@@ -9,7 +9,6 @@ const initState = {
 };
 
 // Actions
-const GET_USER = 'leo/user/get';
 const SET_USER = 'leo/user/set';
 const SET_USERNAME = 'leo/username/set';
 
