@@ -12,8 +12,8 @@ const middleware = [thunk, logger];
 
 export const reducers = combineReducers({ match, user });
 
-function initialState() {
-  return createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)));
+function initialStore(initialState = {}) {
+  return createStore(reducers, initialState, composeWithDevTools(applyMiddleware(...middleware)));
 }
 
-export default initialState;
+export default initialStore;
