@@ -13,7 +13,7 @@ module.exports = withCSS({
   publicRuntimeConfig: {
     // Will be available on both server and client
     type: process.env.NODE_ENV,
-    userApi: process.env.USER_API,
+    matchingApi: process.env.MATCHING_API,
     staticFolder: '/static',
   },
   webpack: (config) => {

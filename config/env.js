@@ -5,7 +5,7 @@ const config = getConfig();
 const serverEnvironment = (config && config.serverRuntimeConfig) || {};
 const publicEnvironment = (config && config.publicRuntimeConfig) || {
   type: 'test',
-  accountApi: '',
+  matchingApi: '',
 };
 
 export default {
