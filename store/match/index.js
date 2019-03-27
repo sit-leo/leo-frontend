@@ -9,7 +9,7 @@ const initState = {
   loading: false,
   match: {
     id: 0,
-    name: '',
+    name: 'No Match Found',
   },
 };
 
@@ -22,7 +22,10 @@ const SET_MATCH = 'leo/match/set/match';
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
     case SET_LOADING: return { ...state, loading: action.loading };
-    case SET_MATCH: return { ...state, match: action.match };
+    case SET_MATCH: {
+      const match = action.match ? action.match : initState.match;
+      return { ...state, match };
+    }
     default: return { ...state };
   }
 }
