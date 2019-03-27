@@ -1,3 +1,5 @@
+.env
 .next/
+.storybook/
 node_modules/
 Dockerfile
