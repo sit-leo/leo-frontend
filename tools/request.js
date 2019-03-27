@@ -18,8 +18,8 @@ function handleResponse(response) {
   return Promise.reject(response.error);
 }
 
-function catchError(e) {
-  return Promise.reject(e.response);
+function catchError(error) {
+  return { error: `Request Error with error = ${error}` };
 }
 
 
