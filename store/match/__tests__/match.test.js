@@ -1,4 +1,4 @@
-import MatchReducer from '../index';
+const MatchReducer = require('../index');
 
 describe('Test Match Reducer', () => {
   it('Test setMatch should return match correctly.', (done) => {
