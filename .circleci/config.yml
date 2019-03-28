@@ -30,16 +30,4 @@ jobs:
             - ./node_modules
 
       # run tests!
-      - run:
-          name: 'check it directory have node_modules'
-          command: 'ls && pwd'
-      - run:
-          name: 'check node_modules'
-          command: 'cd node_modules && pwd && ls'
-      - run:
-          name: 'check node_modules/.bin'
-          command: 'cd .bin && pwd && ls'
-      - run:
-          name: 'test by package in node_modules'
-          command: './node_modules/.bin/jest'
       - run: yarn test
