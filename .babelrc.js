@@ -5,7 +5,10 @@ module.exports = {
       "presets": ["@babel/preset-env"]
     },
     "development": {
-      "presets": ["next/babel"]
+      "presets": ["next/babel"],
+      "plugins": [
+        ['styled-components', { ssr: true }],
+      ]
     },
     "production": {
       "presets": ["next/babel"],
