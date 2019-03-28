@@ -11,3 +11,5 @@ const handler = routes.getRequestHandler(app);
 app.prepare().then(() => {
   express().use(handler).listen(PORT);
 });
+
+console.log(process.env);
