@@ -40,7 +40,6 @@
   },
   "scripts": {
     "test": "jest",
-    "test-babel": "babel-jest",
     "dev": "node server.js",
     "build": "next build",
     "start": "node server.js",
