@@ -27,6 +27,7 @@ jobs:
             - v1-dependencies-
 
       - run: yarn global add jest
+      - run: yarn global add @babel/core
 
       - run: yarn install
 
