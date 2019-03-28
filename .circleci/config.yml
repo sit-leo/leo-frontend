@@ -26,8 +26,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn global add jest
-      - run: yarn global add @babel/core
+      - run: yarn global add jest @babel/core babel-loader
 
       - run: yarn install
 
@@ -38,3 +37,7 @@ jobs:
 
       # run tests!
       - run: yarn test
+
+      - run: yarn build
+
+      - run: yarn start
