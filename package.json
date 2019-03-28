@@ -37,7 +37,7 @@
     "jest": "^24.5.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test && jest",
+    "test": "NODE_ENV=test && ./node_modules/.bin/jest",
     "dev": "node server.js",
     "build": "next build",
     "start": "node server.js",
