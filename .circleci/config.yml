@@ -28,12 +28,18 @@ jobs:
 
       - run: yarn install
 
+      - run: ls
+      - run: pwd
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run: ls
+      - run: pwd
+
       - run: yarn test
 
       - run: yarn build
