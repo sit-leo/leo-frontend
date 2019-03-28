@@ -16,18 +16,18 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - dependencies-{{ checksum "package.json" }}
 
-      - run:
-          name: "install global dependencies"
-          command: yarn global add jest@^24.5.0 babel-jest@^24.5.0 babel-loader@^8.0.5 @babel/core@^7.3.4
+      # - run:
+      #     name: "install global dependencies"
+      #     command: yarn global add jest@^24.5.0 babel-jest@^24.5.0 babel-loader@^8.0.5 @babel/core@^7.3.4
       - run: yarn install
 
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: dependencies-{{ checksum "package.json" }}
           paths:
             - ./node_modules
 
       # run tests!
+      - run: ls node_modules
       - run: yarn test
