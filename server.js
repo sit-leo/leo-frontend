@@ -9,7 +9,6 @@ const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
+  console.log('env => ', process.env);
   express().use(handler).listen(PORT);
 });
-
-console.log(process.env);
