@@ -40,10 +40,10 @@
     "jest": "^24.5.0"
   },
   "scripts": {
-    "test": "jest",
-    "dev": "node server.js",
+    "test": "NODE_ENV=test jest",
+    "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "storybook": "start-storybook"
   }
 }
