@@ -1,4 +1,4 @@
-const UserReducer = require('../user');
+import UserReducer from '../user';
 
 describe('Test User Reducer', () => {
   it('Test setUser should return user correctly.', (done) => {
