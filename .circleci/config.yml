@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  run-unit-test:
     docker:
       - image: circleci/node:11.0.0
 
@@ -27,3 +27,11 @@ jobs:
 
       # run tests!
       - run: yarn test
+  build-docker-image:
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker image build -t imgrbs/leo-frontend .
+      - run: docker push imgrbs/leo-frontend
