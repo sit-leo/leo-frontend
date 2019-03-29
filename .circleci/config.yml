@@ -42,6 +42,6 @@ workflows:
   workflow:
     jobs:
       - run-unit-test
-      - build-docker-image
+      - build-docker-image:
           requires:
             - run-unit-test
