@@ -28,6 +28,7 @@ jobs:
       # run tests!
       - run: yarn test
   build-docker-image:
+    machine: true
     working_directory: ~/repo
 
     steps:
