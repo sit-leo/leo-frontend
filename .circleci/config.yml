@@ -7,13 +7,10 @@ jobs:
   run-unit-test:
     docker:
       - image: circleci/node:11.0.0
-
     working_directory: ~/repo
-
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package.json" }}
@@ -25,8 +22,8 @@ jobs:
           paths:
             - ./node_modules
 
-      # run tests!
       - run: yarn test
+
   build-docker-image:
     machine: true
     working_directory: ~/repo
@@ -34,8 +31,21 @@ jobs:
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker image build -t imgrbs/sit-leo-frontend .
-      - run: docker push imgrbs/sit-leo-frontend
+      - run: docker image build -t imgrbs/$IMAGE_NAME .
+      - run: docker push imgrbs/$IMAGE_NAME
+
+  deploy-docker-image:
+    machine: true
+        steps:
+          - checkout
+          # - run: |
+          #     ssh $OS_USER@$OD_IP \
+          #       'sudo docker pull imgrbs/$IMAGE_NAME && \
+          #       sudo docker system prune -f &&\
+          #       sudo docker container run \
+          #       -e NODE_ENV=production \
+          #       -e PORT=3000 \
+          #       --rm -ditp 8000:3000 --name docker-testing dscythe/docker_tutorial'
 
 workflows:
   version: 2
@@ -45,3 +55,6 @@ workflows:
       - build-docker-image:
           requires:
             - run-unit-test
+      - deploy-docker-image:
+          requires:
+            - build-docker-image
