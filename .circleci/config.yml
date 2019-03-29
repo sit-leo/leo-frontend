@@ -27,7 +27,6 @@ jobs:
   build-docker-image:
     machine: true
     working_directory: ~/repo
-
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -36,16 +35,17 @@ jobs:
 
   deploy-docker-image:
     machine: true
-        steps:
-          - checkout
-          # - run: |
-          #     ssh $OS_USER@$OD_IP \
-          #       'sudo docker pull imgrbs/$IMAGE_NAME && \
-          #       sudo docker system prune -f &&\
-          #       sudo docker container run \
-          #       -e NODE_ENV=production \
-          #       -e PORT=3000 \
-          #       --rm -ditp 8000:3000 --name docker-testing dscythe/docker_tutorial'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # - run: |
+      #     ssh $OS_USER@$OD_IP \
+      #       'sudo docker pull imgrbs/$IMAGE_NAME && \
+      #       sudo docker system prune -f &&\
+      #       sudo docker container run \
+      #       -e NODE_ENV=production \
+      #       -e PORT=3000 \
+      #       --rm -ditp 8000:3000 --name docker-testing dscythe/docker_tutorial'
 
 workflows:
   version: 2
