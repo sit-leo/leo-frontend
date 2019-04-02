@@ -2,11 +2,20 @@ import React from 'react';
 
 import env from '../../config/env';
 
+import Text, { TitlePrimary, Paragraph, TextError } from '../base/Text';
+
 const LandingIndex = () => (
   <React.Fragment>
-    <h1>Hello LEO !</h1>
-    <h3>{ env.public.type }</h3>
-    <h3>{ env.public.matchingApi }</h3>
+    <TitlePrimary>Hello LEO !</TitlePrimary>
+    <TextError>{ env.public.type }</TextError>
+    <br />
+    <TextError>{ env.public.matchingApi }</TextError>
+    <hr />
+    <TitlePrimary>Color</TitlePrimary>
+    <TitlePrimary>Title Primary</TitlePrimary>
+    <Text>Main Text</Text>
+    <Paragraph>Paragraph Text</Paragraph>
+    <TextError>Error Text</TextError>
   </React.Fragment>
 );
 
