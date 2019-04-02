@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import colors from '../../config/color';
 
-
 const Text = styled.span`
   color: ${colors.text.main};
 `;
+
 export default Text;
 
 export const TitlePrimary = styled.h1`
