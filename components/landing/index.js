@@ -2,11 +2,12 @@ import React from 'react';
 
 import env from '../../config/env';
 
+import Container from '../base/Container';
 import Text, { TitlePrimary, Paragraph, TextError } from '../base/Text';
 import Input from '../base/Input';
 
 const LandingIndex = () => (
-  <React.Fragment>
+  <Container>
     <TitlePrimary>Hello LEO !</TitlePrimary>
     <TextError>{ env.public.type }</TextError>
     <br />
@@ -18,7 +19,7 @@ const LandingIndex = () => (
     <Paragraph>Paragraph Text</Paragraph>
     <TextError>Error Text</TextError>
     <Input text="Input" />
-  </React.Fragment>
+  </Container>
 );
 
 export default LandingIndex;
