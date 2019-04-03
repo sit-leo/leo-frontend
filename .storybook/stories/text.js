@@ -1,11 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Text, { TitlePrimary } from '../../components/base/Text';
 
-storiesOf('Text', module)
-  .add('Sample Title with text', () => (
+import Text, { TitlePrimary, Paragraph, TextError } from '../../components/base/Text';
+
+storiesOf('Base/Text', module)
+  .add('Title Primary with text', () => (
     <TitlePrimary>Example Title</TitlePrimary>
   ))
-  .add('Sample Text with text', () => (
-    <Text>Example Text</Text>
+  .add('Main Text with text', () => (
+    <Text>Main Text</Text>
+  ))
+  .add('Paragraph with text', () => (
+    <Paragraph>Paragraph Text</Paragraph>
+  ))
+  .add('TextError with text', () => (
+    <TextError>Paragraph Text</TextError>
   ))

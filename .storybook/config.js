@@ -3,6 +3,7 @@ import 'antd/dist/antd.min.css';
 
 function loadStories() {
   require('./stories/text.js');
+  require('./stories/input.js');
   require('./stories/button.js');
 }
 
