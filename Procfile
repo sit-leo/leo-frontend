@@ -1,2 +1,2 @@
 web: yarn start
-storybook: yarn storybook -p 80
+storybook: yarn storybook -p $PORT
