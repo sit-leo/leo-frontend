@@ -47,7 +47,6 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "storybook": "start-storybook",
-    "build-storybook": "build-storybook -c .storybook -o storybook-static",
-    "start-storybook": "node server-storybook.js"
+    "build-storybook": "build-storybook -c .storybook -o storybook-static"
   }
 }
