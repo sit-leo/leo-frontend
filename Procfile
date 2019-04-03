@@ -1,2 +1,2 @@
 web: yarn start
-storybook: yarn storybook -p $PORT
+deploy-storybook: yarn build-storybook && yarn start-storybook
