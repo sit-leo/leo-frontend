@@ -1,2 +1,2 @@
-web: yarn start
-deploy-storybook: yarn build-storybook && yarn start-storybook
+build: yarn build-storybook
+web: yarn start-storybook
