@@ -1,1 +1,2 @@
-web: yarn storybook -p 8080
+web: yarn start
+storybook: yarn storybook
