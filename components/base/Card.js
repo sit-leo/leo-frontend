@@ -18,4 +18,11 @@ const Card = ({ children }) => (
   </CardContaier>
 );
 
+export const SmallCard = styled.div`
+  padding: .7em 1em;
+  border-radius: 10px;
+  border: solid 2px ${colors.outline};
+  background-color: ${colors.white};
+`;
+
 export default Card;
