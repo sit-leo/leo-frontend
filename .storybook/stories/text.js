@@ -1,18 +1,30 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Text, { TitlePrimary, Paragraph, TextError } from '../../components/base/Text';
+import Text, { Title, TitlePrimary, TitleMedium, TitleSmall, TextSmall, Paragraph, TextError } from '../../components/base/Text';
 
 storiesOf('Base/Text', module)
-  .add('Title Primary with text', () => (
-    <TitlePrimary>Example Title</TitlePrimary>
+  .add('Title Large', () => (
+    <Title>TitleLarge_Muli_34px_Regular_#373F51(nav menu unselected)</Title>
   ))
-  .add('Main Text with text', () => (
-    <Text>Main Text</Text>
+  .add('Title Large Primary', () => (
+    <TitlePrimary>TitleLarge_Muli_34px_SemiBold_#58A4B0(nav menu selected) </TitlePrimary>
   ))
-  .add('Paragraph with text', () => (
-    <Paragraph>Paragraph Text</Paragraph>
+  .add('Title Medium', () => (
+    <TitleMedium>TitleMedium_Muli_30px_SemiBold_#373F51</TitleMedium>
   ))
-  .add('TextError with text', () => (
+  .add('Title Small', () => (
+    <TitleSmall>TitleSmall_Muli_25px_SemiBold_#373F51</TitleSmall>
+  ))
+  .add('Text Small', () => (
+    <TextSmall>SubTitleSmall_Muli_25px_Regular_#373F51</TextSmall>
+  ))
+  .add('Text Main', () => (
+    <Text>Main Text with <b>Span</b> Tag</Text>
+  ))
+  .add('Text Paragraph', () => (
+    <Paragraph>Paragraph_Muli_20px_Regular_#1B1B1E</Paragraph>
+  ))
+  .add('Text Error', () => (
     <TextError>Paragraph Text</TextError>
   ))
