@@ -2,7 +2,7 @@ import React from 'react';
 
 import env from '../../config/env';
 
-import Container from '../base/Container';
+import Container from '../base/Grid';
 import { TitlePrimary, TextError } from '../base/Text';
 
 const LandingIndex = () => (
