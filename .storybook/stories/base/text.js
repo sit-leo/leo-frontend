@@ -1,7 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Text, { Title, TitlePrimary, TitleMedium, TitleSmall, TextSmall, Paragraph, TextError } from '../../components/base/Text';
+import Text, {
+  Title,
+  TitlePrimary,
+  TitleMedium,
+  TitleSmall,
+  TextSmall,
+  Paragraph,
+  TextError
+} from '../../../components/base/Text';
 
 storiesOf('Base/Text', module)
   .add('Title Large', () => (
