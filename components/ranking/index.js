@@ -14,7 +14,7 @@ const Position = ({ position }) => (
   </div>
 );
 
-const RankingPage = ({ positions }) => (
+export const RankingPage = ({ positions = [{ name: 'No Position Found' }] }) => (
   <ContainerFluid>
     <Row>
       <Col className="px-0">
