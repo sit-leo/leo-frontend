@@ -23,14 +23,14 @@ export const RankingPage = ({ positions = [{ name: 'No Position Found' }] }) => 
     </Row>
     <Row className="py-4 px-5">
       <Col lg={4}>
-        <TitleMedium>Your Ranking</TitleMedium>
         <Card>
+          <TitleMedium>Your Ranking</TitleMedium>
           Your Ranking
         </Card>
       </Col>
       <Col lg={8}>
-        <TitleMedium>List of Recruiters</TitleMedium>
         <Card>
+          <TitleMedium>List of Recruiters</TitleMedium>
           {
             positions.map(position => <Position key={position.id} position={position} />)
           }
