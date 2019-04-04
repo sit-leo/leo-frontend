@@ -2,20 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
+import Navbar from '../base/Navbar';
 import Hero from '../base/Hero';
-import Card from '../base/Card';
+import Card, { SmallCard } from '../base/Card';
 import { TitleMedium } from '../base/Text';
 
 const Position = ({ position }) => (
-  <div>
+  <SmallCard>
     {
       position.name
     }
-  </div>
+  </SmallCard>
 );
 
 export const RankingPage = ({ positions = [{ name: 'No Position Found' }] }) => (
   <ContainerFluid>
+    <Navbar />
     <Row>
       <Col className="px-0">
         <Hero text="Ranking Page" />
