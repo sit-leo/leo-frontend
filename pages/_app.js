@@ -1,4 +1,5 @@
 import 'antd/dist/antd.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
 import { Provider } from 'react-redux';
