@@ -7,7 +7,7 @@ import { TitlePrimary, TextError } from '../base/Text';
 
 const LandingIndex = () => (
   <Container>
-    <TitlePrimary>Hello LEO !</TitlePrimary>
+    <TitlePrimary>Hello LEO App !</TitlePrimary>
     <TextError>{ env.public.type }</TextError>
     <br />
     <TextError>{ env.public.matchingApi }</TextError>
