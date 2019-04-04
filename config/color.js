@@ -1,6 +1,7 @@
 export default {
   white: '#fff',
   primary: '#58a4b0',
+  dark: '#373F51',
   hover: '#3c9fae',
   text: {
     main: '#373F51',
@@ -10,4 +11,5 @@ export default {
   error: '#d96c6c',
   disabled: '#d8d8d8',
   background: '#F6F6F6',
+  shadow: 'rgba(96, 84, 84, 0.1)',
 };
