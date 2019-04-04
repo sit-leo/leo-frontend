@@ -1,4 +1,5 @@
 export default {
+  white: '#fff',
   primary: '#58a4b0',
   hover: '#3c9fae',
   text: {
