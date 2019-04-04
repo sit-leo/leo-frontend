@@ -1,8 +1,9 @@
 export default {
-  font: '',
+  font: 'Muli',
   size: {
-    large: '',
-    medium: '',
-    small: '',
+    large: '34px',
+    medium: '30px',
+    small: '25px',
+    paragraph: '20px',
   },
 };
