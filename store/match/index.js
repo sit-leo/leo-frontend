@@ -11,12 +11,17 @@ const initState = {
     id: 0,
     name: 'No Match Found',
   },
+  positions: [{
+    id: 0,
+    name: 'No Position Found',
+  }],
 };
 
 // Actions
 const SET_LOADING = 'leo/match/set/loading';
 
 const SET_MATCH = 'leo/match/set/match';
+const SET_POSITIONS = 'leo/match/set/positions';
 
 // Reducer
 export default function reducer(state = initState, action = {}) {
@@ -25,6 +30,10 @@ export default function reducer(state = initState, action = {}) {
     case SET_MATCH: {
       const match = action.match ? action.match : initState.match;
       return { ...state, match };
+    }
+    case SET_POSITIONS: {
+      const positions = (action.positions && action.positions.length > 0) ? action.positions : initState.positions;
+      return { ...state, positions };
     }
     default: return { ...state };
   }
@@ -35,7 +44,16 @@ export function setMatch(match) {
   return { type: SET_MATCH, match };
 }
 
+export function setPositions(positions) {
+  return { type: SET_POSITIONS, positions };
+}
+
 export function getMatchByMatchId(matchId) {
   return request.get(`${MATCH_API}/matches/${matchId}`)
     .then(({ data: match }) => match);
+}
+
+export function getPositionsByMatchId(matchId) {
+  return request.get(`${MATCH_API}/matches/${matchId}/positions`)
+    .then(({ data: positions }) => positions);
 }
