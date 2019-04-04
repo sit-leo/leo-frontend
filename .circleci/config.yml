@@ -9,19 +9,18 @@ jobs:
       - image: circleci/node:11.0.0
     working_directory: ~/repo
     steps:
+      - run:
+          name: Sent Line Notification
+          command: $NOTIFY_WORKFLOW_START
       - checkout
-
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package.json" }}
-
       - run: yarn install
-
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-
       - run: yarn test
 
   build-docker-image:
@@ -33,19 +32,18 @@ jobs:
       - run: docker image build -t imgrbs/$IMAGE_NAME .
       - run: docker push imgrbs/$IMAGE_NAME
 
-  deploy-docker-image:
-    machine: true
-    working_directory: ~/repo
+  deploy-heroku:
+    docker:
+      - image: buildpack-deps:trusty
     steps:
       - checkout
-      # - run: |
-      #     ssh $OS_USER@$OD_IP \
-      #       'sudo docker pull imgrbs/$IMAGE_NAME && \
-      #       sudo docker system prune -f &&\
-      #       sudo docker container run \
-      #       -e NODE_ENV=production \
-      #       -e PORT=3000 \
-      #       --rm -ditp 8000:3000 --name docker-testing dscythe/docker_tutorial'
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - run:
+          name: Sent Line Notification
+          command: $NOTIFY_WORKFLOW_SUCCESS
 
 workflows:
   version: 2
@@ -55,6 +53,6 @@ workflows:
       - build-docker-image:
           requires:
             - run-unit-test
-      - deploy-docker-image:
+      - deploy-heroku:
           requires:
             - build-docker-image
