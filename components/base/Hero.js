@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import colors from '../../config/color';
 import fonts from '../../config/font';
 
-const HeroContainer = styled.div`
+import { FlexCenter } from './Flex';
+
+const HeroContainer = styled(FlexCenter)`
   background-image: linear-gradient(to bottom, ${colors.dark}, ${colors.primary});
   font-size: ${fonts.size.hero};
   color: ${colors.disabled};
@@ -12,7 +14,7 @@ const HeroContainer = styled.div`
 `;
 
 const Hero = ({ text }) => (
-  <HeroContainer className="d-flex justify-content-center align-items-center">
+  <HeroContainer>
     { text }
   </HeroContainer>
 );
