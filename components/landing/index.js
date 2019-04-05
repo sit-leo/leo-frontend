@@ -2,17 +2,17 @@ import React from 'react';
 
 import env from '../../config/env';
 
-import Container from '../base/Grid';
+import { ContainerFluid } from '../base/Grid';
 import { TitlePrimary, TextError } from '../base/Text';
 
 const LandingIndex = () => (
-  <Container>
+  <ContainerFluid>
     <TitlePrimary>Hello LEO App !</TitlePrimary>
     <TextError>{ env.public.type }</TextError>
     <br />
     <TextError>{ env.public.matchingApi }</TextError>
     <hr />
-  </Container>
+  </ContainerFluid>
 );
 
 export default LandingIndex;
