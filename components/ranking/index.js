@@ -2,16 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
+import { FlexBetween } from '../base/Flex';
+import Text, { TitleMedium } from '../base/Text';
+
 import Navbar from '../base/Navbar';
 import Hero from '../base/Hero';
 import Card, { SmallCard } from '../base/Card';
-import { TitleMedium } from '../base/Text';
+
+const LabelText = ({ label, text }) => (
+  <Text>
+    <b className="mr-3">{label}</b>
+    {text}
+  </Text>
+);
 
 const Position = ({ position }) => (
   <SmallCard>
-    {
-      position.name
-    }
+    <Text><b>Company Name</b></Text>
+    <FlexBetween className="mt-3">
+      <Text><LabelText label="Job Position" text={`${position.name}`} /></Text>
+      <Text><LabelText label="Amount" text={`${position.capacity}`} /></Text>
+    </FlexBetween>
   </SmallCard>
 );
 
