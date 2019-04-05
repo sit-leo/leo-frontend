@@ -14,6 +14,7 @@ const initState = {
   positions: [{
     id: 0,
     name: 'No Position Found',
+    capacity: 0,
   }],
 };
 

@@ -26,7 +26,7 @@ const Position = ({ position }) => (
   </SmallCard>
 );
 
-export const RankingPage = ({ positions = [{ name: 'No Position Found' }] }) => (
+export const RankingPage = ({ positions = [{ name: 'No Position Found', capacity: 0 }] }) => (
   <ContainerFluid>
     <Navbar />
     <Row>
