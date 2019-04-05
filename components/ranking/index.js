@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { ContainerFluid, Row, Col } from '../base/Grid';
+import Container, { ContainerFluid, Row, Col } from '../base/Grid';
 import { FlexBetween } from '../base/Flex';
 import Text, { TitleMedium } from '../base/Text';
 
@@ -27,18 +27,20 @@ const Position = ({ position }) => (
 );
 
 export const RankingPage = ({ positions = [{ name: 'No Position Found', capacity: 0 }] }) => (
-  <ContainerFluid>
-    <Navbar />
-    <Row>
-      <Col className="px-0">
-        <Hero text="Ranking Page" />
-      </Col>
-    </Row>
-    <Row className="py-4 px-5">
+  <Fragment>
+    <ContainerFluid>
+      <Navbar />
+      <Row>
+        <Col className="px-0">
+          <Hero text="Ranking Page" />
+        </Col>
+      </Row>
+    </ContainerFluid>
+    <Container>
       <Col lg={4}>
         <Card>
           <TitleMedium>Your Ranking</TitleMedium>
-          Your Ranking
+            Your Ranking
         </Card>
       </Col>
       <Col lg={8}>
@@ -49,8 +51,8 @@ export const RankingPage = ({ positions = [{ name: 'No Position Found', capacity
           }
         </Card>
       </Col>
-    </Row>
-  </ContainerFluid>
+    </Container>
+  </Fragment>
 );
 
 const mapStateToProps = state => ({
