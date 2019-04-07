@@ -16,5 +16,9 @@ export default (instance) => {
       return adapter.get(`${MATCH_API}/matches/${matchId}/positions`)
         .then(({ data: positions }) => positions);
     },
+    postApplicantRankingByMatchId(matchId, applicantRanking) {
+      return adapter.post(`${MATCH_API}/matches/${matchId}/ranking`, applicantRanking)
+        .then(({ data: ranks }) => ranks);
+    },
   };
 };
