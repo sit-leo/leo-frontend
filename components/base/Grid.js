@@ -30,8 +30,8 @@ export const ContainerFluid = ({ children }) => (
   </ContainerStyled>
 );
 
-const Container = ({ children }) => (
-  <ContainerStyled fluid={false}>
+const Container = ({ children, className }) => (
+  <ContainerStyled className={className} fluid={false}>
     <Row>
       { children }
     </Row>
