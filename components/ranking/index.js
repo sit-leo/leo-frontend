@@ -32,7 +32,7 @@ const PositionCard = ({ position, isOpen, toggle }) => (
 );
 
 
-const Position = ({ position, addRank: addRanking }) => {
+const Position = ({ position, addRank: addRanking = () => {} }) => {
   const [isOpen, toggle] = useState(false);
   return (
     <Fragment>
@@ -53,7 +53,7 @@ const mapDispatchToPositionProps = dispatch => ({
 
 const PositionCompose = connect(null, mapDispatchToPositionProps)(Position);
 
-const Rank = ({ rank, index, removeRank: removeRanking }) => (
+const Rank = ({ rank, index, removeRank: removeRanking = () => {} }) => (
   <div>
     <button type="button" onClick={() => removeRanking(rank)}>Delete</button>
     {`${index + 1} ${rank.name}`}
