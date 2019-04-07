@@ -1,9 +1,18 @@
 import axios from 'axios';
 import cookie from './cookie';
 
-function createApiInstance(isAuthen = false, headers = {}) {
+export function clientInstance(isAuthen = true, headers = {}) {
   if (isAuthen) {
     const token = cookie.getToken();
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return axios.create({
+    headers,
+  });
+}
+
+export function serverInstance(token, isAuthen = true, headers = {}) {
+  if (isAuthen) {
     headers.Authorization = `Bearer ${token}`;
   }
   return axios.create({
@@ -18,22 +27,26 @@ function handleResponse(response) {
   return Promise.reject(response.error);
 }
 
-function catchError(error) {
-  return { error: `Request Error with error = ${error}` };
+function catchError(e) {
+  return Promise.reject(e.response);
 }
 
 
-export default {
-  get(url, isAuthen) {
-    return createApiInstance(isAuthen).get(url).then(handleResponse).catch(catchError);
+export default instance => ({
+  get(url) {
+    return instance
+      .get(url).then(handleResponse).catch(catchError);
   },
-  post(url, body, isAuthen) {
-    return createApiInstance(isAuthen).post(url, body).then(handleResponse).catch(catchError);
+  post(url, body) {
+    return instance
+      .post(url, body).then(handleResponse).catch(catchError);
   },
-  put(url, body, isAuthen) {
-    return createApiInstance(isAuthen).put(url, body).then(handleResponse).catch(catchError);
+  put(url, body) {
+    return instance
+      .put(url, body).then(handleResponse).catch(catchError);
   },
-  delete(url, isAuthen) {
-    return createApiInstance(isAuthen).delete(url).then(handleResponse).catch(catchError);
+  delete(url) {
+    return instance
+      .delete(url).then(handleResponse).catch(catchError);
   },
-};
+});
