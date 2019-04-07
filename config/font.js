@@ -1,5 +1,5 @@
 export default {
-  font: 'Muli',
+  name: 'Kanit',
   size: {
     hero: '70px',
     large: '34px',
