@@ -17,8 +17,8 @@ const SET_LOADING = 'leo/match/set/loading';
 
 const SET_MATCH = 'leo/match/set/match';
 const SET_POSITIONS = 'leo/match/set/positions';
-const ADD_RANK = 'leo/match/add/ranks';
-const REMOVE_RANK = 'leo/match/remove/ranks';
+const ADD_RANK = 'leo/match/add/rank';
+const REMOVE_RANK = 'leo/match/remove/rank';
 
 // Reducer
 export default function reducer(state = initState, action = {}) {
