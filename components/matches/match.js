@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const MatchPage = ({ match }) => (
   <React.Fragment>
@@ -14,4 +15,9 @@ MatchPage.propTypes = {
   }).isRequired,
 };
 
-export default MatchPage;
+
+const mapStateToProps = state => ({
+  match: state.match.match,
+});
+
+export default connect(mapStateToProps)(MatchPage);
