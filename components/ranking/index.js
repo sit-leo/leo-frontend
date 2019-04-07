@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
-
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import { Collapse } from 'reactstrap';
+
+import { addRank, removeRank } from '../../store/match';
 
 import Container, { ContainerFluid, Row, Col } from '../base/Grid';
 import { FlexBetween } from '../base/Flex';
@@ -28,37 +31,45 @@ const PositionCard = ({ position, isOpen, toggle }) => (
   </SmallCard>
 );
 
-const Position = ({ position }) => {
+
+const Position = ({ position, addRank: addRanking }) => {
   const [isOpen, toggle] = useState(false);
   return (
     <Fragment>
       <PositionCard isOpen={isOpen} toggle={toggle} position={position} />
       <Collapse isOpen={isOpen}>
         <Card>
-            Hello Position
+          <TitleMedium>No Information</TitleMedium>
+          <button type="button" onClick={() => addRanking(position)}>Add to Your Ranking</button>
         </Card>
       </Collapse>
     </Fragment>
   );
 };
 
-const Rank = () => (
-  <Fragment>
-    <div>
-      Delete
-      1. CompanyName
-      Document
-    </div>
-    <div>
-      Delete
-      2. CompanyName
-      Document
-    </div>
-  </Fragment>
+const mapDispatchToPositionProps = dispatch => ({
+  addRank: bindActionCreators(addRank, dispatch),
+});
+
+const PositionCompose = connect(null, mapDispatchToPositionProps)(Position);
+
+const Rank = ({ rank, index, removeRank: removeRanking }) => (
+  <div>
+    <button type="button" onClick={() => removeRanking(rank)}>Delete</button>
+    {`${index + 1} ${rank.name}`}
+    <button type="button">Document</button>
+  </div>
 );
 
+
+const mapDispatchToRankProps = dispatch => ({
+  removeRank: bindActionCreators(removeRank, dispatch),
+});
+
+const RankCompose = connect(null, mapDispatchToRankProps)(Rank);
+
 export const RankingPage = ({
-  ranks = [{ id: 1, name: 'No Position Found' }],
+  ranks = [],
   positions = [{ name: 'No Position Found', capacity: 0 }],
 }) => (
   <Fragment>
@@ -70,20 +81,22 @@ export const RankingPage = ({
         </Col>
       </Row>
     </ContainerFluid>
-    <Container>
+    <Container className="py-5">
       <Col lg={4}>
         <Card>
           <TitleMedium>Your Ranking</TitleMedium>
           {
-              ranks.map((rank, index) => <Rank key={rank.id} />)
-            }
+            (ranks.length > 0)
+              ? ranks.map((rank, index) => <RankCompose key={rank.id} index={index} rank={rank} />)
+              : <Text>No Ranking</Text>
+          }
         </Card>
       </Col>
       <Col lg={8}>
         <Card>
           <TitleMedium>List of Recruiters</TitleMedium>
           {
-            positions.map(position => <Position key={position.id} position={position} />)
+            positions.map((position => <PositionCompose key={position.id} position={position} />))
           }
         </Card>
       </Col>
@@ -92,6 +105,7 @@ export const RankingPage = ({
 );
 
 const mapStateToProps = state => ({
+  ranks: state.match.ranks,
   positions: state.match.positions,
 });
 
