@@ -28,7 +28,7 @@ function handleResponse(response) {
 }
 
 function catchError(e) {
-  return Promise.reject(e.response);
+  return { error: (e && e.response) || 'unexpected: fetch error' };
 }
 
 
