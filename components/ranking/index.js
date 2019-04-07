@@ -26,7 +26,25 @@ const Position = ({ position }) => (
   </SmallCard>
 );
 
-export const RankingPage = ({ positions = [{ name: 'No Position Found', capacity: 0 }] }) => (
+const Rank = () => (
+  <Fragment>
+    <div>
+      Delete
+      1. CompanyName
+      Document
+    </div>
+    <div>
+      Delete
+      2. CompanyName
+      Document
+    </div>
+  </Fragment>
+);
+
+export const RankingPage = ({
+  ranks = [{ id: 1, name: 'No Position Found' }],
+  positions = [{ name: 'No Position Found', capacity: 0 }],
+}) => (
   <Fragment>
     <ContainerFluid>
       <Navbar />
@@ -40,7 +58,9 @@ export const RankingPage = ({ positions = [{ name: 'No Position Found', capacity
       <Col lg={4}>
         <Card>
           <TitleMedium>Your Ranking</TitleMedium>
-            Your Ranking
+          {
+              ranks.map((rank, index) => <Rank key={rank.id} />)
+            }
         </Card>
       </Col>
       <Col lg={8}>
