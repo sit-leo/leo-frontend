@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+
 import { connect } from 'react-redux';
+import { Collapse } from 'reactstrap';
 
 import Container, { ContainerFluid, Row, Col } from '../base/Grid';
 import { FlexBetween } from '../base/Flex';
@@ -16,8 +18,8 @@ const LabelText = ({ label, text }) => (
   </Text>
 );
 
-const Position = ({ position }) => (
-  <SmallCard>
+const PositionCard = ({ position, isOpen, toggle }) => (
+  <SmallCard onClick={() => toggle(!isOpen)}>
     <Text><b>Company Name</b></Text>
     <FlexBetween className="mt-3">
       <Text><LabelText label="Job Position" text={`${position.name}`} /></Text>
@@ -25,6 +27,20 @@ const Position = ({ position }) => (
     </FlexBetween>
   </SmallCard>
 );
+
+const Position = ({ position }) => {
+  const [isOpen, toggle] = useState(false);
+  return (
+    <Fragment>
+      <PositionCard isOpen={isOpen} toggle={toggle} position={position} />
+      <Collapse isOpen={isOpen}>
+        <Card>
+            Hello Position
+        </Card>
+      </Collapse>
+    </Fragment>
+  );
+};
 
 const Rank = () => (
   <Fragment>
