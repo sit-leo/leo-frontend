@@ -27,8 +27,14 @@ const MainButton = styled(DefaultButtonStyled)`
   }
 `;
 
-const Button = ({ text, ...props }) => (
-  <MainButton {...props}>{text}</MainButton>
-);
+export const DangerButton = styled(DefaultButtonStyled)`
+  background: ${colors.error};
+  color: ${colors.white};
 
-export default Button;
+  &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
+    background: ${colors.hover};
+    color: ${colors.white};
+  }
+`;
+
+export default MainButton;
