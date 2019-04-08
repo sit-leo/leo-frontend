@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 import { Collapse, Modal } from 'reactstrap';
 
+import { clientInstance } from '../../tools/request';
+
+import adapter from '../../store/match/match-adapter';
 import { addRank, removeRank } from '../../store/match';
 
 import Container, { ContainerFluid, Row, Col } from '../base/Grid';
@@ -14,6 +17,8 @@ import Navbar from '../base/Navbar';
 import Hero from '../base/Hero';
 import Card, { SmallCard } from '../base/Card';
 import Button, { DangerButton } from '../base/Button';
+
+const matchAdapter = adapter(clientInstance());
 
 const LabelText = ({ label, text }) => (
   <Text>
@@ -70,6 +75,7 @@ const mapDispatchToRankProps = dispatch => ({
 const RankCompose = connect(null, mapDispatchToRankProps)(Rank);
 
 export const RankingPage = ({
+  match = { id: 0 },
   ranks = [],
   positions = [{ name: 'No Position Found', capacity: 0 }],
 }) => {
@@ -118,7 +124,7 @@ export const RankingPage = ({
         <DangerButton onClick={() => toggleConfirm(!isOpenConfirm)}>
           Cancel
         </DangerButton>
-        <Button onClick={() => toggleConfirm(!isOpenConfirm)}>
+        <Button onClick={() => matchAdapter.postApplicantRankingByMatchId(match.id, ranks)}>
           Confirm
         </Button>
       </Modal>
@@ -127,6 +133,7 @@ export const RankingPage = ({
 };
 
 const mapStateToProps = state => ({
+  match: state.match.match,
   ranks: state.match.ranks,
   positions: state.match.positions,
 });
