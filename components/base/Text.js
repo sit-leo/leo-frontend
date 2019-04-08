@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import colors from '../../config/color';
-import fonts from '../../config/font';
+import font from '../../config/font';
 
 const Text = styled.span`
   font-size: ${fonts.size.paragraph};

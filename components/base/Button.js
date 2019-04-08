@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button as DefaultButton } from 'antd';
 
 import colors from '../../config/color';
-import fonts from '../../config/font';
+import font from '../../config/font';
 
 const DefaultButtonStyled = styled(DefaultButton)`
   border-radius: 10px;
