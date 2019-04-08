@@ -11,7 +11,7 @@ import RankingPage from '../components/ranking';
 
 class Ranking extends React.Component {
   static async getInitialProps({ store, query, req }) {
-    const matchAdapter = adapter(request(serverInstance(cookie.getToken())));
+    const matchAdapter = adapter(request(serverInstance(cookie.getToken(req))));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
     const positions = await matchAdapter.getPositionsByMatchId(query.matchId);
     await store.dispatch(setMatch(match));

@@ -11,7 +11,7 @@ import MatchPage from '../../components/matches/match';
 
 class MatchSSR extends React.Component {
   static async getInitialProps({ store, query, req }) {
-    const matchAdapter = adapter(request(serverInstance(cookie.getToken())));
+    const matchAdapter = adapter(request(serverInstance(cookie.getToken(req))));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
     await store.dispatch(setMatch(match));
     return {};
