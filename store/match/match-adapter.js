@@ -5,6 +5,10 @@ import request from '../../tools/request';
 
 const MATCH_API = env.public.matchingApi;
 
+function redirectToRanking(matchId) {
+  return Router.push(`/matches/${matchId}/ranking`);
+}
+
 export default (instance) => {
   const adapter = request(instance);
   return {
@@ -18,7 +22,7 @@ export default (instance) => {
     },
     postApplicantRankingByMatchId(matchId, applicantRanking) {
       return adapter.post(`${MATCH_API}/matches/${matchId}/ranking`, applicantRanking)
-        .then(({ data: ranks }) => ranks);
+        .then(({ status }) => status === 200 && redirectToRanking(matchId));
     },
   };
 };
