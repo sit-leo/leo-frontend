@@ -27,12 +27,12 @@ describe('Test Match Reducer', () => {
 
     const store = MatchReducer({ ranks: [] }, action);
 
-    expect(store).toEqual({ ranks: [rank] });
+    expect(store).toEqual({ ranks: [{ ...rank, sequence: 1 }] });
     done();
   });
 
   it('Test addRank with same rank should not added rank.', (done) => {
-    const rank = { id: 1, name: 'Software Developer' };
+    const rank = { id: 1, name: 'Software Developer', sequence: 1 };
     const action = { type: 'leo/match/add/rank', rank };
 
     const store = MatchReducer({ ranks: [rank] }, action);
