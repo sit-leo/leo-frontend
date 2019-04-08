@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import request, { serverInstance } from '../tools/request';
+import { serverInstance } from '../tools/request';
 import cookie from '../tools/cookie';
 import adapter from '../store/match/match-adapter';
 
@@ -11,7 +11,7 @@ import RankingPage from '../components/ranking';
 
 class Ranking extends React.Component {
   static async getInitialProps({ store, query, req }) {
-    const matchAdapter = adapter(request(serverInstance(cookie.getToken(req))));
+    const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
     const positions = await matchAdapter.getPositionsByMatchId(query.matchId);
     await store.dispatch(setMatch(match));
