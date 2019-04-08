@@ -3,13 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { configure } from '@storybook/react';
 
+const stories = require.context('./stories', true, /.js$/);
+
 function loadStories() {
-  require('./stories/base/text.js');
-  require('./stories/base/input.js');
-  require('./stories/base/button.js');
-  require('./stories/base/card.js');
-  require('./stories/base/hero.js');
-  require('./stories/ranking/index.js');
+  stories.keys().forEach(filename => stories(filename));
 }
 
 configure(loadStories, module);
