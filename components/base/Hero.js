@@ -8,7 +8,7 @@ import { FlexCenter } from './Flex';
 
 const HeroContainer = styled(FlexCenter)`
   background-image: linear-gradient(to bottom, ${colors.dark}, ${colors.primary});
-  font-size: ${fonts.size.hero};
+  font-size: ${font.size.hero};
   color: ${colors.disabled};
   min-height: 300px;
 `;
