@@ -6,11 +6,7 @@ import configureStore from 'redux-mock-store';
 import { RankingPage } from '../../../components/ranking';
 
 const mockStore = configureStore();
-const store = mockStore({
-  ui: {
-    isMenuOpened: true,
-  },
-});
+const store = mockStore({});
 
 storiesOf('Ranking', module)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
