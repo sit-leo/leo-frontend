@@ -32,7 +32,7 @@ export const DangerButton = styled(DefaultButtonStyled)`
   color: ${colors.white};
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
-    background: ${colors.hover};
+    background: ${colors.error};
     color: ${colors.white};
   }
 `;
