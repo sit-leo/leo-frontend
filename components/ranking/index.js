@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Collapse } from 'reactstrap';
+import { Collapse, Modal } from 'reactstrap';
 
 import { addRank, removeRank } from '../../store/match';
 
@@ -13,6 +13,7 @@ import Text, { TitleMedium } from '../base/Text';
 import Navbar from '../base/Navbar';
 import Hero from '../base/Hero';
 import Card, { SmallCard } from '../base/Card';
+import Button, { DangerButton } from '../base/Button';
 
 const LabelText = ({ label, text }) => (
   <Text>
@@ -71,38 +72,59 @@ const RankCompose = connect(null, mapDispatchToRankProps)(Rank);
 export const RankingPage = ({
   ranks = [],
   positions = [{ name: 'No Position Found', capacity: 0 }],
-}) => (
-  <Fragment>
-    <ContainerFluid>
-      <Navbar />
-      <Row>
-        <Col className="px-0">
-          <Hero text="Ranking Page" />
+}) => {
+  const [isOpenConfirm, toggleConfirm] = useState(false);
+
+  return (
+    <Fragment>
+      <ContainerFluid>
+        <Navbar />
+        <Row>
+          <Col className="px-0">
+            <Hero text="Ranking Page" />
+          </Col>
+        </Row>
+      </ContainerFluid>
+      <Container className="py-5">
+        <Col lg={4}>
+          <Card>
+            <TitleMedium>Your Ranking</TitleMedium>
+            <div>
+              {
+                (ranks.length > 0)
+                  ? ranks.map((rank, index) => <RankCompose key={rank.id} index={index} rank={rank} />)
+                  : <Text>No Ranking</Text>
+              }
+            </div>
+            <Button
+              disabled={ranks.length <= 0}
+              onClick={() => toggleConfirm(!isOpenConfirm)}
+            >
+              Confirm Ranking
+            </Button>
+          </Card>
         </Col>
-      </Row>
-    </ContainerFluid>
-    <Container className="py-5">
-      <Col lg={4}>
-        <Card>
-          <TitleMedium>Your Ranking</TitleMedium>
-          {
-            (ranks.length > 0)
-              ? ranks.map((rank, index) => <RankCompose key={rank.id} index={index} rank={rank} />)
-              : <Text>No Ranking</Text>
-          }
-        </Card>
-      </Col>
-      <Col lg={8}>
-        <Card>
-          <TitleMedium>List of Recruiters</TitleMedium>
-          {
-            positions.map((position => <PositionCompose key={position.id} position={position} />))
-          }
-        </Card>
-      </Col>
-    </Container>
-  </Fragment>
-);
+        <Col lg={8}>
+          <Card>
+            <TitleMedium>List of Recruiters</TitleMedium>
+            {
+              positions.map((position => <PositionCompose key={position.id} position={position} />))
+            }
+          </Card>
+        </Col>
+      </Container>
+      <Modal isOpen={isOpenConfirm}>
+        Confirm
+        <DangerButton onClick={() => toggleConfirm(!isOpenConfirm)}>
+          Cancel
+        </DangerButton>
+        <Button onClick={() => toggleConfirm(!isOpenConfirm)}>
+          Confirm
+        </Button>
+      </Modal>
+    </Fragment>
+  );
+};
 
 const mapStateToProps = state => ({
   ranks: state.match.ranks,
