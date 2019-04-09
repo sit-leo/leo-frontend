@@ -12,13 +12,14 @@ import { clientInstance } from '../../tools/request';
 import adapter from '../../store/match/match-adapter';
 import { addRank, updateRank, removeRank } from '../../store/match/applicant';
 
-import Container, { ContainerFluid, Col } from '../base/Grid';
+import Container, { Col } from '../base/Grid';
 import Flex, { FlexBetween, FlexCenter } from '../base/Flex';
 import Text, { TitleMedium, TextSmall } from '../base/Text';
 
 import Navbar from '../base/Navbar';
 import Card, { SmallCard } from '../base/Card';
 import Button, { DangerButton } from '../base/Button';
+import WithNavbar from '../base/Layouts';
 
 const Step = Steps.Step;
 
@@ -100,10 +101,7 @@ export const RankingPage = ({
   const [isOpenConfirm, toggleConfirm] = useState(false);
 
   return (
-    <Fragment>
-      <ContainerFluid>
-        <Navbar />
-      </ContainerFluid>
+    <WithNavbar>
       <Container className="py-5">
         <Card>
           <Col>
@@ -183,14 +181,14 @@ export const RankingPage = ({
           </FlexBetween>
         </ModalFooter>
       </Modal>
-    </Fragment>
+    </WithNavbar>
   );
 };
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  ranks: state.applicant.ranks,
   positions: state.match.positions,
+  ranks: state.applicant.ranks,
 });
 
 export default connect(mapStateToProps)(RankingPage);
