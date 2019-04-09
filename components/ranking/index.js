@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Collapse, Modal } from 'reactstrap';
+import { Steps } from 'antd';
 
 import { clientInstance } from '../../tools/request';
 
@@ -17,6 +18,8 @@ import Navbar from '../base/Navbar';
 import Hero from '../base/Hero';
 import Card, { SmallCard } from '../base/Card';
 import Button, { DangerButton } from '../base/Button';
+
+const Step = Steps.Step;
 
 const matchAdapter = adapter(clientInstance());
 
@@ -79,6 +82,7 @@ export const RankingPage = ({
   ranks = [],
   positions = [{ name: 'No Position Found', capacity: 0 }],
 }) => {
+  const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
 
   return (
@@ -87,7 +91,27 @@ export const RankingPage = ({
         <Navbar />
       </ContainerFluid>
       <Container className="py-5">
-        <Col lg={4}>
+        <Col>
+          <Steps current={step}>
+            <Step />
+            <Step />
+            <Step />
+          </Steps>
+        </Col>
+        <Button onClick={() => handleStep(step + 1)}>Next Step</Button>
+        { step === 0 && (
+        <Col>
+          <Card>
+            <TitleMedium>List of Recruiters</TitleMedium>
+            {
+              positions.map((position => <PositionCompose key={position.id} position={position} />))
+            }
+          </Card>
+        </Col>
+        ) }
+
+        { step === 1 && (
+        <Col>
           <Card>
             <TitleMedium>Your Ranking</TitleMedium>
             <div>
@@ -105,14 +129,15 @@ export const RankingPage = ({
             </Button>
           </Card>
         </Col>
-        <Col lg={8}>
+        ) }
+
+        { step === 2 && (
+        <Col>
           <Card>
-            <TitleMedium>List of Recruiters</TitleMedium>
-            {
-              positions.map((position => <PositionCompose key={position.id} position={position} />))
-            }
+            <TitleMedium>Upload Document</TitleMedium>
           </Card>
         </Col>
+        ) }
       </Container>
       <Modal isOpen={isOpenConfirm}>
         Confirm
