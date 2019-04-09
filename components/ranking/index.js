@@ -85,11 +85,6 @@ export const RankingPage = ({
     <Fragment>
       <ContainerFluid>
         <Navbar />
-        <Row>
-          <Col className="px-0">
-            <Hero text="Ranking Page" />
-          </Col>
-        </Row>
       </ContainerFluid>
       <Container className="py-5">
         <Col lg={4}>
