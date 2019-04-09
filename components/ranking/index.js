@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-
 import WithNavbar from '../layouts/with-navbar';
 
 import Container, { Col } from '../base/Grid';
