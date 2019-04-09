@@ -22,16 +22,12 @@ export default function reducer(state = initState, action = {}) {
       const removalIndex = ranks.findIndex(rank => rank.id === action.rank.id);
       ranks.splice(removalIndex, 1);
       ranks.splice(action.index, 0, { ...action.rank, sequence: action.index + 1 });
-      ranks = ranks.map((rank, rankIndex) => {
-        if (rankIndex > action.index) {
-          return { ...rank, sequence: rank.sequence + 1 };
-        }
-        return rank;
-      });
+      ranks = ranks.map((rank, rankIndex) => ({ ...rank, sequence: rankIndex + 1 }));
       return { ...state, ranks };
     }
     case REMOVE_RANK: {
-      const ranks = [...state.ranks].filter(rank => rank.name !== action.rank.name);
+      let ranks = [...state.ranks].filter(rank => rank.name !== action.rank.name);
+      ranks = ranks.map((rank, rankIndex) => ({ ...rank, sequence: rankIndex + 1 }));
       return { ...state, ranks };
     }
     default: return { ...state };
