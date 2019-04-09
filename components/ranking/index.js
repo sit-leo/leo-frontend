@@ -10,12 +10,11 @@ import { clientInstance } from '../../tools/request';
 import adapter from '../../store/match/match-adapter';
 import { addRank, removeRank } from '../../store/match/applicant';
 
-import Container, { ContainerFluid, Row, Col } from '../base/Grid';
-import { FlexBetween } from '../base/Flex';
+import Container, { ContainerFluid, Col } from '../base/Grid';
+import Flex, { FlexBetween, FlexCenter } from '../base/Flex';
 import Text, { TitleMedium } from '../base/Text';
 
 import Navbar from '../base/Navbar';
-import Hero from '../base/Hero';
 import Card, { SmallCard } from '../base/Card';
 import Button, { DangerButton } from '../base/Button';
 
@@ -48,8 +47,12 @@ const Position = ({ position, addRank: addRanking = () => {} }) => {
       <PositionCard isOpen={isOpen} toggle={toggle} position={position} />
       <Collapse isOpen={isOpen}>
         <Card>
-          <TitleMedium>No Information</TitleMedium>
-          <button type="button" onClick={() => addRanking(position)}>Add to Your Ranking</button>
+          <Flex>
+            <TitleMedium>No Information</TitleMedium>
+          </Flex>
+          <FlexCenter>
+            <Button type="button" onClick={() => addRanking(position)}>Add to Your Ranking</Button>
+          </FlexCenter>
         </Card>
       </Collapse>
     </Fragment>
@@ -97,8 +100,8 @@ export const RankingPage = ({
             <Step />
             <Step />
           </Steps>
+          <Button onClick={() => handleStep(step + 1)}>Next Step</Button>
         </Col>
-        <Button onClick={() => handleStep(step + 1)}>Next Step</Button>
         { step === 0 && (
         <Col>
           <Card>
