@@ -35,7 +35,7 @@ export default function reducer(state = initState, action = {}) {
     case ADD_RANK: {
       const ranks = [...state.ranks];
       if (!ranks.find(rank => rank.name === action.rank.name)) {
-        ranks.push({ ...action.rank, sequence: ranks.length + 1 });
+        ranks.push({ ...action.rank, positionId: action.rank.id, sequence: ranks.length + 1 });
       }
       return { ...state, ranks };
     }
