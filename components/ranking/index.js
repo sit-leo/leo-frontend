@@ -7,7 +7,7 @@ import { Collapse, Modal } from 'reactstrap';
 import { clientInstance } from '../../tools/request';
 
 import adapter from '../../store/match/match-adapter';
-import { addRank, removeRank } from '../../store/match';
+import { addRank, removeRank } from '../../store/match/applicant';
 
 import Container, { ContainerFluid, Row, Col } from '../base/Grid';
 import { FlexBetween } from '../base/Flex';
@@ -28,7 +28,7 @@ const LabelText = ({ label, text }) => (
 );
 
 const PositionCard = ({ position, isOpen, toggle }) => (
-  <SmallCard onClick={() => toggle(!isOpen)}>
+  <SmallCard className="my-3" onClick={() => toggle(!isOpen)}>
     <Text><b>Company Name</b></Text>
     <FlexBetween className="mt-3">
       <Text><LabelText label="Job Position" text={`${position.name}`} /></Text>
@@ -134,7 +134,7 @@ export const RankingPage = ({
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  ranks: state.match.ranks,
+  ranks: state.applicant.ranks,
   positions: state.match.positions,
 });
 
