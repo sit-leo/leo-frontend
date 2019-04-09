@@ -2,17 +2,19 @@ import React, { Fragment, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Collapse, Modal } from 'reactstrap';
+import {
+  Collapse, Modal, ModalHeader, ModalBody, ModalFooter,
+} from 'reactstrap';
 import { Steps } from 'antd';
 
 import { clientInstance } from '../../tools/request';
 
 import adapter from '../../store/match/match-adapter';
-import { addRank, removeRank } from '../../store/match/applicant';
+import { addRank, updateRank, removeRank } from '../../store/match/applicant';
 
 import Container, { ContainerFluid, Col } from '../base/Grid';
 import Flex, { FlexBetween, FlexCenter } from '../base/Flex';
-import Text, { TitleMedium } from '../base/Text';
+import Text, { TitleMedium, TextSmall } from '../base/Text';
 
 import Navbar from '../base/Navbar';
 import Card, { SmallCard } from '../base/Card';
@@ -65,16 +67,25 @@ const mapDispatchToPositionProps = dispatch => ({
 
 const PositionCompose = connect(null, mapDispatchToPositionProps)(Position);
 
-const Rank = ({ rank, index, removeRank: removeRanking = () => {} }) => (
-  <div>
-    <button type="button" onClick={() => removeRanking(rank)}>Delete</button>
-    {`${index + 1} ${rank.name}`}
-    <button type="button">Document</button>
-  </div>
+const Rank = ({
+  rankNumber, rank, index,
+  updateRank: updateRanking = () => {},
+  removeRank: removeRanking = () => {},
+}) => (
+  <SmallCard>
+    <FlexBetween>
+      { index > 0 && <button type="button" onClick={() => updateRanking(index - 1, rank)}>^</button>}
+      <span>{`${index + 1}`}</span>
+      { index < rankNumber - 1 && <button type="button" onClick={() => updateRanking(index + 1, rank)}>V</button>}
+      <TextSmall>{`${rank.name}`}</TextSmall>
+      <button type="button" onClick={() => removeRanking(rank)}>Delete</button>
+    </FlexBetween>
+  </SmallCard>
 );
 
 
 const mapDispatchToRankProps = dispatch => ({
+  updateRank: bindActionCreators(updateRank, dispatch),
   removeRank: bindActionCreators(removeRank, dispatch),
 });
 
@@ -94,62 +105,83 @@ export const RankingPage = ({
         <Navbar />
       </ContainerFluid>
       <Container className="py-5">
-        <Col>
-          <Steps current={step}>
-            <Step />
-            <Step />
-            <Step />
-          </Steps>
-          <Button onClick={() => handleStep(step + 1)}>Next Step</Button>
-        </Col>
-        { step === 0 && (
-        <Col>
-          <Card>
-            <TitleMedium>List of Recruiters</TitleMedium>
-            {
+        <Card>
+          <Col>
+            <Steps current={step}>
+              <Step title="Add Ranks" />
+              <Step title="Order Ranks" />
+              <Step title="Upload Documents" />
+            </Steps>
+          </Col>
+          <Col>
+            <FlexBetween>
+              <Button onClick={() => handleStep(step + 1)}>Next Step</Button>
+              <TitleMedium className="text-center">
+                {`${ranks.length}`}
+                <br />
+                {'Your Rank'}
+              </TitleMedium>
+            </FlexBetween>
+          </Col>
+          { step === 0 && (
+          <Col>
+            <Card>
+              <TitleMedium>List of Recruiters</TitleMedium>
+              {
               positions.map((position => <PositionCompose key={position.id} position={position} />))
             }
-          </Card>
-        </Col>
-        ) }
+            </Card>
+          </Col>
+          ) }
 
-        { step === 1 && (
-        <Col>
-          <Card>
-            <TitleMedium>Your Ranking</TitleMedium>
-            <div>
+          { step === 1 && (
+          <Col>
+            <Card>
+              <TitleMedium>Your Ranking</TitleMedium>
               {
                 (ranks.length > 0)
-                  ? ranks.map((rank, index) => <RankCompose key={rank.id} index={index} rank={rank} />)
+                  ? ranks.map((rank, index) => <RankCompose key={rank.id} index={index} rank={rank} rankNumber={ranks.length} />)
                   : <Text>No Ranking</Text>
               }
-            </div>
-            <Button
-              disabled={ranks.length <= 0}
-              onClick={() => toggleConfirm(!isOpenConfirm)}
-            >
+              <Button
+                disabled={ranks.length <= 0}
+                onClick={() => toggleConfirm(!isOpenConfirm)}
+              >
               Confirm Ranking
-            </Button>
-          </Card>
-        </Col>
-        ) }
+              </Button>
+            </Card>
+          </Col>
+          ) }
 
-        { step === 2 && (
-        <Col>
-          <Card>
-            <TitleMedium>Upload Document</TitleMedium>
-          </Card>
-        </Col>
-        ) }
+          { step === 2 && (
+          <Col>
+            <Card>
+              <TitleMedium>Upload Document</TitleMedium>
+            </Card>
+          </Col>
+          ) }
+
+        </Card>
       </Container>
       <Modal isOpen={isOpenConfirm}>
-        Confirm
-        <DangerButton onClick={() => toggleConfirm(!isOpenConfirm)}>
-          Cancel
-        </DangerButton>
-        <Button onClick={() => matchAdapter.postApplicantRankingByMatchId(match.id, ranks)}>
-          Confirm
-        </Button>
+        <ModalHeader className="text-center">Confirmation</ModalHeader>
+        <ModalBody className="text-center">
+          Are you sure to confirm this ranking?
+          Please check the information before confirming.
+        </ModalBody>
+        <ModalFooter className="flex-column text-center">
+          <span>
+            You can edit your ranking until the match starts. We will notificate you before the match starts.
+          </span>
+          <FlexBetween className="w-100 mt-3 px-5">
+            <DangerButton onClick={() => toggleConfirm(!isOpenConfirm)}>
+            Cancel
+            </DangerButton>
+            <Button onClick={() => matchAdapter.postApplicantRankingByMatchId(match.id, ranks)}>
+            Confirm
+            </Button>
+          </FlexBetween>
+        </ModalFooter>
       </Modal>
     </Fragment>
   );
