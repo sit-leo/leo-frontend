@@ -30,7 +30,7 @@ export const ContainerFluid = ({ children }) => (
   </ContainerStyled>
 );
 
-const Container = ({ children, className }) => (
+const ContainerRow = ({ children, className }) => (
   <ContainerStyled className={className} fluid={false}>
     <Row>
       { children }
@@ -38,4 +38,4 @@ const Container = ({ children, className }) => (
   </ContainerStyled>
 );
 
-export default Container;
+export default ContainerRow;
