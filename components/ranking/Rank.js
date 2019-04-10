@@ -31,7 +31,7 @@ const Rank = ({
         <span>{`${index + 1}`}</span>
         { index < rankNumber - 1 && <Icon type="caret-down" theme="filled" onClick={() => updateRanking(index - 1, rank)} />}
       </FlexCenter>
-      <TextSmall className="flex-grow-1">{`${rank.name}`}</TextSmall>
+      <TextSmall className="flex-grow-1">{`${rank.position.name}`}</TextSmall>
       <DeletedIcon onClick={() => removeRanking(rank)} theme="filled" type="minus-circle" />
     </FlexBetween>
   </SmallCard>
