@@ -18,7 +18,7 @@ class Ranking extends React.Component {
     const ranks = await matchAdapter.getApplicantRankingByMatchId(query.matchId);
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
-    if (ranks.length > 0) {
+    if (ranks && ranks.length > 0) {
       await store.dispatch(setRanks(ranks));
       await store.dispatch(setIsUpdateRank(true));
     }
