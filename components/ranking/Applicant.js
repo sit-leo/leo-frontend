@@ -20,10 +20,10 @@ const LabelText = ({ label, text }) => (
 
 const PositionCard = ({ position, isOpen, toggle }) => (
   <SmallCard className="my-3" onClick={() => toggle(!isOpen)}>
-    <Text><b>Company Name</b></Text>
+    <Text><b>Applicant Name</b></Text>
     <FlexBetween className="mt-3">
-      <Text><LabelText label="Job Position" text={`${position.name}`} /></Text>
-      <Text><LabelText label="Amount" text={`${position.capacity}`} /></Text>
+      <Text><LabelText label="Education" text="3rd year at SIT, KMUTT" /></Text>
+      <Text><LabelText label="Document" text="2" /></Text>
     </FlexBetween>
   </SmallCard>
 );
