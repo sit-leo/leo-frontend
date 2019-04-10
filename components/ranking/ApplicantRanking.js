@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import WithNavbar from '../layouts/with-navbar';
-
-import Container, { Col } from '../base/Grid';
-import { FlexBetween } from '../base/Flex';
+import { Col } from '../base/Grid';
 import { TitleMedium } from '../base/Text';
-import Card from '../base/Card';
 
 import Upload from './Upload';
-import RankingStep from './RankingStep';
 import RankingList from './RankingList';
 import PositionList from './PositionList';
-import ModalConfirmation from './ModalConfirmation';
 import Ranking from './Ranking';
 
 const RankCouter = ({ counter }) => (
