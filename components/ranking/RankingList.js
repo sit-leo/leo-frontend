@@ -12,7 +12,7 @@ const RankingList = ({ ranks, isOpenConfirm, toggleConfirm = () => {} }) => (
     {
       (ranks.length > 0)
         ? ranks.map((rank, index) => <Rank key={rank.id} index={index} rank={rank} rankNumber={ranks.length} />)
-        : <FlexCenter><Text className="my-3">Please select position at least 1 in previous step.</Text></FlexCenter>
+        : <FlexCenter><Text className="my-3">Please select at least 1 in previous step.</Text></FlexCenter>
     }
     <FlexCenter>
       <Button
