@@ -19,7 +19,11 @@ export default adapter => ({
       .then(({ data: positions }) => positions);
   },
   postApplicantRankingByMatchId(matchId, applicantRanking) {
-    return adapter.post(`${MATCH_API}/matches/${matchId}/ranking`, applicantRanking)
+    return adapter.post(`${MATCH_API}/matches/${matchId}/applicants/ranking`, applicantRanking)
       .then(({ status }) => status === 200 && redirectToRanking(matchId));
+  },
+  getApplicantRankingByMatchId(matchId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/applicants/ranking`)
+      .then(({ data: ranks }) => ranks);
   },
 });
