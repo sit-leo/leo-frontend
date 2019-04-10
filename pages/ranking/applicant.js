@@ -14,7 +14,7 @@ class ApplicantRankingPage extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
-    const positions = await matchAdapter.getPositionsByMatchId(query.matchId);
+    const positions = await matchAdapter.getMatchPositionsByMatchId(query.matchId);
     const ranks = await matchAdapter.getApplicantRankingByMatchId(query.matchId);
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
