@@ -24,7 +24,7 @@ const Rank = ({
   updateRank: updateRanking = () => {},
   removeRank: removeRanking = () => {},
 }) => (
-  <SmallCard>
+  <SmallCard className="my-3">
     <FlexBetween className="align-items-center">
       <FlexCenter className="flex-grow-2 mx-3 flex-column">
         { index > 0 && <Icon type="caret-up" theme="filled" onClick={() => updateRanking(index - 1, rank)} />}
