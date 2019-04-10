@@ -7,7 +7,6 @@ import Position from './Position';
 
 const PositionList = ({ positions = [{ name: 'No Position Found', capacity: 0 }] }) => (
   <Card>
-    <TitleMedium>List of Recruiters</TitleMedium>
     {
         positions.map((position => <Position key={position.id} position={position} />))
     }

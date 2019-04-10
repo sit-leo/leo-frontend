@@ -9,7 +9,6 @@ import Rank from './Rank';
 const RankingList = ({ ranks, isOpenConfirm, toggleConfirm = () => {} }) => (
 
   <Card>
-    <TitleMedium>Your Ranking</TitleMedium>
     {
       (ranks.length > 0)
         ? ranks.map((rank, index) => <Rank key={rank.id} index={index} rank={rank} rankNumber={ranks.length} />)
