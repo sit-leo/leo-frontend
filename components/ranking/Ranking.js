@@ -44,7 +44,7 @@ export const RecruiterRanking = ({
         <Col>
           {
               children
-            }
+          }
         </Col>
       </Card>
     </Container>
@@ -54,7 +54,6 @@ export const RecruiterRanking = ({
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  ranks: state.applicant.ranks,
 });
 
 export default connect(mapStateToProps)(RecruiterRanking);
