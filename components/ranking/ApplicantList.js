@@ -14,7 +14,7 @@ const ApplicantList = ({ applicants = [{ name: 'No Applicant Found' }] }) => (
 );
 
 const mapStateToProps = state => ({
-  positions: state.applicant.positions,
+  applicants: state.recruiter.applicants,
 });
 
 export default connect(mapStateToProps)(ApplicantList);
