@@ -13,10 +13,15 @@ import Button, { DangerButton } from '../base/Button';
 const matchAdapter = adapter(clientInstance());
 
 const ModalConfirmation = ({
-  match, ranks, isOpenConfirm, toggleConfirm,
+  match, ranks, isUpdateRank,
+  isOpenConfirm, toggleConfirm,
 }) => {
   function handleConfirm() {
-    matchAdapter.postApplicantRankingByMatchId(match.id, ranks);
+    if (!isUpdateRank) {
+      matchAdapter.postApplicantRankingByMatchId(match.id, ranks);
+    } else {
+      matchAdapter.updateApplicantRankingByMatchId(match.id, ranks);
+    }
     toggleConfirm(false);
   }
   return (
@@ -47,6 +52,7 @@ const ModalConfirmation = ({
 const mapStateToProps = state => ({
   match: state.match.match,
   ranks: state.applicant.ranks,
+  isUpdateRank: state.applicant.isUpdateRank,
 });
 
 export default connect(mapStateToProps)(ModalConfirmation);

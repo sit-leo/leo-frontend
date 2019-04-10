@@ -6,7 +6,7 @@ import cookie from '../../tools/cookie';
 import adapter from '../../store/match/match-adapter';
 
 import { setMatch, setPositions } from '../../store/match';
-import { setRanks } from '../../store/match/applicant';
+import { setRanks, setIsUpdateRank } from '../../store/match/applicant';
 
 import RankingPage from '../../components/ranking';
 
@@ -18,7 +18,10 @@ class Ranking extends React.Component {
     const ranks = await matchAdapter.getApplicantRankingByMatchId(query.matchId);
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
-    await store.dispatch(setRanks(ranks));
+    if (ranks.length > 0) {
+      await store.dispatch(setRanks(ranks));
+      await store.dispatch(setIsUpdateRank(true));
+    }
     return {};
   }
 
