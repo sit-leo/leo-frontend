@@ -27,7 +27,7 @@ describe('Test Applicant Reducer', () => {
     const rankAdded = {
       id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
     };
-    const action = { type: 'leo/match/remove/rank', rank: rankAdded };
+    const action = { type: 'leo/match/remove/rank', position: rankAdded };
 
     const store = ApplicantReducer({ ranks: [rankAdded] }, action);
 
@@ -42,7 +42,7 @@ describe('Test Applicant Reducer', () => {
     const rankAdded2 = {
       id: 2, name: 'Web Developer', positionId: 1, sequence: 2,
     };
-    const action = { type: 'leo/match/remove/rank', rank: rankAdded1 };
+    const action = { type: 'leo/match/remove/rank', position: rankAdded1 };
 
     const store = ApplicantReducer({ ranks: [rankAdded1, rankAdded2] }, action);
 
@@ -57,7 +57,7 @@ describe('Test Applicant Reducer', () => {
     const rankAdded2 = {
       id: 2, name: 'Web Developer', positionId: 1, sequence: 2,
     };
-    const action = { type: 'leo/match/update/rank', index: 0, rank: rankAdded2 };
+    const action = { type: 'leo/match/update/rank', index: 0, position: rankAdded2 };
 
     const store = ApplicantReducer({ ranks: [rankAdded1, rankAdded2] }, action);
 
