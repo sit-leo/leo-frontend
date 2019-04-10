@@ -3,6 +3,7 @@ const initState = {
 };
 
 // Actions
+const SET_RANK = 'leo/match/SET/rank';
 const ADD_RANK = 'leo/match/add/rank';
 const UPDATE_RANK = 'leo/match/update/rank';
 const REMOVE_RANK = 'leo/match/remove/rank';
@@ -10,6 +11,7 @@ const REMOVE_RANK = 'leo/match/remove/rank';
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
+    case SET_RANK: return { ...state, ranks: action.ranks };
     case ADD_RANK: {
       const ranks = [...state.ranks];
       if (!ranks.find(rank => rank.id === action.rank.id)) {
@@ -35,6 +37,10 @@ export default function reducer(state = initState, action = {}) {
 }
 
 // Action Creators
+
+export function setRanks(ranks) {
+  return { type: SET_RANK, ranks };
+}
 
 export function addRank(rank) {
   return { type: ADD_RANK, rank };
