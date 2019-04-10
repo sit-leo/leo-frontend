@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Col } from '../base/Grid';
-import { TitleMedium } from '../base/Text';
-
 import Upload from './Upload';
 import RankingList from './RankingList';
 import PositionList from './PositionList';
 import Ranking from './Ranking';
 
-const RankCouter = ({ counter }) => (
-  <TitleMedium className="text-center">
-    {`${counter}`}
-    <br />
-    {'Your Rank'}
-  </TitleMedium>
-);
+const steps = [
+  'Add Ranks',
+  'Order Ranks',
+  'Upload Documents',
+];
 
 export const ApplicantRanking = ({
   ranks = [],
@@ -25,14 +20,14 @@ export const ApplicantRanking = ({
   return (
     <Ranking
       ranks={ranks}
+      steps={steps}
       step={step}
       handleStep={handleStep}
       isOpenConfirm={isOpenConfirm}
       toggleConfirm={toggleConfirm}
     >
-      <Col>
-        { step === 0 && (<PositionList />) }
-        { step === 1
+      { step === 0 && (<PositionList />) }
+      { step === 1
               && (
                 <RankingList
                   ranks={ranks}
@@ -41,8 +36,7 @@ export const ApplicantRanking = ({
                 />
               )
             }
-        { step === 2 && (<Upload />) }
-      </Col>
+      { step === 2 && (<Upload />) }
     </Ranking>
   );
 };
