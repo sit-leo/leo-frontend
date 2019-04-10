@@ -1,12 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { Icon } from 'antd';
+
+import color from '../../config/color';
+import font from '../../config/font';
 
 import { updateRank, removeRank } from '../../store/match/applicant';
 
 import { SmallCard } from '../base/Card';
-import { FlexBetween } from '../base/Flex';
+import { FlexBetween, FlexCenter } from '../base/Flex';
 import { TextSmall } from '../base/Text';
+
+const DeletedIcon = styled(Icon)`
+  font-size: ${font.size.medium};
+  color: ${color.error};
+`;
 
 const Rank = ({
   rankNumber, rank, index,
@@ -14,12 +25,14 @@ const Rank = ({
   removeRank: removeRanking = () => {},
 }) => (
   <SmallCard>
-    <FlexBetween>
-      { index > 0 && <button type="button" onClick={() => updateRanking(index - 1, rank)}>^</button>}
-      <span>{`${index + 1}`}</span>
-      { index < rankNumber - 1 && <button type="button" onClick={() => updateRanking(index + 1, rank)}>V</button>}
-      <TextSmall>{`${rank.name}`}</TextSmall>
-      <button type="button" onClick={() => removeRanking(rank)}>Delete</button>
+    <FlexBetween className="align-items-center">
+      <FlexCenter className="flex-grow-2 mx-3 flex-column">
+        { index > 0 && <Icon type="caret-up" theme="filled" onClick={() => updateRanking(index - 1, rank)} />}
+        <span>{`${index + 1}`}</span>
+        { index < rankNumber - 1 && <Icon type="caret-down" theme="filled" onClick={() => updateRanking(index - 1, rank)} />}
+      </FlexCenter>
+      <TextSmall className="flex-grow-1">{`${rank.name}`}</TextSmall>
+      <DeletedIcon onClick={() => removeRanking(rank)} theme="filled" type="minus-circle" />
     </FlexBetween>
   </SmallCard>
 );
