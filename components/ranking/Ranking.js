@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import WithNavbar from '../layouts/with-navbar';
@@ -8,10 +8,7 @@ import { FlexBetween } from '../base/Flex';
 import { TitleMedium } from '../base/Text';
 import Card from '../base/Card';
 
-import Upload from './Upload';
 import RankingStep from './RankingStep';
-import RankingList from './RankingList';
-import PositionList from './PositionList';
 import ModalConfirmation from './ModalConfirmation';
 
 const RankCouter = ({ counter }) => (
@@ -23,7 +20,7 @@ const RankCouter = ({ counter }) => (
 );
 
 export const RecruiterRanking = ({
-  step, handleStep, isOpenConfirm, toggleConfirm,
+  steps = [], step, handleStep, isOpenConfirm, toggleConfirm,
   ranks = [],
   children,
 }) => (
@@ -31,7 +28,7 @@ export const RecruiterRanking = ({
     <Container className="py-5">
       <Card>
         <Col>
-          <RankingStep step={step} />
+          <RankingStep steps={steps} step={step} />
           <FlexBetween>
             <RankCouter counter={ranks.length} />
             <div className="d-flex flex-column">
@@ -43,7 +40,7 @@ export const RecruiterRanking = ({
         </Col>
         <Col>
           {
-              children
+            children
           }
         </Col>
       </Card>
