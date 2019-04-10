@@ -10,7 +10,7 @@ const steps = [
 const RankingStep = ({ step: stepIndex }) => (
   <Steps current={stepIndex}>
     {
-      steps.map(step => <Steps.Step title={step} />)
+      steps.map(step => <Steps.Step key={step} title={step} />)
     }
   </Steps>
 );
