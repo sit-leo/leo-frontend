@@ -13,19 +13,19 @@ describe('Test Applicant Reducer', () => {
 
   it('Test addRank with same rank should not added rank.', (done) => {
     const position = {
-      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
+      id: 1, name: 'Software Developer',
     };
     const action = { type: 'leo/match/add/rank', position };
 
-    const store = ApplicantReducer({ ranks: [position] }, action);
+    const store = ApplicantReducer({ ranks: [{ ...position, positionId: 1, sequence: 1 }] }, action);
 
-    expect(store).toEqual({ ranks: [position] });
+    expect(store).toEqual({ ranks: [{ ...position, positionId: 1, sequence: 1 }] });
     done();
   });
 
   it('Test removeRank should return ranks that include added rank.', (done) => {
     const rankAdded = {
-      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
+      position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
     };
     const action = { type: 'leo/match/remove/rank', position: rankAdded };
 
@@ -37,10 +37,10 @@ describe('Test Applicant Reducer', () => {
 
   it('Test removeRank at rank 2 should return ranks that include added rank with valid sequence.', (done) => {
     const rankAdded1 = {
-      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
+      position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
     };
     const rankAdded2 = {
-      id: 2, name: 'Web Developer', positionId: 1, sequence: 2,
+      position: { id: 2, name: 'Web Developer' }, positionId: 2, sequence: 2,
     };
     const action = { type: 'leo/match/remove/rank', position: rankAdded1 };
 
@@ -50,12 +50,12 @@ describe('Test Applicant Reducer', () => {
     done();
   });
 
-  it('Test updateRank should return ranks that changed rank sequence decrease index.', (done) => {
+  it('Test updateRank should return ranks that changed rank sequence increase from 1 to 0 index.', (done) => {
     const rankAdded1 = {
-      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
+      position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
     };
     const rankAdded2 = {
-      id: 2, name: 'Web Developer', positionId: 1, sequence: 2,
+      position: { id: 2, name: 'Web Developer' }, positionId: 2, sequence: 2,
     };
     const action = { type: 'leo/match/update/rank', index: 0, position: rankAdded2 };
 
@@ -65,14 +65,14 @@ describe('Test Applicant Reducer', () => {
     done();
   });
 
-  it('Test updateRank should return ranks that changed rank sequence by increase index.', (done) => {
+  it('Test updateRank should return ranks that changed rank sequence by decrease from 0 to 1 index.', (done) => {
     const rankAdded1 = {
-      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
+      position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
     };
     const rankAdded2 = {
-      id: 2, name: 'Web Developer', positionId: 1, sequence: 2,
+      position: { id: 2, name: 'Web Developer' }, positionId: 2, sequence: 2,
     };
-    const action = { type: 'leo/match/update/rank', index: 1, rank: rankAdded1 };
+    const action = { type: 'leo/match/update/rank', index: 1, position: rankAdded1 };
 
     const store = ApplicantReducer({ ranks: [rankAdded1, rankAdded2] }, action);
 
