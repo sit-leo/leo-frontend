@@ -12,18 +12,14 @@ describe('Test Applicant Reducer', () => {
   });
 
   it('Test addRank with same rank should not added rank.', (done) => {
-    const rankAdded = {
-      positionId: 1,
-      sequence: 1,
-      position: {
-        id: 1, name: 'Software Developer',
-      },
+    const position = {
+      id: 1, name: 'Software Developer', positionId: 1, sequence: 1,
     };
-    const action = { type: 'leo/match/add/rank', rank: rankAdded };
+    const action = { type: 'leo/match/add/rank', position };
 
-    const store = ApplicantReducer({ ranks: [rankAdded] }, action);
+    const store = ApplicantReducer({ ranks: [position] }, action);
 
-    expect(store).toEqual({ ranks: [rankAdded] });
+    expect(store).toEqual({ ranks: [position] });
     done();
   });
 
