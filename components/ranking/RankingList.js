@@ -5,21 +5,23 @@ import Button from '../base/Button';
 import Text, { TitleMedium } from '../base/Text';
 
 import Rank from './Rank';
+import { FlexCenter } from '../base/Flex';
 
 const RankingList = ({ ranks, isOpenConfirm, toggleConfirm = () => {} }) => (
-
   <Card>
     {
       (ranks.length > 0)
         ? ranks.map((rank, index) => <Rank key={rank.id} index={index} rank={rank} rankNumber={ranks.length} />)
-        : <Text>No Ranking</Text>
+        : <FlexCenter><Text className="my-3">Please select position at least 1 in previous step.</Text></FlexCenter>
     }
-    <Button
-      disabled={ranks.length <= 0}
-      onClick={() => toggleConfirm(!isOpenConfirm)}
-    >
+    <FlexCenter>
+      <Button
+        disabled={ranks.length <= 0}
+        onClick={() => toggleConfirm(!isOpenConfirm)}
+      >
     Confirm Ranking
-    </Button>
+      </Button>
+    </FlexCenter>
   </Card>
 );
 
