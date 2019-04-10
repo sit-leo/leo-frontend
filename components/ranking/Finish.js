@@ -4,7 +4,9 @@ import { TitleMedium } from '../base/Text';
 
 const Finish = () => (
   <Card>
-    <TitleMedium>Ranking Finish :tada:</TitleMedium>
+    <TitleMedium className="text-center">
+      {'Ranking Finish ✨'}
+    </TitleMedium>
   </Card>
 );
 
