@@ -1,7 +1,6 @@
 import Router from 'next/router';
 
 import env from '../../config/env';
-import request from '../../tools/request';
 
 const MATCH_API = env.public.matchingApi;
 
@@ -29,5 +28,13 @@ export default adapter => ({
   getApplicantRankingByMatchId(matchId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/applicants/ranking`)
       .then(({ data: ranks }) => ranks);
+  },
+  getRecruiterRankingByMatchIdAndPositionId(matchId, positionId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`)
+      .then(({ data: ranks }) => ranks);
+  },
+  getApplicantsByMatchId(matchId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/recruiters/positions`)
+      .then(({ data: positions }) => positions);
   },
 });
