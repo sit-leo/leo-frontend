@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { serverInstance } from '../tools/request';
-import cookie from '../tools/cookie';
-import adapter from '../store/match/match-adapter';
+import { serverInstance } from '../../tools/request';
+import cookie from '../../tools/cookie';
+import adapter from '../../store/match/match-adapter';
 
-import { setMatch, setPositions } from '../store/match';
+import { setMatch, setPositions } from '../../store/match';
 
-import RankingPage from '../components/ranking';
+import RankingPage from '../../components/ranking';
 
 class Ranking extends React.Component {
   static async getInitialProps({ store, query, req }) {
