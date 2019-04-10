@@ -13,7 +13,7 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/matches/${matchId}`)
       .then(({ data: match }) => match);
   },
-  getPositionsByMatchId(matchId) {
+  getMatchPositionsByMatchId(matchId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/positions`)
       .then(({ data: positions }) => positions);
   },
@@ -35,6 +35,10 @@ export default adapter => ({
   },
   getApplicantsByMatchId(matchId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/recruiters/positions`)
+      .then(({ data: positions }) => positions);
+  },
+  getRecruiterPositionsByMatchId(matchId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/positions`)
       .then(({ data: positions }) => positions);
   },
 });
