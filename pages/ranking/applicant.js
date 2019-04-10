@@ -5,12 +5,12 @@ import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
 import adapter from '../../store/match/match-adapter';
 
-import { setMatch, setPositions } from '../../store/match';
-import { setRanks, setIsUpdateRank } from '../../store/match/applicant';
+import { setMatch } from '../../store/match';
+import { setPositions, setRanks, setIsUpdateRank } from '../../store/match/applicant';
 
-import Ranking from '../../components/ranking';
+import ApplicantRanking from '../../components/ranking/ApplicantRanking';
 
-class ApplicantRanking extends React.Component {
+class ApplicantRankingPage extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
@@ -26,8 +26,8 @@ class ApplicantRanking extends React.Component {
   }
 
   render() {
-    return <Ranking />;
+    return <ApplicantRanking />;
   }
 }
 
-export default connect()(ApplicantRanking);
+export default connect()(ApplicantRankingPage);
