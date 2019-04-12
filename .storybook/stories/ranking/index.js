@@ -3,13 +3,20 @@ import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { RankingPage } from '../../../components/ranking';
+import ApplicantRanking from '../../../components/ranking/ApplicantRanking';
 
 const mockStore = configureStore();
-const store = mockStore({});
+const store = mockStore({
+  match: {
+    match: {},
+  },
+  applicant: {
+    ranks: []
+  }
+});
 
 storiesOf('Ranking', module)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
-  .add('Ranking Component', () => (
-    <RankingPage text="Default" />
+  .add('ApplicantRanking Component', () => (
+    <ApplicantRanking />
   ))
