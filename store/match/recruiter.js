@@ -1,10 +1,13 @@
 const initState = {
   isUpdateRank: false,
+  positions: [],
   applicants: [],
   ranks: [],
 };
 
   // Actions
+const SET_POSITIONS = 'leo/match/recruiter/set/positions';
+
 const SET_APPLICANTS = 'leo/match/recruiter/set/applicants';
 
 const SET_IS_UPDATE_RANK = 'leo/match/recruiter/set/isUpdateRank';
@@ -17,6 +20,9 @@ const REMOVE_RANK = 'leo/match/recruiter/remove/rank';
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
     case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank };
+    case SET_POSITIONS: {
+      return { ...state, positions: action.positions };
+    }
     case SET_RANK: {
       const ranks = [...action.ranks].map(rank => ({ ...rank, positionId: rank.position.id }));
       return { ...state, ranks };
@@ -49,6 +55,10 @@ export default function reducer(state = initState, action = {}) {
 }
 
 // Action Creators
+
+export function setPositions(positions) {
+  return { type: SET_POSITIONS, positions };
+}
 
 export function setApplicants(applicants) {
   return { type: SET_APPLICANTS, applicants };
