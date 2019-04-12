@@ -9,7 +9,7 @@ const initState = {
 };
 
 // Actions
-const SET_POSITIONS = 'leo/match/set/positions';
+const SET_POSITIONS = 'leo/match/applicant/set/positions';
 
 const SET_IS_UPDATE_RANK = 'leo/match/applicant/set/isUpdateRank';
 const SET_RANK = 'leo/match/applicant/set/rank';
