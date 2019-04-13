@@ -32,10 +32,10 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, ranks };
     }
     case ADD_RANK: {
-      const { position } = action;
+      const { applicant } = action;
       const ranks = [...state.ranks];
-      if (!ranks.find(rank => rank.positionId === position.id)) {
-        ranks.push({ position, positionId: position.id, sequence: ranks.length + 1 });
+      if (!ranks.find(rank => rank.applicantMatchId === applicant.id)) {
+        ranks.push({ applicant, applicantMatchId: applicant.id, sequence: ranks.length + 1 });
       }
       return { ...state, ranks };
     }
@@ -76,14 +76,14 @@ export function setRanks(ranks) {
   return { type: SET_RANK, ranks };
 }
 
-export function addRank(position) {
-  return { type: ADD_RANK, position };
+export function addRank(applicant) {
+  return { type: ADD_RANK, applicant };
 }
 
-export function updateRank(index, position) {
-  return { type: UPDATE_RANK, index, position };
+export function updateRank(index, applicant) {
+  return { type: UPDATE_RANK, index, applicant };
 }
 
-export function removeRank(position) {
-  return { type: REMOVE_RANK, position };
+export function removeRank(applicant) {
+  return { type: REMOVE_RANK, applicant };
 }
