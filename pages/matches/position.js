@@ -8,7 +8,7 @@ import adapter from '../../store/match/match-adapter';
 import { setMatch } from '../../store/match';
 import { setPositions } from '../../store/match/recruiter';
 
-import RecruiterPosition from '../../components/ranking/RecruiterPosition';
+import RecruiterPosition from '../../components/matches/RecruiterPosition';
 
 class RecruiterPositionPage extends React.Component {
   static async getInitialProps({ store, query, req }) {
