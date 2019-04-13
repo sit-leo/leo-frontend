@@ -8,7 +8,7 @@ function redirectToApplicantRanking(matchId) {
   return Router.push(`/matches/${matchId}/applicants/ranking`);
 }
 
-function redirectToRecruiterRanking(matchId, positionId) {
+export function redirectToRecruiterRanking(matchId, positionId) {
   return Router.push(`/matches/${matchId}/positions/${positionId}/ranking`);
 }
 
