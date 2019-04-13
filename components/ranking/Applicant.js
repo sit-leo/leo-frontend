@@ -18,9 +18,13 @@ const LabelText = ({ label, text }) => (
   </Text>
 );
 
-const PositionCard = ({ position, isOpen, toggle }) => (
+const ApplicantCard = ({ applicant, isOpen, toggle }) => (
   <SmallCard className="my-3" onClick={() => toggle(!isOpen)}>
-    <Text><b>Applicant Name</b></Text>
+    <Text>
+      <b>
+        {`Applicant Name, Applicant Id: ${applicant.id}`}
+      </b>
+    </Text>
     <FlexBetween className="mt-3">
       <Text><LabelText label="Education" text="3rd year at SIT, KMUTT" /></Text>
       <Text><LabelText label="Document" text="2" /></Text>
@@ -32,7 +36,7 @@ const Applicant = ({ applicant, addRank: addRanking = () => {} }) => {
   const [isOpen, toggle] = useState(false);
   return (
     <Fragment>
-      <PositionCard isOpen={isOpen} toggle={toggle} position={applicant} />
+      <ApplicantCard isOpen={isOpen} toggle={toggle} applicant={applicant} />
       <Collapse isOpen={isOpen}>
         <Card>
           <Flex>
