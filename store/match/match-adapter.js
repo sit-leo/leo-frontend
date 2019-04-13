@@ -4,8 +4,8 @@ import env from '../../config/env';
 
 const MATCH_API = env.public.matchingApi;
 
-function redirectToRanking(matchId) {
-  return Router.push(`/matches/${matchId}/ranking`);
+function redirectToApplicantRanking(matchId) {
+  return Router.push(`/matches/${matchId}/applicants/ranking`);
 }
 
 export default adapter => ({
@@ -19,11 +19,11 @@ export default adapter => ({
   },
   postApplicantRankingByMatchId(matchId, applicantRanking) {
     return adapter.post(`${MATCH_API}/matches/${matchId}/applicants/ranking`, applicantRanking)
-      .then(({ status }) => status === 200 && redirectToRanking(matchId));
+      .then(({ status }) => status === 200 && redirectToApplicantRanking(matchId));
   },
   updateApplicantRankingByMatchId(matchId, applicantRanking) {
     return adapter.put(`${MATCH_API}/matches/${matchId}/applicants/ranking`, applicantRanking)
-      .then(({ status }) => status === 200 && redirectToRanking(matchId));
+      .then(({ status }) => status === 200 && redirectToApplicantRanking(matchId));
   },
   getApplicantRankingByMatchId(matchId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/applicants/ranking`)
