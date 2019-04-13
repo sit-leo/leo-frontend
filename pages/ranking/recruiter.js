@@ -8,14 +8,14 @@ import adapter from '../../store/match/match-adapter';
 import { setMatch } from '../../store/match';
 import { setApplicants, setRanks, setIsUpdateRank } from '../../store/match/recruiter';
 
-import RecruiterRanking from '../../components/ranking/RecruiterRanking';
+import RecruiterRankingPage from '../../components/ranking/RecruiterRanking';
 
-class RecruiterRankingPage extends React.Component {
+class RecruiterRankingSSR extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
-    const applicants = await matchAdapter.getApplicantsByMatchId(query.matchId);
-    const ranks = await matchAdapter.getRecruiterRankingByMatchIdAndPositionId(query.matchId);
+    const applicants = await matchAdapter.getApplicantsByMatchIdAndPositionId(query.matchId, query.positionId);
+    const ranks = await matchAdapter.getRecruiterRankingByMatchIdAndPositionId(query.matchId, query.positionId);
     await store.dispatch(setMatch(match));
     await store.dispatch(setApplicants(applicants));
     if (ranks && ranks.length > 0) {
@@ -26,8 +26,8 @@ class RecruiterRankingPage extends React.Component {
   }
 
   render() {
-    return <RecruiterRanking />;
+    return <RecruiterRankingPage />;
   }
 }
 
-export default connect()(RecruiterRankingPage);
+export default connect()(RecruiterRankingSSR);
