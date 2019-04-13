@@ -1,4 +1,5 @@
 const initState = {
+
   isUpdateRank: false,
   positions: [],
   applicants: [],
@@ -22,6 +23,9 @@ export default function reducer(state = initState, action = {}) {
     case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank };
     case SET_POSITIONS: {
       return { ...state, positions: action.positions };
+    }
+    case SET_APPLICANTS: {
+      return { ...state, applicants: action.applicants };
     }
     case SET_RANK: {
       const ranks = [...action.ranks].map(rank => ({ ...rank, positionId: rank.position.id }));

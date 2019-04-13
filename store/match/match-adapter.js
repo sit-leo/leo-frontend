@@ -39,7 +39,7 @@ export default adapter => ({
   },
   getApplicantsByMatchIdAndPositionId(matchId, positionId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/applicants`)
-      .then(({ data: positions }) => positions);
+      .then(({ data: applicants }) => applicants);
   },
   getRecruiterRankingByMatchIdAndPositionId(matchId, positionId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`)
