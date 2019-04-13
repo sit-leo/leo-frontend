@@ -33,16 +33,16 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/matches/${matchId}/applicants/ranking`)
       .then(({ data: ranks }) => ranks);
   },
-  getRecruiterRankingByMatchIdAndPositionId(matchId, positionId) {
-    return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`)
-      .then(({ data: ranks }) => ranks);
-  },
-  getApplicantsByMatchId(matchId) {
+  getRecruiterPositionsByMatchId(matchId) {
     return adapter.get(`${MATCH_API}/matches/${matchId}/recruiters/positions`)
       .then(({ data: positions }) => positions);
   },
-  getRecruiterPositionsByMatchId(matchId) {
-    return adapter.get(`${MATCH_API}/matches/${matchId}/positions`)
+  getApplicantsByMatchIdAndPositionId(matchId, positionId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/applicants`)
       .then(({ data: positions }) => positions);
+  },
+  getRecruiterRankingByMatchIdAndPositionId(matchId, positionId) {
+    return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`)
+      .then(({ data: ranks }) => ranks);
   },
 });
