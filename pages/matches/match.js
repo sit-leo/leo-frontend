@@ -7,7 +7,7 @@ import adapter from '../../store/match/match-adapter';
 
 import { setMatch } from '../../store/match';
 
-import MatchPage from '../../components/matches/match';
+import MatchPage from '../../components/matches/Match';
 
 class MatchSSR extends React.Component {
   static async getInitialProps({ store, query, req }) {
