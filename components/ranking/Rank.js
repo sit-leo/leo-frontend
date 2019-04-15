@@ -1,14 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { Icon } from 'antd';
 
 import color from '../../config/color';
 import font from '../../config/font';
-
-import { updateRank, removeRank } from '../../store/match/applicant';
 
 import { SmallCard } from '../base/Card';
 import { FlexBetween, FlexCenter } from '../base/Flex';
@@ -21,8 +17,8 @@ const DeletedIcon = styled(Icon)`
 
 const Rank = ({
   rankNumber, rank, index,
-  updateRank: updateRanking = () => {},
-  removeRank: removeRanking = () => {},
+  updateRanking = () => {},
+  removeRanking = () => {},
 }) => (
   <SmallCard className="my-3">
     <FlexBetween className="align-items-center">
@@ -37,9 +33,4 @@ const Rank = ({
   </SmallCard>
 );
 
-const mapDispatchToRankProps = dispatch => ({
-  updateRank: bindActionCreators(updateRank, dispatch),
-  removeRank: bindActionCreators(removeRank, dispatch),
-});
-
-export default connect(null, mapDispatchToRankProps)(Rank);
+export default Rank;

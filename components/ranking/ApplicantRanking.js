@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { updateRank, removeRank } from '../../store/match/applicant';
 
 import Upload from './Upload';
 import RankingList from './RankingList';
@@ -14,6 +17,8 @@ const steps = [
 
 export const ApplicantRanking = ({
   ranks = [],
+  updateRank: updateRanking = () => {},
+  removeRank: removeRanking = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
@@ -33,6 +38,8 @@ export const ApplicantRanking = ({
                   ranks={ranks}
                   isOpenConfirm={isOpenConfirm}
                   toggleConfirm={toggleConfirm}
+                  updateRanking={updateRanking}
+                  removeRanking={removeRanking}
                 />
               )
             }
@@ -46,4 +53,9 @@ const mapStateToProps = state => ({
   ranks: state.applicant.ranks,
 });
 
-export default connect(mapStateToProps)(ApplicantRanking);
+const mapDispatchToRankProps = dispatch => ({
+  updateRank: bindActionCreators(updateRank, dispatch),
+  removeRank: bindActionCreators(removeRank, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToRankProps)(ApplicantRanking);
