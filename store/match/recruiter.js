@@ -28,7 +28,7 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, applicants: action.applicants };
     }
     case SET_RANK: {
-      const ranks = [...action.ranks].map(rank => ({ ...rank, positionId: rank.position.id }));
+      const ranks = [...action.ranks].map(rank => ({ ...rank, applicantMatchId: rank.id }));
       return { ...state, ranks };
     }
     case ADD_RANK: {
@@ -42,7 +42,7 @@ export default function reducer(state = initState, action = {}) {
     case UPDATE_RANK: {
       const { index, applicant } = action;
       let ranks = [...state.ranks];
-      const removalIndex = ranks.findIndex(rank => rank.applicantMatchId === applicant.id);
+      const removalIndex = ranks.findIndex(rank => rank.applicantMatchId === applicant.applicantMatchId);
       ranks.splice(removalIndex, 1);
       ranks.splice(index, 0, { ...applicant, sequence: index + 1 });
       ranks = ranks.map((rank, rankIndex) => ({ ...rank, sequence: rankIndex + 1 }));
