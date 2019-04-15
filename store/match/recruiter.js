@@ -32,7 +32,7 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, applicants: action.applicants };
     }
     case SET_RANK: {
-      const ranks = [...action.ranks].map(rank => ({ ...rank, applicantMatchId: rank.id }));
+      const ranks = [...action.ranks].map(rank => ({ ...rank, applicant: { id: rank.applicantMatchId } }));
       return { ...state, ranks };
     }
     case ADD_RANK: {
