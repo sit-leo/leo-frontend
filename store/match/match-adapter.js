@@ -45,4 +45,12 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`)
       .then(({ data: ranks }) => ranks);
   },
+  postRecruiterRankingByMatchIdAndPositionId(matchId, positionId, recruiterRanking) {
+    return adapter.post(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`, recruiterRanking)
+      .then(({ status }) => status === 200);
+  },
+  updateRecruiterRankingByMatchIdAndPositionId(matchId, positionId, recruiterRanking) {
+    return adapter.put(`${MATCH_API}/matches/${matchId}/positions/${positionId}/ranking`, recruiterRanking)
+      .then(({ status }) => status === 200);
+  },
 });

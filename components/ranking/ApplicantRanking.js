@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { clientInstance } from '../../tools/request';
+
+import adapter from '../../store/match/match-adapter';
 import { updateRank, removeRank } from '../../store/match/applicant';
 
 import Upload from './Upload';
 import RankingList from './RankingList';
 import PositionList from './PositionList';
 import Ranking from './Ranking';
+import ModalConfirmation from './ModalConfirmation';
+
+const matchAdapter = adapter(clientInstance());
 
 const steps = [
   'Add Ranks',
@@ -16,12 +22,21 @@ const steps = [
 ];
 
 export const ApplicantRanking = ({
-  ranks = [],
+  match, isUpdateRank, ranks = [],
   updateRank: updateRanking = () => {},
   removeRank: removeRanking = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
+
+  function handleConfirm() {
+    if (!isUpdateRank) {
+      matchAdapter.postApplicantRankingByMatchId(match.id, ranks);
+    } else {
+      matchAdapter.updateApplicantRankingByMatchId(match.id, ranks);
+    }
+    toggleConfirm(false);
+  }
   return (
     <Ranking
       ranks={ranks}
@@ -44,6 +59,7 @@ export const ApplicantRanking = ({
               )
             }
       { step === 2 && (<Upload />) }
+      <ModalConfirmation isOpenConfirm={isOpenConfirm} toggleConfirm={toggleConfirm} />
     </Ranking>
   );
 };
@@ -51,6 +67,7 @@ export const ApplicantRanking = ({
 const mapStateToProps = state => ({
   match: state.match.match,
   ranks: state.applicant.ranks,
+  isUpdateRank: state.applicant.isUpdateRank,
 });
 
 const mapDispatchToRankProps = dispatch => ({

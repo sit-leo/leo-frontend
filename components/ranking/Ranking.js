@@ -9,7 +9,6 @@ import { TitleMedium } from '../base/Text';
 import Card from '../base/Card';
 
 import RankingStep from './RankingStep';
-import ModalConfirmation from './ModalConfirmation';
 
 const RankCouter = ({ counter }) => (
   <TitleMedium className="text-center">
@@ -19,8 +18,8 @@ const RankCouter = ({ counter }) => (
   </TitleMedium>
 );
 
-export const RecruiterRanking = ({
-  steps = [], step, handleStep, isOpenConfirm, toggleConfirm,
+export const Ranking = ({
+  steps = [], step, handleStep,
   ranks = [],
   children,
 }) => (
@@ -45,7 +44,6 @@ export const RecruiterRanking = ({
         </Col>
       </Card>
     </Container>
-    <ModalConfirmation isOpenConfirm={isOpenConfirm} toggleConfirm={toggleConfirm} />
   </WithNavbar>
 );
 
@@ -53,4 +51,4 @@ const mapStateToProps = state => ({
   match: state.match.match,
 });
 
-export default connect(mapStateToProps)(RecruiterRanking);
+export default connect(mapStateToProps)(Ranking);
