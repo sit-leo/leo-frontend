@@ -59,7 +59,7 @@ export const ApplicantRanking = ({
               )
             }
       { step === 2 && (<Upload />) }
-      <ModalConfirmation isOpenConfirm={isOpenConfirm} toggleConfirm={toggleConfirm} />
+      <ModalConfirmation handleConfirm={handleConfirm} isOpenConfirm={isOpenConfirm} toggleConfirm={toggleConfirm} />
     </Ranking>
   );
 };
