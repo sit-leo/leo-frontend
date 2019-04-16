@@ -37,7 +37,7 @@ const RankingList = ({
                   position={rank.position}
                   rankingButton={(
                     <TitleMedium>
-                      <FlexCenter className="mr-0 flex-grow-2 flex-column">
+                      <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
                         { index > 0
                           ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
                           : <br />
