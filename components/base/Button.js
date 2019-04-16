@@ -1,10 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { Button as DefaultButton } from 'antd';
 
 import color from '../../config/color';
-import font from '../../config/font';
 
 const DefaultButtonStyled = styled(DefaultButton)`
   border-radius: 10px;
