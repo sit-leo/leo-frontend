@@ -64,7 +64,7 @@ export const Ranking = ({
             <FlexBetween>
               <Button
                 type="button"
-                className={`${step !== 0 ? 'visible' : 'invisible'}`}
+                disabled={step === 0}
                 onClick={increaseStep}
               >
                 Previous
