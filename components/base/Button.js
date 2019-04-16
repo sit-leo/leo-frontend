@@ -18,7 +18,7 @@ const DefaultButtonStyled = styled(DefaultButton)`
 `;
 
 const MainButton = styled(DefaultButtonStyled)`
-  transition: 0s;
+  width: 100%;
   background: ${color.primary};
   color: ${color.white};
 
