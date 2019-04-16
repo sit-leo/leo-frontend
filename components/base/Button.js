@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Button as DefaultButton } from 'antd';
 
-import colors from '../../config/color';
+import color from '../../config/color';
 import font from '../../config/font';
 
 const DefaultButtonStyled = styled(DefaultButton)`
@@ -19,22 +19,22 @@ const DefaultButtonStyled = styled(DefaultButton)`
 
 const MainButton = styled(DefaultButtonStyled)`
   transition: 0s;
-  background: ${colors.primary};
-  color: ${colors.white};
+  background: ${color.primary};
+  color: ${color.white};
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
-    background: ${colors.hover};
-    color: ${colors.white};
+    background: ${color.hover};
+    color: ${color.white};
   }
 `;
 
 export const DangerButton = styled(DefaultButtonStyled)`
-  background: ${colors.error};
-  color: ${colors.white};
+  background: ${color.error};
+  color: ${color.white};
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
-    background: ${colors.error};
-    color: ${colors.white};
+    background: ${color.error};
+    color: ${color.white};
   }
 `;
 
