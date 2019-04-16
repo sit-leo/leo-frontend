@@ -7,8 +7,6 @@ import {
   Col as DefaultCol,
 } from 'reactstrap';
 
-import colors from '../../config/color';
-
 export const Col = ({
   xs = 12, md, lg, xl, children, ...props
 }) => (
