@@ -12,8 +12,8 @@ const CardContaier = styled.div`
   padding: 1.5em;
 `;
 
-const Card = ({ children }) => (
-  <CardContaier>
+const Card = ({ children, ...props }) => (
+  <CardContaier {...props}>
     {children}
   </CardContaier>
 );

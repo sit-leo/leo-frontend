@@ -21,7 +21,6 @@ export const Row = DefaultRow;
 
 export const ContainerStyled = styled(ContainerDefault)`
   height: auto;
-  background: ${colors.background};
 `;
 
 export const ContainerFluid = ({ children }) => (
