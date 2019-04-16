@@ -66,7 +66,7 @@ export const Ranking = ({
           <hr />
           <Row>
             <Col lg={2}>
-              <Button disabled={step === 0} onClick={increaseStep}>
+              <Button className="w-100" disabled={step === 0} onClick={increaseStep}>
                 Previous
               </Button>
             </Col>
@@ -84,15 +84,13 @@ export const Ranking = ({
               }
             </Col>
             <Col lg={2}>
-              <Button disabled={ranks.length === 0} onClick={decreaseStep}>
+              <Button className="w-100" disabled={ranks.length === 0} onClick={decreaseStep}>
                 Next
               </Button>
             </Col>
           </Row>
           <Row>
-            <Col>
-              { children }
-            </Col>
+            { children }
           </Row>
         </Card>
       </ContainerRow>
