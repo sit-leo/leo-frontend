@@ -66,11 +66,7 @@ export const Ranking = ({
           <hr />
           <Row>
             <Col lg={2}>
-              <Button
-                type="button"
-                disabled={step === 0}
-                onClick={increaseStep}
-              >
+              <Button disabled={step === 0} onClick={increaseStep}>
                 Previous
               </Button>
             </Col>
@@ -84,26 +80,18 @@ export const Ranking = ({
                       className="w-50"
                     />
                   )
-                  : (
-                    <TitleMedium>Your Rank</TitleMedium>
-                  )
+                  : (<TitleMedium>Your Rank</TitleMedium>)
               }
             </Col>
             <Col lg={2}>
-              <Button
-                type="button"
-                disabled={ranks.length === 0}
-                onClick={decreaseStep}
-              >
+              <Button disabled={ranks.length === 0} onClick={decreaseStep}>
                 Next
               </Button>
             </Col>
           </Row>
           <Row>
             <Col>
-              {
-                children
-              }
+              { children }
             </Col>
           </Row>
         </Card>
