@@ -16,8 +16,8 @@ import ModalConfirmation from './ModalConfirmation';
 const matchAdapter = adapter(clientInstance());
 
 const steps = [
-  'Add Ranks',
-  'Order Ranks',
+  'Add to rank',
+  'Arrange rank',
   'Finish',
 ];
 
