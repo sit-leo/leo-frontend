@@ -10,4 +10,5 @@ export default Image;
 export const Avatar = styled.img`
     max-width: 135px;
     max-height: 135px;
+    width: 100%;
 `;
