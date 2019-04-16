@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Card from '../base/Card';
 import Applicant from './Applicant';
 
 
 const ApplicantList = ({ applicants = [{ name: 'No Applicant Found' }] }) => (
-  <Card>
+  <React.Fragment>
     {
         applicants.map((applicant => <Applicant key={applicant.id} applicant={applicant} />))
     }
-  </Card>
+  </React.Fragment>
 );
 
 const mapStateToProps = state => ({

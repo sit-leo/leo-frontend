@@ -1,13 +1,13 @@
 import React from 'react';
-import Card from '../base/Card';
+
 import { TitleMedium } from '../base/Text';
 
 const Finish = () => (
-  <Card>
+  <React.Fragment>
     <TitleMedium className="text-center">
       {'Ranking Finish ✨'}
     </TitleMedium>
-  </Card>
+  </React.Fragment>
 );
 
 export default Finish;

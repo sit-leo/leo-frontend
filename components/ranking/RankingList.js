@@ -14,7 +14,7 @@ const RankingList = ({
   updateRanking = () => {},
   removeRanking = () => {},
 }) => (
-  <Card>
+  <React.Fragment>
     {
       (ranks.length > 0)
         ? ranks.map((rank, index) => (
@@ -37,7 +37,7 @@ const RankingList = ({
     Confirm Ranking
       </Button>
     </FlexCenter>
-  </Card>
+  </React.Fragment>
 );
 
 export default RankingList;
