@@ -5,6 +5,7 @@ import colors from '../../config/color';
 import font from '../../config/font';
 
 const Text = styled.span`
+  font-weight: 300;
   font-size: ${font.size.paragraph};
   color: ${colors.text.paragraph};
 `;
@@ -25,10 +26,10 @@ export const TitleMedium = styled.h2`
   color: ${colors.text.main};
 `;
 
-export const TextSmall = styled.h4`
+export const TextSmall = styled.span`
   font-size: ${font.size.small};
   color: ${colors.text.paragraph};
-  font-weight: normal;
+  font-weight: 300;
 `;
 
 export const TitleSmall = styled(TextSmall)`
