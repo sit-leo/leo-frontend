@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Card from '../base/Card';
 import Button from '../base/Button';
-import Text, { TitleMedium } from '../base/Text';
+import Text from '../base/Text';
 
 import Rank from './Rank';
 import { FlexCenter } from '../base/Flex';
