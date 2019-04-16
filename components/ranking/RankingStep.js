@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps } from 'antd';
+import Steps from '../base/Step';
 
 const RankingStep = ({ steps = [], step: stepIndex }) => (
   <Steps current={stepIndex}>
