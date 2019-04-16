@@ -7,9 +7,9 @@ import color from '../../config/color';
 
 import WithNavbar from '../layouts/with-navbar';
 
-import Container, { Col } from '../base/Grid';
-import { FlexBetween, FlexCenter } from '../base/Flex';
-import Text, { TextSmall } from '../base/Text';
+import ContainerRow, { Col, Row } from '../base/Grid';
+import { FlexCenter } from '../base/Flex';
+import Text, { TextSmall, TitleMedium } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 
@@ -57,15 +57,15 @@ export const Ranking = ({
   return (
     <WithNavbar>
       <Hero>Hero</Hero>
-      <Container className="py-5">
+      <ContainerRow className="py-5">
         <Card className="position-relative">
           <RankCouter counter={ranks.length} />
           <Col className="py-3" md={{ size: 8, offset: 2 }}>
             <RankingStep steps={steps} step={step} />
           </Col>
           <hr />
-          <Col className="py-2">
-            <FlexBetween>
+          <Row>
+            <Col lg={2}>
               <Button
                 type="button"
                 disabled={step === 0}
@@ -73,11 +73,23 @@ export const Ranking = ({
               >
                 Previous
               </Button>
-              <Input
-                prefix={<Icon type="search" />}
-                className="mx-3"
-                type="text"
-              />
+            </Col>
+            <Col lg={8} className="d-flex justify-content-center">
+              {
+                step === 0
+                  ? (
+                    <Input
+                      prefix={<Icon type="search" />}
+                      type="text"
+                      className="w-50"
+                    />
+                  )
+                  : (
+                    <TitleMedium>Your Rank</TitleMedium>
+                  )
+              }
+            </Col>
+            <Col lg={2}>
               <Button
                 type="button"
                 disabled={ranks.length === 0}
@@ -85,15 +97,17 @@ export const Ranking = ({
               >
                 Next
               </Button>
-            </FlexBetween>
-          </Col>
-          <Col>
-            {
-              children
-            }
-          </Col>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {
+                children
+              }
+            </Col>
+          </Row>
         </Card>
-      </Container>
+      </ContainerRow>
     </WithNavbar>
   );
 };
