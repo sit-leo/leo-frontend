@@ -38,4 +38,12 @@ export const DangerButton = styled(DefaultButtonStyled)`
   }
 `;
 
+export const CardButton = styled.button`
+  width: 100%;
+  border-color: ${color.disabled};
+  border-style: solid;
+  border-radius: 0 0 10px 10px;
+  border-width: 1px 0 0 0;
+`;
+
 export default MainButton;
