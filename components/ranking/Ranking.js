@@ -9,7 +9,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import Container, { Col } from '../base/Grid';
 import { FlexBetween, FlexCenter } from '../base/Flex';
-import { TextSmall, TextError } from '../base/Text';
+import Text, { TextSmall } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 
@@ -18,7 +18,7 @@ import Hero from '../base/Hero';
 
 const CounterBadge = styled(TextSmall)`
   color: ${color.white};
-  background: ${color.error};
+  background: ${props => (props.counter === 0 ? color.disabled : color.error)};
   min-width: 40px;
   cursor: pointer;
 `;
@@ -28,14 +28,18 @@ const CounterBox = styled(FlexCenter)`
   right: 1.5em;
 `;
 
+const CounterText = styled(Text)`
+  color: ${props => (props.counter === 0 ? color.disabled : color.error)};
+`;
+
 const RankCouter = ({ counter }) => (
   <CounterBox className="position-absolute text-center flex-column">
-    <CounterBadge className="rounded-circle">
+    <CounterBadge counter={counter} className="rounded-circle">
       {`${counter}`}
     </CounterBadge>
-    <TextError>
+    <CounterText counter={counter}>
       <u>Your Rank</u>
-    </TextError>
+    </CounterText>
   </CounterBox>
 );
 
