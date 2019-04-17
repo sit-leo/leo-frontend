@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import { Collapse } from 'reactstrap';
 
 import Paragraph from 'antd/lib/typography/Paragraph';
 
@@ -8,7 +11,14 @@ import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
 import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
-import { InformationCollapse } from '../base/Collapse';
+import color from '../../config/color';
+
+const InformationCollapse = styled(Collapse)`
+  border-color: ${color.disabled};
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  width: 100%;
+`;
 
 const Position = ({
   position,
