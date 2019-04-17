@@ -7,7 +7,7 @@ import Paragraph from 'antd/lib/typography/Paragraph';
 
 import ContainerRow, { Col } from '../base/Grid';
 import { TitleMedium, TextSmall } from '../base/Text';
-import { Avatar } from '../base/Image';
+import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
 import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
@@ -32,7 +32,7 @@ const Position = ({
         <Col lg={rankingButton ? 3 : 2}>
           <FlexCenter>
             { rankingButton }
-            <Avatar className="rounded-circle" src="/static/images/leo.png" alt="leo-logo" />
+            <RankingAvatar className="rounded-circle" src="/static/images/leo.png" alt="leo-logo" />
           </FlexCenter>
         </Col>
         <Col lg={rankingButton ? 6 : 7}>
