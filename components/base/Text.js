@@ -19,6 +19,7 @@ export const Title = styled.h1`
 
 export const TitlePrimary = styled(Title)`
   color: ${colors.primary};
+  font-weight: 300;
 `;
 
 export const TitleMedium = styled.h2`
