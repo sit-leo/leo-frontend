@@ -52,7 +52,7 @@ const Navbar = () => (
       <Col lg={8} className="mb-3 d-none d-lg-flex">
         {
           menus.map(menu => (
-            <Link href={menu.path}>
+            <Link key={menu.name} href={menu.path}>
               <Menu>{menu.name}</Menu>
             </Link>
           ))
