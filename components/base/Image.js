@@ -7,8 +7,14 @@ const Image = styled.img`
 
 export default Image;
 
-export const Avatar = styled.img`
+export const RankingAvatar = styled.img`
     max-width: 135px;
     max-height: 135px;
+    width: 100%;
+`;
+
+export const ProfileAvatar = styled.img`
+    max-width: 83px;
+    max-height: 83px;
     width: 100%;
 `;
