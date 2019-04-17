@@ -47,10 +47,10 @@ export const Ranking = ({
   ranks = [],
   children,
 }) => {
-  function increaseStep() {
+  function decreaseStep() {
     return step > 0 && handleStep(step - 1);
   }
-  function decreaseStep() {
+  function increaseStep() {
     return step < 2 && handleStep(step + 1);
   }
   return (
@@ -64,7 +64,7 @@ export const Ranking = ({
           <hr />
           <Row>
             <Col lg={2}>
-              <Button className="w-100" disabled={step === 0} onClick={increaseStep}>
+              <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
                 Previous
               </Button>
             </Col>
@@ -82,13 +82,15 @@ export const Ranking = ({
               }
             </Col>
             <Col lg={2}>
-              <Button className="w-100" disabled={ranks.length === 0} onClick={decreaseStep}>
+              <Button className="w-100" disabled={ranks.length === 0} onClick={increaseStep}>
                 Next
               </Button>
             </Col>
           </Row>
           <Row>
-            { children }
+            <Col>
+              { children }
+            </Col>
           </Row>
         </Card>
       </ContainerRow>
