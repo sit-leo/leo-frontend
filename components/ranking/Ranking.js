@@ -102,4 +102,6 @@ const mapStateToProps = state => ({
   match: state.match.match,
 });
 
-export default connect(mapStateToProps)(Ranking);
+const RankingCompose = connect(mapStateToProps)(Ranking);
+
+export default RankingCompose;
