@@ -10,7 +10,7 @@ import { updateRank, removeRank } from '../../store/match/applicant';
 import Upload from './Upload';
 import RankingList from './RankingList';
 import PositionList from './PositionList';
-import Ranking from './Ranking';
+import RankingCompose from './Ranking';
 import ModalConfirmation from './ModalConfirmation';
 
 const matchAdapter = adapter(clientInstance());
@@ -38,7 +38,7 @@ export const ApplicantRanking = ({
     toggleConfirm(false);
   }
   return (
-    <Ranking
+    <RankingCompose
       ranks={ranks}
       steps={steps}
       step={step}
@@ -59,8 +59,12 @@ export const ApplicantRanking = ({
               )
             }
       { step === 2 && (<Upload />) }
-      <ModalConfirmation handleConfirm={handleConfirm} isOpenConfirm={isOpenConfirm} toggleConfirm={toggleConfirm} />
-    </Ranking>
+      <ModalConfirmation
+        handleConfirm={handleConfirm}
+        isOpenConfirm={isOpenConfirm}
+        toggleConfirm={toggleConfirm}
+      />
+    </RankingCompose>
   );
 };
 
