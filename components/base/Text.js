@@ -24,6 +24,7 @@ export const TitlePrimary = styled(Title)`
 export const TitleMedium = styled.h2`
   font-size: ${font.size.medium};
   color: ${colors.text.main};
+  font-weight: 300;
 `;
 
 export const TextSmall = styled.span`
@@ -33,7 +34,7 @@ export const TextSmall = styled.span`
 `;
 
 export const TitleSmall = styled(TextSmall)`
-  font-weight: 600;
+  font-weight: 300;
 `;
 
 export const Paragraph = styled.p`
