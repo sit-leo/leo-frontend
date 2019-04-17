@@ -4,21 +4,23 @@ import { bindActionCreators } from 'redux';
 
 import { addRank } from '../../store/match/applicant';
 
-import { Col } from '../base/Grid';
 import Button from '../base/Button';
 
-import Position from './Position';
+import RankingCard from './RankingCard';
 
 const PositionList = ({
   addRank: addRanking = () => {},
   positions = [{ name: 'No Position Found', capacity: 0 }],
 }) => (
-  <Col>
+  <React.Fragment>
     {
         positions.map((position => (
-          <Position
+          <RankingCard
             key={position.id}
-            position={position}
+            title={position.name}
+            value={position.money}
+            subtitle={position.location}
+            capacity={position.capacity}
             actionButton={(
               <Button
                 className="mt-2"
@@ -31,7 +33,7 @@ const PositionList = ({
           />
         )))
     }
-  </Col>
+  </React.Fragment>
 );
 
 const mapStateToProps = state => ({

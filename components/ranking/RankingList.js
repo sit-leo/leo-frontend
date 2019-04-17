@@ -6,7 +6,7 @@ import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Icon from '../base/Icon';
 
-import Position from './Position';
+import RankingCard from './RankingCard';
 
 const RankingList = ({
   ranks,
@@ -31,10 +31,14 @@ const RankingList = ({
           (ranks.length > 0)
             ? ranks.map((rank, index) => {
               const ranking = index + 1;
+              const ranker = rank.position || rank.applicant;
               return (
-                <Position
+                <RankingCard
                   key={`${JSON.stringify(rank)}-${ranking}`}
-                  position={rank.position}
+                  title={ranker.name}
+                  value={ranker.money}
+                  subtitle={ranker.location}
+                  capacity={ranker.capacity}
                   rankingButton={(
                     <TitleMedium>
                       <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
