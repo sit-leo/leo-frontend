@@ -15,9 +15,13 @@ import Button from '../base/Button';
 
 import RankingStep from './RankingStep';
 
+function checkCounter(counter) {
+  return counter === 0 ? color.disabled : color.error;
+}
+
 const CounterBadge = styled(TextSmall)`
   color: ${color.white};
-  background: ${props => (props.counter === 0 ? color.disabled : color.error)};
+  background: ${props => checkCounter(props.counter)};
   min-width: 40px;
   cursor: pointer;
 `;
@@ -28,7 +32,7 @@ const CounterBox = styled(FlexCenter)`
 `;
 
 const CounterText = styled(Text)`
-  color: ${props => (props.counter === 0 ? color.disabled : color.error)};
+  color: ${props => checkCounter(props.counter)};
 `;
 
 const RankCouter = ({ counter }) => (
