@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Input, Icon } from 'antd';
 import color from '../../config/color';
 
-import WithNavbar from '../layouts/with-navbar';
+import RankingLayout from '../layouts/ranking';
 
 import ContainerRow, { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
@@ -14,7 +14,6 @@ import Card from '../base/Card';
 import Button from '../base/Button';
 
 import RankingStep from './RankingStep';
-import Hero from '../base/Hero';
 
 const CounterBadge = styled(TextSmall)`
   color: ${color.white};
@@ -55,8 +54,7 @@ export const Ranking = ({
     return step < 2 && handleStep(step + 1);
   }
   return (
-    <WithNavbar>
-      <Hero>Hero</Hero>
+    <RankingLayout>
       <ContainerRow className="py-5">
         <Card className="position-relative">
           <RankCouter counter={ranks.length} />
@@ -94,7 +92,7 @@ export const Ranking = ({
           </Row>
         </Card>
       </ContainerRow>
-    </WithNavbar>
+    </RankingLayout>
   );
 };
 
