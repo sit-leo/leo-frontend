@@ -9,7 +9,8 @@ import Button, { DangerButton } from '../base/Button';
 
 
 const Confirmation = ({
-  isOpenConfirm, toggleConfirm,
+  isOpenConfirm,
+  toggleConfirm,
   handleConfirm,
 }) => (
   <Modal isOpen={isOpenConfirm}>
@@ -35,10 +36,4 @@ const Confirmation = ({
   </Modal>
 );
 
-const mapStateToProps = state => ({
-  match: state.match.match,
-  ranks: state.applicant.ranks,
-  isUpdateRank: state.applicant.isUpdateRank,
-});
-
-export default connect(mapStateToProps)(Confirmation);
+export default Confirmation;
