@@ -1,6 +1,7 @@
 export default {
   white: '#fff',
   primary: '#58a4b0',
+  secondary: '#6a6f7a',
   dark: '#373F51',
   hover: '#3c9fae',
   text: {
