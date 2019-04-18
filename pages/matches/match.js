@@ -7,9 +7,9 @@ import adapter from '../../store/match/match-adapter';
 
 import { setMatch } from '../../store/match';
 
-import MatchPage from '../../components/matches/Match';
+import MatchPage from '../../components/matches/MatchPage';
 
-class MatchSSR extends React.Component {
+class MatchController extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
@@ -22,4 +22,4 @@ class MatchSSR extends React.Component {
   }
 }
 
-export default connect()(MatchSSR);
+export default connect()(MatchController);

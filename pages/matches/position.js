@@ -8,9 +8,9 @@ import adapter from '../../store/match/match-adapter';
 import { setMatch } from '../../store/match';
 import { setPositions } from '../../store/match/recruiter';
 
-import RecruiterPosition from '../../components/matches/RecruiterPosition';
+import RecruiterPositionPage from '../../components/matches/RecruiterPositionPage';
 
-class RecruiterPositionPage extends React.Component {
+class RecruiterPositionController extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
@@ -21,8 +21,8 @@ class RecruiterPositionPage extends React.Component {
   }
 
   render() {
-    return <RecruiterPosition />;
+    return <RecruiterPositionPage />;
   }
 }
 
-export default connect()(RecruiterPositionPage);
+export default connect()(RecruiterPositionController);
