@@ -4,43 +4,55 @@ import { bindActionCreators } from 'redux';
 
 import { clientInstance } from '../../tools/request';
 
-import adapter from '../../store/matching/matching-adapter';
-import { updateRank, removeRank } from '../../store/matching/recruiter';
+import matchAdapter from '../../store/matching/matching-adapter';
+import {
+  updateRecruiterRank,
+  removeRecruiterRank,
+} from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
 import ApplicantList from './ApplicantList';
-import FinishStep from './FinishStep';
 import RankingStep from './RankingStep';
 import Confirmation from './Confirmation';
+import FinishStep from './FinishStep';
 
-const matchAdapter = adapter(clientInstance());
+const matchRequest = matchAdapter(clientInstance());
 
-const steps = [
+const RECRUITER_RANKING_STEPS = [
   'Add to rank',
   'Arrange rank',
   'Finish',
 ];
 
 export const RecruiterRanking = ({
-  match, position, isUpdateRank, ranks = [],
-  updateRank: updateRanking = () => {},
-  removeRank: removeRanking = () => {},
+  match,
+  position,
+  haveRank,
+  recruiterRanks = [],
+  updateRank = () => {},
+  removeRank = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
 
   function handleConfirm() {
-    if (!isUpdateRank) {
-      matchAdapter.postRecruiterRankingByMatchIdAndPositionId(match.id, position.id, ranks);
+    const matchId = match.id;
+    const positionId = position.id;
+    if (!haveRank) {
+      matchRequest.postRecruiterRankingByMatchIdAndPositionId(
+        matchId, positionId, recruiterRanks,
+      );
     } else {
-      matchAdapter.updateRecruiterRankingByMatchIdAndPositionId(match.id, position.id, ranks);
+      matchRequest.updateRecruiterRankingByMatchIdAndPositionId(
+        matchId, positionId, recruiterRanks,
+      );
     }
     toggleConfirm(false);
   }
   return (
     <RankingPageContainer
-      ranks={ranks}
-      steps={steps}
+      rankingSteps={RECRUITER_RANKING_STEPS}
+      rankCounter={recruiterRanks.length}
       step={step}
       handleStep={handleStep}
       isOpenConfirm={isOpenConfirm}
@@ -50,11 +62,11 @@ export const RecruiterRanking = ({
       { step === 1
               && (
                 <RankingStep
-                  ranks={ranks}
+                  ranks={recruiterRanks}
                   isOpenConfirm={isOpenConfirm}
                   toggleConfirm={toggleConfirm}
-                  updateRanking={updateRanking}
-                  removeRanking={removeRanking}
+                  updateRank={updateRank}
+                  removeRank={removeRank}
                 />
               )
         }
@@ -70,14 +82,14 @@ export const RecruiterRanking = ({
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  position: state.recruiter.position,
-  ranks: state.recruiter.ranks,
-  isUpdateRank: state.recruiter.isUpdateRank,
+  position: state.ranking.position,
+  recruiterRanks: state.ranking.ranks,
+  haveRank: state.ranking.haveRank,
 });
 
 const mapDispatchToRankProps = dispatch => ({
-  updateRank: bindActionCreators(updateRank, dispatch),
-  removeRank: bindActionCreators(removeRank, dispatch),
+  updateRank: bindActionCreators(updateRecruiterRank, dispatch),
+  removeRank: bindActionCreators(removeRecruiterRank, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(RecruiterRanking);

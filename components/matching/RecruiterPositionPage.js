@@ -9,10 +9,11 @@ import RankingLayout from '../layouts/ranking';
 import { Col, Row } from '../base/Grid';
 import { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
-import RankingCard from './RankingCard';
 import MainButton from '../base/Button';
 
-const PositionList = ({ match, positions = [] }) => (
+import RankingCard from './RankingCard';
+
+const PositionList = ({ match, positions }) => (
   <div className="d-flex flex-column">
     {
       positions.map(position => (
@@ -53,7 +54,7 @@ const RecruiterPosition = ({ match, positions = [] }) => (
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  positions: state.recruiter.positions,
+  positions: state.ranking.positions,
 });
 
 export default connect(mapStateToProps)(RecruiterPosition);

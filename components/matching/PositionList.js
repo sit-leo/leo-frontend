@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addRank } from '../../store/matching/applicant';
+import { addApplicantRank } from '../../store/matching/ranking';
 
 import Button from '../base/Button';
 
 import RankingCard from './RankingCard';
 
 const PositionList = ({
-  addRank: addRanking = () => {},
-  positions = [{ name: 'No Position Found', capacity: 0 }],
+  positions,
+  addRank = () => {},
 }) => (
   <React.Fragment>
     {
@@ -25,7 +25,7 @@ const PositionList = ({
               <Button
                 className="mt-2"
                 type="button"
-                onClick={() => addRanking(position)}
+                onClick={() => addRank(position)}
               >
                 Add to rank
               </Button>
@@ -37,12 +37,11 @@ const PositionList = ({
 );
 
 const mapStateToProps = state => ({
-  positions: state.applicant.positions,
+  positions: state.ranking.positions,
 });
 
 const mapDispatchToPositionProps = dispatch => ({
-  addRank: bindActionCreators(addRank, dispatch),
+  addRank: bindActionCreators(addApplicantRank, dispatch),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToPositionProps)(PositionList);
