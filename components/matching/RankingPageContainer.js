@@ -53,7 +53,7 @@ const RankStep = ({ steps = [], step: stepIndex }) => (
   </Steps>
 );
 
-export const RankingPageContainer = ({
+const RankingPageContainer = ({
   steps = [], step, handleStep,
   ranks = [],
   children,

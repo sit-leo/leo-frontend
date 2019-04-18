@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { clientInstance } from '../../tools/request';
 
 import adapter from '../../store/match/match-adapter';
-import { updateRank, removeRank } from '../../store/match/applicant';
+import { updateRank, removeRank } from '../../store/matching/applicant';
 
 import RankingStep from './RankingStep';
 import PositionList from './PositionList';

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addRank } from '../../store/match/recruiter';
+import { addRank } from '../../store/matching/recruiter';
 
 import Button from '../base/Button';
 

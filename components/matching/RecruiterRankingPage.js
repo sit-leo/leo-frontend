@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import { clientInstance } from '../../tools/request';
 
-import adapter from '../../store/match/match-adapter';
-import { updateRank, removeRank } from '../../store/match/recruiter';
+import adapter from '../../store/matching/matching-adapter';
+import { updateRank, removeRank } from '../../store/matching/recruiter';
 
 import RankingPageContainer from './RankingPageContainer';
 import ApplicantList from './ApplicantList';
