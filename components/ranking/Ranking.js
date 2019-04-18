@@ -9,7 +9,7 @@ import RankingLayout from '../layouts/ranking';
 
 import ContainerRow, { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
-import Text, { TextSmall, TitleMedium } from '../base/Text';
+import Text, { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 
@@ -19,7 +19,7 @@ function checkCounter(counter) {
   return counter === 0 ? color.disabled : color.error;
 }
 
-const CounterBadge = styled(TextSmall)`
+const CounterBadge = styled(Text)`
   color: ${color.white};
   background: ${props => checkCounter(props.counter)};
   min-width: 40px;
@@ -82,7 +82,7 @@ export const Ranking = ({
                       className="w-50"
                     />
                   )
-                  : (<TitleMedium>Your Rank</TitleMedium>)
+                  : (<TitleSmall>Your Rank</TitleSmall>)
               }
             </Col>
             <Col lg={2}>

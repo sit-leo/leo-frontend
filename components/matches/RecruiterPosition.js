@@ -7,7 +7,7 @@ import { redirectToRecruiterRanking } from '../../store/match/match-adapter';
 import RankingLayout from '../layouts/ranking';
 
 import { Col, Row } from '../base/Grid';
-import { TitleMedium } from '../base/Text';
+import { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
 import RankingCard from '../ranking/RankingCard';
 import MainButton from '../base/Button';
@@ -38,7 +38,7 @@ const RecruiterPosition = ({ match, positions = [] }) => (
       <Card>
         <Row>
           <Col lg={7}>
-            <TitleMedium>Choose position to rank</TitleMedium>
+            <TitleSmall>Choose position to rank</TitleSmall>
           </Col>
           <Col lg={5}>
             <Input />

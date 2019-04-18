@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Paragraph from 'antd/lib/typography/Paragraph';
 
 import ContainerRow, { Col } from '../base/Grid';
-import { TitleMedium, TextSmall } from '../base/Text';
+import Text, { TitleSmall } from '../base/Text';
 import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
 import Flex, { FlexCenter } from '../base/Flex';
@@ -31,15 +31,15 @@ const RankingCard = ({
         </Col>
         <Col lg={rankingButton ? 6 : 7}>
           <Flex className="flex-column justify-content-center text-left">
-            <TitleMedium>{title}</TitleMedium>
-            <TextSmall>{value}</TextSmall>
-            <TextSmall>{subtitle}</TextSmall>
+            <TitleSmall>{title}</TitleSmall>
+            <Text>{value}</Text>
+            <Text>{subtitle}</Text>
           </Flex>
         </Col>
         <Col lg={3}>
           <FlexCenter className="flex-column">
-            <TitleMedium className="mb-0">{capacity || 0}</TitleMedium>
-            <TextSmall>{badgeText}</TextSmall>
+            <TitleSmall className="mb-0">{capacity || 0}</TitleSmall>
+            <Text>{badgeText}</Text>
             { actionButton }
           </FlexCenter>
         </Col>
@@ -47,7 +47,7 @@ const RankingCard = ({
         <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
           <ContainerRow>
             <Col>
-              <TitleMedium>No Information</TitleMedium>
+              <TitleSmall>No Information</TitleSmall>
               <Paragraph>
                 - none
               </Paragraph>

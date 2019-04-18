@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button, { DangerButton } from '../base/Button';
-import Text, { TitleMedium } from '../base/Text';
+import Text, { TitleSmall } from '../base/Text';
 import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Icon from '../base/Icon';
@@ -40,7 +40,7 @@ const RankingList = ({
                   subtitle={ranker.location}
                   capacity={ranker.capacity}
                   rankingButton={(
-                    <TitleMedium>
+                    <TitleSmall>
                       <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
                         { index > 0
                           ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
@@ -52,7 +52,7 @@ const RankingList = ({
                           : <br />
                       }
                       </FlexCenter>
-                    </TitleMedium>
+                    </TitleSmall>
                   )}
                   actionButton={
                     <DangerButton onClick={() => remove(rank)}>Delete</DangerButton>

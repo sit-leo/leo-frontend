@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { TitleMedium } from '../base/Text';
+import { TitleSmall } from '../base/Text';
 
 const Finish = () => (
-  <TitleMedium className="text-center">
+  <TitleSmall className="text-center">
     {'Ranking Finish ✨'}
-  </TitleMedium>
+  </TitleSmall>
 );
 
 export default Finish;
