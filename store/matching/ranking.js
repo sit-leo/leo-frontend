@@ -1,6 +1,7 @@
 const initState = {
   haveRank: false,
   isUpdateRank: false,
+  isConfirm: false,
 
   position: { id: 0 },
 
@@ -28,6 +29,7 @@ const initState = {
 // Actions
 export const SET_HAVE_RANK = 'RANKING/SET_HAVE_RANK';
 export const SET_IS_UPDATE_RANK = 'RANKING/SET_IS_UPDATE_RANK';
+export const SET_IS_CONFIRM = 'RANKING/SET_IS_CONFIRM';
 
 export const SET_POSITION = 'RANKING/SET_POSITION';
 
@@ -85,7 +87,9 @@ export default function reducer(state = initState, action = {}) {
   switch (action.type) {
     case SET_HAVE_RANK: return { ...state, haveRank: action.haveRank };
 
-    case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank };
+    case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank, isConfirm: false };
+
+    case SET_IS_CONFIRM: return { ...state, isUpdateRank: false, isConfirm: action.isConfirm };
 
     case SET_POSITION: return { ...state, position: action.position };
 
@@ -188,6 +192,10 @@ export function setHaveRank(haveRank) {
 
 export function setIsUpdateRank(isUpdateRank) {
   return { type: SET_IS_UPDATE_RANK, isUpdateRank };
+}
+
+export function setIsConfirm(isConfirm) {
+  return { type: SET_IS_CONFIRM, isConfirm };
 }
 
 export function setPosition(position) {
