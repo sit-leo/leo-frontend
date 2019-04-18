@@ -58,6 +58,9 @@ const RankingPageContainer = ({
   rankCounter,
   step,
   handleStep,
+  haveRank,
+  isUpdateRank,
+  isConfirm,
   children,
 }) => {
   function decreaseStep() {
@@ -95,7 +98,13 @@ const RankingPageContainer = ({
               }
             </Col>
             <Col lg={2}>
-              <Button className="w-100" disabled={rankCounter === 0} onClick={increaseStep}>
+              <Button
+                className="w-100"
+                disabled={
+                  rankCounter === 0 || (step === 1 && (isUpdateRank && !isConfirm))
+                }
+                onClick={increaseStep}
+              >
                 Next
               </Button>
             </Col>
@@ -113,6 +122,9 @@ const RankingPageContainer = ({
 
 const mapStateToProps = state => ({
   match: state.match.match,
+  haveRank: state.ranking.haveRank,
+  isUpdateRank: state.ranking.isUpdateRank,
+  isConfirm: state.ranking.isConfirm,
 });
 
 export default connect(mapStateToProps)(RankingPageContainer);

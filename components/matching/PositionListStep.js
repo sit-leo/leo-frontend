@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addApplicantRank } from '../../store/matching/ranking';
+import { addApplicantRank, setIsUpdateRank } from '../../store/matching/ranking';
 
 import Button from '../base/Button';
 
@@ -11,6 +11,7 @@ import RankingCard from './RankingCard';
 const PositionList = ({
   positions,
   addRank = () => {},
+  setIsUpdate = () => {},
 }) => (
   <React.Fragment>
     {
@@ -25,7 +26,7 @@ const PositionList = ({
               <Button
                 className="mt-2"
                 type="button"
-                onClick={() => addRank(position)}
+                onClick={() => setIsUpdate(true) && addRank(position)}
               >
                 Add to rank
               </Button>
@@ -42,6 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToPositionProps = dispatch => ({
   addRank: bindActionCreators(addApplicantRank, dispatch),
+  setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToPositionProps)(PositionList);

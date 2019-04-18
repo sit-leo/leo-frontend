@@ -1,4 +1,8 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import Button, { DangerButton } from '../base/Button';
 import Text, { TitleSmall } from '../base/Text';
@@ -17,20 +21,29 @@ const RankingErrorText = () => (
 );
 
 const RankingStep = ({
+  isUpdateRank,
   ranks,
   isOpenConfirm,
   toggleConfirm = () => {},
   updateRank = () => {},
   removeRank = () => {},
+  setIsUpdate = () => {},
 }) => {
   const rankCounter = ranks.length;
 
   function increaseRank(index, rank) {
+    setIsUpdate(true);
     return updateRank(index - 1, rank);
   }
 
   function decreaseRank(index, rank) {
+    setIsUpdate(true);
     return updateRank(index + 1, rank);
+  }
+
+  function remove(rank) {
+    setIsUpdate(true);
+    return removeRank(rank);
   }
 
   return (
@@ -63,7 +76,7 @@ const RankingStep = ({
                   </TitleSmall>
                 )}
                 actionButton={
-                  <DangerButton onClick={() => removeRank(rank)}>Delete</DangerButton>
+                  <DangerButton onClick={() => remove(rank)}>Delete</DangerButton>
                 }
               />
             );
@@ -73,7 +86,7 @@ const RankingStep = ({
       <Col lg={{ size: 4, offset: 4 }}>
         <Button
           className="w-100"
-          disabled={ranks.length <= 0}
+          disabled={rankCounter === 0 || !isUpdateRank}
           onClick={() => toggleConfirm(!isOpenConfirm)}
         >
           Confirm Ranking
@@ -83,4 +96,12 @@ const RankingStep = ({
   );
 };
 
-export default RankingStep;
+const mapStateToProps = state => ({
+  isUpdateRank: state.ranking.isUpdateRank,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RankingStep);

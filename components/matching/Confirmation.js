@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
+
+import { setIsConfirm } from '../../store/matching/ranking';
 
 import { FlexBetween } from '../base/Flex';
 import Button, { DangerButton } from '../base/Button';
@@ -12,6 +15,7 @@ const Confirmation = ({
   isOpenConfirm,
   toggleConfirm,
   handleConfirm,
+  setConfirm = () => {},
 }) => (
   <Modal isOpen={isOpenConfirm}>
     <ModalHeader className="justify-content-center">Confirmation</ModalHeader>
@@ -28,7 +32,7 @@ const Confirmation = ({
         <DangerButton onClick={() => toggleConfirm(!isOpenConfirm)}>
         Cancel
         </DangerButton>
-        <Button onClick={handleConfirm}>
+        <Button onClick={() => setConfirm(true) && handleConfirm()}>
         Confirm
         </Button>
       </FlexBetween>
@@ -36,4 +40,8 @@ const Confirmation = ({
   </Modal>
 );
 
-export default Confirmation;
+const mapDispatchToProps = dispatch => ({
+  setConfirm: bindActionCreators(setIsConfirm, dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(Confirmation);
