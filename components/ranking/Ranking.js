@@ -7,7 +7,7 @@ import color from '../../config/color';
 
 import RankingLayout from '../layouts/ranking';
 
-import ContainerRow, { Col, Row } from '../base/Grid';
+import { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Text, { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
@@ -26,13 +26,13 @@ const CounterBadge = styled(Text)`
   cursor: pointer;
 `;
 
+const CounterText = styled(Text)`
+  color: ${props => checkCounter(props.counter)};
+`;
+
 const CounterBox = styled(FlexCenter)`
   top: 1.5em;
   right: 1.5em;
-`;
-
-const CounterText = styled(Text)`
-  color: ${props => checkCounter(props.counter)};
 `;
 
 const RankCouter = ({ counter }) => (
