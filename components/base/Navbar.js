@@ -6,9 +6,9 @@ import color from '../../config/color';
 
 import { ContainerStyled, Col, Row } from './Grid';
 import Image, { ProfileAvatar } from './Image';
-import { TitleMedium } from './Text';
+import { TitleSmall } from './Text';
 
-const Menu = styled(TitleMedium)`
+const Menu = styled(TitleSmall)`
   cursor: pointer;
   color: ${color.primary};
   margin-right: 1.3em;
