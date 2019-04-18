@@ -8,7 +8,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatch } from '../../store/match';
-import { setPositions } from '../../store/matching/recruiter';
+import { setPositions } from '../../store/matching/ranking';
 
 import RecruiterPositionPage from '../../components/matching/RecruiterPositionPage';
 

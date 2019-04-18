@@ -9,8 +9,11 @@ import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatch } from '../../store/match';
 import {
-  setApplicants, setRanks, setIsUpdateRank, setPosition,
-} from '../../store/matching/recruiter';
+  setPosition,
+  setApplicants,
+  setRecruiterRanks,
+  setHaveRank, 
+} from '../../store/matching/ranking';
 
 import RecruiterRankingPage from '../../components/matching/RecruiterRankingPage';
 
@@ -28,8 +31,8 @@ class RecruiterRankingController extends React.Component {
     await store.dispatch(setPosition({ id: +positionId }));
     await store.dispatch(setApplicants(applicants));
     if (ranks && ranks.length > 0) {
-      await store.dispatch(setRanks(ranks));
-      await store.dispatch(setIsUpdateRank(true));
+      await store.dispatch(setRecruiterRanks(ranks));
+      await store.dispatch(setHaveRank(true));
     }
     return {};
   }
