@@ -13,7 +13,7 @@ import Text, {
 
 storiesOf('Base/Text', module)
   .add('Title Large', () => (
-    <Title>TitleLarge_Muli_34px_Regular_#373F51(nav menu unselected)</Title>
+    <Title>TitleLarge_Kanit_30px_Regular_#373F51</Title>
   ))
   .add('Title Large Primary', () => (
     <TitlePrimary>TitleLarge_Muli_34px_SemiBold_#58A4B0(nav menu selected) </TitlePrimary>
