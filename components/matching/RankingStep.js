@@ -35,43 +35,41 @@ const RankingStep = ({
 
   return (
     <React.Fragment>
-      <Col>
-        {
-          (rankCounter > 0)
-            ? ranks.map((rank, index) => {
-              const rankIndex = index + 1;
-              const ranker = rank.position || rank.applicantMatch;
-              return (
-                <RankingCard
-                  key={rankIndex}
-                  title={ranker.name}
-                  value={ranker.money}
-                  subtitle={ranker.location}
-                  capacity={ranker.capacity}
-                  rankingButton={(
-                    <TitleSmall>
-                      <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
-                        { index > 0
-                          ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
-                          : <br />
-                      }
-                        <span>{rankIndex}</span>
-                        { index < rankCounter - 1
-                          ? <Icon type="caret-down" theme="filled" onClick={() => decreaseRank(index, rank)} />
-                          : <br />
-                      }
-                      </FlexCenter>
-                    </TitleSmall>
-                  )}
-                  actionButton={
-                    <DangerButton onClick={() => removeRank(rank)}>Delete</DangerButton>
-                  }
-                />
-              );
-            })
-            : <RankingErrorText />
-        }
-      </Col>
+      {
+        (rankCounter > 0)
+          ? ranks.map((rank, index) => {
+            const rankIndex = index + 1;
+            const ranker = rank.position || rank.applicantMatch;
+            return (
+              <RankingCard
+                key={rankIndex}
+                title={ranker.name}
+                value={ranker.money}
+                subtitle={ranker.location}
+                capacity={ranker.capacity}
+                rankingButton={(
+                  <TitleSmall>
+                    <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
+                      { index > 0
+                        ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
+                        : <br />
+                    }
+                      <span>{rankIndex}</span>
+                      { index < rankCounter - 1
+                        ? <Icon type="caret-down" theme="filled" onClick={() => decreaseRank(index, rank)} />
+                        : <br />
+                    }
+                    </FlexCenter>
+                  </TitleSmall>
+                )}
+                actionButton={
+                  <DangerButton onClick={() => removeRank(rank)}>Delete</DangerButton>
+                }
+              />
+            );
+          })
+          : <RankingErrorText />
+      }
       <Col lg={{ size: 4, offset: 4 }}>
         <Button
           className="w-100"
