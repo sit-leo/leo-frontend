@@ -68,6 +68,12 @@ export default function reducer(state = initState, action = {}) {
 
     case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank };
 
+    case SET_POSITION: return { ...state, position: action.position };
+
+    case SET_POSITIONS: return { ...state, positions: action.positions };
+
+    case SET_APPLICANTS: return { ...state, applicants: action.applicants };
+
     case SET_APPLICANT_RANKS: {
       const applicantRanks = action.applicantRanks.map(rank => ({ ...rank, position: { id: rank.positionId } }));
       return { ...state, applicantRanks };
