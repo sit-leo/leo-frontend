@@ -10,10 +10,10 @@ import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
 
-const CardLeft = ({ rankingButton }) => (
+const CardLeft = ({ imagePath, rankingButton }) => (
   <FlexCenter>
     { rankingButton }
-    <RankingAvatar className="rounded-circle" src="/static/images/leo.png" alt="leo-logo" />
+    <RankingAvatar className="rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
   </FlexCenter>
 );
 
@@ -68,6 +68,7 @@ const RankingCard = ({
   value,
   subtitle,
   capacity,
+  imagePath,
   badgeText,
   actionButton,
   rankingButton,
@@ -77,7 +78,7 @@ const RankingCard = ({
     <SmallCard>
       <ContainerRow className="pt-4">
         <Col lg={rankingButton ? 3 : 2}>
-          <CardLeft rankingButton={rankingButton} />
+          <CardLeft imagePath={imagePath} rankingButton={rankingButton} />
         </Col>
         <Col lg={rankingButton ? 6 : 7}>
           <CardMiddle title={title} value={value} subtitle={subtitle} />
