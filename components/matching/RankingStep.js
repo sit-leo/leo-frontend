@@ -12,23 +12,23 @@ const RankingStep = ({
   ranks,
   isOpenConfirm,
   toggleConfirm = () => {},
-  updateRanking = () => {},
-  removeRanking = () => {},
+  updateRank = () => {},
+  removeRank = () => {},
 }) => {
+  const rankCounter = ranks.length;
+
   function increaseRank(index, rank) {
-    return updateRanking(index - 1, rank);
+    return updateRank(index - 1, rank);
   }
   function decreaseRank(index, rank) {
-    return updateRanking(index + 1, rank);
+    return updateRank(index + 1, rank);
   }
-  function remove(rank) {
-    return removeRanking(rank);
-  }
+
   return (
     <React.Fragment>
       <Col>
         {
-          (ranks.length > 0)
+          (rankCounter > 0)
             ? ranks.map((rank, index) => {
               const ranking = index + 1;
               const ranker = rank.position || rank.applicantMatch;
@@ -47,7 +47,7 @@ const RankingStep = ({
                           : <br />
                       }
                         <span>{ranking}</span>
-                        { index < ranks.length - 1
+                        { index < rankCounter - 1
                           ? <Icon type="caret-down" theme="filled" onClick={() => decreaseRank(index, rank)} />
                           : <br />
                       }
@@ -55,7 +55,7 @@ const RankingStep = ({
                     </TitleSmall>
                   )}
                   actionButton={
-                    <DangerButton onClick={() => remove(rank)}>Delete</DangerButton>
+                    <DangerButton onClick={() => removeRank(rank)}>Delete</DangerButton>
                   }
                 />
               );
