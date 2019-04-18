@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 import ContainerRow, { Col } from '../base/Grid';
-import Text, { TitleSmall } from '../base/Text';
+import Text, {
+  TitleSmall, TitleSmallPrimary, Title, SubTitleSmall, TitlePrimary,
+} from '../base/Text';
 import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
 import Flex, { FlexCenter } from '../base/Flex';
@@ -21,9 +23,9 @@ const CardMiddle = ({
   subtitle,
 }) => (
   <Flex className="flex-column justify-content-center text-left">
-    <TitleSmall>{title || '-'}</TitleSmall>
-    <Text>{value || '-'}</Text>
-    <Text>{subtitle || '-'}</Text>
+    <Title>{title || '-'}</Title>
+    <TitleSmallPrimary>{value || '-'}</TitleSmallPrimary>
+    <TitleSmall>{subtitle || '-'}</TitleSmall>
   </Flex>
 );
 
@@ -33,8 +35,8 @@ const CardRight = ({
   actionButton,
 }) => (
   <FlexCenter className="flex-column">
-    <TitleSmall className="mb-0">{capacity || 0}</TitleSmall>
-    <Text>{badgeText || 'Recruit'}</Text>
+    <TitlePrimary className="mb-0">{capacity || 0}</TitlePrimary>
+    <SubTitleSmall>{badgeText || 'Recruit'}</SubTitleSmall>
     { actionButton }
   </FlexCenter>
 );
@@ -85,10 +87,12 @@ const RankingCard = ({
         </Col>
         <CardCollapse isOpen={isOpen} />
       </ContainerRow>
-      <CardButton className="mt-3" onClick={() => toggle(!isOpen)}>
-        {
-          !isOpen ? 'Show more' : 'Show less'
-        }
+      <CardButton className="mt-3 py-1" onClick={() => toggle(!isOpen)}>
+        <TitleSmallPrimary className="mb-0">
+          {
+            !isOpen ? 'Show more' : 'Show less'
+          }
+        </TitleSmallPrimary>
       </CardButton>
     </SmallCard>
   );
