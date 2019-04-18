@@ -17,6 +17,7 @@ const PositionList = ({ match, positions = [] }) => (
     {
       positions.map(position => (
         <RankingCard
+          key={position.name}
           title={position.name}
           value={position.money}
           subtitle={position.location}
