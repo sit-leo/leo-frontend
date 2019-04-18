@@ -43,7 +43,7 @@ const CardRight = ({
 
 const CardCollapse = ({
   isOpen,
-  informations = [{ header: 'Noinformaiton', detail: '- none' }],
+  informations = [{ header: 'No Informaiton', detail: '- none' }],
 }) => (
   <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
     <ContainerRow>
