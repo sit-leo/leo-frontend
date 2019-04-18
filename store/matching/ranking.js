@@ -1,4 +1,4 @@
-const initState = {
+export const initState = {
   haveRank: false,
   isUpdateRank: false,
   isConfirm: false,

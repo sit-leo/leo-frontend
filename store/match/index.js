@@ -1,4 +1,4 @@
-const initState = {
+export const initState = {
   match: {
     id: 0,
     name: 'No Match Found',
