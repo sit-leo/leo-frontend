@@ -7,7 +7,7 @@ import { clientInstance } from '../../tools/request';
 import adapter from '../../store/match/match-adapter';
 import { updateRank, removeRank } from '../../store/match/applicant';
 
-import RankingList from './RankingList';
+import RankingStep from './RankingStep';
 import PositionList from './PositionList';
 import RankingCompose from './Ranking';
 import Confirmation from './Confirmation';
@@ -49,7 +49,7 @@ export const ApplicantRanking = ({
       { step === 0 && (<PositionList />) }
       { step === 1
               && (
-                <RankingList
+                <RankingStep
                   ranks={ranks}
                   isOpenConfirm={isOpenConfirm}
                   toggleConfirm={toggleConfirm}

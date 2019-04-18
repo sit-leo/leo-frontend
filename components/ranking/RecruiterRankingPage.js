@@ -10,7 +10,7 @@ import { updateRank, removeRank } from '../../store/match/recruiter';
 import RankingCompose from './Ranking';
 import ApplicantList from './ApplicantList';
 import FinishStep from './FinishStep';
-import RankingList from './RankingList';
+import RankingStep from './RankingStep';
 import Confirmation from './Confirmation';
 
 const matchAdapter = adapter(clientInstance());
@@ -49,7 +49,7 @@ export const RecruiterRanking = ({
       { step === 0 && (<ApplicantList />) }
       { step === 1
               && (
-                <RankingList
+                <RankingStep
                   ranks={ranks}
                   isOpenConfirm={isOpenConfirm}
                   toggleConfirm={toggleConfirm}

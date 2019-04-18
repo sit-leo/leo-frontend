@@ -12,8 +12,7 @@ import { FlexCenter } from '../base/Flex';
 import Text, { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
-
-import RankingStep from './RankingStep';
+import Steps from '../base/Step';
 
 function checkCounter(counter) {
   return counter === 0 ? color.disabled : color.error;
@@ -46,6 +45,14 @@ const RankCouter = ({ counter }) => (
   </CounterBox>
 );
 
+const RankStep = ({ steps = [], step: stepIndex }) => (
+  <Steps current={stepIndex}>
+    {
+      steps.map(step => <Steps.Step key={step} title={step} />)
+    }
+  </Steps>
+);
+
 export const Ranking = ({
   steps = [], step, handleStep,
   ranks = [],
@@ -63,7 +70,7 @@ export const Ranking = ({
         <Card className="position-relative">
           <RankCouter counter={ranks.length} />
           <Col className="py-3" md={{ size: 8, offset: 2 }}>
-            <RankingStep steps={steps} step={step} />
+            <RankStep steps={steps} step={step} />
           </Col>
           <hr />
           <Row>
