@@ -1,35 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { Input } from 'antd';
 import { redirectToRecruiterRanking } from '../../store/match/match-adapter';
 
-import WithNavbar from '../layouts/with-navbar';
+import RankingLayout from '../layouts/ranking';
 
-import { Col } from '../base/Grid';
+import { Col, Row } from '../base/Grid';
 import { TitleMedium } from '../base/Text';
-import Button from '../base/Button';
-
-const Position = ({ match, position }) => (
-  <Button className="my-3" onClick={() => redirectToRecruiterRanking(match.id, position.id)}>{position.name}</Button>
-);
+import Card from '../base/Card';
+import RankingCard from '../ranking/RankingCard';
+import MainButton from '../base/Button';
 
 const PositionList = ({ match, positions = [] }) => (
   <div className="d-flex flex-column">
     {
-      positions.map(position => <Position key={position.id} match={match} position={position} />)
+      positions.map(position => (
+        <RankingCard
+          title={position.name}
+          value={position.money}
+          subtitle={position.location}
+          capacity={position.capacity}
+          actionButton={(
+            <MainButton className="my-3" onClick={() => redirectToRecruiterRanking(match.id, position.id)}>
+              Select
+            </MainButton>
+          )}
+        />
+      ))
     }
   </div>
 );
 
 const RecruiterPosition = ({ match, positions = [] }) => (
-  <WithNavbar>
+  <RankingLayout>
     <Col>
-      <TitleMedium>
-      Recruiter Position
-      </TitleMedium>
-      <PositionList match={match} positions={positions} />
+      <Card>
+        <Row>
+          <Col lg={7}>
+            <TitleMedium>Choose position to rank</TitleMedium>
+          </Col>
+          <Col lg={5}>
+            <Input />
+          </Col>
+        </Row>
+        <PositionList match={match} positions={positions} />
+      </Card>
     </Col>
-  </WithNavbar>
+  </RankingLayout>
 );
 
 const mapStateToProps = state => ({
