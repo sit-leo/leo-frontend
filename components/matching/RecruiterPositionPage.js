@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Input } from 'antd';
-import { redirectToRecruiterRanking } from '../../store/match/match-adapter';
+import { redirectToRecruiterRanking } from '../../store/matching/matching-adapter';
 
 import RankingLayout from '../layouts/ranking';
 
 import { Col, Row } from '../base/Grid';
 import { TitleSmall } from '../base/Text';
 import Card from '../base/Card';
-import RankingCard from '../ranking/RankingCard';
+import RankingCard from './RankingCard';
 import MainButton from '../base/Button';
 
 const PositionList = ({ match, positions = [] }) => (
