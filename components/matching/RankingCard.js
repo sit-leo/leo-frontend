@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import Paragraph from 'antd/lib/typography/Paragraph';
-
 import ContainerRow, { Col } from '../base/Grid';
 import Text, { TitleSmall } from '../base/Text';
 import { RankingAvatar } from '../base/Image';
@@ -59,7 +57,7 @@ const CardCollapse = ({
 const Information = ({ header, detail }) => (
   <Col>
     <TitleSmall>{ header }</TitleSmall>
-    <Paragraph>{ detail }</Paragraph>
+    <Text>{ detail }</Text>
   </Col>
 );
 
