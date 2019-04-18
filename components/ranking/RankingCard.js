@@ -10,11 +10,64 @@ import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
 
+const CardLeft = ({ rankingButton }) => (
+  <FlexCenter>
+    { rankingButton }
+    <RankingAvatar className="rounded-circle" src="/static/images/leo.png" alt="leo-logo" />
+  </FlexCenter>
+);
+
+const CardMiddle = ({
+  title,
+  value,
+  subtitle,
+}) => (
+  <Flex className="flex-column justify-content-center text-left">
+    <TitleSmall>{title}</TitleSmall>
+    <Text>{value}</Text>
+    <Text>{subtitle}</Text>
+  </Flex>
+);
+
+const CardRight = ({
+  capacity,
+  badgeText,
+  actionButton,
+}) => (
+  <FlexCenter className="flex-column">
+    <TitleSmall className="mb-0">{capacity}</TitleSmall>
+    <Text>{badgeText}</Text>
+    { actionButton }
+  </FlexCenter>
+);
+
+const CardCollapse = ({
+  isOpen,
+  informations = [{ header: 'Noinformaiton', detail: '- none' }],
+}) => (
+  <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
+    <ContainerRow>
+      {
+        informations.map(({ header, detail }) => (
+          <Information key={header} header={header} detail={detail} />
+        ))
+      }
+    </ContainerRow>
+  </InformationCollapse>
+);
+
+const Information = ({ header, detail }) => (
+  <Col>
+    <TitleSmall>{ header }</TitleSmall>
+    <Paragraph>{ detail }</Paragraph>
+  </Col>
+);
+
 const RankingCard = ({
   title,
   value,
   subtitle,
-  capacity,
+  capacity = 0,
   badgeText = 'Recruit',
   actionButton,
   rankingButton,
@@ -24,38 +77,16 @@ const RankingCard = ({
     <SmallCard>
       <ContainerRow className="pt-4">
         <Col lg={rankingButton ? 3 : 2}>
-          <FlexCenter>
-            { rankingButton }
-            <RankingAvatar className="rounded-circle" src="/static/images/leo.png" alt="leo-logo" />
-          </FlexCenter>
+          <CardLeft rankingButton={rankingButton} />
         </Col>
         <Col lg={rankingButton ? 6 : 7}>
-          <Flex className="flex-column justify-content-center text-left">
-            <TitleSmall>{title}</TitleSmall>
-            <Text>{value}</Text>
-            <Text>{subtitle}</Text>
-          </Flex>
+          <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
         <Col lg={3}>
-          <FlexCenter className="flex-column">
-            <TitleSmall className="mb-0">{capacity || 0}</TitleSmall>
-            <Text>{badgeText}</Text>
-            { actionButton }
-          </FlexCenter>
+          <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
         </Col>
-
-        <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
-          <ContainerRow>
-            <Col>
-              <TitleSmall>No Information</TitleSmall>
-              <Paragraph>
-                - none
-              </Paragraph>
-            </Col>
-          </ContainerRow>
-        </InformationCollapse>
+        <CardCollapse isOpen={isOpen} />
       </ContainerRow>
-
       <CardButton className="mt-3" onClick={() => toggle(!isOpen)}>
         {
           !isOpen ? 'Show more' : 'Show less'
