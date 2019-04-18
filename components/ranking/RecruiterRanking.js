@@ -9,7 +9,7 @@ import { updateRank, removeRank } from '../../store/match/recruiter';
 
 import RankingCompose from './Ranking';
 import ApplicantList from './ApplicantList';
-import Finish from './Finish';
+import FinishStep from './FinishStep';
 import RankingList from './RankingList';
 import Confirmation from './Confirmation';
 
@@ -58,7 +58,7 @@ export const RecruiterRanking = ({
                 />
               )
         }
-      { step === 2 && (<Finish />) }
+      { step === 2 && (<FinishStep />) }
       <Confirmation
         handleConfirm={handleConfirm}
         isOpenConfirm={isOpenConfirm}
