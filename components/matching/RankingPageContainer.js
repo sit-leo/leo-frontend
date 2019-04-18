@@ -45,7 +45,7 @@ const RankCouter = ({ counter }) => (
   </CounterBox>
 );
 
-const RankStep = ({ steps = [], step: stepIndex }) => (
+const RankStep = ({ steps = [], stepIndex }) => (
   <Steps current={stepIndex}>
     {
       steps.map(step => <Steps.Step key={step} title={step} />)
@@ -54,8 +54,10 @@ const RankStep = ({ steps = [], step: stepIndex }) => (
 );
 
 const RankingPageContainer = ({
-  steps = [], step, handleStep,
-  ranks = [],
+  rankingSteps = [],
+  rankCounter,
+  step,
+  handleStep,
   children,
 }) => {
   function decreaseStep() {
@@ -68,9 +70,9 @@ const RankingPageContainer = ({
     <RankingLayout>
       <Col>
         <Card className="position-relative">
-          <RankCouter counter={ranks.length} />
+          <RankCouter counter={rankCounter} />
           <Col className="py-3" md={{ size: 8, offset: 2 }}>
-            <RankStep steps={steps} step={step} />
+            <RankStep steps={rankingSteps} stepIndex={step} />
           </Col>
           <hr />
           <Row>
@@ -93,7 +95,7 @@ const RankingPageContainer = ({
               }
             </Col>
             <Col lg={2}>
-              <Button className="w-100" disabled={ranks.length === 0} onClick={increaseStep}>
+              <Button className="w-100" disabled={rankCounter === 0} onClick={increaseStep}>
                 Next
               </Button>
             </Col>
