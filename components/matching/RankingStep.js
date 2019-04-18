@@ -31,7 +31,7 @@ const RankingStep = ({
           (ranks.length > 0)
             ? ranks.map((rank, index) => {
               const ranking = index + 1;
-              const ranker = rank.position || rank.applicant;
+              const ranker = rank.position || rank.applicantMatch;
               return (
                 <RankingCard
                   key={`${JSON.stringify(rank)}-${ranking}`}
