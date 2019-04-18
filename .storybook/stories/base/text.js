@@ -4,35 +4,36 @@ import { storiesOf } from '@storybook/react';
 import Text, {
   Title,
   TitlePrimary,
-  TitleMedium,
   TitleSmall,
-  TextSmall,
   Paragraph,
-  TextError
+  TextError,
+  TitleLight,
+  SubTitleSmall,
+  EmptyInformationText
 } from '../../../components/base/Text';
 
 storiesOf('Base/Text', module)
-  .add('Title Large', () => (
-    <Title>TitleLarge_Kanit_30px_Regular_#373F51</Title>
+  .add('Title', () => (
+    <React.Fragment>
+      <TitlePrimary>NavSelected_Kanit_30px_Regular_#58A4B0</TitlePrimary>
+      <br/>
+      <TitleLight>NavUnselected_Kanit_30px_Light_#373F51</TitleLight>
+      <br/>
+      <Title>TitleLarge_Kanit_30px_Regular_#373F51</Title>
+      <br/>
+      <TitleSmall>TitleSmall_Kanit_25px_Regular_#373F51</TitleSmall>
+      <br/>
+      <SubTitleSmall>SubTitleSmall_Kanit_25px_Light_#373F51</SubTitleSmall>
+    </React.Fragment>
   ))
-  .add('Title Large Primary', () => (
-    <TitlePrimary>TitleLarge_Muli_34px_SemiBold_#58A4B0(nav menu selected) </TitlePrimary>
-  ))
-  .add('Title Medium', () => (
-    <TitleMedium>TitleMedium_Muli_30px_SemiBold_#373F51</TitleMedium>
-  ))
-  .add('Title Small', () => (
-    <TitleSmall>TitleSmall_Muli_25px_SemiBold_#373F51</TitleSmall>
-  ))
-  .add('Text Small', () => (
-    <TextSmall>SubTitleSmall_Muli_25px_Regular_#373F51</TextSmall>
-  ))
-  .add('Text Main', () => (
-    <Text>Main Text with <b>Span</b> Tag</Text>
-  ))
-  .add('Text Paragraph', () => (
-    <Paragraph>Paragraph_Muli_20px_Regular_#1B1B1E</Paragraph>
-  ))
-  .add('Text Error', () => (
-    <TextError>Paragraph Text</TextError>
+  .add('Text', () => (
+    <React.Fragment>
+      <Paragraph>Paragraph_Kanit_25px_Light_#1B1B1E</Paragraph>
+      <br/>
+      <EmptyInformationText>EmptyInformationText_Kanit_25px_LightItalic_#6A6F7A</EmptyInformationText>
+      <br/>
+      <Text>Span Text - Size Small</Text>
+      <br/>
+      <TextError>Span Text - Size Small - Color Error</TextError>
+    </React.Fragment>
   ))

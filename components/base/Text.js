@@ -6,7 +6,7 @@ import font from '../../config/font';
 
 const Text = styled.span`
   font-weight: 300;
-  font-size: ${font.size.paragraph};
+  font-size: ${font.size.small};
   color: ${colors.text.paragraph};
 `;
 
@@ -19,30 +19,35 @@ export const Title = styled.h1`
 
 export const TitlePrimary = styled(Title)`
   color: ${colors.primary};
+`;
+
+export const TitleLight = styled(Title)`
   font-weight: 300;
 `;
 
-export const TitleMedium = styled.h2`
-  font-size: ${font.size.medium};
+export const TitleSmall = styled.h2`
+  font-size: ${font.size.small};
+  color: ${colors.text.main};
+`;
+
+export const SubTitleSmall = styled.h2`
+  font-size: ${font.size.small};
   color: ${colors.text.main};
   font-weight: 300;
 `;
 
-export const TextSmall = styled.span`
-  font-size: ${font.size.small};
-  color: ${colors.text.paragraph};
-  font-weight: 300;
-`;
-
-export const TitleSmall = styled(TextSmall)`
-  font-weight: 300;
-`;
 
 export const Paragraph = styled.p`
-  font-size: ${font.size.paragraph};
+  font-size: ${font.size.small};
   color: ${colors.text.paragraph};
+  margin: 0;
 `;
 
 export const TextError = styled(Text)`
   color: ${colors.error};
+`;
+
+export const EmptyInformationText = styled(Text)`
+  color: ${colors.secondary};
+  font-style: italic;
 `;
