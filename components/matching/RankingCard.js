@@ -21,9 +21,9 @@ const CardMiddle = ({
   subtitle,
 }) => (
   <Flex className="flex-column justify-content-center text-left">
-    <TitleSmall>{title}</TitleSmall>
-    <Text>{value}</Text>
-    <Text>{subtitle}</Text>
+    <TitleSmall>{title || '-'}</TitleSmall>
+    <Text>{value || '-'}</Text>
+    <Text>{subtitle || '-'}</Text>
   </Flex>
 );
 
@@ -33,8 +33,8 @@ const CardRight = ({
   actionButton,
 }) => (
   <FlexCenter className="flex-column">
-    <TitleSmall className="mb-0">{capacity}</TitleSmall>
-    <Text>{badgeText}</Text>
+    <TitleSmall className="mb-0">{capacity || 0}</TitleSmall>
+    <Text>{badgeText || 'Recruit'}</Text>
     { actionButton }
   </FlexCenter>
 );
@@ -65,8 +65,8 @@ const RankingCard = ({
   title,
   value,
   subtitle,
-  capacity = 0,
-  badgeText = 'Recruit',
+  capacity,
+  badgeText,
   actionButton,
   rankingButton,
 }) => {
