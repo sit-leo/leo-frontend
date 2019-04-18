@@ -3,24 +3,17 @@ import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import Match from '../../../components/matches/Match';
-import RecruiterPosition from '../../../components/matches/RecruiterPosition';
+import { initState as match } from '../../../store/match'
+
+import MatchPage from '../../../components/matches/MatchPage';
 
 const mockStore = configureStore();
 const store = mockStore({
-  match: {
-    match: {},
-  },
-  recruiter: {
-    positions: []
-  }
+  match,
 });
 
 storiesOf('Match', module)
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
-  .add('Match Component', () => (
-    <Match />
-  ))
-  .add('RecruiterPosition Component', () => (
-    <RecruiterPosition />
+  .add('MatchPage Component', () => (
+    <MatchPage />
   ))
