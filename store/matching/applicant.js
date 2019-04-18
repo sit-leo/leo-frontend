@@ -1,6 +1,4 @@
 const initState = {
-  haveRank: false,
-  isUpdateRank: false,
   positions: [{
     id: 0,
     name: 'No Position Found',
@@ -10,8 +8,6 @@ const initState = {
 };
 
 // Actions
-const SET_HAVE_RANK = 'leo/match/applicant/set/haveRank';
-const SET_IS_UPDATE_RANK = 'leo/match/applicant/set/isUpdateRank';
 const SET_POSITIONS = 'leo/match/applicant/set/positions';
 
 const SET_RANK = 'leo/match/applicant/set/rank';
@@ -22,8 +18,6 @@ const REMOVE_RANK = 'leo/match/applicant/remove/rank';
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
-    case SET_HAVE_RANK: return { ...state, haveRank: action.haveRank };
-    case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank };
     case SET_POSITIONS: {
       const positions = (action.positions && action.positions.length > 0) ? action.positions : initState.positions;
       return { ...state, positions };
@@ -60,17 +54,8 @@ export default function reducer(state = initState, action = {}) {
 }
 
 // Action Creators
-
-export function setHaveRank(haveRank) {
-  return { type: SET_HAVE_RANK, haveRank };
-}
-
 export function setPositions(positions) {
   return { type: SET_POSITIONS, positions };
-}
-
-export function setIsUpdateRank(isUpdateRank) {
-  return { type: SET_IS_UPDATE_RANK, isUpdateRank };
 }
 
 export function setRanks(ranks) {

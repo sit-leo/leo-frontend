@@ -1,5 +1,4 @@
 const initState = {
-  loading: false,
   match: {
     id: 0,
     name: 'No Match Found',
@@ -7,14 +6,11 @@ const initState = {
 };
 
 // Actions
-const SET_LOADING = 'leo/match/set/loading';
-
 const SET_MATCH = 'leo/match/set/match';
 
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
-    case SET_LOADING: return { ...state, loading: action.loading };
     case SET_MATCH: {
       const match = action.match ? action.match : initState.match;
       return { ...state, match };
