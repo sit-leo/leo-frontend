@@ -59,7 +59,7 @@ export const Ranking = ({
   }
   return (
     <RankingLayout>
-      <ContainerRow className="py-5">
+      <Col>
         <Card className="position-relative">
           <RankCouter counter={ranks.length} />
           <Col className="py-3" md={{ size: 8, offset: 2 }}>
@@ -97,7 +97,7 @@ export const Ranking = ({
             </Col>
           </Row>
         </Card>
-      </ContainerRow>
+      </Col>
     </RankingLayout>
   );
 };
