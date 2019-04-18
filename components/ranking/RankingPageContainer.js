@@ -53,7 +53,7 @@ const RankStep = ({ steps = [], step: stepIndex }) => (
   </Steps>
 );
 
-export const Ranking = ({
+export const RankingPageContainer = ({
   steps = [], step, handleStep,
   ranks = [],
   children,
@@ -113,6 +113,4 @@ const mapStateToProps = state => ({
   match: state.match.match,
 });
 
-const RankingCompose = connect(mapStateToProps)(Ranking);
-
-export default RankingCompose;
+export default connect(mapStateToProps)(RankingPageContainer);
