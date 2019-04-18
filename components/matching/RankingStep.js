@@ -8,6 +8,14 @@ import Icon from '../base/Icon';
 
 import RankingCard from './RankingCard';
 
+const RankingErrorText = () => (
+  <FlexCenter>
+    <Text className="my-3">
+    Please select at least 1 in previous step.
+    </Text>
+  </FlexCenter>
+);
+
 const RankingStep = ({
   ranks,
   isOpenConfirm,
@@ -20,6 +28,7 @@ const RankingStep = ({
   function increaseRank(index, rank) {
     return updateRank(index - 1, rank);
   }
+
   function decreaseRank(index, rank) {
     return updateRank(index + 1, rank);
   }
@@ -30,11 +39,11 @@ const RankingStep = ({
         {
           (rankCounter > 0)
             ? ranks.map((rank, index) => {
-              const ranking = index + 1;
+              const rankIndex = index + 1;
               const ranker = rank.position || rank.applicantMatch;
               return (
                 <RankingCard
-                  key={`${JSON.stringify(rank)}-${ranking}`}
+                  key={rankIndex}
                   title={ranker.name}
                   value={ranker.money}
                   subtitle={ranker.location}
@@ -46,7 +55,7 @@ const RankingStep = ({
                           ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
                           : <br />
                       }
-                        <span>{ranking}</span>
+                        <span>{rankIndex}</span>
                         { index < rankCounter - 1
                           ? <Icon type="caret-down" theme="filled" onClick={() => decreaseRank(index, rank)} />
                           : <br />
@@ -60,7 +69,7 @@ const RankingStep = ({
                 />
               );
             })
-            : <FlexCenter><Text className="my-3">Please select at least 1 in previous step.</Text></FlexCenter>
+            : <RankingErrorText />
         }
       </Col>
       <Col lg={{ size: 4, offset: 4 }}>
