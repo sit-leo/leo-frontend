@@ -66,7 +66,7 @@ function setApplicantMatchIdToRecruiterRank(rank) {
 }
 
 function setPositionIdToApplicantRank(rank) {
-  return { ...rank, position: { id: rank.positionId } };
+  return { ...rank, positionId: rank.position.id };
 }
 
 function setPositionId(position) {
