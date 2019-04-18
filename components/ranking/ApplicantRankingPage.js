@@ -9,7 +9,7 @@ import { updateRank, removeRank } from '../../store/match/applicant';
 
 import RankingStep from './RankingStep';
 import PositionList from './PositionList';
-import RankingCompose from './Ranking';
+import RankingContainer from './RankingContainer';
 import Confirmation from './Confirmation';
 import UploadStep from './UploadStep';
 
@@ -38,7 +38,7 @@ export const ApplicantRanking = ({
     toggleConfirm(false);
   }
   return (
-    <RankingCompose
+    <RankingContainer
       ranks={ranks}
       steps={steps}
       step={step}

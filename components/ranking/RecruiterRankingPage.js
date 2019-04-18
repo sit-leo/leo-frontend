@@ -7,7 +7,7 @@ import { clientInstance } from '../../tools/request';
 import adapter from '../../store/match/match-adapter';
 import { updateRank, removeRank } from '../../store/match/recruiter';
 
-import RankingCompose from './Ranking';
+import RankingContainer from './RankingContainer';
 import ApplicantList from './ApplicantList';
 import FinishStep from './FinishStep';
 import RankingStep from './RankingStep';
@@ -38,7 +38,7 @@ export const RecruiterRanking = ({
     toggleConfirm(false);
   }
   return (
-    <RankingCompose
+    <RankingContainer
       ranks={ranks}
       steps={steps}
       step={step}
