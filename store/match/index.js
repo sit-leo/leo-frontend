@@ -6,13 +6,13 @@ const initState = {
 };
 
 // Actions
-const SET_MATCH = 'leo/match/set/match';
+export const SET_MATCH = 'MATCH/SET_MATCH';
 
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
     case SET_MATCH: {
-      const match = action.match ? action.match : initState.match;
+      const match = action.match || initState.match;
       return { ...state, match };
     }
     default: return { ...state };
