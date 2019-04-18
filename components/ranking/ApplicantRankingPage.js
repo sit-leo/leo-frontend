@@ -64,7 +64,7 @@ export const ApplicantRanking = ({
         isOpenConfirm={isOpenConfirm}
         toggleConfirm={toggleConfirm}
       />
-    </RankingCompose>
+    </RankingContainer>
   );
 };
 
