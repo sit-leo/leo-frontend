@@ -1,7 +1,7 @@
 const routes = require('next-routes');
 
 module.exports = routes()
-  .add('matches/match', '/matches/:matchId')
-  .add('ranking/applicant', '/matches/:matchId/applicants/ranking')
-  .add('matches/position', '/matches/:matchId/recruiters/positions')
-  .add('ranking/recruiter', '/matches/:matchId/positions/:positionId/ranking');
+  .add('match/index', '/matches/:matchId')
+  .add('matching/ApplicantRanking', '/matches/:matchId/applicants/ranking')
+  .add('matching/RecruiterPosition', '/matches/:matchId/recruiters/positions')
+  .add('matching/RecruiterRanking', '/matches/:matchId/positions/:positionId/ranking');
