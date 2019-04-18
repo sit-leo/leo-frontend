@@ -11,7 +11,7 @@ import Upload from './Upload';
 import RankingList from './RankingList';
 import PositionList from './PositionList';
 import RankingCompose from './Ranking';
-import ModalConfirmation from './ModalConfirmation';
+import Confirmation from './Confirmation';
 
 const matchAdapter = adapter(clientInstance());
 
@@ -59,7 +59,7 @@ export const ApplicantRanking = ({
               )
             }
       { step === 2 && (<Upload />) }
-      <ModalConfirmation
+      <Confirmation
         handleConfirm={handleConfirm}
         isOpenConfirm={isOpenConfirm}
         toggleConfirm={toggleConfirm}

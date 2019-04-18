@@ -8,7 +8,7 @@ import { FlexBetween } from '../base/Flex';
 import Button, { DangerButton } from '../base/Button';
 
 
-const ModalConfirmation = ({
+const Confirmation = ({
   isOpenConfirm, toggleConfirm,
   handleConfirm,
 }) => (
@@ -41,4 +41,4 @@ const mapStateToProps = state => ({
   isUpdateRank: state.applicant.isUpdateRank,
 });
 
-export default connect(mapStateToProps)(ModalConfirmation);
+export default connect(mapStateToProps)(Confirmation);
