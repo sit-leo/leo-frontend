@@ -6,9 +6,9 @@ import color from '../../config/color';
 
 import { ContainerStyled, Col, Row } from './Grid';
 import Image, { ProfileAvatar } from './Image';
-import { TitleSmall } from './Text';
+import { TitleLight } from './Text';
 
-const Menu = styled(TitleSmall)`
+const Menu = styled(TitleLight)`
   cursor: pointer;
   color: ${color.primary};
   margin-right: 1.3em;
@@ -36,6 +36,10 @@ const menus = [
   {
     name: 'Applicant Ranking',
     path: '/matches/1/applicants/ranking',
+  },
+  {
+    name: 'Recruiter Position',
+    path: '/matches/1/recruiters/positions',
   },
   {
     name: 'Recruiter Ranking',
