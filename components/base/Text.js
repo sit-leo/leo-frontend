@@ -5,7 +5,7 @@ import colors from '../../config/color';
 import font from '../../config/font';
 
 const Text = styled.span`
-  font-weight: 300;
+  font-weight: ${font.weight.regular};
   font-size: ${font.size.small};
   color: ${colors.text.paragraph};
 `;
@@ -15,6 +15,7 @@ export default Text;
 export const Title = styled.h1`
   font-size: ${font.size.large};
   color: ${colors.text.main};
+  font-weight: ${font.weight.regular};
 `;
 
 export const TitlePrimary = styled(Title)`
@@ -22,24 +23,26 @@ export const TitlePrimary = styled(Title)`
 `;
 
 export const TitleLight = styled(Title)`
-  font-weight: 300;
+  font-weight: ${font.weight.light};
 `;
 
 export const TitleSmall = styled.h2`
   font-size: ${font.size.small};
   color: ${colors.text.main};
+  font-weight: ${font.weight.regular};
 `;
 
 export const SubTitleSmall = styled.h2`
   font-size: ${font.size.small};
   color: ${colors.text.main};
-  font-weight: 300;
+  font-weight: ${font.weight.light};
 `;
 
 
 export const Paragraph = styled.p`
   font-size: ${font.size.small};
   color: ${colors.text.paragraph};
+  font-weight: ${font.weight.light};
   margin: 0;
 `;
 
