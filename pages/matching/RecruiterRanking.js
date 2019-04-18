@@ -24,9 +24,13 @@ class RecruiterRankingController extends React.Component {
 
     const { matchId, positionId } = query;
     const match = await matchRequest.getMatchByMatchId(matchId);
+    const applicants = await matchingRequest.getApplicantsByMatchIdAndPositionId(
+      matchId, positionId,
+    );
+    const ranks = await matchingRequest.getRecruiterRankingByMatchIdAndPositionId(
+      matchId, positionId,
+    );
 
-    const applicants = await matchingRequest.getApplicantsByMatchIdAndPositionId(matchId, positionId);
-    const ranks = await matchingRequest.getRecruiterRankingByMatchIdAndPositionId(matchId, positionId);
     await store.dispatch(setMatch(match));
     await store.dispatch(setPosition({ id: +positionId }));
     await store.dispatch(setApplicants(applicants));
