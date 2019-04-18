@@ -83,7 +83,7 @@ export const RecruiterRanking = ({
 const mapStateToProps = state => ({
   match: state.match.match,
   position: state.ranking.position,
-  recruiterRanks: state.ranking.ranks,
+  recruiterRanks: state.ranking.recruiterRanks,
   haveRank: state.ranking.haveRank,
 });
 
