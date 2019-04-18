@@ -17,8 +17,9 @@ class RecruiterPositionController extends React.Component {
     const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
     const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
 
-    const match = await matchRequest.getMatchByMatchId(query.matchId);
-    const positions = await matchingRequest.getRecruiterPositionsByMatchId(query.matchId);
+    const { matchId } = query;
+    const match = await matchRequest.getMatchByMatchId(matchId);
+    const positions = await matchingRequest.getRecruiterPositionsByMatchId(matchId);
 
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));

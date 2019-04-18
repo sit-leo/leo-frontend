@@ -12,7 +12,7 @@ import {
   setPosition,
   setApplicants,
   setRecruiterRanks,
-  setHaveRank, 
+  setHaveRank,
 } from '../../store/matching/ranking';
 
 import RecruiterRankingPage from '../../components/matching/RecruiterRankingPage';

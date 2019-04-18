@@ -11,7 +11,7 @@ import { setMatch } from '../../store/match';
 import {
   setHaveRank,
   setPositions,
-  setApplicantRanks
+  setApplicantRanks,
 } from '../../store/matching/ranking';
 
 import ApplicantRankingPage from '../../components/matching/ApplicantRankingPage';
@@ -21,9 +21,10 @@ class ApplicantRankingController extends React.Component {
     const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
     const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
 
-    const match = await matchRequest.getMatchByMatchId(query.matchId);
-    const positions = await matchingRequest.getMatchPositionsByMatchId(query.matchId);
-    const ranks = await matchingRequest.getApplicantRankingByMatchId(query.matchId);
+    const { matchId } = query;
+    const match = await matchRequest.getMatchByMatchId(matchId);
+    const positions = await matchingRequest.getMatchPositionsByMatchId(matchId);
+    const ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
 
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
