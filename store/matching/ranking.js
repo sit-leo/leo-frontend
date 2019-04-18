@@ -44,7 +44,7 @@ export const ADD_RECRUITER_RANKS = 'RANKING/ADD_RECRUITER_RANKS';
 export const UPDATE_RECRUITER_RANKS = 'RANKING/UPDATE_RECRUITER_RANKS';
 export const REMOVE_RECRUITER_RANKS = 'RANKING/REMOVE_RECRUITER_RANKS';
 
-// Utility
+// Utilities
 function isRankEqualPosition(rank, position) {
   return rank.positionId === position.positionId;
 }
@@ -61,6 +61,22 @@ function setSequenceByRankIndex(rank, rankIndex) {
   return { ...rank, sequence: rankIndex + 1 };
 }
 
+function setApplicantMatchIdToRecruiterRank(rank) {
+  return { ...rank, applicantMatch: { id: rank.applicantMatchId } };
+}
+
+function setPositionIdToApplicantRank(rank) {
+  return { ...rank, position: { id: rank.positionId } };
+}
+
+function setPositionId(position) {
+  return { ...position, positionId: position.id };
+}
+
+function setApplicantMatchId(applicantMatch) {
+  return { ...applicantMatch, applicantMatchId: applicantMatch.id };
+}
+
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -70,12 +86,18 @@ export default function reducer(state = initState, action = {}) {
 
     case SET_POSITION: return { ...state, position: action.position };
 
-    case SET_POSITIONS: return { ...state, positions: action.positions };
+    case SET_POSITIONS: {
+      const positions = action.positions.map(setPositionId);
+      return { ...state, positions };
+    }
 
-    case SET_APPLICANTS: return { ...state, applicants: action.applicants };
+    case SET_APPLICANTS: {
+      const applicants = action.applicants.map(setApplicantMatchId);
+      return { ...state, applicants };
+    }
 
     case SET_APPLICANT_RANKS: {
-      const applicantRanks = action.applicantRanks.map(rank => ({ ...rank, position: { id: rank.positionId } }));
+      const applicantRanks = action.applicantRanks.map(setPositionIdToApplicantRank);
       return { ...state, applicantRanks };
     }
 
@@ -110,7 +132,7 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case SET_RECRUITER_RANKS: {
-      const recruiterRanks = action.recruiterRanks.map(rank => ({ ...rank, applicantMatch: { id: rank.applicantMatchId } }));
+      const recruiterRanks = action.recruiterRanks.map(setApplicantMatchIdToRecruiterRank);
       return { ...state, recruiterRanks };
     }
 
