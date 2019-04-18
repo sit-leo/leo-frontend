@@ -116,18 +116,22 @@ export default function reducer(state = initState, action = {}) {
 
     case REMOVE_APPLICANT_RANKS: {
       const { position } = action;
-      const filteredApplicantRanks = state.applicantRanks.filter(rank => isRankNotEqualPosition(rank, position));
+      const filteredApplicantRanks = state.applicantRanks.filter(
+        rank => isRankNotEqualPosition(rank, position),
+      );
       const applicantRanks = filteredApplicantRanks.map(setSequenceByRankIndex);
       return { ...state, applicantRanks };
     }
 
     case UPDATE_APPLICANT_RANKS: {
       const { index, position } = action;
-      const removalIndex = state.applicantRanks.findIndex(rank => isRankEqualPosition(rank, position));
+      const removalIndex = state.applicantRanks.findIndex(
+        rank => isRankEqualPosition(rank, position),
+      );
       const ranks = [...state.applicantRanks];
       ranks.splice(removalIndex, 1);
       ranks.splice(index, 0, { ...position, sequence: index + 1 });
-      const applicantRanks = ranks.map((rank, rankIndex) => ({ ...rank, sequence: rankIndex + 1 }));
+      const applicantRanks = ranks.map(setSequenceByRankIndex);
       return { ...state, applicantRanks };
     }
 
@@ -151,17 +155,19 @@ export default function reducer(state = initState, action = {}) {
 
     case UPDATE_RECRUITER_RANKS: {
       const { index, applicant } = action;
-      let ranks = [...state.ranks];
-      const removalIndex = ranks.findIndex(rank => rank.applicantMatchId === applicant.applicantMatchId);
+      const removalIndex = state.recruiterRanks.findIndex(rank => rank.applicantMatchId === applicant.applicantMatchId);
+      const ranks = [...state.recruiterRanks];
       ranks.splice(removalIndex, 1);
       ranks.splice(index, 0, { ...applicant, sequence: index + 1 });
-      ranks = ranks.map((rank, rankIndex) => ({ ...rank, sequence: rankIndex + 1 }));
-      return { ...state, ranks };
+      const recruiterRanks = ranks.map(setSequenceByRankIndex);
+      return { ...state, recruiterRanks };
     }
 
     case REMOVE_RECRUITER_RANKS: {
       const { applicantMatch } = action;
-      const filteredRecruiterRanks = state.recruiterRanks.filter(rank => isRankNotEqualApplicantMatch(rank, applicantMatch));
+      const filteredRecruiterRanks = state.recruiterRanks.filter(
+        rank => isRankNotEqualApplicantMatch(rank, applicantMatch),
+      );
       const recruiterRanks = filteredRecruiterRanks.map(setSequenceByRankIndex);
       return { ...state, recruiterRanks };
     }
