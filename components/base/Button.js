@@ -41,6 +41,10 @@ export const CardButton = styled.button`
   border-style: solid;
   border-radius: 0 0 10px 10px;
   border-width: 1px 0 0 0;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default MainButton;
