@@ -3,19 +3,24 @@ import { connect } from 'react-redux';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
-import adapter from '../../store/match/match-adapter';
+
+import matchAdapter from '../../store/match/match-adapter';
+import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatch } from '../../store/match';
-import { setPositions, setRanks, setIsUpdateRank } from '../../store/match/applicant';
+import { setPositions, setRanks, setIsUpdateRank } from '../../store/matching/applicant';
 
-import ApplicantRankingPage from '../../components/ranking/ApplicantRankingPage';
+import ApplicantRankingPage from '../../components/matching/ApplicantRankingPage';
 
 class ApplicantRankingController extends React.Component {
   static async getInitialProps({ store, query, req }) {
-    const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
-    const match = await matchAdapter.getMatchByMatchId(query.matchId);
-    const positions = await matchAdapter.getMatchPositionsByMatchId(query.matchId);
-    const ranks = await matchAdapter.getApplicantRankingByMatchId(query.matchId);
+    const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
+    const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
+
+    const match = await matchRequest.getMatchByMatchId(query.matchId);
+    const positions = await matchingRequest.getMatchPositionsByMatchId(query.matchId);
+    const ranks = await matchingRequest.getApplicantRankingByMatchId(query.matchId);
+
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
     if (ranks && ranks.length > 0) {

@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
-import adapter from '../../store/match/match-adapter';
+
+import matchAdapter from '../../store/match/match-adapter';
+import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatch } from '../../store/match';
-import { setPositions } from '../../store/match/recruiter';
+import { setPositions } from '../../store/matching/recruiter';
 
-import RecruiterPositionPage from '../../components/matches/RecruiterPositionPage';
+import RecruiterPositionPage from '../../components/matching/RecruiterPositionPage';
 
 class RecruiterPositionController extends React.Component {
   static async getInitialProps({ store, query, req }) {
-    const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
-    const match = await matchAdapter.getMatchByMatchId(query.matchId);
-    const positions = await matchAdapter.getRecruiterPositionsByMatchId(query.matchId);
+    const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
+    const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
+
+    const match = await matchRequest.getMatchByMatchId(query.matchId);
+    const positions = await matchingRequest.getRecruiterPositionsByMatchId(query.matchId);
+
     await store.dispatch(setMatch(match));
     await store.dispatch(setPositions(positions));
     return {};
