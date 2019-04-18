@@ -8,9 +8,9 @@ import adapter from '../../store/match/match-adapter';
 import { setMatch } from '../../store/match';
 import { setPositions, setRanks, setIsUpdateRank } from '../../store/match/applicant';
 
-import ApplicantRanking from '../../components/ranking/ApplicantRanking';
+import ApplicantRankingPage from '../../components/ranking/ApplicantRankingPage';
 
-class ApplicantRankingPage extends React.Component {
+class ApplicantRankingController extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
@@ -26,8 +26,8 @@ class ApplicantRankingPage extends React.Component {
   }
 
   render() {
-    return <ApplicantRanking />;
+    return <ApplicantRankingPage />;
   }
 }
 
-export default connect()(ApplicantRankingPage);
+export default connect()(ApplicantRankingController);

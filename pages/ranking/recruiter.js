@@ -10,9 +10,9 @@ import {
   setApplicants, setRanks, setIsUpdateRank, setPosition,
 } from '../../store/match/recruiter';
 
-import RecruiterRankingPage from '../../components/ranking/RecruiterRanking';
+import RecruiterRankingPage from '../../components/ranking/RecruiterRankingPage';
 
-class RecruiterRankingSSR extends React.Component {
+class RecruiterRankingController extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
@@ -33,4 +33,4 @@ class RecruiterRankingSSR extends React.Component {
   }
 }
 
-export default connect()(RecruiterRankingSSR);
+export default connect()(RecruiterRankingController);
