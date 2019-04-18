@@ -12,7 +12,7 @@ import {
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
-import PositionList from './PositionList';
+import PositionListStep from './PositionListStep';
 import RankingStep from './RankingStep';
 import Confirmation from './Confirmation';
 import UploadStep from './UploadStep';
@@ -57,7 +57,7 @@ export const ApplicantRanking = ({
       isOpenConfirm={isOpenConfirm}
       toggleConfirm={toggleConfirm}
     >
-      { step === 0 && (<PositionList />) }
+      { step === 0 && (<PositionListStep />) }
       { step === 1
               && (
                 <RankingStep

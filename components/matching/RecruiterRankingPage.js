@@ -11,7 +11,7 @@ import {
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
-import ApplicantList from './ApplicantList';
+import ApplicantListStep from './ApplicantListStep';
 import RankingStep from './RankingStep';
 import Confirmation from './Confirmation';
 import FinishStep from './FinishStep';
@@ -58,7 +58,7 @@ export const RecruiterRanking = ({
       isOpenConfirm={isOpenConfirm}
       toggleConfirm={toggleConfirm}
     >
-      { step === 0 && (<ApplicantList />) }
+      { step === 0 && (<ApplicantListStep />) }
       { step === 1
               && (
                 <RankingStep
