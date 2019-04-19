@@ -41,6 +41,13 @@ const RankingButton = ({
   </TitleSmall>
 );
 
+const ConfirmedButton = () => (
+  <Button className="w-100">
+    <Icon type="check" />
+    Confirmed
+  </Button>
+);
+
 const RankingErrorText = () => (
   <FlexCenter>
     <TextError className="my-3">
@@ -110,19 +117,30 @@ const RankingStep = ({
           : <RankingErrorText />
       }
       <Col lg={{ size: 4, offset: 4 }}>
-        <Button
-          className="w-100"
-          disabled={rankCounter === 0 || !isUpdateRank}
-          onClick={() => toggleConfirm(!isOpenConfirm)}
-        >
-          Confirm Ranking
-        </Button>
+        {
+          isConfirm ? (<ConfirmedButton />)
+            : (
+              <Button
+                className="w-100"
+                disabled={rankCounter === 0 || !isUpdateRank}
+                onClick={() => toggleConfirm(!isOpenConfirm)}
+              >
+                {
+              !(haveRank && isUpdateRank)
+                ? 'Confirm Ranking'
+                : 'Update Ranking'
+            }
+              </Button>
+            )
+        }
       </Col>
     </React.Fragment>
   );
 };
 
 const mapStateToProps = state => ({
+  isConfirm: state.ranking.isConfirm,
+  haveRank: state.ranking.haveRank,
   isUpdateRank: state.ranking.isUpdateRank,
 });
 
