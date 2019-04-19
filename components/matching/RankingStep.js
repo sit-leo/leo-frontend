@@ -5,29 +5,62 @@ import { connect } from 'react-redux';
 import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import Button, { DangerButton } from '../base/Button';
-import Text, { TitleSmall } from '../base/Text';
+import { TitleSmall, TextError } from '../base/Text';
 import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Icon from '../base/Icon';
 
 import RankingCard from './RankingCard';
 
+function isNotFirstRank(rankIndex) {
+  return rankIndex !== 1;
+}
+
+function isNotLastRank(rankIndex, rankCounter) {
+  return rankIndex < rankCounter;
+}
+
+const RankingButton = ({
+  rankIndex,
+  rankCounter,
+  increaseRank,
+  decreaseRank,
+}) => (
+  <TitleSmall>
+    <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
+      { isNotFirstRank(rankIndex)
+        ? <Icon type="caret-up" theme="filled" onClick={increaseRank} />
+        : <br />
+      }
+      <span>{rankIndex}</span>
+      { isNotLastRank(rankIndex, rankCounter)
+        ? <Icon type="caret-down" theme="filled" onClick={decreaseRank} />
+        : <br />
+      }
+    </FlexCenter>
+  </TitleSmall>
+);
+
 const RankingErrorText = () => (
   <FlexCenter>
-    <Text className="my-3">
-    Please select at least 1 in previous step.
-    </Text>
+    <TextError className="my-3">
+      Please select at least 1 in previous step.
+    </TextError>
   </FlexCenter>
 );
 
 const RankingStep = ({
+  isConfirm,
+  haveRank,
   isUpdateRank,
-  ranks,
+  setIsUpdate = () => {},
+
   isOpenConfirm,
   toggleConfirm = () => {},
+
+  ranks,
   updateRank = () => {},
   removeRank = () => {},
-  setIsUpdate = () => {},
 }) => {
   const rankCounter = ranks.length;
 
@@ -52,28 +85,21 @@ const RankingStep = ({
         (rankCounter > 0)
           ? ranks.map((rank, index) => {
             const rankIndex = index + 1;
-            const ranker = rank.position || rank.applicantMatch;
+            const ranked = rank.position || rank.applicantMatch;
             return (
               <RankingCard
                 key={rankIndex}
-                title={ranker.name}
-                value={ranker.money}
-                subtitle={ranker.location}
-                capacity={ranker.capacity}
+                title={ranked.name}
+                value={ranked.money}
+                subtitle={ranked.location}
+                capacity={ranked.capacity}
                 rankingButton={(
-                  <TitleSmall>
-                    <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
-                      { index > 0
-                        ? <Icon type="caret-up" theme="filled" onClick={() => increaseRank(index, rank)} />
-                        : <br />
-                    }
-                      <span>{rankIndex}</span>
-                      { index < rankCounter - 1
-                        ? <Icon type="caret-down" theme="filled" onClick={() => decreaseRank(index, rank)} />
-                        : <br />
-                    }
-                    </FlexCenter>
-                  </TitleSmall>
+                  <RankingButton
+                    rankIndex={rankIndex}
+                    rankCounter={rankCounter}
+                    increaseRank={() => increaseRank(index, rank)}
+                    decreaseRank={() => decreaseRank(index, rank)}
+                  />
                 )}
                 actionButton={
                   <DangerButton onClick={() => remove(rank)}>Delete</DangerButton>
