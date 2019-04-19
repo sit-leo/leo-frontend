@@ -5,6 +5,7 @@ import RankingReducer,
   UPDATE_APPLICANT_RANKS,
   ADD_RECRUITER_RANKS,
   REMOVE_RECRUITER_RANKS,
+  UPDATE_RECRUITER_RANKS,
 } from '../ranking';
 
 describe('Test Ranking Reducer', () => {
@@ -166,6 +167,50 @@ describe('Test Ranking Reducer', () => {
       recruiterRanks: [
         { ...applicantMatchAdded2, sequence: 1 },
       ],
+    };
+    expect(store).toEqual(expected);
+    done();
+  });
+
+  it('Test updateRecruiterRank with `2 Applicant Match Added` should return recruiterRanks that changed Rank Sequence from Applicant Match 2 -> 1 and Applicant Match 1 -> 2.', (done) => {
+    const applicantMatchAdded1 = {
+      sequence: 1, id: 1, applicantMatchId: 1, applicant: { id: 1, applicantId: 1 },
+    };
+    const applicantMatchAdded2 = {
+      sequence: 2, id: 2, applicantMatchId: 2, applicant: { id: 2, applicantId: 2 },
+    };
+
+    const action = { type: UPDATE_RECRUITER_RANKS, index: 0, applicantMatch: applicantMatchAdded2 };
+
+    const initState = { recruiterRanks: [applicantMatchAdded1, applicantMatchAdded2] };
+    const store = RankingReducer(initState, action);
+
+    const expected = {
+      recruiterRanks: [
+        { ...applicantMatchAdded2, sequence: 1 },
+        { ...applicantMatchAdded1, sequence: 2 }],
+    };
+    expect(store).toEqual(expected);
+    done();
+  });
+
+  it('Test updateApplicantRank with `2 Applicant Match Added` should return recruiterRanks that changed Rank Sequence from Applicant Match 1 -> 2 and Applicant Match 2 -> 1.', (done) => {
+    const applicantMatchAdded1 = {
+      sequence: 1, id: 1, applicantMatchId: 1, applicant: { id: 1, applicantId: 1 },
+    };
+    const applicantMatchAdded2 = {
+      sequence: 2, id: 2, applicantMatchId: 2, applicant: { id: 2, applicantId: 2 },
+    };
+
+    const action = { type: UPDATE_RECRUITER_RANKS, index: 1, applicantMatch: applicantMatchAdded1 };
+
+    const initState = { recruiterRanks: [applicantMatchAdded1, applicantMatchAdded2] };
+    const store = RankingReducer(initState, action);
+
+    const expected = {
+      recruiterRanks: [
+        { ...applicantMatchAdded2, sequence: 1 },
+        { ...applicantMatchAdded1, sequence: 2 }],
     };
     expect(store).toEqual(expected);
     done();
