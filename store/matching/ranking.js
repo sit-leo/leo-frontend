@@ -54,6 +54,7 @@ function isRankEqualPosition(rank, position) {
 function isRankNotEqualPosition(rank, position) {
   return rank.positionId !== position.positionId;
 }
+
 function isRankEqualApplicant(rank, applicant) {
   return rank.applicantMatchId === applicant.applicantMatchId;
 }
@@ -161,13 +162,13 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case UPDATE_RECRUITER_RANKS: {
-      const { index, applicant } = action;
+      const { index, applicantMatch } = action;
       const removalIndex = state.recruiterRanks.findIndex(
-        rank => isRankEqualApplicant(rank, applicant),
+        rank => isRankEqualApplicant(rank, applicantMatch),
       );
       const ranks = [...state.recruiterRanks];
       ranks.splice(removalIndex, 1);
-      ranks.splice(index, 0, { ...applicant, sequence: index + 1 });
+      ranks.splice(index, 0, { ...applicantMatch, sequence: index + 1 });
       const recruiterRanks = ranks.map(setSequenceByRankIndex);
       return { ...state, recruiterRanks };
     }
