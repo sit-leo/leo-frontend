@@ -24,7 +24,7 @@ const PositionList = ({ match, positions }) => (
           subtitle={position.location}
           capacity={position.capacity}
           actionButton={(
-            <MainButton className="my-3" onClick={() => redirectToRecruiterRanking(match.id, position.id)}>
+            <MainButton className="my-3 w-100" onClick={() => redirectToRecruiterRanking(match.id, position.id)}>
               Select
             </MainButton>
           )}

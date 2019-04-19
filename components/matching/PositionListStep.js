@@ -24,7 +24,7 @@ const PositionList = ({
             capacity={position.capacity}
             actionButton={(
               <Button
-                className="mt-2"
+                className="w-100"
                 type="button"
                 onClick={() => setIsUpdate(true) && addRank(position)}
               >

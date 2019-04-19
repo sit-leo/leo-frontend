@@ -26,8 +26,8 @@ const RankingButton = ({
   increaseRank,
   decreaseRank,
 }) => (
-  <Title>
-    <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
+  <Title className="mb-0">
+    <FlexCenter className="flex-column">
       { isNotFirstRank(rankIndex)
         ? <Icon type="caret-up" theme="filled" onClick={increaseRank} />
         : <br />
@@ -109,7 +109,7 @@ const RankingStep = ({
                   />
                 )}
                 actionButton={
-                  <DangerButton onClick={() => remove(rank)}>Delete</DangerButton>
+                  <DangerButton className="w-100" onClick={() => remove(rank)}>Delete</DangerButton>
                 }
               />
             );

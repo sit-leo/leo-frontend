@@ -25,7 +25,7 @@ const ApplicantList = ({
             capacity={0}
             badgeText="Documents"
             actionButton={
-              <Button type="button" onClick={() => setIsUpdate(true) && addRank(applicant)}>Add to Your Ranking</Button>
+              <Button className="w-100" type="button" onClick={() => setIsUpdate(true) && addRank(applicant)}>Add to Your Ranking</Button>
             }
           />
         )))
