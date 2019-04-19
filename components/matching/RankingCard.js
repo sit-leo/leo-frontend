@@ -10,11 +10,8 @@ import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
 
-const CardLeft = ({ imagePath, rankingButton }) => (
-  <FlexCenter>
-    { rankingButton }
-    <RankingAvatar className="rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
-  </FlexCenter>
+const CardLeft = ({ imagePath }) => (
+  <RankingAvatar className="w-100 rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
 );
 
 const CardMiddle = ({
@@ -36,7 +33,7 @@ const CardRight = ({
 }) => (
   <FlexCenter className="flex-column">
     <TitlePrimary className="mb-0">{capacity || 0}</TitlePrimary>
-    <SubTitleSmall>{badgeText || 'Recruit'}</SubTitleSmall>
+    <SubTitleSmall className="mb-3">{badgeText || 'Recruit'}</SubTitleSmall>
     { actionButton }
   </FlexCenter>
 );
@@ -77,13 +74,16 @@ const RankingCard = ({
   return (
     <SmallCard>
       <ContainerRow className="pt-4">
-        <Col lg={rankingButton ? 3 : 2}>
+        {
+          rankingButton && <Col lg={1} className="d-flex align-items-center justify-content-center">{ rankingButton }</Col>
+        }
+        <Col lg={2}>
           <CardLeft imagePath={imagePath} rankingButton={rankingButton} />
         </Col>
-        <Col lg={rankingButton ? 6 : 7}>
+        <Col lg={rankingButton ? 7 : 8}>
           <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
-        <Col lg={3}>
+        <Col lg={2}>
           <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
         </Col>
         <CardCollapse isOpen={isOpen} />
