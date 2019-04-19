@@ -6,7 +6,7 @@ import color from '../../config/color';
 
 const DefaultButtonStyled = styled(DefaultButton)`
   border-radius: 10px;
-  padding: 0.6em 3em;
+  padding: 0.6em 2em;
   height: auto;
   border: none;
 
