@@ -9,7 +9,7 @@ import RankingLayout from '../layouts/ranking';
 
 import { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
-import Text, { TitleSmall } from '../base/Text';
+import Text, { Title } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 import Steps from '../base/Step';
@@ -94,7 +94,7 @@ const RankingPageContainer = ({
                       className="w-50"
                     />
                   )
-                  : (<TitleSmall>Your Rank</TitleSmall>)
+                  : (<Title>Your Rank</Title>)
               }
             </Col>
             <Col lg={2}>
