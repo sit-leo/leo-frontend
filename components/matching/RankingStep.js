@@ -126,10 +126,10 @@ const RankingStep = ({
                 onClick={() => toggleConfirm(!isOpenConfirm)}
               >
                 {
-              !(haveRank && isUpdateRank)
-                ? 'Confirm Ranking'
-                : 'Update Ranking'
-            }
+                  !(haveRank && isUpdateRank)
+                    ? 'Confirm Ranking'
+                    : 'Update Ranking'
+                }
               </Button>
             )
         }
