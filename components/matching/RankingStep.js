@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import Button, { DangerButton } from '../base/Button';
-import { TitleSmall, TextError } from '../base/Text';
+import { Title, TextError } from '../base/Text';
 import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Icon from '../base/Icon';
@@ -26,7 +26,7 @@ const RankingButton = ({
   increaseRank,
   decreaseRank,
 }) => (
-  <TitleSmall>
+  <Title>
     <FlexCenter className="mr-3 ml-0 flex-grow-2 flex-column">
       { isNotFirstRank(rankIndex)
         ? <Icon type="caret-up" theme="filled" onClick={increaseRank} />
@@ -38,7 +38,7 @@ const RankingButton = ({
         : <br />
       }
     </FlexCenter>
-  </TitleSmall>
+  </Title>
 );
 
 const ConfirmedButton = () => (
