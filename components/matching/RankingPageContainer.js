@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Input, Icon } from 'antd';
+import { Input, Popover } from 'antd';
+
+import { setIsUpdateRank } from '../../store/matching/ranking';
+
 import color from '../../config/color';
 
 import RankingLayout from '../layouts/ranking';
 
 import { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
-import Text, { Title, ExtraSmallTextLight } from '../base/Text';
+import Icon, { DeletedIcon } from '../base/Icon';
+import Text, { Title, ExtraSmallTextLight, EmptyInformationText } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 import Steps from '../base/Step';
@@ -35,11 +40,40 @@ const CounterBox = styled(FlexCenter)`
   right: 1.5em;
 `;
 
-const RankCouter = ({ counter }) => (
+const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
+  ranks.length > 0
+    ? ranks.map((rank, index) => {
+      const ranked = rank.position || rank.applicantMatch;
+      return (
+        <Text key={ranked.name} className="d-flex align-items-center">
+          <DeletedIcon onClick={() => removeRank(rank)} className="mr-3" type="minus-circle" theme="filled" />
+          {`${index + 1}. ${ranked.name || '-'}`}
+        </Text>
+      );
+    })
+    : <EmptyInformationText>No rank found, please add rank.</EmptyInformationText>
+);
+
+const SmallRankingBox = ({ ranks, removeRank }) => (
+  <div>
+    <SmallRankingList ranks={ranks} removeRank={removeRank} />
+    <hr />
+    <ExtraSmallTextLight>You can rearrange the rank in the next step.</ExtraSmallTextLight>
+  </div>
+);
+
+const RankCouter = ({ counter, ranks, removeRank }) => (
   <CounterBox className="position-absolute text-center flex-column">
-    <CounterBadge counter={counter} className="rounded-circle">
-      {`${counter}`}
-    </CounterBadge>
+    <Popover
+      placement="bottomRight"
+      content={
+        <SmallRankingBox ranks={ranks} removeRank={removeRank} />
+      }
+    >
+      <CounterBadge counter={counter} className="rounded-circle">
+        {`${counter}`}
+      </CounterBadge>
+    </Popover>
     <ExtraSmallTextLight>
       Your Rank
     </ExtraSmallTextLight>
@@ -55,12 +89,19 @@ const RankStep = ({ steps = [], stepIndex }) => (
 );
 
 const RankingPageContainer = ({
-  rankingSteps = [],
+  rankingSteps,
+
+  ranks,
+  removeRank,
+
   rankCounter,
+
   step,
   handleStep,
-  haveRank,
+
   isUpdateRank,
+  setIsUpdate,
+
   isConfirm,
   children,
 }) => {
@@ -70,12 +111,17 @@ const RankingPageContainer = ({
   function increaseStep() {
     return step < 2 && handleStep(step + 1);
   }
+  function remove(rank) {
+    setIsUpdate(true);
+    return removeRank(rank);
+  }
+
   return (
     <RankingLayout>
       <Col>
         <Card>
           <Row className="sticky-top bg-white pb-3">
-            <RankCouter counter={rankCounter} />
+            <RankCouter counter={rankCounter} ranks={ranks} removeRank={remove} />
             <Col className="py-3" md={{ size: 8, offset: 2 }}>
               <RankStep steps={rankingSteps} stepIndex={step} />
             </Col>
@@ -128,4 +174,9 @@ const mapStateToProps = state => ({
   isConfirm: state.ranking.isConfirm,
 });
 
-export default connect(mapStateToProps)(RankingPageContainer);
+
+const mapDispatchToProps = dispatch => ({
+  setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RankingPageContainer);

@@ -51,6 +51,8 @@ export const ApplicantRanking = ({
   return (
     <RankingPageContainer
       rankingSteps={APPLICANT_RANKING_STEPS}
+      ranks={applicantRanks}
+      removeRank={removeRank}
       rankCounter={applicantRanks.length}
       step={step}
       handleStep={handleStep}
