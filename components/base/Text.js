@@ -58,3 +58,12 @@ export const EmptyInformationText = styled(Text)`
   color: ${colors.secondary};
   font-style: italic;
 `;
+
+export const ExtraSmallText = styled(Text)`
+  font-size: ${font.size.xsmall};
+`;
+
+export const ExtraSmallTextLight = styled(Text)`
+  font-size: ${font.size.xsmall};
+  font-weight: ${font.weight.light};
+`;

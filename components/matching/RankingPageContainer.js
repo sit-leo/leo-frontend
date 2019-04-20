@@ -9,7 +9,7 @@ import RankingLayout from '../layouts/ranking';
 
 import { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
-import Text, { Title } from '../base/Text';
+import Text, { Title, ExtraSmallTextLight } from '../base/Text';
 import Card from '../base/Card';
 import Button from '../base/Button';
 import Steps from '../base/Step';
@@ -23,14 +23,15 @@ const CounterBadge = styled(Text)`
   background: ${props => checkCounter(props.counter)};
   min-width: 40px;
   cursor: pointer;
-`;
+  transition: .2s;
 
-const CounterText = styled(Text)`
-  color: ${props => checkCounter(props.counter)};
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 const CounterBox = styled(FlexCenter)`
-  top: 1.5em;
+  top: .5em;
   right: 1.5em;
 `;
 
@@ -39,9 +40,9 @@ const RankCouter = ({ counter }) => (
     <CounterBadge counter={counter} className="rounded-circle">
       {`${counter}`}
     </CounterBadge>
-    <CounterText counter={counter}>
-      <u>Your Rank</u>
-    </CounterText>
+    <ExtraSmallTextLight>
+      Your Rank
+    </ExtraSmallTextLight>
   </CounterBox>
 );
 
@@ -72,13 +73,13 @@ const RankingPageContainer = ({
   return (
     <RankingLayout>
       <Col>
-        <Card className="position-relative">
-          <RankCouter counter={rankCounter} />
-          <Col className="py-3" md={{ size: 8, offset: 2 }}>
-            <RankStep steps={rankingSteps} stepIndex={step} />
-          </Col>
-          <hr />
-          <Row>
+        <Card>
+          <Row className="sticky-top bg-white pb-3">
+            <RankCouter counter={rankCounter} />
+            <Col className="py-3" md={{ size: 8, offset: 2 }}>
+              <RankStep steps={rankingSteps} stepIndex={step} />
+            </Col>
+            <Col><hr /></Col>
             <Col lg={2}>
               <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
                 Previous
