@@ -23,6 +23,11 @@ function checkCounter(counter) {
   return counter === 0 ? color.disabled : color.error;
 }
 
+const CounterBox = styled(FlexCenter)`
+  top: .5em;
+  right: 1.5em;
+`;
+
 const CounterBadge = styled(Text)`
   color: ${color.white};
   background: ${props => checkCounter(props.counter)};
@@ -35,10 +40,13 @@ const CounterBadge = styled(Text)`
   }
 `;
 
-const CounterBox = styled(FlexCenter)`
-  top: .5em;
-  right: 1.5em;
-`;
+const SmallRankingBox = ({ ranks, removeRank }) => (
+  <div>
+    <SmallRankingList ranks={ranks} removeRank={removeRank} />
+    <hr />
+    <ExtraSmallTextLight>You can rearrange the rank in the next step.</ExtraSmallTextLight>
+  </div>
+);
 
 const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
   ranks.length > 0
@@ -52,14 +60,6 @@ const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
       );
     })
     : <EmptyInformationText>No rank found, please add rank.</EmptyInformationText>
-);
-
-const SmallRankingBox = ({ ranks, removeRank }) => (
-  <div>
-    <SmallRankingList ranks={ranks} removeRank={removeRank} />
-    <hr />
-    <ExtraSmallTextLight>You can rearrange the rank in the next step.</ExtraSmallTextLight>
-  </div>
 );
 
 const RankCouter = ({ counter, ranks, removeRank }) => (
