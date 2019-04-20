@@ -2,7 +2,7 @@
 
 import env from '../../config/env';
 
-const MATCH_API = env.public.matchingApi;
+const MATCH_API = env.public.matchApi;
 
 export default adapter => ({
   getMatchByMatchId(matchId) {

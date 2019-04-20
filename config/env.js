@@ -6,6 +6,7 @@ const serverEnvironment = (config && config.serverRuntimeConfig) || {};
 const publicEnvironment = (config && config.publicRuntimeConfig) || {
   type: 'test',
   matchingApi: '',
+  matchApi: '',
 };
 
 export default {

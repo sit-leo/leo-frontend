@@ -14,6 +14,7 @@ module.exports = withCSS({
     // Will be available on both server and client
     type: process.env.NODE_ENV,
     matchingApi: process.env.MATCHING_API,
+    matchApi: process.env.MATCH_API,
     staticFolder: '/static',
   },
   webpack: (config) => {
