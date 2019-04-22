@@ -5,8 +5,9 @@ import { Button as DefaultButton } from 'antd';
 import color from '../../config/color';
 
 const DefaultButtonStyled = styled(DefaultButton)`
+  text-align: center;
   border-radius: 10px;
-  padding: 0.6em 2em;
+  padding: 0.6em 0;
   height: auto;
   border: none;
 
