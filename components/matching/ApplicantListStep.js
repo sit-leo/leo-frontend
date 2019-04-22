@@ -2,31 +2,39 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addRecruiterRank, setIsUpdateRank } from '../../store/matching/ranking';
-
-import Button from '../base/Button';
+import { addRecruiterRank, removeRecruiterRank, setIsUpdateRank } from '../../store/matching/ranking';
 
 import RankingCard from './RankingCard';
+import ActionButton from './ActionButton';
 
+function isApplicantInRecruiterRanks(recruiterRanks, applicantMatchId) {
+  return recruiterRanks.findIndex(rank => rank.applicantMatchId === applicantMatchId) !== -1;
+}
 
 const ApplicantList = ({
   applicants,
+  recruiterRanks = [],
   addRank = () => {},
+  removeRank = () => {},
   setIsUpdate = () => {},
 }) => (
   <React.Fragment>
     {
-        applicants.map((({ applicant }) => (
+        applicants.map((applicantMatch => (
           <RankingCard
-            key={applicant.id}
-            title={applicant.name}
-            value={applicant.educations[0].gpax}
-            subtitle={applicant.educations[0].educationName}
+            key={applicantMatch.applicant.id}
+            title={applicantMatch.applicant.name}
+            value={applicantMatch.applicant.educations[0].gpax}
+            subtitle={applicantMatch.applicant.educations[0].educationName}
             capacity={0}
             badgeText="Documents"
-            actionButton={
-              <Button className="w-100" type="button" onClick={() => setIsUpdate(true) && addRank(applicant)}>Add to rank</Button>
-            }
+            actionButton={(
+              <ActionButton
+                isInRank={!isApplicantInRecruiterRanks(recruiterRanks, applicantMatch.applicantMatchId)}
+                addRank={() => setIsUpdate(true) && addRank(applicantMatch)}
+                removeRank={() => setIsUpdate(true) && removeRank(applicantMatch)}
+              />
+)}
           />
         )))
     }
@@ -35,10 +43,12 @@ const ApplicantList = ({
 
 const mapStateToProps = state => ({
   applicants: state.ranking.applicants,
+  recruiterRanks: state.ranking.recruiterRanks,
 });
 
 const mapDispatchToPositionProps = dispatch => ({
   addRank: bindActionCreators(addRecruiterRank, dispatch),
+  removeRank: bindActionCreators(removeRecruiterRank, dispatch),
   setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
 });
 

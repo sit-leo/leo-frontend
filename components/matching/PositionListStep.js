@@ -2,15 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addApplicantRank, setIsUpdateRank } from '../../store/matching/ranking';
-
-import Button from '../base/Button';
+import { addApplicantRank, setIsUpdateRank, removeApplicantRank } from '../../store/matching/ranking';
 
 import RankingCard from './RankingCard';
+import ActionButton from './ActionButton';
+
+
+function isPositionInApplicantRanks(applicantRanks, positionId) {
+  return applicantRanks.findIndex(rank => rank.positionId === positionId) !== -1;
+}
 
 const PositionList = ({
   positions,
+  applicantRanks,
   addRank = () => {},
+  removeRank = () => {},
   setIsUpdate = () => {},
 }) => (
   <React.Fragment>
@@ -23,13 +29,11 @@ const PositionList = ({
             subtitle={position.location}
             capacity={position.capacity}
             actionButton={(
-              <Button
-                className="w-100"
-                type="button"
-                onClick={() => setIsUpdate(true) && addRank(position)}
-              >
-                Add to rank
-              </Button>
+              <ActionButton
+                isInRank={!isPositionInApplicantRanks(applicantRanks, position.positionId)}
+                addRank={() => setIsUpdate(true) && addRank(position)}
+                removeRank={() => setIsUpdate(true) && removeRank(position)}
+              />
             )}
           />
         )))
@@ -39,10 +43,12 @@ const PositionList = ({
 
 const mapStateToProps = state => ({
   positions: state.ranking.positions,
+  applicantRanks: state.ranking.applicantRanks,
 });
 
 const mapDispatchToPositionProps = dispatch => ({
   addRank: bindActionCreators(addApplicantRank, dispatch),
+  removeRank: bindActionCreators(removeApplicantRank, dispatch),
   setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
 });
 
