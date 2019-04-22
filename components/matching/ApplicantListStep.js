@@ -16,12 +16,12 @@ const ApplicantList = ({
 }) => (
   <React.Fragment>
     {
-        applicants.map((applicant => (
+        applicants.map((({ applicant }) => (
           <RankingCard
             key={applicant.id}
             title={applicant.name}
-            value={applicant.gpax}
-            subtitle={applicant.department}
+            value={applicant.educations[0].gpax}
+            subtitle={applicant.educations[0].educationName}
             capacity={0}
             badgeText="Documents"
             actionButton={
