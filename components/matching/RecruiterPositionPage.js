@@ -39,14 +39,16 @@ const RecruiterPosition = ({ match, positions = [] }) => (
     <Col>
       <Card>
         <Row>
-          <Col lg={7}>
+          <Col lg={{ offset: 1, size: 6 }}>
             <TitleSmall>Choose position to rank</TitleSmall>
           </Col>
-          <Col lg={5}>
+          <Col lg={4}>
             <Input />
           </Col>
+          <Col lg={{ size: 10, offset: 1 }}>
+            <PositionList match={match} positions={positions} />
+          </Col>
         </Row>
-        <PositionList match={match} positions={positions} />
       </Card>
     </Col>
   </RankingLayout>
