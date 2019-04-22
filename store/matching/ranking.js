@@ -17,13 +17,9 @@ export const initState = {
     documents: [],
   }],
 
-  applicantRanks: [{
-    positionId: 0,
-  }],
+  applicantRanks: [],
 
-  recruiterRanks: [{
-    applicantMatchId: 0,
-  }],
+  recruiterRanks: [],
 };
 
 // Actions

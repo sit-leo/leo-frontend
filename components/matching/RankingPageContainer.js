@@ -126,12 +126,12 @@ const RankingPageContainer = ({
               <RankStep steps={rankingSteps} stepIndex={step} />
             </Col>
             <Col><hr /></Col>
-            <Col lg={2}>
+            <Col lg={{ size: 2, offset: 1 }}>
               <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
                 Previous
               </Button>
             </Col>
-            <Col lg={8} className="d-flex justify-content-center">
+            <Col lg={6} className="d-flex justify-content-center">
               {
                 step === 0
                   ? (
@@ -157,7 +157,7 @@ const RankingPageContainer = ({
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col lg={{ size: 10, offset: 1 }}>
               { children }
             </Col>
           </Row>
