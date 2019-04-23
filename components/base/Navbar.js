@@ -30,8 +30,12 @@ const NavbarContainer = styled(ContainerStyled)`
 
 const menus = [
   {
-    name: 'Matches',
+    name: 'All Matches',
     path: '/matches',
+  },
+  {
+    name: 'My Matches',
+    path: '/my-matches',
   },
   {
     name: 'Applicant Ranking',
