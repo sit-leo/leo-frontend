@@ -12,8 +12,8 @@ import MyMatchesPage from '../../components/matches/MyMatchesPage';
 class MyMatchesController extends React.Component {
   static async getInitialProps({ store, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
-    const matches = await matchAdapter.getCurrentMatch();
-    await store.dispatch(setMatches(matches));
+    // const matches = await matchAdapter.getCurrentMatchByStatus('current');
+    // await store.dispatch(setMatches(matches));
     return {};
   }
 
