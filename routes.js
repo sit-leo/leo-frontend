@@ -5,4 +5,5 @@ module.exports = routes()
   .add('match/MyMatches', '/my-matches')
   .add('matching/ApplicantRanking', '/matches/:matchId/applicants/ranking')
   .add('matching/RecruiterPosition', '/matches/:matchId/recruiters/positions')
-  .add('matching/RecruiterRanking', '/matches/:matchId/positions/:positionId/ranking');
+  .add('matching/RecruiterRanking', '/matches/:matchId/positions/:positionId/ranking')
+  .add('matching/MatchResult', '/matches/:matchId/result');
