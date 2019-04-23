@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -31,13 +31,21 @@ const CounterBox = styled(FlexCenter)`
 const CounterBadge = styled(Text)`
   color: ${color.white};
   background: ${props => checkCounter(props.counter)};
-  min-width: 40px;
+  min-width: 30px;
   cursor: pointer;
   transition: .2s;
 
   &:hover {
     transform: scale(1.3);
   }
+`;
+
+const CounterText = styled(ExtraSmallTextLight)`
+  cursor: pointer;
+  ${props => props.counter > 0 && css`
+    color: ${color.error};
+    text-decoration: underline;
+  `}
 `;
 
 const SmallRankingBox = ({ ranks, removeRank }) => (
@@ -65,6 +73,7 @@ const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
 const RankCouter = ({ counter, ranks, removeRank }) => (
   <CounterBox className="position-absolute text-center flex-column">
     <Popover
+      className="d-flex flex-column align-items-center justify-content-center"
       placement="bottomRight"
       content={
         <SmallRankingBox ranks={ranks} removeRank={removeRank} />
@@ -73,10 +82,10 @@ const RankCouter = ({ counter, ranks, removeRank }) => (
       <CounterBadge counter={counter} className="rounded-circle">
         {`${counter}`}
       </CounterBadge>
+      <CounterText counter={counter}>
+        Your Rank
+      </CounterText>
     </Popover>
-    <ExtraSmallTextLight>
-      Your Rank
-    </ExtraSmallTextLight>
   </CounterBox>
 );
 
