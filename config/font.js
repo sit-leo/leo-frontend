@@ -5,8 +5,8 @@ export default {
     regular: 400,
   },
   size: {
-    large: '30px',
-    small: '25px',
-    xsmall: '20px',
+    large: '20px',
+    small: '18px',
+    xsmall: '16px',
   },
 };

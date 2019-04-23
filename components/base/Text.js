@@ -29,7 +29,7 @@ export const TitleLight = styled(Title)`
 export const TitleSmall = styled.h2`
   font-size: ${font.size.small};
   color: ${colors.text.main};
-  font-weight: ${font.weight.regular};
+  font-weight: ${font.weight.light};
 `;
 
 export const TitleSmallPrimary = styled(TitleSmall)`
