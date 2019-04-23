@@ -7,6 +7,7 @@ const publicEnvironment = (config && config.publicRuntimeConfig) || {
   type: 'test',
   matchingApi: '',
   matchApi: '',
+  userApi: '',
 };
 
 export default {
