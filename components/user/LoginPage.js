@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { Form } from 'antd';
 import { clientInstance } from '../../tools/request';
 
 import userAdapter from '../../store/user/user-adapter';
 import { setUsername, setPassword } from '../../store/user';
 
+import { Title } from '../base/Text';
 import Button from '../base/Button';
+import Input from '../base/Input';
+import ContainerRow, { Col } from '../base/Grid';
 
 const userRequest = userAdapter(clientInstance());
 
@@ -19,10 +23,25 @@ const LoginPage = ({
   setPassword: handlePassword,
 }) => (
   <React.Fragment>
-    <h1>Login Page</h1>
-    <input onChange={e => handleUsername(e.target.value)} value={username} />
-    <input onChange={e => handlePassword(e.target.value)} value={password} />
-    <Button onClick={() => userRequest.login({ username, password })}>Login</Button>
+    <ContainerRow>
+      <Col>
+        <Form
+          method="POST"
+          className="w-100 py-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            userRequest.login({ username, password });
+          }}
+        >
+          <Title>Login Page</Title>
+          Username
+          <Input onChange={e => handleUsername(e.target.value)} value={username} />
+          Password
+          <Input type="password" onChange={e => handlePassword(e.target.value)} value={password} />
+          <Button htmlType="submit" className="w-100 mt-4">Login</Button>
+        </Form>
+      </Col>
+    </ContainerRow>
   </React.Fragment>
 );
 
