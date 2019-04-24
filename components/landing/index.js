@@ -1,14 +1,34 @@
 import React from 'react';
+import Link from 'next/link';
 
 import env from '../../config/env';
 
 import WithNavbar from '../layouts/with-navbar';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
-import { TitlePrimary, TextError } from '../base/Text';
+import Text, { TitlePrimary, TextError } from '../base/Text';
 import Card from '../base/Card';
 import { RankingAvatar } from '../base/Image';
 import Flex, { FlexCenter } from '../base/Flex';
+
+const linksDebug = [
+  {
+    name: 'Applicant Ranking',
+    path: '/matches/1/applicants/ranking',
+  },
+  {
+    name: 'Recruiter Position',
+    path: '/matches/1/recruiters/positions',
+  },
+  {
+    name: 'Recruiter Ranking',
+    path: '/matches/1/positions/1/ranking',
+  },
+  {
+    name: 'Login',
+    path: '/login',
+  },
+];
 
 const LandingIndex = () => (
   <WithNavbar>
@@ -29,6 +49,17 @@ const LandingIndex = () => (
             <Flex className="flex-column">
               <TextError>{ env.public.type }</TextError>
               <TextError>{ env.public.matchingApi }</TextError>
+              <TextError>{ env.public.matchApi }</TextError>
+              <TextError>{ env.public.userApi }</TextError>
+              {
+                linksDebug.map(menu => (
+                  <Link key={menu.name} href={menu.path}>
+                    <a href="#">
+                      <Text>{menu.name}</Text>
+                    </a>
+                  </Link>
+                ))
+              }
             </Flex>
           </Card>
         </Col>
