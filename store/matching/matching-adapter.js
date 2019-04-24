@@ -53,4 +53,8 @@ export default adapter => ({
     return adapter.put(`${MATCHING_API}/matches/${matchId}/positions/${positionId}/ranking`, recruiterRanking)
       .then(({ status }) => status === 200);
   },
+  getMatchResultByMatchId(matchId) {
+    return adapter.get(`${MATCHING_API}/matches/${matchId}/result`)
+      .then(({ data: ranks }) => ranks);
+  },
 });
