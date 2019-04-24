@@ -37,25 +37,15 @@ const menus = [
     name: 'My Matches',
     path: '/my-matches',
   },
-  {
-    name: 'Applicant Ranking',
-    path: '/matches/1/applicants/ranking',
-  },
-  {
-    name: 'Recruiter Position',
-    path: '/matches/1/recruiters/positions',
-  },
-  {
-    name: 'Recruiter Ranking',
-    path: '/matches/1/positions/1/ranking',
-  },
 ];
 
 const Navbar = () => (
   <NavbarContainer fluid className="d-flex justify-content-center align-items-stretch">
     <Row className="w-100 d-flex align-items-end">
       <Col xs={6} lg={2} className="logo text-left">
-        <Image src="/static/images/leo.png" />
+        <Link href="/">
+          <Image style={{ cursor: 'pointer' }} src="/static/images/leo.png" />
+        </Link>
       </Col>
       <Col lg={8} className="mb-3 d-none d-lg-flex">
         {
