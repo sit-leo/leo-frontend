@@ -5,13 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import match from './match';
 import ranking from './matching/ranking';
+import user from './user';
 
 const logger = createLogger();
 
 const middleware = [thunk, logger];
 
 export const reducers = combineReducers({
-  match, ranking,
+  match, ranking, user,
 });
 
 function initialStore(initialState = {}) {
