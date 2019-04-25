@@ -63,10 +63,6 @@ function setSequenceByRankIndex(rank, rankIndex) {
   return { ...rank, sequence: rankIndex + 1 };
 }
 
-function setApplicantMatchIdToRecruiterRank(rank) {
-  return { ...rank, applicantMatch: { id: rank.applicantMatchId } };
-}
-
 function setPositionIdToApplicantRank(rank) {
   return { ...rank, positionId: rank.position.id };
 }
@@ -140,7 +136,7 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case SET_RECRUITER_RANKS: {
-      const recruiterRanks = action.recruiterRanks.map(setApplicantMatchIdToRecruiterRank);
+      const recruiterRanks = action.recruiterRanks || initState.recruiterRanks;
       return { ...state, recruiterRanks };
     }
 
