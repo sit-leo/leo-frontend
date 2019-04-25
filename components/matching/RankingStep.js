@@ -109,7 +109,7 @@ const RankingStep = ({
                   />
                 )}
                 actionButton={
-                  <DangerButton className="w-100" onClick={() => remove(rank)}>Delete</DangerButton>
+                  <DangerButton className="w-75" onClick={() => remove(rank)}>Delete</DangerButton>
                 }
               />
             );
