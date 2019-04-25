@@ -157,7 +157,7 @@ const RankingPageContainer = ({
               <Button
                 className="w-100"
                 disabled={
-                  rankCounter === 0 || (step === 1 && (isUpdateRank && !isConfirm))
+                  step === 2 || rankCounter === 0 || (step === 1 && (isUpdateRank && !isConfirm))
                 }
                 onClick={increaseStep}
               >
