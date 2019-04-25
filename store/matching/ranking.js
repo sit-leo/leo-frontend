@@ -64,7 +64,15 @@ function setSequenceByRankIndex(rank, rankIndex) {
 }
 
 function setPositionIdToApplicantRank(rank) {
-  return { ...rank, positionId: rank.position.id };
+  const newRank = rank;
+  delete newRank.applicantMatch.applicant;
+  return { ...newRank, positionId: rank.position.id };
+}
+
+function removePositionFromRecruiterRank(rank) {
+  const newRank = rank;
+  delete newRank.position;
+  return { ...newRank };
 }
 
 function setPositionId(position) {
@@ -136,7 +144,7 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case SET_RECRUITER_RANKS: {
-      const recruiterRanks = action.recruiterRanks || initState.recruiterRanks;
+      const recruiterRanks = action.recruiterRanks.map(removePositionFromRecruiterRank);
       return { ...state, recruiterRanks };
     }
 
