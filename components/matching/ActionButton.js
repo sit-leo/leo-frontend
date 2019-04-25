@@ -10,7 +10,7 @@ const ActionButton = ({
   isInRank
     ? (
       <Button
-        className="w-100"
+        className="w-75"
         onClick={addRank}
       >
         Add to rank
@@ -18,7 +18,7 @@ const ActionButton = ({
     )
     : (
       <DangerButton
-        className="w-100"
+        className="w-75"
         onClick={removeRank}
       >
         Delete

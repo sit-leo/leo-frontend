@@ -67,3 +67,6 @@ export const ExtraSmallTextLight = styled(Text)`
   font-size: ${font.size.xsmall};
   font-weight: ${font.weight.light};
 `;
+export const ExtraSmallTextLightPrimary = styled(ExtraSmallTextLight)`
+  color: ${colors.primary};
+`;

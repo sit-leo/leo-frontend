@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ContainerRow, { Col } from '../base/Grid';
 import Text, {
-  TitleSmall, TitleSmallPrimary, Title, SubTitleSmall, TitlePrimary,
+  TitleSmall, TitleSmallPrimary, Title, SubTitleSmall, TitlePrimary, ExtraSmallTextLightPrimary,
 } from '../base/Text';
 import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
@@ -11,7 +11,7 @@ import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
 
 const CardLeft = ({ imagePath }) => (
-  <RankingAvatar className="w-100 rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
+  <RankingAvatar className="w-75 rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
 );
 
 const CardMiddle = ({
@@ -77,23 +77,23 @@ const RankingCard = ({
         {
           rankingButton && <Col lg={1} className="d-flex align-items-center justify-content-center">{ rankingButton }</Col>
         }
-        <Col lg={2}>
+        <Col lg={2} className="text-center">
           <CardLeft imagePath={imagePath} rankingButton={rankingButton} />
         </Col>
-        <Col lg={rankingButton ? 7 : 8}>
+        <Col lg={rankingButton ? 6 : 7}>
           <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
-        <Col lg={2}>
+        <Col lg={3} className="text-center">
           <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
         </Col>
         <CardCollapse isOpen={isOpen} />
       </ContainerRow>
-      <CardButton className="mt-3 py-1" onClick={() => toggle(!isOpen)}>
-        <TitleSmallPrimary className="mb-0">
+      <CardButton className="mt-3 py-1 bg-white" onClick={() => toggle(!isOpen)}>
+        <ExtraSmallTextLightPrimary className="mb-0">
           {
             !isOpen ? 'Show more' : 'Show less'
           }
-        </TitleSmallPrimary>
+        </ExtraSmallTextLightPrimary>
       </CardButton>
     </SmallCard>
   );
