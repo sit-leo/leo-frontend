@@ -14,6 +14,13 @@ export const initState = {
   applicants: [{
     id: 0,
     name: 'No Applicant Found',
+    applicant: {
+      name: 'No Applicant Found',
+      educations: [{
+        educationName: 'No Education',
+        gpax: 0.00,
+      }],
+    },
     documents: [],
   }],
 
