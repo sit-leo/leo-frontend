@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import env from '../../config/env';
 
+import cookie from '../../tools/cookie';
 import WithNavbar from '../layouts/with-navbar';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
@@ -60,6 +61,7 @@ const LandingIndex = () => (
                   </Link>
                 ))
               }
+              <Text onClick={() => cookie.clearToken()}>Logout</Text>
             </Flex>
           </Card>
         </Col>
