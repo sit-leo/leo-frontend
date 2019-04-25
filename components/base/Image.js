@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Image = styled.img`
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 87px;
+    max-height: 87px;
 `;
 
 export default Image;
@@ -16,5 +16,4 @@ export const RankingAvatar = styled.img`
 export const ProfileAvatar = styled.img`
     max-width: 83px;
     max-height: 83px;
-    width: 100%;
 `;
