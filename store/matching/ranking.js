@@ -9,6 +9,8 @@ export const initState = {
     id: 0,
     name: 'No Position Found',
     capacity: 0,
+    money: 0,
+    location: 'No Location',
   }],
 
   applicants: [{
