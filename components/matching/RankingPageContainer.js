@@ -59,7 +59,7 @@ const SmallRankingBox = ({ ranks, removeRank }) => (
 const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
   ranks.length > 0
     ? ranks.map((rank, index) => {
-      const ranked = rank.position || rank.applicantMatch;
+      const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
       return (
         <Text key={ranked.id} className="d-flex align-items-center">
           <DeletedIcon onClick={() => removeRank(rank)} className="mr-3" type="minus-circle" theme="filled" />

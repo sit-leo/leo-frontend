@@ -92,7 +92,7 @@ const RankingStep = ({
         (rankCounter > 0)
           ? ranks.map((rank, index) => {
             const rankIndex = index + 1;
-            const ranked = rank.position || rank.applicantMatch;
+            const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
             return (
               <RankingCard
                 key={rankIndex}
