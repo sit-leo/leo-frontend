@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { withAuth } from '../../tools/with-auth';
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
 
@@ -46,4 +47,6 @@ class RecruiterRankingController extends React.Component {
   }
 }
 
-export default connect()(RecruiterRankingController);
+export default withAuth(
+  connect()(RecruiterRankingController),
+);

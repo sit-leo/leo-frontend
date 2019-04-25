@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { withAuth } from '../../tools/with-auth';
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
 
@@ -22,7 +23,9 @@ class RecruiterPositionController extends React.Component {
     const positions = await matchingRequest.getRecruiterPositionsByMatchId(matchId);
 
     await store.dispatch(setMatch(match));
-    await store.dispatch(setPositions(positions));
+    if (positions && positions.length > 0) {
+      await store.dispatch(setPositions(positions));
+    }
     return {};
   }
 
@@ -31,4 +34,6 @@ class RecruiterPositionController extends React.Component {
   }
 }
 
-export default connect()(RecruiterPositionController);
+export default withAuth(
+  connect()(RecruiterPositionController),
+);
