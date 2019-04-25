@@ -86,6 +86,17 @@ const RankingStep = ({
     return removeRank(rank);
   }
 
+  function getRankedNestedValue(ranked) {
+    if (ranked.educations && Array.isArray(ranked.educations)) {
+      return ranked.educations[0];
+    }
+    return ranked.recruiter;
+  }
+
+  function getApplicantDocuments(ranked) {
+    return (ranked.documents && Array.isArray(ranked.documents) && ranked.documents.length);
+  }
+
   return (
     <React.Fragment>
       {
@@ -93,13 +104,18 @@ const RankingStep = ({
           ? ranks.map((rank, index) => {
             const rankIndex = index + 1;
             const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
+            const nestedValue = getRankedNestedValue(ranked);
+            const subtitle = nestedValue.educationName || `${nestedValue.name}, ${nestedValue.location}`;
+            const value = nestedValue.gpax || ranked.money;
+            const capacity = getApplicantDocuments(ranked) || ranked.capacity;
             return (
               <RankingCard
                 key={ranked.id}
                 title={ranked.name}
-                value={ranked.educations[0].gpax}
-                subtitle={ranked.educations[0].educationName}
-                capacity={ranked.capacity}
+                value={value}
+                subtitle={subtitle}
+                capacity={capacity}
+                badgeText={!(rank.position) && 'Documents'}
                 rankingButton={(
                   <RankingButton
                     rankIndex={rankIndex}
