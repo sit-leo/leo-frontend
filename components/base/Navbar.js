@@ -40,14 +40,14 @@ const menus = [
 ];
 
 const Navbar = () => (
-  <NavbarContainer fluid className="d-flex justify-content-center align-items-stretch">
-    <Row className="w-100 d-flex align-items-end">
+  <NavbarContainer fluid className="d-flex justify-content-stretch align-items-center">
+    <Row className="w-100">
       <Col xs={6} lg={2} className="logo text-left">
         <Link href="/">
-          <Image style={{ cursor: 'pointer' }} src="/static/images/leo.png" />
+          <Image className="w-50" src="/static/images/leo.png" />
         </Link>
       </Col>
-      <Col lg={8} className="mb-3 d-none d-lg-flex">
+      <Col lg={8} className="pt-4 d-none d-lg-flex align-items-center">
         {
           menus.map(menu => (
             <Link key={menu.name} href={menu.path}>
@@ -57,7 +57,7 @@ const Navbar = () => (
         }
       </Col>
       <Col xs={6} lg={2} className="profile-avatar text-right">
-        <ProfileAvatar className="rounded-circle" src="/static/images/avatar.png" />
+        <ProfileAvatar className="w-75 rounded-circle" src="/static/images/avatar.png" />
       </Col>
     </Row>
   </NavbarContainer>
