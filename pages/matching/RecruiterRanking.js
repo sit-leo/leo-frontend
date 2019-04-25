@@ -34,7 +34,9 @@ class RecruiterRankingController extends React.Component {
 
     await store.dispatch(setMatch(match));
     await store.dispatch(setPosition({ id: +positionId }));
-    await store.dispatch(setApplicants(applicants));
+    if (applicants && applicants.length > 0) {
+      await store.dispatch(setApplicants(applicants));
+    }
     if (ranks && ranks.length > 0) {
       await store.dispatch(setRecruiterRanks(ranks));
       await store.dispatch(setHaveRank(true));

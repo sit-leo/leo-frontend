@@ -28,7 +28,9 @@ class ApplicantRankingController extends React.Component {
     const ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
 
     await store.dispatch(setMatch(match));
-    await store.dispatch(setPositions(positions));
+    if (positions && positions.length > 0) {
+      await store.dispatch(setPositions(positions));
+    }
     if (ranks && ranks.length > 0) {
       await store.dispatch(setApplicantRanks(ranks));
       await store.dispatch(setHaveRank(true));
