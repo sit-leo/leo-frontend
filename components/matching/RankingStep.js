@@ -95,10 +95,10 @@ const RankingStep = ({
             const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
             return (
               <RankingCard
-                key={rankIndex}
+                key={ranked.id}
                 title={ranked.name}
-                value={ranked.money}
-                subtitle={ranked.location}
+                value={ranked.educations[0].gpax}
+                subtitle={ranked.educations[0].educationName}
                 capacity={ranked.capacity}
                 rankingButton={(
                   <RankingButton
