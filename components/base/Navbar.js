@@ -37,6 +37,14 @@ const menus = [
     name: 'My Matches',
     path: '/my-matches',
   },
+  {
+    name: 'Organizations',
+    path: '/organizations',
+  },
+  {
+    name: 'Profile',
+    path: '/profile',
+  },
 ];
 
 const Navbar = () => (
