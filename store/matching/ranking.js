@@ -29,6 +29,8 @@ export const initState = {
   applicantRanks: [],
 
   recruiterRanks: [],
+
+  matchResults: [],
 };
 
 // Actions
@@ -50,6 +52,8 @@ export const SET_RECRUITER_RANKS = 'RANKING/SET_RECRUITER_RANKS';
 export const ADD_RECRUITER_RANKS = 'RANKING/ADD_RECRUITER_RANKS';
 export const UPDATE_RECRUITER_RANKS = 'RANKING/UPDATE_RECRUITER_RANKS';
 export const REMOVE_RECRUITER_RANKS = 'RANKING/REMOVE_RECRUITER_RANKS';
+
+export const SET_MATCH_RESULTS = 'RANKING/SET_MATCH_RESULTS';
 
 // Utilities
 function isRankEqualPosition(rank, position) {
@@ -116,6 +120,11 @@ export default function reducer(state = initState, action = {}) {
     case SET_APPLICANT_RANKS: {
       const applicantRanks = action.applicantRanks.map(setAttributeForApplicantRank);
       return { ...state, applicantRanks };
+    }
+
+    case SET_MATCH_RESULTS: {
+      const matchResults = action.matchResults || initState.matchResults;
+      return { ...state, matchResults };
     }
 
     case ADD_APPLICANT_RANKS: {
@@ -250,4 +259,8 @@ export function setApplicantRanks(applicantRanks) {
 
 export function setRecruiterRanks(recruiterRanks) {
   return { type: SET_RECRUITER_RANKS, recruiterRanks };
+}
+
+export function setMatchResults(matchResults) {
+  return { type: SET_MATCH_RESULTS, matchResults };
 }
