@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RankingLayout from '../layouts/matching';
+import MatchingLayout from '../layouts/matching';
 import { Col, Row } from '../base/Grid';
 import { Title, TitlePrimary } from '../base/Text';
 import Card from '../base/Card';
@@ -12,7 +12,7 @@ const ResultList = ({ results = [1] }) => (
 );
 
 const MatchResultPage = () => (
-  <RankingLayout>
+  <MatchingLayout>
     <Col>
       <Card>
         <Row>
@@ -26,7 +26,7 @@ const MatchResultPage = () => (
         </Row>
       </Card>
     </Col>
-  </RankingLayout>
+  </MatchingLayout>
 );
 
 export default MatchResultPage;

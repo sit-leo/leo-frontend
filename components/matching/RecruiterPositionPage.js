@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Input } from 'antd';
 import { redirectToRecruiterRanking } from '../../store/matching/matching-adapter';
 
-import RankingLayout from '../layouts/ranking';
+import MatchingLayout from '../layouts/matching';
 
 import { Col, Row } from '../base/Grid';
 import { TitleSmall } from '../base/Text';
@@ -35,7 +35,7 @@ const PositionList = ({ match, positions }) => (
 );
 
 const RecruiterPosition = ({ match, positions = [] }) => (
-  <RankingLayout>
+  <MatchingLayout>
     <Col>
       <Card>
         <Row>
@@ -51,7 +51,7 @@ const RecruiterPosition = ({ match, positions = [] }) => (
         </Row>
       </Card>
     </Col>
-  </RankingLayout>
+  </MatchingLayout>
 );
 
 const mapStateToProps = state => ({
