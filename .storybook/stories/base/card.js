@@ -6,6 +6,7 @@ import ContainerRow, { Col } from '../../../components/base/Grid'
 import Card, { SmallCard } from '../../../components/base/Card';
 import Button from '../../../components/base/Button';
 
+import MatchCard from '../../../components/matches/MatchCard';
 import RankingCard from '../../../components/matching/RankingCard';
 
 storiesOf('Base/Card', module)
@@ -40,6 +41,13 @@ storiesOf('Base/Card', module)
             <Button>Add to rank</Button>
           }
         />
+      </Col>
+    </ContainerRow>
+  ))
+  .add('Match Card Component', () => (
+    <ContainerRow>
+      <Col>
+        <MatchCard />
       </Col>
     </ContainerRow>
   ))
