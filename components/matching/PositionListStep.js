@@ -26,7 +26,7 @@ const PositionList = ({
             key={position.id}
             title={position.name}
             value={position.money}
-            subtitle={`${position.recruiter.name}, ${position.recruiter.location}`}
+            subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
             capacity={position.capacity}
             actionButton={(
               <ActionButton
