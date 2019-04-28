@@ -11,7 +11,7 @@ const Time = () => (
   </Hero>
 );
 
-const RankingLayout = ({ children }) => (
+const MatchingLayout = ({ children }) => (
   <WithNavbar>
     <Time />
     <ContainerRow className="py-5">
@@ -20,4 +20,4 @@ const RankingLayout = ({ children }) => (
   </WithNavbar>
 );
 
-export default RankingLayout;
+export default MatchingLayout;

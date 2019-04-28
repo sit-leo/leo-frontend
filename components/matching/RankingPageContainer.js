@@ -9,7 +9,7 @@ import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import color from '../../config/color';
 
-import RankingLayout from '../layouts/ranking';
+import MatchingLayout from '../layouts/matching';
 
 import { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
@@ -126,7 +126,7 @@ const RankingPageContainer = ({
   }
 
   return (
-    <RankingLayout>
+    <MatchingLayout>
       <Col>
         <Card>
           <Row className="sticky-top bg-white pb-3">
@@ -172,7 +172,7 @@ const RankingPageContainer = ({
           </Row>
         </Card>
       </Col>
-    </RankingLayout>
+    </MatchingLayout>
   );
 };
 
