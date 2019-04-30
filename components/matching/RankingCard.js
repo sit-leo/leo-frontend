@@ -83,9 +83,13 @@ const RankingCard = ({
         <Col lg={rankingButton ? 6 : 7}>
           <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
-        <Col lg={3} className="text-center">
-          <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
-        </Col>
+        { capacity
+          && (
+            <Col lg={3} className="text-center">
+              <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
+            </Col>
+          )
+        }
         <CardCollapse isOpen={isOpen} />
       </ContainerRow>
       <CardButton className="mt-3 py-1 bg-white" onClick={() => toggle(!isOpen)}>
