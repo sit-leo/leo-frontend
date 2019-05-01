@@ -1,5 +1,5 @@
 export const initState = {
-  loading: true,
+  loading: false,
 };
 
 // Actions
