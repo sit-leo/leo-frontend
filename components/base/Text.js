@@ -18,6 +18,12 @@ export const Title = styled.h1`
   font-weight: ${font.weight.regular};
 `;
 
+export const TitleLarge = styled.h1`
+  font-size: ${font.size.xlarge};
+  color: ${colors.text.main};
+  font-weight: ${font.weight.regular};
+`;
+
 export const TitlePrimary = styled(Title)`
   color: ${colors.primary};
 `;

@@ -5,6 +5,7 @@ export default {
     regular: 400,
   },
   size: {
+    xlarge: '30px',
     large: '20px',
     small: '18px',
     xsmall: '16px',

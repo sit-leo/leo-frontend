@@ -7,7 +7,7 @@ import color from '../../config/color';
 import { SmallCard } from '../base/Card';
 import { Row, Col } from '../base/Grid';
 import {
-  Title, SubTitleSmall, TitlePrimary, TitleLight,
+  TitleLarge, SubTitleSmall, TitlePrimary, TitleLight,
 } from '../base/Text';
 import { FlexCenter } from '../base/Flex';
 import Button from '../base/Button';
@@ -40,12 +40,12 @@ const MatchCard = ({
   title,
   startDate,
 }) => (
-  <SmallCard className="py-2 px-4">
+  <SmallCard className="py-4 px-4">
     <Row>
       <Col lg={4}>
-        <Title>
+        <TitleLarge>
           {title || '-'}
-        </Title>
+        </TitleLarge>
         <MatchCardSubTitle>
           {'Match date '}
           <span>{ startDate || '-' }</span>
