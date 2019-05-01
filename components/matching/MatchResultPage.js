@@ -10,15 +10,14 @@ import Card from '../base/Card';
 import RankingCard from './RankingCard';
 
 function getApplicant(result) {
+  const { applicant: { applicant } } = result;
+  if (applicant) {
+    if (applicant.educations.length === 0) {
+      applicant.educations = [{ gpax: '-', educationName: '-' }];
+    }
+    return applicant;
+  }
   return null;
-  // const { applicant: { applicant } } = result;
-  // if (applicant) {
-  //   if (applicant.educations.length === 0) {
-  //     applicant.educations = [{ gpax: '-', educationName: '-' }];
-  //   }
-  //   return applicant;
-  // }
-  // return null;
 }
 
 function getPosition(result) {
@@ -29,17 +28,29 @@ function getPosition(result) {
   return null;
 }
 
-const ResultList = ({ matchResults = [] }) => (
+function getCardInformationByRole(result, role) {
+  if (role === 'applicant') {
+    const position = getPosition(result);
+    return {
+      title: position.name,
+      value: position.money,
+      subtitle: position.recruiter.location,
+    };
+  }
+  if (role === 'recruiter') {
+    const applicant = getApplicant(result);
+    return {
+      title: applicant.name,
+      value: applicant.educations[0].gpax,
+      subtitle: applicant.educations[0].educationName,
+    };
+  }
+  return null;
+}
+
+const ResultList = ({ role, matchResults = [] }) => (
   matchResults.map((result) => {
-    const title = getApplicant(result)
-      ? getApplicant(result).name
-      : getPosition(result).name;
-    const value = getApplicant(result)
-      ? getApplicant(result).educations[0].gpax
-      : getPosition(result).money;
-    const subtitle = getApplicant(result)
-      ? getApplicant(result).educations[0].educationName
-      : getPosition(result).recruiter.location;
+    const { title, value, subtitle } = getCardInformationByRole(result, role);
     return (
       <RankingCard
         key={result.matchResultId}
@@ -52,6 +63,7 @@ const ResultList = ({ matchResults = [] }) => (
 );
 
 const MatchResultPage = ({
+  role,
   matchResults,
 }) => (
   <MatchingLayout>
@@ -63,7 +75,7 @@ const MatchResultPage = ({
             <Title>You have matched with 3 Applicants!!!</Title>
           </Col>
           <Col lg={{ size: 10, offset: 1 }}>
-            <ResultList matchResults={matchResults} />
+            <ResultList role={role} matchResults={matchResults} />
           </Col>
         </Row>
       </Card>
@@ -72,6 +84,7 @@ const MatchResultPage = ({
 );
 
 const mapStateToProps = state => ({
+  role: state.user.role,
   match: state.match.match,
   matchResults: state.ranking.matchResults,
 });
