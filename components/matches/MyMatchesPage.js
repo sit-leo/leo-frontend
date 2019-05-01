@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import day from 'dayjs';
 
 import { clientInstance } from '../../tools/request';
 
@@ -24,7 +25,11 @@ const matchRequest = matchAdapter(clientInstance());
 const MatchList = ({ matches = [] }) => (
   matches.length > 0
     ? matches.map(match => (
-      <MatchCard key={match.name} />
+      <MatchCard
+        key={match.name}
+        title={match.name}
+        startDate={day(match.startDate).format('DD MMM YYYY')}
+      />
     ))
     : <TitleSmall className="text-center">No Matches Found.</TitleSmall>
 );

@@ -34,16 +34,19 @@ const CounterBox = ({ count, badgeText }) => (
 );
 
 
-const MatchCard = () => (
+const MatchCard = ({
+  title,
+  startDate,
+}) => (
   <SmallCard className="py-2 px-4">
     <Row>
-      <Col lg={5}>
+      <Col lg={4}>
         <Title>
-          {'Programmer matching'}
+          {title || '-'}
         </Title>
         <MatchCardSubTitle>
           {'Match date '}
-          <span>18 Aug 2019</span>
+          <span>{ startDate || '-' }</span>
         </MatchCardSubTitle>
         <MatchCardSubTitle>
           {'Organization '}
@@ -55,8 +58,8 @@ const MatchCard = () => (
         <VerticalLine className="mx-3" />
         <CounterBox count={102} badgeText="Applicants" />
       </Col>
-      <Col lg={3} className="d-flex align-items-center justify-content-center">
-        <Button className="w-75">Rank</Button>
+      <Col lg={4} className="d-flex align-items-center justify-content-center">
+        <Button className="w-50">Rank</Button>
       </Col>
     </Row>
   </SmallCard>
