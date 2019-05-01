@@ -4,6 +4,7 @@ import { Steps as DefaultSteps } from 'antd';
 import color from '../../config/color';
 
 const Steps = styled(DefaultSteps)`
+    
     .anticon {
         vertical-align: 0.075em;
     }
