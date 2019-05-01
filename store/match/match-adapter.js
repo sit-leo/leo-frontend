@@ -9,12 +9,12 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/matches/${matchId}`)
       .then(({ data: match }) => match);
   },
-  getCurrentMatchByStatus(status) {
-    return adapter.get(`${MATCH_API}/matches?status=${status}`)
+  getCurrentMatches() {
+    return adapter.get(`${MATCH_API}/user/matches?status=current`)
       .then(({ data: matches }) => matches);
   },
-  getEndedMatchByStatus(status) {
-    return adapter.get(`${MATCH_API}/matches?status=${status}`)
+  getEndedMatches() {
+    return adapter.get(`${MATCH_API}/user/matches?status=ended`)
       .then(({ data: matches }) => matches);
   },
 });
