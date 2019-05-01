@@ -59,7 +59,7 @@ const MatchCard = ({
         <CounterBox count={102} badgeText="Applicants" />
       </Col>
       <Col lg={4} className="d-flex align-items-center justify-content-center">
-        <Button className="w-50">Rank</Button>
+        <Button className="w-50">Detail</Button>
       </Col>
     </Row>
   </SmallCard>
