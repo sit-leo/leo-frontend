@@ -6,6 +6,7 @@ import { configure, addDecorator } from '@storybook/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
+import { initState as global } from '../store/global'
 import { initState as match } from '../store/match'
 import { initState as ranking } from '../store/matching/ranking'
 
@@ -17,6 +18,7 @@ function loadStories() {
 
 const mockStore = configureStore();
 const store = mockStore({
+  global,
   match,
   ranking,
 });
