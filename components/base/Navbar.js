@@ -4,7 +4,9 @@ import Link from 'next/link';
 
 import color from '../../config/color';
 
-import { ContainerStyled, Col, Row } from './Grid';
+import ContainerRow, {
+  ContainerStyled, Col, Row,
+} from './Grid';
 import Image, { ProfileAvatar } from './Image';
 import { SubTitleSmall } from './Text';
 
@@ -18,9 +20,7 @@ const NavbarContainer = styled(ContainerStyled)`
   background: ${color.white};
   border: solid 0px ${color.disabled};
   border-bottom-width: 2px;
-  & , .logo, .profile-avatar {
-    min-height: 132px;
-  }
+  min-height: 100px;
   .logo, .profile-avatar {
     display: flex;
     align-items: center;
@@ -50,22 +50,26 @@ const menus = [
 const Navbar = () => (
   <NavbarContainer fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
-      <Col xs={6} lg={2} className="logo text-left">
+      <Col xs={6} lg={1} className="logo text-left">
         <Link href="/">
-          <Image className="w-50" src="/static/images/leo.png" />
+          <Image src="/static/images/leo.png" />
         </Link>
       </Col>
-      <Col lg={8} className="pt-4 d-none d-lg-flex align-items-center">
-        {
-          menus.map(menu => (
-            <Link key={menu.name} href={menu.path}>
-              <Menu>{menu.name}</Menu>
-            </Link>
-          ))
-        }
+      <Col lg={10} className="d-none d-md-flex align-items-center">
+        <ContainerRow>
+          <Col className="d-flex">
+            {
+              menus.map(menu => (
+                <Link key={menu.name} href={menu.path}>
+                  <Menu>{menu.name}</Menu>
+                </Link>
+              ))
+            }
+          </Col>
+        </ContainerRow>
       </Col>
-      <Col xs={6} lg={2} className="profile-avatar text-right">
-        <ProfileAvatar className="w-75 rounded-circle" src="/static/images/avatar.png" />
+      <Col xs={6} lg={1} className="profile-avatar text-right">
+        <ProfileAvatar className="rounded-circle" src="/static/images/avatar.png" />
       </Col>
     </Row>
   </NavbarContainer>
