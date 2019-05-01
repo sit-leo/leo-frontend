@@ -26,7 +26,8 @@ const MatchList = ({ matches = [] }) => (
   matches.length > 0
     ? matches.map(match => (
       <MatchCard
-        key={match.name}
+        key={match.id}
+        id={match.id}
         title={match.name}
         startDate={day(match.startDate).format('DD MMM YYYY')}
       />

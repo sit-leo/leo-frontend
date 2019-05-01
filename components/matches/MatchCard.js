@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Router from 'next/router';
 
 import color from '../../config/color';
 
@@ -35,6 +36,7 @@ const CounterBox = ({ count, badgeText }) => (
 
 
 const MatchCard = ({
+  id,
   title,
   startDate,
 }) => (
@@ -59,7 +61,12 @@ const MatchCard = ({
         <CounterBox count={102} badgeText="Applicants" />
       </Col>
       <Col lg={{ size: 3, offset: 1 }} className="d-flex align-items-center justify-content-center">
-        <Button className="w-75">Detail</Button>
+        <Button
+          onClick={() => Router.push(`/matches/${id}`)}
+          className="w-75"
+        >
+          Detail
+        </Button>
       </Col>
     </Row>
   </SmallCard>
