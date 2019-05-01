@@ -22,6 +22,10 @@ export const TitlePrimary = styled(Title)`
   color: ${colors.primary};
 `;
 
+export const TitleError = styled(Title)`
+  color: ${colors.error};
+`;
+
 export const TitleLight = styled(Title)`
   font-weight: ${font.weight.light};
 `;
