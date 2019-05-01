@@ -56,7 +56,7 @@ const MyMatchPage = ({ matches, setMatches, setLoading }) => {
     <WithLoading>
       <WithNavbar>
         <ContainerRow className="py-5">
-          <Card className="px-0">
+          <Card className="px-lg-0">
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>
                 <Tabs defaultActiveKey="1" onChange={key => setTab(key)} animated={false}>
