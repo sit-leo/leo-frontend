@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import isEmpty from 'lodash/isEmpty';
 
 import ContainerRow, { Col } from '../base/Grid';
 import Text, {
@@ -83,7 +84,7 @@ const RankingCard = ({
         <Col lg={rankingButton ? 6 : 7}>
           <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
-        { capacity
+        { isEmpty(capacity)
           && (
             <Col lg={3} className="text-center">
               <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
