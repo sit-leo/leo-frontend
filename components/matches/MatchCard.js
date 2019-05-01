@@ -58,8 +58,8 @@ const MatchCard = ({
         <VerticalLine className="mx-3" />
         <CounterBox count={102} badgeText="Applicants" />
       </Col>
-      <Col lg={4} className="d-flex align-items-center justify-content-center">
-        <Button className="w-50">Detail</Button>
+      <Col lg={{ size: 3, offset: 1 }} className="d-flex align-items-center justify-content-center">
+        <Button className="w-75">Detail</Button>
       </Col>
     </Row>
   </SmallCard>
