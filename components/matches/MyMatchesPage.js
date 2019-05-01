@@ -11,18 +11,22 @@ import { setMatches as setMatchesAction } from '../../store/match';
 
 import WithLoading from '../layouts/with-loading';
 import WithNavbar from '../layouts/with-navbar';
-import ContainerRow, { Col, Row } from '../base/Grid';
 
-import Card from '../base/Card';
-import MatchCard from './MatchCard';
+import ContainerRow, { Col, Row } from '../base/Grid';
 import Tabs, { TabPane } from '../base/Tabs';
+import Card from '../base/Card';
+import { TitleSmall } from '../base/Text';
+
+import MatchCard from './MatchCard';
 
 const matchRequest = matchAdapter(clientInstance());
 
 const MatchList = ({ matches = [] }) => (
-  matches.map(match => (
-    <MatchCard key={match.name} />
-  ))
+  matches.length > 0
+    ? matches.map(match => (
+      <MatchCard key={match.name} />
+    ))
+    : <TitleSmall className="text-center">No Matches Found.</TitleSmall>
 );
 
 const TABS = ['Current', 'History'];
