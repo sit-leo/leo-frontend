@@ -69,18 +69,27 @@ const ResultList = ({ role, matchResults = [] }) => (
 const MatchResultPage = ({
   role,
   matchResults = [],
-}) => (
-  <MatchingLayout>
-    <Col>
-      <Card>
-        <Row>
-          {
-            matchResults.length > 0
+}) => {
+  const resultCount = matchResults.length;
+  return (
+    <MatchingLayout>
+      <Col>
+        <Card>
+          <Row>
+            {
+            resultCount > 0
               ? (
                 <React.Fragment>
                   <Col lg={{ size: 10, offset: 1 }} className="text-center">
                     <TitlePrimary>CONGRATULATIONS!</TitlePrimary>
-                    <Title>You have matched with 3 Applicants!!!</Title>
+                    <Title>
+                      {'You have matched with '}
+                      {
+                        (role === 'applicant')
+                          ? 'this position'
+                          : `${resultCount} Applicants`
+                      }
+                    </Title>
                   </Col>
                   <Col lg={{ size: 10, offset: 1 }}>
                     <ResultList role={role} matchResults={matchResults} />
@@ -98,11 +107,12 @@ const MatchResultPage = ({
                 </Col>
               )
           }
-        </Row>
-      </Card>
-    </Col>
-  </MatchingLayout>
-);
+          </Row>
+        </Card>
+      </Col>
+    </MatchingLayout>
+  );
+};
 
 const mapStateToProps = state => ({
   role: state.user.role,
