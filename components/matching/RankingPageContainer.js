@@ -98,6 +98,7 @@ const RankStep = ({ steps = [], stepIndex }) => (
 );
 
 const RankingPageContainer = ({
+  role,
   rankingSteps,
 
   ranks,
@@ -135,35 +136,45 @@ const RankingPageContainer = ({
               <RankStep steps={rankingSteps} stepIndex={step} />
             </Col>
             <Col><hr /></Col>
-            <Col lg={{ size: 2, offset: 1 }}>
-              <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
+            {
+              (step !== 2 || role === 'applicant')
+              && (
+                <React.Fragment>
+                  <Col lg={{ size: 2, offset: 1 }}>
+                    <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
                 Previous
-              </Button>
-            </Col>
-            <Col lg={6} className="d-flex justify-content-center">
-              {
-                step === 0
-                  ? (
-                    <Input
-                      prefix={<Icon type="search" />}
-                      type="text"
-                      className="w-50"
-                    />
-                  )
-                  : (<Title>Your Rank</Title>)
-              }
-            </Col>
-            <Col lg={2}>
-              <Button
-                className="w-100"
-                disabled={
-                  step === 2 || rankCounter === 0 || (step === 1 && (isUpdateRank && !isConfirm))
-                }
-                onClick={increaseStep}
-              >
-                Next
-              </Button>
-            </Col>
+                    </Button>
+                  </Col>
+                  <Col lg={6} className="d-flex justify-content-center">
+                    {
+                      step === 0
+                        ? (
+                          <Input
+                            prefix={<Icon type="search" />}
+                            type="text"
+                            className="w-50"
+                          />
+                        )
+                        : (<Title>Your Rank</Title>)
+                    }
+                  </Col>
+                  <Col lg={2}>
+                    <Button
+                      className="w-100"
+                      disabled={
+                        step === 2
+                        || rankCounter === 0
+                        || (step === 1 && (isUpdateRank && !isConfirm))
+                      }
+                      onClick={increaseStep}
+                    >
+                    Next
+                    </Button>
+                  </Col>
+                </React.Fragment>
+              )
+            }
+
           </Row>
           <Row>
             <Col lg={{ size: 10, offset: 1 }}>
@@ -177,6 +188,7 @@ const RankingPageContainer = ({
 };
 
 const mapStateToProps = state => ({
+  role: state.user.role,
   match: state.match.match,
   haveRank: state.ranking.haveRank,
   isUpdateRank: state.ranking.isUpdateRank,
