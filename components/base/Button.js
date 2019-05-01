@@ -10,6 +10,7 @@ const DefaultButtonStyled = styled(DefaultButton)`
   padding: 0.6em 0;
   height: auto;
   border: none;
+  min-width: 50%;
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
     border: none;
