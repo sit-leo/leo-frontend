@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 import color from '../../config/color';
 
-const HeroContainer = styled.div`
+import { FlexCenter } from './Flex';
+
+const HeroContainer = styled(FlexCenter)`
   background-color: ${color.white};
-  min-height: 215px;
+  min-height: 134px;
   box-shadow: 0 25px 50px 0 ${color.shadow};
 `;
 
