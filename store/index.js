@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import global from './global';
 import match from './match';
 import ranking from './matching/ranking';
 import user from './user';
@@ -12,7 +13,7 @@ const logger = createLogger();
 const middleware = [thunk, logger];
 
 export const reducers = combineReducers({
-  match, ranking, user,
+  global, match, ranking, user,
 });
 
 function initialStore(initialState = {}) {
