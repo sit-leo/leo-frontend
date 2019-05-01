@@ -14,12 +14,10 @@ export default adapter => ({
         return jwt;
       });
   },
-  getUser(token) {
+  getUser() {
     return adapter.get(
       `${USER_API}/me`,
-      false,
-      { Authorization: `Bearer ${token}` },
     )
-      .then(({ data: matches }) => matches);
+      .then(({ data: user }) => user);
   },
 });
