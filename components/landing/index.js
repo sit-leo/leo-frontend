@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 
 import env from '../../config/env';
 
 import cookie from '../../tools/cookie';
+import { clientInstance } from '../../tools/request';
+
+import userAdapter from '../../store/user/user-adapter';
+
+import { setRole, setId } from '../../store/user';
+
 import WithNavbar from '../layouts/with-navbar';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
@@ -32,50 +38,62 @@ const linksDebug = [
   },
 ];
 
-const LandingIndex = ({ role }) => (
-  <WithNavbar>
-    <ContainerFluid>
-      <Row>
-        <Col className="my-5">
-          <Card style={{ minHeight: '25vh' }}>
-            <FlexCenter className="flex-column">
-              <RankingAvatar src="/static/images/leo.png" />
-              <TitlePrimary>We are LEO!</TitlePrimary>
-            </FlexCenter>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            ENV Debugger
-            <hr />
-            <Flex className="flex-column">
-              <TitleLarge>
-                {`Role: ${role || 'guest'}`}
-              </TitleLarge>
-              <TextError>{ env.public.type }</TextError>
-              <TextError>{ env.public.matchingApi }</TextError>
-              <TextError>{ env.public.matchApi }</TextError>
-              <TextError>{ env.public.userApi }</TextError>
-              {
-                linksDebug.map(menu => (
-                  <Link key={menu.name} href={menu.path}>
-                    <a href="#">
-                      <Text>{menu.name}</Text>
-                    </a>
-                  </Link>
-                ))
-              }
-              <Text onClick={() => cookie.clearToken()}>Logout</Text>
-            </Flex>
-          </Card>
-        </Col>
-      </Row>
-    </ContainerFluid>
-  </WithNavbar>
-);
+const userRequest = userAdapter(clientInstance());
+
+const LandingIndex = ({ role, setUser }) => {
+  userRequest.getUser().then(user => setUser(user));
+  return (
+    <WithNavbar>
+      <ContainerFluid>
+        <Row>
+          <Col className="my-5">
+            <Card style={{ minHeight: '25vh' }}>
+              <FlexCenter className="flex-column">
+                <RankingAvatar src="/static/images/leo.png" />
+                <TitlePrimary>We are LEO!</TitlePrimary>
+              </FlexCenter>
+            </Card>
+          </Col>
+          <Col>
+            <Card>
+              ENV Debugger
+              <hr />
+              <Flex className="flex-column">
+                <TitleLarge>
+                  {`Role: ${role || 'guest'}`}
+                </TitleLarge>
+                <TextError>{ env.public.type }</TextError>
+                <TextError>{ env.public.matchingApi }</TextError>
+                <TextError>{ env.public.matchApi }</TextError>
+                <TextError>{ env.public.userApi }</TextError>
+                {
+                  linksDebug.map(menu => (
+                    <Link key={menu.name} href={menu.path}>
+                      <a href="#">
+                        <Text>{menu.name}</Text>
+                      </a>
+                    </Link>
+                  ))
+                }
+                <Text onClick={() => cookie.clearToken()}>Logout</Text>
+              </Flex>
+            </Card>
+          </Col>
+        </Row>
+      </ContainerFluid>
+    </WithNavbar>
+  );
+};
 
 const mapStateToProps = state => ({
   role: state.user.role,
 });
 
-export default connect(mapStateToProps)(LandingIndex);
+const mapDispatchToProps = dispatch => ({
+  setUser: (user) => {
+    dispatch(setId(user.id));
+    dispatch(setRole(user.role));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingIndex);
