@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
+
 import cookie from './cookie';
+
 
 export const auth = (ctx) => {
   const token = cookie.getToken(ctx.req);
