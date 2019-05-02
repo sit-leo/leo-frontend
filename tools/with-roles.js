@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { serverInstance } from './request';
 
 import userAdapter from '../store/user/user-adapter';
+
+import { setId, setRole } from '../store/user';
 
 export const ROLE_APPLICANT = 'applicant';
 export const ROLE_RECRUITER = 'recruiter';
@@ -24,24 +27,29 @@ function redirectToRoot(res) {
   }
 }
 
-const withRole = checkRole => WrappedComponent => class extends Component {
-  static async getInitialProps(ctx) {
-    const props = WrappedComponent.getInitialProps
+const withRole = checkRole => WrappedComponent => connect()(
+  class extends Component {
+    static async getInitialProps(ctx) {
+      const props = WrappedComponent.getInitialProps
         && (await WrappedComponent.getInitialProps(ctx));
 
-    const userRequest = userAdapter(serverInstance(props.token));
-    const user = await userRequest.getUser();
+      const userRequest = userAdapter(serverInstance(props.token));
+      const user = await userRequest.getUser();
 
-    if (!checkRole(user.role)) {
-      redirectToRoot(ctx.res);
+      if (!checkRole(user.role)) {
+        redirectToRoot(ctx.res);
+      }
+
+      await ctx.store.dispatch(setId(user.id));
+      await ctx.store.dispatch(setRole(user.role));
+
+      return { ...props, user };
     }
 
-    return { ...props, user };
-  }
-
-  render() {
-    return <WrappedComponent {...this.props} />;
-  }
-};
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  },
+);
 
 export default withRole;
