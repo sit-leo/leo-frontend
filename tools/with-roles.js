@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { serverInstance } from './request';
-
-import userAdapter from '../store/user/user-adapter';
-
-import { setId, setRole } from '../store/user';
-
 export const ROLE_APPLICANT = 'applicant';
 export const ROLE_RECRUITER = 'recruiter';
 
@@ -33,17 +27,11 @@ const withRole = checkRole => WrappedComponent => connect()(
       const props = WrappedComponent.getInitialProps
         && (await WrappedComponent.getInitialProps(ctx));
 
-      const userRequest = userAdapter(serverInstance(props.token));
-      const user = await userRequest.getUser();
-
-      if (!checkRole(user.role)) {
+      if (!checkRole(props.user.role)) {
         redirectToRoot(ctx.res);
       }
 
-      await ctx.store.dispatch(setId(user.id));
-      await ctx.store.dispatch(setRole(user.role));
-
-      return { ...props, user };
+      return { ...props };
     }
 
     render() {
