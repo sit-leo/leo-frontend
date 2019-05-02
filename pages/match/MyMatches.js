@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { withAuth } from '../../tools/with-auth';
+import withUser from '../../tools/with-user';
+
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
+
 import matchAdapter from '../../store/match/match-adapter';
 
 import { setMatches } from '../../store/match';
@@ -23,6 +26,8 @@ class MyMatchesController extends React.Component {
   }
 }
 
-export default withAuth(
-  connect()(MyMatchesController),
+export default withUser(
+  withAuth(
+    connect()(MyMatchesController),
+  ),
 );

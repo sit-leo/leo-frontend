@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Link from 'next/link';
 
 import env from '../../config/env';
@@ -7,7 +8,7 @@ import cookie from '../../tools/cookie';
 import WithNavbar from '../layouts/with-navbar';
 
 import { ContainerFluid, Row, Col } from '../base/Grid';
-import Text, { TitlePrimary, TextError } from '../base/Text';
+import Text, { TitlePrimary, TitleLarge, TextError } from '../base/Text';
 import Card from '../base/Card';
 import { RankingAvatar } from '../base/Image';
 import Flex, { FlexCenter } from '../base/Flex';
@@ -31,7 +32,7 @@ const linksDebug = [
   },
 ];
 
-const LandingIndex = () => (
+const LandingIndex = ({ role }) => (
   <WithNavbar>
     <ContainerFluid>
       <Row>
@@ -48,6 +49,9 @@ const LandingIndex = () => (
             ENV Debugger
             <hr />
             <Flex className="flex-column">
+              <TitleLarge>
+                {`Role: ${role || 'guest'}`}
+              </TitleLarge>
               <TextError>{ env.public.type }</TextError>
               <TextError>{ env.public.matchingApi }</TextError>
               <TextError>{ env.public.matchApi }</TextError>
@@ -70,4 +74,8 @@ const LandingIndex = () => (
   </WithNavbar>
 );
 
-export default LandingIndex;
+const mapStateToProps = state => ({
+  role: state.user.role,
+});
+
+export default connect(mapStateToProps)(LandingIndex);

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { withAuth } from '../../tools/with-auth';
+import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
 
 import { serverInstance } from '../../tools/request';
@@ -52,7 +53,9 @@ class RecruiterRankingController extends React.Component {
 }
 
 export default withRole(isRecruiter)(
-  withAuth(
-    connect()(RecruiterRankingController),
+  withUser(
+    withAuth(
+      connect()(RecruiterRankingController),
+    ),
   ),
 );
