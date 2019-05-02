@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { withAuth } from '../../tools/with-auth';
+import withRole, { isRecruiter } from '../../tools/with-roles';
+
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
 
@@ -34,6 +36,8 @@ class RecruiterPositionController extends React.Component {
   }
 }
 
-export default withAuth(
-  connect()(RecruiterPositionController),
+export default withRole(isRecruiter)(
+  withAuth(
+    connect()(RecruiterPositionController),
+  ),
 );
