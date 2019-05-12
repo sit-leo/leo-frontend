@@ -65,11 +65,11 @@ function isRankNotEqualPosition(rank, position) {
 }
 
 function isRankEqualApplicant(rank, applicant) {
-  return rank.applicantMatchId === applicant.applicantMatchId;
+  return rank.participantId === applicant.participantId;
 }
 
 function isRankNotEqualApplicantMatch(rank, applicantMatch) {
-  return rank.applicantMatchId !== applicantMatch.applicantMatchId;
+  return rank.participantId !== applicantMatch.participantId;
 }
 
 function setSequenceByRankIndex(rank, rankIndex) {
@@ -85,15 +85,15 @@ function setAttributeForApplicantRank(rank) {
 function setAttributeForRecruiterRank(rank) {
   const newRank = rank;
   delete newRank.position;
-  return { ...newRank, applicantMatchId: newRank.applicantMatch.applicant.id };
+  return { ...newRank, participantId: newRank.applicantMatch.participantId };
 }
 
 function setPositionId(position) {
   return { ...position, positionId: position.id };
 }
 
-function setApplicantMatchId(applicantMatch) {
-  return { ...applicantMatch, applicantMatchId: applicantMatch.id };
+function setParticipantId(applicantMatch) {
+  return { ...applicantMatch, participantId: applicantMatch.participantId };
 }
 
 // Reducer
@@ -113,7 +113,7 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case SET_APPLICANTS: {
-      const applicants = action.applicants.map(setApplicantMatchId);
+      const applicants = action.applicants.map(setParticipantId);
       return { ...state, applicants };
     }
 
@@ -169,10 +169,10 @@ export default function reducer(state = initState, action = {}) {
     case ADD_RECRUITER_RANKS: {
       const { applicantMatch } = action;
       const recruiterRanks = [...state.recruiterRanks];
-      if (!recruiterRanks.find(rank => rank.applicantMatchId === applicantMatch.id)) {
+      if (!recruiterRanks.find(rank => rank.participantId === applicantMatch.id)) {
         recruiterRanks.push({
           applicantMatch,
-          applicantMatchId: applicantMatch.id,
+          participantId: applicantMatch.participantId,
           sequence: recruiterRanks.length + 1,
         });
       }
