@@ -131,7 +131,9 @@ const RankingPageContainer = ({
       <Col>
         <Card>
           <Row className="sticky-top bg-white pb-3">
-            <RankCouter counter={rankCounter} ranks={ranks} removeRank={remove} />
+            {
+              step <= 1 && <RankCouter counter={rankCounter} ranks={ranks} removeRank={remove} />
+            }
             <Col className="py-3" md={{ size: 8, offset: 2 }}>
               <RankStep steps={rankingSteps} stepIndex={step} />
             </Col>
