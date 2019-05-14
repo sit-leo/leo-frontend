@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import color from '../../config/color';
+
+import { ROLE_APPLICANT, ROLE_RECRUITER } from '../../tools/with-roles';
+
 import MatchingLayout from '../layouts/matching';
 
 import { Col, Row } from '../base/Grid';
@@ -33,7 +36,7 @@ function getPosition(result) {
 }
 
 function getCardInformationByRole(result, role) {
-  if (role === 'applicant') {
+  if (role === ROLE_APPLICANT) {
     const position = getPosition(result);
     return {
       title: position.name,
@@ -41,7 +44,7 @@ function getCardInformationByRole(result, role) {
       subtitle: position.recruiter.location,
     };
   }
-  if (role === 'recruiter') {
+  if (role === ROLE_RECRUITER) {
     const applicant = getApplicant(result);
     return {
       title: applicant.name,
@@ -85,7 +88,7 @@ const MatchResultPage = ({
                     <Title>
                       {'You have matched with '}
                       {
-                        (role === 'applicant')
+                        (role === ROLE_APPLICANT)
                           ? 'this position'
                           : `${resultCount} Applicants`
                       }
