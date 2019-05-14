@@ -30,10 +30,6 @@ const NavbarContainer = styled(ContainerStyled)`
 
 const menus = [
   {
-    name: 'All Matches',
-    path: '/matches',
-  },
-  {
     name: 'My Matches',
     path: '/my-matches',
   },
