@@ -9,21 +9,32 @@ import Button from '../base/Button';
 import Card from '../base/Card';
 import ContainerRow, { Col } from '../base/Grid';
 
-const MatchPage = ({ match }) => (
-  <WithNavbar>
-    <Card>
-      <ContainerRow>
-        <Col className="text-center">
-          <h1>{match.name}</h1>
-        </Col>
-        <Col lg={{ size: 6, offset: 3 }} className="text-center">
-          <Button onClick={() => Router.push(`/matches/${match.id}/result`)}>Match Result</Button>
-        </Col>
-      </ContainerRow>
-    </Card>
-  </WithNavbar>
-);
+import { ROLE_APPLICANT } from '../../tools/with-roles';
 
+const MatchPage = ({ match, role }) => {
+  function handleMatchResult() {
+    if (role === ROLE_APPLICANT) {
+      return Router.push(`/matches/${match.id}/result`);
+    }
+    return Router.push(`/matches/${match.id}/result/positions`);
+  }
+  return (
+    <WithNavbar>
+      <Card>
+        <ContainerRow>
+          <Col className="text-center">
+            <h1>{match.name}</h1>
+          </Col>
+          <Col lg={{ size: 6, offset: 3 }} className="text-center">
+            <Button onClick={handleMatchResult}>
+            Match Result
+            </Button>
+          </Col>
+        </ContainerRow>
+      </Card>
+    </WithNavbar>
+  );
+};
 
 MatchPage.propTypes = {
   match: PropTypes.shape({
@@ -31,9 +42,9 @@ MatchPage.propTypes = {
   }).isRequired,
 };
 
-
 const mapStateToProps = state => ({
   match: state.match.match,
+  role: state.user.role,
 });
 
 export default connect(mapStateToProps)(MatchPage);
