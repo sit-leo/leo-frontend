@@ -22,7 +22,7 @@ const PositionList = ({ match, positions, redirect }) => (
           subtitle={position.location}
           capacity={position.capacity}
           actionButton={(
-            <MainButton className="my-3 w-75" onClick={() => redirect(match.id, position.id)}>
+            <MainButton className="w-75" onClick={() => redirect(match.id, position.id)}>
               Select
             </MainButton>
           )}
