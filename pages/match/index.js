@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
+
 import adapter from '../../store/match/match-adapter';
 import userAdapter from '../../store/user/user-adapter';
 
@@ -15,6 +16,7 @@ class MatchController extends React.Component {
   static async getInitialProps({ store, query, req }) {
     const matchAdapter = adapter(serverInstance(cookie.getToken(req)));
     const match = await matchAdapter.getMatchByMatchId(query.matchId);
+
     const userRequest = userAdapter(serverInstance(cookie.getToken(req)));
 
 
