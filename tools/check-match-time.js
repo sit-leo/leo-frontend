@@ -8,8 +8,12 @@ function isCanJoinMatch(joinMatchTime) {
 
 export default isCanJoinMatch;
 
-export function isCanRanking(rankingTime) {
-  return TODAY.isBefore(rankingTime);
+export function isApplicantCanRanking(applicantRankingTime) {
+  return TODAY.isBefore(applicantRankingTime);
+}
+
+export function isRecruiterCanRanking(applicantRankingTime, recruiterRankingTime) {
+  return TODAY.isAfter(applicantRankingTime) && TODAY.isBefore(recruiterRankingTime);
 }
 
 export function isCanSummarize(summaryTime) {
