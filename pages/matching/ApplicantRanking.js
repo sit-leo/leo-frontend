@@ -6,7 +6,7 @@ import { withAuth } from '../../tools/with-auth';
 import withRole, { isApplicant } from '../../tools/with-roles';
 import redirectError from '../../tools/redirect-error';
 
-import { isCanRanking } from '../../tools/check-match-time';
+import { isApplicantCanRanking } from '../../tools/check-match-time';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
@@ -37,7 +37,7 @@ class ApplicantRankingController extends React.Component {
       return redirectError({ req, res }, 'No Match Found.');
     }
 
-    if (!isCanRanking(match.applicantRankingEndDate)) {
+    if (!isApplicantCanRanking(match.applicantRankingEndDate)) {
       return redirectError({ req, res }, 'Applicant Ranking Day has ended.');
     }
 
