@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
 import withRole, { isApplicant } from '../../tools/with-roles';
+import redirectError from '../../tools/redirect-error';
+
+import { isCanRanking } from '../../tools/check-match-time';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
@@ -22,13 +25,22 @@ import ApplicantRankingPage from '../../components/matching/ApplicantRankingPage
 
 class ApplicantRankingController extends React.Component {
   static async getInitialProps({
-    store, query, req,
+    store, query, req, res,
   }) {
     const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
     const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
 
     const { matchId } = query;
     const match = await matchRequest.getMatchByMatchId(matchId);
+
+    if (match.error) {
+      return redirectError({ req, res }, 'No Match Found.');
+    }
+
+    if (!isCanRanking(match.applicantRankingEndDate)) {
+      return redirectError({ req, res }, 'Applicant Ranking Day has ended.');
+    }
+
     const positions = await matchingRequest.getMatchPositionsByMatchId(matchId);
     const ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
 
