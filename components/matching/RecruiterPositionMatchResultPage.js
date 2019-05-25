@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import RecruiterPosition from './RecruiterPosition';
 
-function redirectToMatchResult(matchId) {
-  return Router.push(`/matches/${matchId}/result`);
+function redirectToMatchResult(matchId, positionId) {
+  return Router.push(`/matches/${matchId}/positions/${positionId}/result`);
 }
 
 const RecruiterPositionMatchResultPage = ({

@@ -7,5 +7,6 @@ module.exports = routes()
   .add('matching/RecruiterPosition', '/matches/:matchId/recruiters/positions')
   .add('matching/RecruiterRanking', '/matches/:matchId/positions/:positionId/ranking')
   .add('matching/RecruiterPositionMatchResult', '/matches/:matchId/result/positions')
-  .add('matching/MatchResult', '/matches/:matchId/result')
+  .add('matching/ApplicantMatchResult', '/matches/:matchId/result')
+  .add('matching/PositionMatchResult', '/matches/:matchId/positions/:positionId/result')
   .add('user/Login', '/login');
