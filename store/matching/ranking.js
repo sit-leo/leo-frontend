@@ -195,7 +195,6 @@ export default function reducer(state = initState, action = {}) {
 
     case UPDATE_RECRUITER_RANKS: {
       const { index, applicantMatch } = action;
-      console.log(applicantMatch);
       const removalIndex = state.recruiterRanks.findIndex(
         rank => isRankEqualApplicant(rank, applicantMatch),
       );

@@ -152,10 +152,10 @@ describe('Test Ranking Reducer', () => {
 
   it('Test removeRecruiterRank with `Applicant Match` at rank 2 should return ranks that include added rank with valid sequence.', (done) => {
     const applicantMatchAdded1 = {
-      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 },
+      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 }, applicantMatch: { applicant: { name: 'Tae Keerati' } },
     };
     const applicantMatchAdded2 = {
-      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 },
+      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 }, applicantMatch: { applicant: { name: 'Volk Natchanon' } },
     };
 
     const action = { type: REMOVE_RECRUITER_RANKS, applicantMatch: applicantMatchAdded1 };
@@ -174,10 +174,10 @@ describe('Test Ranking Reducer', () => {
 
   it('Test updateRecruiterRank with `2 Applicant Match Added` should return recruiterRanks that changed Rank Sequence from Applicant Match 2 -> 1 and Applicant Match 1 -> 2.', (done) => {
     const applicantMatchAdded1 = {
-      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 },
+      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 }, applicantMatch: { applicant: { name: 'Tae Keerati' } },
     };
     const applicantMatchAdded2 = {
-      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 },
+      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 }, applicantMatch: { applicant: { name: 'Volk Natchanon' } },
     };
 
     const action = { type: UPDATE_RECRUITER_RANKS, index: 0, applicantMatch: applicantMatchAdded2 };
@@ -196,10 +196,10 @@ describe('Test Ranking Reducer', () => {
 
   it('Test updateApplicantRank with `2 Applicant Match Added` should return recruiterRanks that changed Rank Sequence from Applicant Match 1 -> 2 and Applicant Match 2 -> 1.', (done) => {
     const applicantMatchAdded1 = {
-      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 },
+      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 }, applicantMatch: { applicant: { name: 'Tae Keerati' } },
     };
     const applicantMatchAdded2 = {
-      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 },
+      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 }, applicantMatch: { applicant: { name: 'Volk Natchanon' } },
     };
 
     const action = { type: UPDATE_RECRUITER_RANKS, index: 1, applicantMatch: applicantMatchAdded1 };
