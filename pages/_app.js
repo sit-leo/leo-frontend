@@ -17,6 +17,9 @@ const GlobalStyle = createGlobalStyle`
     background: ${colors.background};
     font-family: ${font.name}, sans-serif;
   }
+  .ant-message {
+    z-index: 9999;
+  }
 `;
 
 export default withReduxStore(
