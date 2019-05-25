@@ -126,17 +126,17 @@ const RankingStep = ({
                 badgeText={!(rank.position) && 'Documents'}
                 rankingButton={
                   <DeletedIcon type="delete" theme="filled" onClick={() => remove(rank)} />
-                }
+                  }
                 actionButton={
-                  (
-                    <RankingButton
-                      rankIndex={rankIndex}
-                      rankCounter={rankCounter}
-                      increaseRank={() => increaseRank(index, rank)}
-                      decreaseRank={() => decreaseRank(index, rank)}
-                    />
-                  )
-                }
+                    (
+                      <RankingButton
+                        rankIndex={rankIndex}
+                        rankCounter={rankCounter}
+                        increaseRank={() => increaseRank(index, rank)}
+                        decreaseRank={() => decreaseRank(index, rank)}
+                      />
+                    )
+                  }
               />
             );
           })
