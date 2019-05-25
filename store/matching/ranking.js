@@ -158,9 +158,15 @@ export default function reducer(state = initState, action = {}) {
         rank => isRankEqualPosition(rank, position),
       );
       const ranks = [...state.applicantRanks];
+      message.success(`
+        Your is rank updated from
+        "${ranks[index].position.name}" to "${ranks[removalIndex].position.name}".
+      `);
+
       ranks.splice(removalIndex, 1);
       ranks.splice(index, 0, { ...position, sequence: index + 1 });
       const applicantRanks = ranks.map(setSequenceByRankIndex);
+
       return { ...state, applicantRanks };
     }
 
@@ -185,13 +191,20 @@ export default function reducer(state = initState, action = {}) {
 
     case UPDATE_RECRUITER_RANKS: {
       const { index, applicantMatch } = action;
+      console.log(applicantMatch);
       const removalIndex = state.recruiterRanks.findIndex(
         rank => isRankEqualApplicant(rank, applicantMatch),
       );
       const ranks = [...state.recruiterRanks];
+      message.success(`
+        Your is rank updated from
+        "${ranks[index].applicantMatch.applicant.name}" to "${ranks[removalIndex].applicantMatch.applicant.name}"".
+      `);
+
       ranks.splice(removalIndex, 1);
       ranks.splice(index, 0, { ...applicantMatch, sequence: index + 1 });
       const recruiterRanks = ranks.map(setSequenceByRankIndex);
+
       return { ...state, recruiterRanks };
     }
 
