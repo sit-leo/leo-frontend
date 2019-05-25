@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 
 import { setIsUpdateRank } from '../../store/matching/ranking';
 
-import Button, { DangerButton } from '../base/Button';
-import { Title, TextError } from '../base/Text';
+import Button from '../base/Button';
+import { Title, TitleLarge, TextError } from '../base/Text';
 import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
-import Icon from '../base/Icon';
+import Icon, { DeletedIcon } from '../base/Icon';
 
 import RankingCard from './RankingCard';
 
-function isNotFirstRank(rankIndex) {
-  return rankIndex !== 1;
+function isFirstRank(rankIndex) {
+  return rankIndex === 1;
 }
 
-function isNotLastRank(rankIndex, rankCounter) {
-  return rankIndex < rankCounter;
+function isLastRank(rankIndex, rankCounter) {
+  return rankIndex === rankCounter;
 }
 
 const RankingButton = ({
@@ -28,15 +28,23 @@ const RankingButton = ({
 }) => (
   <Title className="mb-0">
     <FlexCenter className="flex-column">
-      { isNotFirstRank(rankIndex)
-        ? <Icon type="caret-up" theme="filled" onClick={increaseRank} />
-        : <br />
-      }
-      <span>{rankIndex}</span>
-      { isNotLastRank(rankIndex, rankCounter)
-        ? <Icon type="caret-down" theme="filled" onClick={decreaseRank} />
-        : <br />
-      }
+      <Icon
+        disabled={isFirstRank(rankIndex)}
+        type="caret-up"
+        theme="filled"
+        onClick={
+          () => !isFirstRank(rankIndex) && increaseRank()
+        }
+      />
+      <TitleLarge className="mb-0">{rankIndex}</TitleLarge>
+      <Icon
+        disabled={isLastRank(rankIndex, rankCounter)}
+        type="caret-down"
+        theme="filled"
+        onClick={
+         () => !isLastRank(rankIndex, rankCounter) && decreaseRank()
+        }
+      />
     </FlexCenter>
   </Title>
 );
@@ -116,16 +124,18 @@ const RankingStep = ({
                 subtitle={subtitle}
                 capacity={capacity}
                 badgeText={!(rank.position) && 'Documents'}
-                rankingButton={(
-                  <RankingButton
-                    rankIndex={rankIndex}
-                    rankCounter={rankCounter}
-                    increaseRank={() => increaseRank(index, rank)}
-                    decreaseRank={() => decreaseRank(index, rank)}
-                  />
-                )}
+                rankingButton={
+                  <DeletedIcon type="delete" theme="filled" onClick={() => remove(rank)} />
+                }
                 actionButton={
-                  <DangerButton className="w-75" onClick={() => remove(rank)}>Delete</DangerButton>
+                  (
+                    <RankingButton
+                      rankIndex={rankIndex}
+                      rankCounter={rankCounter}
+                      increaseRank={() => increaseRank(index, rank)}
+                      decreaseRank={() => decreaseRank(index, rank)}
+                    />
+                  )
                 }
               />
             );
