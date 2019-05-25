@@ -7,8 +7,8 @@ import { addRecruiterRank, removeRecruiterRank, setIsUpdateRank } from '../../st
 import RankingCard from './RankingCard';
 import ActionButton from './ActionButton';
 
-function isApplicantInRecruiterRanks(recruiterRanks, applicantMatchId) {
-  return recruiterRanks.findIndex(rank => rank.applicantMatchId === applicantMatchId) !== -1;
+function isApplicantInRecruiterRanks(recruiterRanks, participantId) {
+  return recruiterRanks.findIndex(rank => rank.participantId === participantId) !== -1;
 }
 
 const ApplicantList = ({
@@ -30,7 +30,7 @@ const ApplicantList = ({
             badgeText="Documents"
             actionButton={(
               <ActionButton
-                isInRank={!isApplicantInRecruiterRanks(recruiterRanks, applicantMatch.applicantMatchId)}
+                isInRank={!isApplicantInRecruiterRanks(recruiterRanks, applicantMatch.participantId)}
                 addRank={() => setIsUpdate(true) && addRank(applicantMatch)}
                 removeRank={() => setIsUpdate(true) && removeRank(applicantMatch)}
               />
