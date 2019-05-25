@@ -33,7 +33,7 @@ class MatchResultController extends React.Component {
     }
 
     if (!isAnnouceDate(match.announceDate)) {
-      return redirectError({ req, res }, 'Announce Day not started or has ended.');
+      return redirectError({ req, res }, 'Announce Day not started.');
     }
 
     const matchResults = await matchingRequest.getMatchResultByMatchId(matchId);
