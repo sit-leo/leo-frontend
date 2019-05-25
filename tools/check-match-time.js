@@ -3,19 +3,19 @@ import dayjs from 'dayjs';
 const TODAY = dayjs();
 
 function isCanJoinMatch(joinMatchTime) {
-  return TODAY.isBefore(joinMatchTime);
+  return !TODAY.isAfter(joinMatchTime);
 }
 
 export default isCanJoinMatch;
 
 export function isApplicantCanRanking(applicantRankingTime) {
-  return TODAY.isBefore(applicantRankingTime);
+  return !TODAY.isAfter(applicantRankingTime);
 }
 
 export function isRecruiterCanRanking(applicantRankingTime, recruiterRankingTime) {
-  return TODAY.isAfter(applicantRankingTime) && TODAY.isBefore(recruiterRankingTime);
+  return TODAY.isAfter(applicantRankingTime) && !TODAY.isAfter(recruiterRankingTime);
 }
 
-export function isCanSummarize(summaryTime) {
-  return TODAY.isBefore(summaryTime);
+export function isAnnouceDate(annouceDate) {
+  return !TODAY.isBefore(annouceDate);
 }
