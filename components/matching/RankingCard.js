@@ -28,13 +28,9 @@ const CardMiddle = ({
 );
 
 const CardRight = ({
-  capacity,
-  badgeText,
   actionButton,
 }) => (
-  <FlexCenter className="flex-column">
-    <TitlePrimary className="mb-0">{capacity || 0}</TitlePrimary>
-    <SubTitleSmall className="mb-3">{badgeText || 'Recruit'}</SubTitleSmall>
+  <FlexCenter className="h-100">
     { actionButton }
   </FlexCenter>
 );
@@ -87,7 +83,7 @@ const RankingCard = ({
         { isEmpty(capacity)
           && (
             <Col lg={3} className="text-center">
-              <CardRight capacity={capacity} badgeText={badgeText} actionButton={actionButton} />
+              <CardRight actionButton={actionButton} />
             </Col>
           )
         }
