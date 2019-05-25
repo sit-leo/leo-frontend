@@ -7,26 +7,30 @@ export const initState = {
 
   position: { id: 0 },
 
-  positions: [{
-    id: 0,
-    name: 'No Position Found',
-    capacity: 0,
-    money: 0,
-    location: 'No Location',
-  }],
+  positions: [
+    // {
+    //   id: 0,
+    //   name: 'No Position Found',
+    //   capacity: 0,
+    //   money: 0,
+    //   location: 'No Location',
+    // },
+  ],
 
-  applicants: [{
-    id: 0,
-    name: 'No Applicant Found',
-    applicant: {
-      name: 'No Applicant Found',
-      educations: [{
-        educationName: 'No Education',
-        gpax: 0.00,
-      }],
-    },
-    documents: [],
-  }],
+  applicants: [
+    //   {
+    //   id: 0,
+    //   name: 'No Applicant Found',
+    //   applicant: {
+    //     name: 'No Applicant Found',
+    //     educations: [{
+    //       educationName: 'No Education',
+    //       gpax: 0.00,
+    //     }],
+    //   },
+    //   documents: [],
+    // }
+  ],
 
   applicantRanks: [],
 
