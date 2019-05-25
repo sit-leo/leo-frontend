@@ -1,3 +1,5 @@
+import { message } from 'antd';
+
 export const initState = {
   haveRank: false,
   isUpdateRank: false,
@@ -137,6 +139,7 @@ export default function reducer(state = initState, action = {}) {
           sequence: applicantRanks.length + 1,
         });
       }
+      message.success('Your is rank added.');
       return { ...state, applicantRanks };
     }
 
@@ -176,6 +179,7 @@ export default function reducer(state = initState, action = {}) {
           sequence: recruiterRanks.length + 1,
         });
       }
+      message.success('Your is rank added.');
       return { ...state, recruiterRanks };
     }
 
