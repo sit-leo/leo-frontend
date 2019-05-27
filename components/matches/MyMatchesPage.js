@@ -29,7 +29,7 @@ const MatchList = ({ matches = [] }) => (
         key={match.id}
         id={match.id}
         title={match.name}
-        startDate={day(match.startDate).format('DD MMM YYYY')}
+        startDate={day(match.announceDate).format('DD MMM YYYY')}
       />
     ))
     : <TitleSmall className="text-center">No Matches Found.</TitleSmall>
