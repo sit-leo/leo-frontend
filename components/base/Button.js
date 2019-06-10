@@ -27,6 +27,17 @@ const MainButton = styled(DefaultButtonStyled)`
   }
 `;
 
+export const SmallMainButton = styled(MainButton)`
+  min-width: 25%;
+`;
+
+export const SmallButton = styled(DefaultButtonStyled)`
+  min-width: 25%;
+  border: 1px solid ${color.hover} !important;
+  background: ${color.white};
+  color: ${color.hover};
+`;
+
 export const DangerButton = styled(DefaultButtonStyled)`
   background: ${color.error};
   color: ${color.white};
