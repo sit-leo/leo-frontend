@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 
 import Navbar from '../base/Navbar';
 
-const WithNavbar = ({ children }) => (
+const WithNavbar = ({ children, logout }) => (
   <Fragment>
-    <Navbar />
+    <Navbar logout={logout} />
     { children }
   </Fragment>
 );
