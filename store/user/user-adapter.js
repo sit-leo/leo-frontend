@@ -14,6 +14,13 @@ export default adapter => ({
         return jwt;
       });
   },
+  logout() {
+    return adapter.post(`${USER_API}/logout`)
+      .then(() => {
+        cookie.clearToken();
+        Router.push('/');
+      });
+  },
   getUser() {
     return adapter.get(
       `${USER_API}/me`,
