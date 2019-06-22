@@ -18,7 +18,11 @@ export default adapter => ({
     return adapter.post(`${USER_API}/logout`)
       .then(() => {
         cookie.clearToken();
-        Router.push('/');
+        if (window && window.location.pathname == '/') {
+          window.location.reload();
+        } else {
+          Router.push('/');
+        }
       });
   },
   getUser() {
