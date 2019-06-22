@@ -61,8 +61,8 @@ const MenuItem = styled(DefaultMenu.Item)`
   margin: 0;
 `;
 
-const DropDownItem = ({ children }) => (
-  <Flex className="h-100 p-1 align-items-center">
+const DropDownItem = ({ children, handleClick }) => (
+  <Flex onClick={handleClick} className="h-100 p-1 align-items-center">
     {children}
   </Flex>
 );
@@ -70,7 +70,7 @@ const DropDownItem = ({ children }) => (
 const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { },
 }) => (
-  <DropDownItem onClick={handleClick}>
+  <DropDownItem handleClick={handleClick}>
     <Icon type={type} theme={theme} />
     {text}
   </DropDownItem>
