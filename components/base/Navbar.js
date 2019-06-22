@@ -54,12 +54,11 @@ const menus = [
 const dropdownItems = [
   { type: 'user', text: 'Profile' },
   { type: 'setting', text: 'Account Setting' },
-  { type: 'logout', text: 'Logout' },
 ];
 
 const MenuItem = styled(DefaultMenu.Item)`
-  ${props => (props.disabledLine ? '' : `border-bottom: solid 0.5px ${color.disabled};`)}
-  margin-bottom: 0;
+  ${props => (props.hide === 'true' ? '' : `border-bottom: solid 0.5px ${color.disabled};`)}
+  margin: 0;
 `;
 
 const DropDownItem = ({ children }) => (
@@ -68,14 +67,20 @@ const DropDownItem = ({ children }) => (
   </Flex>
 );
 
-const IconItem = ({ type, text, theme = 'outlined' }) => (
-  <DropDownItem>
+const IconItem = ({
+  type, text, theme = 'outlined', handleClick = () => { },
+}) => (
+  <DropDownItem onClick={handleClick}>
     <Icon type={type} theme={theme} />
     {text}
   </DropDownItem>
 );
 
-const MenuDropdown = () => (
+function isLogoutButton(index) {
+  return (index + 1) === dropdownItems.length;
+}
+
+const MenuDropdown = ({ logout }) => (
   <Menu>
     <MenuItem className="h-auto">
       <Flex className="p-1 align-items-center">
@@ -85,15 +90,21 @@ const MenuDropdown = () => (
     </MenuItem>
     {
       dropdownItems.map((item, index) => (
-        <MenuItem key={item.type} disabledLine={(index + 1) === dropdownItems.length}>
+        <MenuItem
+          key={item.type}
+          hide={isLogoutButton(index).toString()}
+        >
           <IconItem {...item} />
         </MenuItem>
       ))
     }
+    <MenuItem>
+      <IconItem type="logout" text="Logout" handleClick={logout} />
+    </MenuItem>
   </Menu>
 );
 
-const NavbarContainer = () => (
+const NavbarContainer = ({ logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
       <Col xs={6} lg={1} className="logo text-left">
@@ -115,7 +126,7 @@ const NavbarContainer = () => (
         </ContainerRow>
       </Col>
       <Col xs={6} lg={1} className="profile-avatar text-right">
-        <Dropdown overlay={<MenuDropdown />}>
+        <Dropdown overlay={<MenuDropdown logout={logout} />}>
           <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
             <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
             <b><Icon type="down" /></b>
