@@ -57,8 +57,8 @@ const dropdownItems = [
 ];
 
 const MenuItem = styled(DefaultMenu.Item)`
-  ${props => (props.hide === 'true' ? '' : `border-bottom: solid 0.5px ${color.disabled};`)}
-  margin: 0;
+  ${props => (props.hide ? '' : `border-bottom: solid 0.5px ${color.disabled};`)}
+  margin: 0 !important;
 `;
 
 const DropDownItem = ({ children, handleClick }) => (
@@ -92,14 +92,13 @@ const MenuDropdown = ({ logout }) => (
       dropdownItems.map((item, index) => (
         <MenuItem
           key={item.type}
-          hide={isLogoutButton(index).toString()}
         >
           <IconItem {...item} />
         </MenuItem>
       ))
     }
     <MenuItem>
-      <IconItem type="logout" text="Logout" handleClick={logout} />
+      <IconItem hide type="logout" text="Logout" handleClick={logout} />
     </MenuItem>
   </Menu>
 );
