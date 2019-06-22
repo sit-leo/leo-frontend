@@ -14,4 +14,10 @@ export const RankingAvatar = styled.img`
 `;
 
 export const ProfileAvatar = styled(Image)`
+
+`;
+
+export const SmallProfileAvatar = styled.img`
+    max-width: 45px;
+    max-height: 45px;
 `;
