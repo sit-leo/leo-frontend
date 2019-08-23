@@ -80,7 +80,7 @@ function isLogoutButton(index) {
   return (index + 1) === dropdownItems.length;
 }
 
-const MenuDropdown = ({ logout }) => (
+const MenuDropdown = ({ role, logout }) => (
   <Menu>
     <MenuItem className="h-auto">
       <Flex className="p-1 align-items-center">
@@ -103,7 +103,7 @@ const MenuDropdown = ({ logout }) => (
   </Menu>
 );
 
-const NavbarContainer = ({ logout = () => { } }) => (
+const NavbarContainer = ({ role, logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
       <Col xs={6} lg={1} className="logo text-left">
@@ -125,12 +125,18 @@ const NavbarContainer = ({ logout = () => { } }) => (
         </ContainerRow>
       </Col>
       <Col xs={6} lg={1} className="profile-avatar text-right">
-        <Dropdown overlay={<MenuDropdown logout={logout} />}>
-          <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
-            <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
-            <b><Icon type="down" /></b>
-          </FlexCenter>
-        </Dropdown>
+        {
+          role !== 'guest'
+            ? (
+              <Dropdown overlay={<MenuDropdown logout={logout} />}>
+                <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
+                  <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
+                  <b><Icon type="down" /></b>
+                </FlexCenter>
+              </Dropdown>
+            )
+            : <div>Register / Sign in</div>
+        }
       </Col>
     </Row>
   </NavbarContainerStyled>

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
 import { clientInstance } from '../../tools/request';
 
@@ -12,11 +13,15 @@ function logout() {
   userRequest.logout();
 }
 
-const WithNavbar = ({ children }) => (
+const WithNavbar = ({ role, children }) => (
   <Fragment>
-    <Navbar logout={() => logout()} />
+    <Navbar role={role} logout={() => logout()} />
     { children }
   </Fragment>
 );
 
-export default WithNavbar;
+const mapStateToProps = state => ({
+  role: state.user.role,
+});
+
+export default connect(mapStateToProps)(WithNavbar);
