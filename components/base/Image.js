@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Image = styled.img`
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 40px;
+    max-height: 40px;
 `;
 
 export default Image;

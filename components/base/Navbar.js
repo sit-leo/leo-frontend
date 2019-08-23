@@ -28,7 +28,7 @@ const NavbarContainerStyled = styled(ContainerStyled)`
   background: ${color.white};
   border: solid 0px ${color.disabled};
   border-bottom-width: 2px;
-  min-height: 100px;
+  min-height: 70px;
   .logo, .profile-avatar {
     display: flex;
     align-items: center;
