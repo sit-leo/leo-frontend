@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Link from 'next/link';
 
-import env from '../../config/env';
-
-import cookie from '../../tools/cookie';
 import { clientInstance } from '../../tools/request';
 
 import userAdapter from '../../store/user/user-adapter';
@@ -13,30 +9,12 @@ import { setRole, setId } from '../../store/user';
 
 import WithNavbar from '../layouts/with-navbar';
 
+import EnvDebugger from '../base/Debugger';
 import { ContainerFluid, Row, Col } from '../base/Grid';
-import Text, { TitlePrimary, TitleLarge, TextError } from '../base/Text';
+import { TitlePrimary } from '../base/Text';
 import Card from '../base/Card';
 import { RankingAvatar } from '../base/Image';
-import Flex, { FlexCenter } from '../base/Flex';
-
-const linksDebug = [
-  {
-    name: 'Applicant Ranking',
-    path: '/matches/1/applicants/ranking',
-  },
-  {
-    name: 'Recruiter Position',
-    path: '/matches/1/recruiters/positions',
-  },
-  {
-    name: 'Recruiter Ranking',
-    path: '/matches/1/positions/1/ranking',
-  },
-  {
-    name: 'Login',
-    path: '/login',
-  },
-];
+import { FlexCenter } from '../base/Flex';
 
 const userRequest = userAdapter(clientInstance());
 
@@ -54,31 +32,7 @@ const LandingIndex = ({ role, setUser }) => {
               </FlexCenter>
             </Card>
           </Col>
-          <Col>
-            <Card>
-              ENV Debugger
-              <hr />
-              <Flex className="flex-column">
-                <TitleLarge>
-                  {`Role: ${role || 'guest'}`}
-                </TitleLarge>
-                <TextError>{ env.public.type }</TextError>
-                <TextError>{ env.public.matchingApi }</TextError>
-                <TextError>{ env.public.matchApi }</TextError>
-                <TextError>{ env.public.userApi }</TextError>
-                {
-                  linksDebug.map(menu => (
-                    <Link key={menu.name} href={menu.path}>
-                      <a href="#">
-                        <Text>{menu.name}</Text>
-                      </a>
-                    </Link>
-                  ))
-                }
-                <Text onClick={() => cookie.clearToken()}>Logout</Text>
-              </Flex>
-            </Card>
-          </Col>
+          <EnvDebugger role={role} />
         </Row>
       </ContainerFluid>
     </WithNavbar>
