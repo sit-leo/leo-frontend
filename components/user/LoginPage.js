@@ -9,6 +9,8 @@ import { clientInstance } from '../../tools/request';
 import userAdapter from '../../store/user/user-adapter';
 import { setUsername, setPassword } from '../../store/user';
 
+import WithNavbar from '../layouts/with-navbar';
+
 import { Title } from '../base/Text';
 import { SmallButton, SmallMainButton } from '../base/Button';
 import Input from '../base/Input';
@@ -23,7 +25,8 @@ const LoginPage = ({
   setUsername: handleUsername,
   setPassword: handlePassword,
 }) => (
-  <FlexCenter className="vh-100">
+  <WithNavbar>
+    <FlexCenter className="vh-100">
     <ContainerRow>
       <Col lg={{ size: 6, offset: 3 }}>
         <Form
@@ -55,6 +58,7 @@ const LoginPage = ({
       </Col>
     </ContainerRow>
   </FlexCenter>
+  </WithNavbar>
 );
 
 const mapStateToProps = state => ({
