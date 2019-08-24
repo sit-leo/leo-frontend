@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -11,8 +10,7 @@ import { setUsername, setPassword } from '../../store/user';
 
 import WithNavbar from '../layouts/with-navbar';
 
-import { Title } from '../base/Text';
-import { SmallButton, SmallMainButton } from '../base/Button';
+import { SmallMainButton } from '../base/Button';
 import Input from '../base/Input';
 import ContainerRow, { Col, Row } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
@@ -27,37 +25,37 @@ const LoginPage = ({
 }) => (
   <WithNavbar>
     <FlexCenter className="vh-100">
-    <ContainerRow>
-      <Col lg={{ size: 6, offset: 3 }}>
-        <Form
-          method="POST"
-          className="w-100 py-4 px-4 card"
-          onSubmit={(e) => {
-            e.preventDefault();
-            userRequest.login({ username, password });
-          }}
-        >
-          <Col className="text-center mb-3">
-            <img className="w-25" src="/static/images/leo.png" alt="LEO-Logo" />
-          </Col>
-          <Input
-            onChange={e => handleUsername(e.target.value)}
-            value={username}
-            placeholder="Email"
-            required
-          />
-          <Input
-            type="password"
-            onChange={e => handlePassword(e.target.value)}
-            value={password}
-            placeholder="password"
-            required
-          />
-          <SmallMainButton htmlType="submit" className="my-3 w-25 mx-auto">Sign in</SmallMainButton>
-        </Form>
-      </Col>
-    </ContainerRow>
-  </FlexCenter>
+      <ContainerRow>
+        <Col lg={{ size: 6, offset: 3 }}>
+          <Form
+            method="POST"
+            className="w-100 py-4 px-4 card"
+            onSubmit={(e) => {
+              e.preventDefault();
+              userRequest.login({ username, password });
+            }}
+          >
+            <Col className="text-center mb-3">
+              <img className="w-25" src="/static/images/leo.png" alt="LEO-Logo" />
+            </Col>
+            <Input
+              onChange={e => handleUsername(e.target.value)}
+              value={username}
+              placeholder="Email"
+              required
+            />
+            <Input
+              type="password"
+              onChange={e => handlePassword(e.target.value)}
+              value={password}
+              placeholder="password"
+              required
+            />
+            <SmallMainButton htmlType="submit" className="my-3 w-25 mx-auto">Sign in</SmallMainButton>
+          </Form>
+        </Col>
+      </ContainerRow>
+    </FlexCenter>
   </WithNavbar>
 );
 
