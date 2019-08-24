@@ -25,17 +25,6 @@ const LoginPage = ({
 }) => (
   <FlexCenter className="vh-100">
     <ContainerRow>
-      <Col className="py-3">
-        <Row>
-          <Col className="text-center text-lg-right" lg={{ size: 3, offset: 3 }}>
-            <img className="w-25" src="/static/images/leo.png" alt="LEO-Logo" />
-          </Col>
-          <Col className="text-center text-lg-left" lg={{ size: 3 }}>
-            <h1 className="m-0">LEO</h1>
-            Matching System
-          </Col>
-        </Row>
-      </Col>
       <Col lg={{ size: 6, offset: 3 }}>
         <Form
           method="POST"
@@ -45,7 +34,9 @@ const LoginPage = ({
             userRequest.login({ username, password });
           }}
         >
-          <Title>Login</Title>
+          <Col className="text-center mb-3">
+            <img className="w-25" src="/static/images/leo.png" alt="LEO-Logo" />
+          </Col>
           <Input
             onChange={e => handleUsername(e.target.value)}
             value={username}
@@ -59,16 +50,7 @@ const LoginPage = ({
             placeholder="password"
             required
           />
-          <div className="text-right">
-            <a href="#forgot-password">
-              <u>Forgot Password?</u>
-            </a>
-          </div>
-          <SmallMainButton htmlType="submit" className="my-3 w-25 mx-auto">Login</SmallMainButton>
-          <div className="text-center">
-            <span className="mr-3">{`${"Don't have any account ?"}`}</span>
-            <SmallButton>Register</SmallButton>
-          </div>
+          <SmallMainButton htmlType="submit" className="my-3 w-25 mx-auto">Sign in</SmallMainButton>
         </Form>
       </Col>
     </ContainerRow>
