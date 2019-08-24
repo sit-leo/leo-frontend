@@ -71,9 +71,9 @@ const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { },
 }) => (
   <DropDownItem handleClick={handleClick}>
-    <Icon type={type} theme={theme} />
-    {text}
-  </DropDownItem>
+      <Icon type={type} theme={theme} />
+      {text}
+    </DropDownItem>
 );
 
 function isLogoutButton(index) {
@@ -112,17 +112,21 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
         </Link>
       </Col>
       <Col lg={10} className="d-none d-md-flex align-items-center">
-        <ContainerRow>
-          <Col className="d-flex">
-            {
-              menus.map(menu => (
-                <Link key={menu.name} href={menu.path}>
-                  <Navbar>{menu.name}</Navbar>
-                </Link>
-              ))
-            }
-          </Col>
-        </ContainerRow>
+        {
+          role !== 'guest' && (
+            <ContainerRow>
+              <Col className="d-flex">
+                {
+                  menus.map(menu => (
+                    <Link key={menu.name} href={menu.path}>
+                      <Navbar>{menu.name}</Navbar>
+                    </Link>
+                  ))
+                }
+              </Col>
+            </ContainerRow>
+          )
+        }
       </Col>
       <Col xs={6} lg={1} className="profile-avatar text-right">
         {
