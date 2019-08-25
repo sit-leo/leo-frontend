@@ -72,9 +72,9 @@ const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { },
 }) => (
   <DropDownItem handleClick={handleClick}>
-    <Icon type={type} theme={theme} />
-    {text}
-  </DropDownItem>
+      <Icon type={type} theme={theme} />
+      {text}
+    </DropDownItem>
 );
 
 function isLogoutButton(index) {
@@ -130,26 +130,34 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
         }
       </Col>
       {
-          role !== 'guest'
-            ? (
-              <Col xs={6} lg={1} className="profile-avatar text-right">
-                <Dropdown overlay={<MenuDropdown logout={logout} />}>
-                  <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
-                    <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
-                    <b><Icon type="down" /></b>
-                  </FlexCenter>
-                </Dropdown>
-              </Col>
-            )
-            : (
-              <Col xs={6} lg={3} className="d-flex flex-row justify-content-end align-items-center">
-                <TitleSmallPrimary className="mr-3">Register</TitleSmallPrimary>
-                <SmallMainButton className="px-4">
-                  <TitleSmallWhite className="mb-1">Sign in</TitleSmallWhite>
-                </SmallMainButton>
-              </Col>
-            )
-        }
+        role !== 'guest'
+          ? (
+            <Col xs={6} lg={1} className="profile-avatar text-right">
+              <Dropdown overlay={<MenuDropdown logout={logout} />}>
+                <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
+                  <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
+                  <b><Icon type="down" /></b>
+                </FlexCenter>
+              </Dropdown>
+            </Col>
+          )
+          : (
+            <Col xs={6} lg={3} className="d-flex flex-row justify-content-end align-items-center">
+              <a href="/register">
+                <TitleSmallPrimary className="mr-3">
+                  Register
+                </TitleSmallPrimary>
+              </a>
+              <SmallMainButton className="px-4">
+                <a href="/login">
+                  <TitleSmallWhite className="mb-1">
+                    Sign in
+                  </TitleSmallWhite>
+                </a>
+              </SmallMainButton>
+            </Col>
+          )
+      }
     </Row>
   </NavbarContainerStyled>
 );
