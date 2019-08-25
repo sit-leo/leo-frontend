@@ -46,6 +46,10 @@ export const TitleSmallPrimary = styled(TitleSmall)`
   color: ${colors.primary};
 `;
 
+export const TitleSmallWhite = styled(TitleSmall)`
+  color: ${colors.white};
+`;
+
 export const SubTitleSmall = styled.h2`
   font-size: ${font.size.small};
   color: ${colors.text.main};
