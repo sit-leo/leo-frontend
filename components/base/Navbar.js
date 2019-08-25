@@ -72,9 +72,9 @@ const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { },
 }) => (
   <DropDownItem handleClick={handleClick}>
-      <Icon type={type} theme={theme} />
-      {text}
-    </DropDownItem>
+    <Icon type={type} theme={theme} />
+    {text}
+  </DropDownItem>
 );
 
 function isLogoutButton(index) {
