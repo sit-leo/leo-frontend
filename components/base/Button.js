@@ -6,7 +6,7 @@ import color from '../../config/color';
 
 const DefaultButtonStyled = styled(DefaultButton)`
   text-align: center;
-  border-radius: 10px;
+  border-radius: 22.5px;
   padding: 0.6em 0;
   height: auto;
   border: none;
@@ -33,7 +33,7 @@ export const SmallMainButton = styled(MainButton)`
 
 export const SmallButton = styled(DefaultButtonStyled)`
   min-width: 25%;
-  border: 1px solid ${color.hover} !important;
+  border-color: ${color.hover} !important;
   background: ${color.white};
   color: ${color.hover};
 `;
