@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Menu as DefaultMenu, Dropdown, Icon } from 'antd';
@@ -11,7 +11,8 @@ import ContainerRow, {
   ContainerStyled, Col, Row,
 } from './Grid';
 import Image, { ProfileAvatar, SmallProfileAvatar } from './Image';
-import { SubTitleSmall } from './Text';
+import { TitleSmallPrimary, TitleSmallWhite, SubTitleSmall } from './Text';
+import { SmallMainButton } from './Button';
 
 const Menu = styled(DefaultMenu)`
   border-radius: 5px;
@@ -71,9 +72,9 @@ const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { },
 }) => (
   <DropDownItem handleClick={handleClick}>
-      <Icon type={type} theme={theme} />
-      {text}
-    </DropDownItem>
+    <Icon type={type} theme={theme} />
+    {text}
+  </DropDownItem>
 );
 
 function isLogoutButton(index) {
@@ -111,7 +112,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
           <Image src="/static/images/leo.png" />
         </Link>
       </Col>
-      <Col lg={10} className="d-none d-md-flex align-items-center">
+      <Col lg={role !== 'guest' ? 10 : 8} className="d-none d-md-flex align-items-center">
         {
           role !== 'guest' && (
             <ContainerRow>
@@ -128,20 +129,27 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
           )
         }
       </Col>
-      <Col xs={6} lg={1} className="profile-avatar text-right">
-        {
+      {
           role !== 'guest'
             ? (
-              <Dropdown overlay={<MenuDropdown logout={logout} />}>
-                <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
-                  <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
-                  <b><Icon type="down" /></b>
-                </FlexCenter>
-              </Dropdown>
+              <Col xs={6} lg={1} className="profile-avatar text-right">
+                <Dropdown overlay={<MenuDropdown logout={logout} />}>
+                  <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
+                    <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
+                    <b><Icon type="down" /></b>
+                  </FlexCenter>
+                </Dropdown>
+              </Col>
             )
-            : <div>Register / Sign in</div>
+            : (
+              <Col xs={6} lg={3} className="d-flex flex-row justify-content-end align-items-center">
+                <TitleSmallPrimary className="mr-3">Register</TitleSmallPrimary>
+                <SmallMainButton className="px-4">
+                  <TitleSmallWhite className="mb-1">Sign in</TitleSmallWhite>
+                </SmallMainButton>
+              </Col>
+            )
         }
-      </Col>
     </Row>
   </NavbarContainerStyled>
 );
