@@ -13,8 +13,13 @@ import font from '../config/font';
 
 
 const GlobalStyle = createGlobalStyle`
+  body {
+    background-image: url('/static/images/bg.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
   div#__next, html, body {
-    background: ${colors.background};
     font-family: ${font.name}, sans-serif;
   }
   .ant-message {
