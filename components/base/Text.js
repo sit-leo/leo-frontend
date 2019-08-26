@@ -32,6 +32,10 @@ export const TitleError = styled(Title)`
   color: ${colors.error};
 `;
 
+export const TitleWhite = styled(Title)`
+  color: ${colors.white};
+`;
+
 export const TitleLight = styled(Title)`
   font-weight: ${font.weight.light};
 `;
