@@ -5,5 +5,9 @@ import Navbar from '../../../components/base/Navbar';
 
 storiesOf('Base/Navbar', module)
   .add('Navbar Component', () => (
-    <Navbar />
+    <React.Fragment>
+      <Navbar />
+      <br />
+      <Navbar role='guest' />
+    </React.Fragment>
   ))
