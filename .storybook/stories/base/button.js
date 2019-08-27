@@ -1,11 +1,27 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Button, { DangerButton } from '../../../components/base/Button';
+import Button, {
+  DangerButton,
+  SmallMainButton,
+  SmallButton,
+  CardButton
+} from '../../../components/base/Button';
 
 storiesOf('Base/Button', module)
   .add('Main Button - Default with text', () => (
-    <Button>Default</Button>
+    <React.Fragment>
+      <Button>Button</Button>
+      <br />
+      <br />
+      <SmallMainButton>SmallMainButton</SmallMainButton>
+      <br />
+      <br />
+      <SmallButton>SmallButton</SmallButton>
+    </React.Fragment>
   ))
   .add('Danger Button - Default with text', () => (
-    <DangerButton>Default</DangerButton>
+    <DangerButton>DangerButton</DangerButton>
+  ))
+  .add('Card Button - Default with text', () => (
+    <CardButton>CardButton</CardButton>
   ))
