@@ -4,12 +4,19 @@ import { storiesOf } from '@storybook/react';
 import Text, {
   Title,
   TitlePrimary,
+  TitleError,
+  TitleWhite,
+  TitleLight,
   TitleSmall,
+  TitleSmallPrimary,
+  TitleSmallWhite,
   Paragraph,
   TextError,
-  TitleLight,
   SubTitleSmall,
-  EmptyInformationText
+  EmptyInformationText,
+  ExtraSmallText,
+  ExtraSmallTextLightPrimary,
+  ExtraSmallTextLight
 } from '../../../components/base/Text';
 
 storiesOf('Base/Text', module)
@@ -21,7 +28,17 @@ storiesOf('Base/Text', module)
       <br/>
       <Title>TitleLarge_Kanit_30px_Regular_#373F51</Title>
       <br/>
+      <TitleError>TitleError_Kanit_30px_Regular_#373F51</TitleError>
+      <br/>
+      <TitleWhite>TitleWhite_Kanit_30px_Regular_#373F51</TitleWhite>
+      <br/>
+      <TitleLight>TitleLight_Kanit_30px_Regular_#373F51</TitleLight>
+      <br/>
       <TitleSmall>TitleSmall_Kanit_25px_Regular_#373F51</TitleSmall>
+      <br/>
+      <TitleSmallPrimary>TitleSmallPrimary_Kanit_25px_Regular_#373F51</TitleSmallPrimary>
+      <br/>
+      <TitleSmallWhite>TitleSmallWhite_Kanit_25px_Regular_#373F51</TitleSmallWhite>
       <br/>
       <SubTitleSmall>SubTitleSmall_Kanit_25px_Light_#373F51</SubTitleSmall>
     </React.Fragment>
@@ -35,5 +52,11 @@ storiesOf('Base/Text', module)
       <Text>Span Text - Size Small</Text>
       <br/>
       <TextError>Span Text - Size Small - Color Error</TextError>
+      <br/>
+      <ExtraSmallText>Span Text - Size Extra Small</ExtraSmallText>
+      <br/>
+      <ExtraSmallTextLightPrimary>Span Text - Size Extra Small Light Primary</ExtraSmallTextLightPrimary>
+      <br/>
+      <ExtraSmallTextLight>Span Text - Size Extra Small Light</ExtraSmallTextLight>
     </React.Fragment>
   ))
