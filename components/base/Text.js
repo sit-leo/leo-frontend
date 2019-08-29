@@ -52,6 +52,12 @@ export const TitleSmall = styled.h2`
   font-weight: ${font.weight.light};
 `;
 
+export const SubTitleWhite = styled.h2`
+  font-size: ${font.size.small};
+  color: ${colors.white};
+  font-weight: ${font.weight.light};
+`;
+
 export const TitleSmallPrimary = styled(TitleMedium)`
   color: ${colors.primary};
 `;
@@ -104,6 +110,13 @@ export const ExtraSmallTextLight = styled(Text)`
   font-size: ${font.size.xsmall};
   font-weight: ${font.weight.light};
 `;
+
+export const ExtraSmalLightWhite = styled(Text)`
+  font-size: ${font.size.xsmall};
+  font-weight: ${font.weight.light};
+  color: ${colors.white}
+`;
+
 export const ExtraSmallTextLightPrimary = styled(ExtraSmallTextLight)`
   color: ${colors.primary};
 `;
