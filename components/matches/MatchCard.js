@@ -7,7 +7,7 @@ import color from '../../config/color';
 import { SmallCard } from '../base/Card';
 import { Row, Col } from '../base/Grid';
 import {
-  TitleLarge, SubTitleSmall, TitlePrimary, TitleLight,
+  SubTitleSmall, TitleMedium, TitlePrimary, TitleLight,
 } from '../base/Text';
 import { FlexCenter } from '../base/Flex';
 import Button from '../base/Button';
@@ -16,7 +16,7 @@ const VerticalLine = styled.div`
   border-left: 2px solid ${color.disabled};
 `;
 
-const MatchCardSubTitle = styled(SubTitleSmall)`
+const MatchCardSubTitle = styled(TitleMedium)`
   span {
     color: ${color.primary};
   }
@@ -43,9 +43,9 @@ const MatchCard = ({
   <SmallCard className="py-4 px-4">
     <Row>
       <Col lg={4}>
-        <TitleLarge>
+        <SubTitleSmall>
           {title || '-'}
-        </TitleLarge>
+        </SubTitleSmall>
         <MatchCardSubTitle>
           {'Match date '}
           <span>{ startDate || '-' }</span>
