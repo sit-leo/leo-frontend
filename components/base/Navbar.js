@@ -11,18 +11,12 @@ import ContainerRow, {
   ContainerStyled, Col, Row,
 } from './Grid';
 import Image, { ProfileAvatar, SmallProfileAvatar } from './Image';
-import { TitleSmallPrimary, TitleSmallWhite, SubTitleSmall } from './Text';
+import { TitleSmallPrimary, TitleSmallWhite, NavSelected } from './Text';
 import { SmallMainButton } from './Button';
 
 const Menu = styled(DefaultMenu)`
   border-radius: 5px;
   box-shadow: 0 0 10px 0 ${color.shadow} !important;
-`;
-
-const Navbar = styled(SubTitleSmall)`
-  cursor: pointer;
-  color: ${color.primary};
-  margin-right: 1.3em;
 `;
 
 const NavbarContainerStyled = styled(ContainerStyled)`
@@ -120,7 +114,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
                 {
                   menus.map(menu => (
                     <Link key={menu.name} href={menu.path}>
-                      <Navbar>{menu.name}</Navbar>
+                      <NavSelected>{menu.name}</NavSelected>
                     </Link>
                   ))
                 }

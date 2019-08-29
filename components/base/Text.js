@@ -13,7 +13,7 @@ const Text = styled.span`
 export default Text;
 
 export const Title = styled.h1`
-  font-size: ${font.size.large};
+  font-size: ${font.size.medium};
   color: ${colors.text.main};
   font-weight: ${font.weight.regular};
 `;
@@ -40,29 +40,44 @@ export const TitleLight = styled(Title)`
   font-weight: ${font.weight.light};
 `;
 
+export const TitleMedium = styled.h2`
+  font-size: ${font.size.medium};
+  color: ${colors.text.main};
+  font-weight: ${font.weight.light};
+`;
+
 export const TitleSmall = styled.h2`
   font-size: ${font.size.small};
   color: ${colors.text.main};
   font-weight: ${font.weight.light};
 `;
 
-export const TitleSmallPrimary = styled(TitleSmall)`
+export const TitleSmallPrimary = styled(TitleMedium)`
   color: ${colors.primary};
 `;
 
-export const TitleSmallWhite = styled(TitleSmall)`
+export const TitleSmallWhite = styled(TitleMedium)`
   color: ${colors.white};
 `;
 
 export const SubTitleSmall = styled.h2`
-  font-size: ${font.size.small};
+  font-size: ${font.size.large};
   color: ${colors.text.main};
   font-weight: ${font.weight.light};
 `;
 
+export const NavSelected = styled.h2`
+  font-size: ${font.size.medium};
+  font-weight: ${font.weight.light};
+  color: ${colors.primary};
+  margin-right: 1.3em;
+  margin-bottom: 0;
+  cursor: pointer;
+`;
+
 
 export const Paragraph = styled.p`
-  font-size: ${font.size.small};
+  font-size: ${font.size.medium};
   color: ${colors.text.paragraph};
   font-weight: ${font.weight.light};
   margin: 0;
