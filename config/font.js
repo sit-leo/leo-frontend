@@ -1,6 +1,7 @@
 export default {
   name: 'Kanit',
   weight: {
+    thin: 200,
     light: 300,
     regular: 400,
   },

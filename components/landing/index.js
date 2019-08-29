@@ -11,7 +11,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import EnvDebugger from '../base/Debugger';
 import ContainerRow, { ContainerFluidPrimary, Row, Col } from '../base/Grid';
-import { SubTitleSmall , TitleLarge, Paragraph, TitleSmallWhite, ExtraSmalLightWhite } from '../base/Text';
+import { SubTitleSmall , TitleLarge, ThinParagraph, TitleSmallWhite, ExtraSmalLightWhite } from '../base/Text';
 import MainButton from '../base/Button';
 
 
@@ -25,8 +25,8 @@ const LandingIndex = ({ role, setUser }) => {
           <Col lg={5} className="my-5">
             <TitleLarge>We are LEO</TitleLarge>
             <SubTitleSmall>A land that easy to find the opportunities.</SubTitleSmall>
-            <Paragraph className="my-5">You will get the best match here. Ranking them by yourself and let we match them for you. We guarantee the best result by using Deferred Acceptance Algorithm, awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.</Paragraph>
-            <MainButton className="width-100">Register</MainButton>
+            <ThinParagraph className="my-3 mb-5">You will get the best match here. Ranking them by yourself and let we match them for you. We guarantee the best result by using Deferred Acceptance Algorithm, awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.</ThinParagraph>
+            <MainButton className="w-75">Register</MainButton>
           </Col>
           <Col lg={7} className="d-flex align-items-end">
             <img className="w-100" src="/static/images/girl-boy-landing.png"/>

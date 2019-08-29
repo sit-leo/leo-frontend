@@ -93,6 +93,13 @@ export const Paragraph = styled.p`
   margin: 0;
 `;
 
+export const ThinParagraph = styled.p`
+  font-size: ${font.size.small};
+  color: ${colors.text.paragraph};
+  font-weight: ${font.weight.thin};
+  margin: 0;
+`;
+
 export const TextError = styled(Text)`
   color: ${colors.error};
 `;
