@@ -48,9 +48,9 @@ storiesOf('Base/Text', module)
   ))
   .add('Text', () => (
     <React.Fragment>
-      <Paragraph>Paragraph_Kanit_25px_Light_#1B1B1E</Paragraph>
+      <Paragraph>Paragraph_Kanit_20px_Light_#1B1B1E</Paragraph>
       <br/>
-      <EmptyInformationText>EmptyInformationText_Kanit_25px_LightItalic_#6A6F7A</EmptyInformationText>
+      <EmptyInformationText>EmptyInformationText_Kanit_18px_LightItalic_#6A6F7A</EmptyInformationText>
       <br/>
       <Text>Span Text - Size Small</Text>
       <br/>
