@@ -13,7 +13,7 @@ const Text = styled.span`
 export default Text;
 
 export const Title = styled.h1`
-  font-size: ${font.size.large};
+  font-size: ${font.size.medium};
   color: ${colors.text.main};
   font-weight: ${font.weight.regular};
 `;
@@ -41,7 +41,7 @@ export const TitleLight = styled(Title)`
 `;
 
 export const TitleSmall = styled.h2`
-  font-size: ${font.size.small};
+  font-size: ${font.size.medium};
   color: ${colors.text.main};
   font-weight: ${font.weight.light};
 `;
@@ -55,14 +55,14 @@ export const TitleSmallWhite = styled(TitleSmall)`
 `;
 
 export const SubTitleSmall = styled.h2`
-  font-size: ${font.size.small};
+  font-size: ${font.size.large};
   color: ${colors.text.main};
   font-weight: ${font.weight.light};
 `;
 
 
 export const Paragraph = styled.p`
-  font-size: ${font.size.small};
+  font-size: ${font.size.medium};
   color: ${colors.text.paragraph};
   font-weight: ${font.weight.light};
   margin: 0;

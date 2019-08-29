@@ -6,7 +6,8 @@ export default {
   },
   size: {
     xlarge: '30px',
-    large: '20px',
+    large: '25px',
+    medium: '20px',
     small: '18px',
     xsmall: '16px',
   },
