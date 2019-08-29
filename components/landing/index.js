@@ -11,7 +11,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import EnvDebugger from '../base/Debugger';
 import ContainerRow, { ContainerFluidPrimary, Row, Col } from '../base/Grid';
-import { TitlePrimary, TitleLarge, TitleLight, TitleSmall, SubTitleSmall, TitleSmallWhite, ExtraSmallTextLight } from '../base/Text';
+import { SubTitleSmall , TitleLarge, TitleLight, TitleSmall, Paragraph, TitleSmallWhite, ExtraSmallTextLight } from '../base/Text';
 import MainButton from '../base/Button';
 import Card from '../base/Card';
 import { RankingAvatar } from '../base/Image';
@@ -27,8 +27,8 @@ const LandingIndex = ({ role, setUser }) => {
       <ContainerRow>
           <Col lg={5} className="my-5">
             <TitleLarge>We are LEO</TitleLarge>
-            <TitleLight>A land that easy to find the opportunities.</TitleLight>
-            <SubTitleSmall className="my-5">You will get the best match here. Ranking them by yourself and let we match them for you. We guarantee the best result by using Deferred Acceptance Algorithm, awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.</SubTitleSmall>
+            <SubTitleSmall>A land that easy to find the opportunities.</SubTitleSmall>
+            <Paragraph className="my-5">You will get the best match here. Ranking them by yourself and let we match them for you. We guarantee the best result by using Deferred Acceptance Algorithm, awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.</Paragraph>
             <MainButton className="width-100">Register</MainButton>
           </Col>
           <Col lg={7}>
