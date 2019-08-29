@@ -11,7 +11,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import EnvDebugger from '../base/Debugger';
 import ContainerRow, { ContainerFluidPrimary, Row, Col } from '../base/Grid';
-import { SubTitleSmall , TitleLarge, TitleLight, TitleSmall, Paragraph, TitleSmallWhite, ExtraSmallTextLight } from '../base/Text';
+import { SubTitleSmall , TitleLarge, Title, TitleSmall, Paragraph, TitleSmallWhite, ExtraSmallTextLight, ExtraSmallText } from '../base/Text';
 import MainButton from '../base/Button';
 import Card from '../base/Card';
 import { RankingAvatar } from '../base/Image';
@@ -41,25 +41,25 @@ const LandingIndex = ({ role, setUser }) => {
             <Col lg={4} className="py-3">
             <center>
               <img className="w-25" src="/static/images/leo.png"/>
-              <TitleSmall className="my-2">We do the matching for you.</TitleSmall>
-              <ExtraSmallTextLight className="my-2">We serve you the generic matching here.  </ExtraSmallTextLight>
+              <TitleSmallWhite className="my-2">We do the matching for you.</TitleSmallWhite>
+              <TitleSmall className="my-2">We serve you the generic matching here.  </TitleSmall>
             </center>
             </Col>
 
             <Col lg={4} className="py-3">
             <center>
               <img className="w-25" src="/static/images/leo.png"/>
-              <TitleSmall className="my-2">You rank. Then, we match them.</TitleSmall>
-              <ExtraSmallTextLight className="my-2">We use your rank and match them with 
-the other rank by deferred acceptance algorithms  </ExtraSmallTextLight>
+              <TitleSmallWhite className="my-2">You rank. Then, we match them.</TitleSmallWhite>
+              <ExtraSmallText className="my-2">We use your rank and match them with 
+the other rank by deferred acceptance algorithms  </ExtraSmallText>
             </center>
             </Col>
 
             <Col lg={4} className="py-3">
             <center>
               <img className="w-25" src="/static/images/leo.png"/>
-              <TitleSmall className="my-2">We use Deferred Acceptance Algorithm.</TitleSmall>
-              <ExtraSmallTextLight className="my-2">Awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.  </ExtraSmallTextLight>
+              <TitleSmallWhite className="my-2">We use Deferred Acceptance Algorithm.</TitleSmallWhite>
+              <ExtraSmallText className="my-2">Awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.  </ExtraSmallText>
             </center>
             </Col>
             
