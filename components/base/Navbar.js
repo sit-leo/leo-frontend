@@ -71,10 +71,6 @@ const IconItem = ({
   </DropDownItem>
 );
 
-function isLogoutButton(index) {
-  return (index + 1) === dropdownItems.length;
-}
-
 const MenuDropdown = ({ role, logout }) => (
   <Menu>
     <MenuItem className="h-auto">
