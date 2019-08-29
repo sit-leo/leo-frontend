@@ -40,17 +40,23 @@ export const TitleLight = styled(Title)`
   font-weight: ${font.weight.light};
 `;
 
-export const TitleSmall = styled.h2`
+export const TitleMedium = styled.h2`
   font-size: ${font.size.medium};
   color: ${colors.text.main};
   font-weight: ${font.weight.light};
 `;
 
-export const TitleSmallPrimary = styled(TitleSmall)`
+export const TitleSmall = styled.h2`
+  font-size: ${font.size.small};
+  color: ${colors.text.main};
+  font-weight: ${font.weight.light};
+`;
+
+export const TitleSmallPrimary = styled(TitleMedium)`
   color: ${colors.primary};
 `;
 
-export const TitleSmallWhite = styled(TitleSmall)`
+export const TitleSmallWhite = styled(TitleMedium)`
   color: ${colors.white};
 `;
 
