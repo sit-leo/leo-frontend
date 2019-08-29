@@ -51,7 +51,6 @@ const EnvDebugger = ({ role }) => env.public.type === 'development' && (
             </Link>
           ))
         }
-        <Text onClick={() => cookie.clearToken()}>Logout</Text>
       </Flex>
     </Card>
   </Col>
