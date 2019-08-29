@@ -5,6 +5,7 @@ import Text, {
   Title,
   TitleLarge,
   TitlePrimary,
+  NavSelected,
   TitleError,
   TitleWhite,
   TitleLight,
@@ -23,7 +24,7 @@ import Text, {
 storiesOf('Base/Text', module)
   .add('Title', () => (
     <React.Fragment>
-      <TitlePrimary>NavSelected_Kanit_20px_Regular_#58A4B0</TitlePrimary>
+      <NavSelected>NavSelected_Kanit_20px_Regular_#58A4B0</NavSelected>
       <br/>
       <TitleLight>NavUnselected_Kanit_20px_Light_#373F51</TitleLight>
       <br/>

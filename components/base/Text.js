@@ -62,8 +62,11 @@ export const SubTitleSmall = styled.h2`
 
 export const NavSelected = styled.h2`
   font-size: ${font.size.medium};
-  color: ${colors.text.main};
   font-weight: ${font.weight.light};
+  color: ${colors.primary};
+  margin-right: 1.3em;
+  margin-bottom: 0;
+  cursor: pointer;
 `;
 
 

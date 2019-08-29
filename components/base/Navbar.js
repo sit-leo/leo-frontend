@@ -19,13 +19,6 @@ const Menu = styled(DefaultMenu)`
   box-shadow: 0 0 10px 0 ${color.shadow} !important;
 `;
 
-const Navbar = styled(NavSelected)`
-  cursor: pointer;
-  color: ${color.primary};
-  margin-right: 1.3em;
-  margin-bottom: 0;
-`;
-
 const NavbarContainerStyled = styled(ContainerStyled)`
   background: ${color.white};
   border: solid 0px ${color.disabled};
@@ -121,7 +114,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
                 {
                   menus.map(menu => (
                     <Link key={menu.name} href={menu.path}>
-                      <Navbar>{menu.name}</Navbar>
+                      <NavSelected>{menu.name}</NavSelected>
                     </Link>
                   ))
                 }
