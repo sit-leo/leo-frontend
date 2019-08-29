@@ -6,7 +6,7 @@ import colors from '../../config/color';
 
 const InputDefaultStyled = styled(InputDefault)`
   border-radius: 10px;
-  border: solid 2px ${colors.outline};
+  border: solid 2px ${colors.disabled};
   margin: 6px 0;
   &:hover {
     border-color: ${colors.outline};
