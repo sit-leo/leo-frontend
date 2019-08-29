@@ -66,6 +66,10 @@ export const SubTitleSmall = styled.h2`
   font-weight: ${font.weight.light};
 `;
 
+export const SubTitleSmallWhite = styled(SubTitleSmall)`
+  color: ${colors.white};
+`;
+
 export const NavSelected = styled.h2`
   font-size: ${font.size.medium};
   font-weight: ${font.weight.light};
