@@ -11,7 +11,7 @@ import ContainerRow, {
   ContainerStyled, Col, Row,
 } from './Grid';
 import Image, { ProfileAvatar, SmallProfileAvatar } from './Image';
-import { TitleSmallPrimary, TitleSmallWhite, SubTitleSmall } from './Text';
+import { TitleSmallPrimary, TitleSmallWhite, NavSelected } from './Text';
 import { SmallMainButton } from './Button';
 
 const Menu = styled(DefaultMenu)`
@@ -19,10 +19,11 @@ const Menu = styled(DefaultMenu)`
   box-shadow: 0 0 10px 0 ${color.shadow} !important;
 `;
 
-const Navbar = styled(SubTitleSmall)`
+const Navbar = styled(NavSelected)`
   cursor: pointer;
   color: ${color.primary};
   margin-right: 1.3em;
+  margin-bottom: 0;
 `;
 
 const NavbarContainerStyled = styled(ContainerStyled)`

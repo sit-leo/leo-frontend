@@ -60,6 +60,12 @@ export const SubTitleSmall = styled.h2`
   font-weight: ${font.weight.light};
 `;
 
+export const NavSelected = styled.h2`
+  font-size: ${font.size.medium};
+  color: ${colors.text.main};
+  font-weight: ${font.weight.light};
+`;
+
 
 export const Paragraph = styled.p`
   font-size: ${font.size.medium};
