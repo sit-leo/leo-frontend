@@ -56,6 +56,9 @@ const MatchPage = ({ match, role }) => {
     }
     return Router.push(`/matches/${match.id}/result/positions`);
   }
+  function handleJoinMatch() {
+    return Router.push(`/matches/${match.id}/${role}/join`);
+  }
   return (
     <WithNavbar>
       <ContainerRow className="py-5">
@@ -115,7 +118,7 @@ const MatchPage = ({ match, role }) => {
                 <NumberLabel description="Recruiters" number="12" />
               </Col>
               <Col className="text-center">
-                <Button className="w-100" onClick={null}>
+                <Button className="w-100" onClick={() => handleJoinMatch()}>
                   <TitleWhite className="mb-0">Join Match</TitleWhite>
                 </Button>
               </Col>
