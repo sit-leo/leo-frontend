@@ -57,7 +57,10 @@ const MatchPage = ({ match, role }) => {
     return Router.push(`/matches/${match.id}/result/positions`);
   }
   function handleJoinMatch() {
-    return Router.push(`/matches/${match.id}/${role}/join`);
+    if (role === ROLE_APPLICANT) {
+      return Router.push(`/matches/${match.id}/applicants/join`);
+    }
+    return Router.push(`/matches/${match.id}/recruiters/join`);
   }
   return (
     <WithNavbar>
@@ -68,17 +71,19 @@ const MatchPage = ({ match, role }) => {
               <a href="/matches">Matches</a>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
-              Junior Programmer Match
+              {match.name || 'Default Match Name'}
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
         <Col lg={7} className="text-left">
-          <TitleLarge>Junior Programmer Match</TitleLarge>
+          <TitleLarge>
+            {match.name || 'Default Match Name'}
+          </TitleLarge>
           <img className="w-100" src="/static/images/match-mockup.jpg" alt="match-mockup" />
           <hr />
-          {
-            'This matching is only for Junior Programmer. Join to apply the work and recruit the great employee, rank them by yourself.'
-          }
+          <p className="mb-3">
+            {match.description || 'Default Match Description'}
+          </p>
         </Col>
         <Col lg={5}>
           <Card>
@@ -112,10 +117,10 @@ const MatchPage = ({ match, role }) => {
               </Col>
               <hr className="w-100" />
               <Col lg={6}>
-                <NumberLabel description="Applicants" number="58" />
+                <NumberLabel description="Applicants" number={match.applicants || '0'} />
               </Col>
               <Col lg={6}>
-                <NumberLabel description="Recruiters" number="12" />
+                <NumberLabel description="Recruiters" number={match.recruiters || '0'} />
               </Col>
               <Col className="text-center">
                 <Button className="w-100" onClick={() => handleJoinMatch()}>
