@@ -6,6 +6,7 @@ import {
   Row as DefaultRow,
   Col as DefaultCol,
 } from 'reactstrap';
+import color from '../../config/color';
 
 export const Col = ({
   xs = 12, md, lg, xl, children, ...props
@@ -21,10 +22,21 @@ export const ContainerStyled = styled(ContainerDefault)`
   height: auto;
 `;
 
+export const ContainerPrimaryStyled = styled(ContainerDefault)`
+  height: auto;
+  background-color: ${color.primary};
+`;
+
 export const ContainerFluid = ({ children }) => (
   <ContainerStyled fluid>
     { children }
   </ContainerStyled>
+);
+
+export const ContainerFluidPrimary = ({ children }) => (
+  <ContainerPrimaryStyled fluid>
+    { children }
+  </ContainerPrimaryStyled>
 );
 
 const ContainerRow = ({ children, className }) => (
