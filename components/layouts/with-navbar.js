@@ -7,15 +7,15 @@ import userAdapter from '../../store/user/user-adapter';
 
 import Navbar from '../base/Navbar';
 
-const userRequest = userAdapter(clientInstance());
 
 function logout() {
+  const userRequest = userAdapter(clientInstance());
   userRequest.logout();
 }
 
 const WithNavbar = ({ role, children }) => (
   <Fragment>
-    <Navbar role={role} logout={() => logout()} />
+    <Navbar role={role} logout={logout} />
     { children }
   </Fragment>
 );
