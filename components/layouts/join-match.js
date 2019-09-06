@@ -19,7 +19,7 @@ const JoinMatch = ({ children }) => (
             Junior Programmer Match
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            Join matching
+            Join Matching
           </Breadcrumb.Item>
         </Breadcrumb>
       </Col>
