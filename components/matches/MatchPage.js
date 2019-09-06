@@ -66,9 +66,9 @@ const MatchPage = ({ match, role }) => {
   }
   function convertDatePeriod(startDate, endDate) {
     if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
-      return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMM YYYY')}`;
+      return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMMM YYYY')}`;
     }
-    return `${day(startDate).format('DD MMM')} - ${day(endDate).format('DD MMM YYYY')}`;
+    return `${day(startDate).format('DD MMMM')} - ${day(endDate).format('DD MMMM YYYY')}`;
   }
   return (
     <WithNavbar>
@@ -102,25 +102,25 @@ const MatchPage = ({ match, role }) => {
               <Col>
                 <DateLabel
                   title="Join Period"
-                  date={convertDatePeriod(day(match.startJoiningDate), day(match.announceDate))}
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Applicant Rank"
-                  date="22 - 24 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Recruiter Rank"
-                  date="25 - 27 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Result"
-                  date="28 November 2019 (at 9:00)"
+                  date={day(match.announceDate).format('DD MMMM YYYY')}
                 />
               </Col>
               <hr className="w-100" />
