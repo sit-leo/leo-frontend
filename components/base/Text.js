@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import colors from '../../config/color';
 import font from '../../config/font';
 
+import { Col } from './Grid';
+
 const Text = styled.span`
   font-weight: ${font.weight.regular};
   font-size: ${font.size.small};
@@ -121,8 +123,18 @@ export const ExtraSmallTextLight = styled(Text)`
 export const ExtraSmalLightWhite = styled(Text)`
   font-size: ${font.size.xsmall};
   font-weight: ${font.weight.light};
-  color: ${colors.white}
+  color: ${colors.white};
 `;
+
+
+export const TitleForm = ({ title }) => (
+  <Col>
+    <hr />
+    <TitleMedium className="mb-2">
+      <b>{title}</b>
+    </TitleMedium>
+  </Col>
+);
 
 export const ExtraSmallTextLightPrimary = styled(ExtraSmallTextLight)`
   color: ${colors.primary};
