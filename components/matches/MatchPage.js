@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import { Breadcrumb, Card as AntdCard, Avatar } from 'antd';
+import day from 'dayjs';
 
 import colors from '../../config/color';
 
@@ -49,6 +50,7 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 
+
 const MatchPage = ({ match, role }) => {
   function handleMatchResult() {
     if (role === ROLE_APPLICANT) {
@@ -61,6 +63,12 @@ const MatchPage = ({ match, role }) => {
       return Router.push(`/matches/${match.id}/applicants/join`);
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
+  }
+  function convertDatePeriod(startDate, endDate) {
+    if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
+      return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMM YYYY')}`;
+    }
+    return `${day(startDate).format('DD MMM')} - ${day(endDate).format('DD MMM YYYY')}`;
   }
   return (
     <WithNavbar>
@@ -94,7 +102,7 @@ const MatchPage = ({ match, role }) => {
               <Col>
                 <DateLabel
                   title="Join Period"
-                  date="15 - 21 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.announceDate))}
                 />
               </Col>
               <Col>
