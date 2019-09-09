@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import { Breadcrumb, Card as AntdCard, Avatar } from 'antd';
+import day from 'dayjs';
 
 import colors from '../../config/color';
 
@@ -49,6 +50,7 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 
+
 const MatchPage = ({ match, role }) => {
   function handleMatchResult() {
     if (role === ROLE_APPLICANT) {
@@ -61,6 +63,12 @@ const MatchPage = ({ match, role }) => {
       return Router.push(`/matches/${match.id}/applicants/join`);
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
+  }
+  function convertDatePeriod(startDate, endDate) {
+    if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
+      return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMMM YYYY')}`;
+    }
+    return `${day(startDate).format('DD MMMM')} - ${day(endDate).format('DD MMMM YYYY')}`;
   }
   return (
     <WithNavbar>
@@ -94,25 +102,25 @@ const MatchPage = ({ match, role }) => {
               <Col>
                 <DateLabel
                   title="Join Period"
-                  date="15 - 21 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.announceDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Applicant Rank"
-                  date="22 - 24 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Recruiter Rank"
-                  date="25 - 27 November 2019 (end at 00:00)"
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Result"
-                  date="28 November 2019 (at 9:00)"
+                  date={day(match.announceDate).format('DD MMMM YYYY')}
                 />
               </Col>
               <hr className="w-100" />
