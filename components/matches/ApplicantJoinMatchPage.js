@@ -60,7 +60,7 @@ const ApplicantJoinMatchPage = () => (
     </Col>
     <TitleForm title="Experiences" />
     <Col>
-      <TextArea disabled value={'- Designer at Alchemist, 1 year\n- UX/UI Designer as an outsource, 5 months'} />
+      <TextArea rows={3} value={'- Designer at Alchemist, 1 year\n- UX/UI Designer as an outsource, 5 months'} />
     </Col>
     <TitleForm title="Documents" />
     <Col>
