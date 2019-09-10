@@ -5,3 +5,4 @@ yarn-error.log
 storybook-static
 .scannerwork
 .vscode
+coverage
