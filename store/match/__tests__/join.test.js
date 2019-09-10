@@ -1,5 +1,7 @@
 import JoinReducer,
 {
+  setSkill,
+  SET_SKILL,
   setInputSkillVisible,
   SET_INPUT_SKILL_VISIBLE,
   setExperiences,
@@ -27,6 +29,13 @@ describe('Test Join Match Actions', () => {
     const action = setInputSkillVisible(true);
     expect(action.type).toEqual(SET_INPUT_SKILL_VISIBLE);
     expect(action.inputSkillVisible).toEqual(true);
+  });
+
+  it('Test setSkill action should return type and property correctly.', () => {
+    const skill = 'React Unit Test.';
+    const action = setSkill(skill);
+    expect(action.type).toEqual(SET_SKILL);
+    expect(action.skill).toEqual(skill);
   });
 });
 
@@ -76,6 +85,16 @@ describe('Test Join Match Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.inputSkillVisible).toEqual(true);
+    done();
+  });
+
+  it('Test setSkill should return skill correctly.', (done) => {
+    const skill = 'React Unit Test.';
+    const action = { type: SET_SKILL, skill };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.skill).toEqual(skill);
     done();
   });
 });
