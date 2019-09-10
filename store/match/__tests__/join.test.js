@@ -8,6 +8,8 @@ import JoinReducer,
   SET_APPLICANT_EXPERIENCES,
   addApplicantSkill,
   ADD_APPLICANT_SKILL,
+  removeApplicantSkill,
+  REMOVE_APPLICANT_SKILL,
 } from '../join';
 
 describe('Test Join Match Actions', () => {
@@ -22,6 +24,13 @@ describe('Test Join Match Actions', () => {
     const skill = 'Backend Development';
     const action = addApplicantSkill(skill);
     expect(action.type).toEqual(ADD_APPLICANT_SKILL);
+    expect(action.skill).toEqual(skill);
+  });
+
+  it('Test removeApplicantSkill action should return type and property correctly.', () => {
+    const skill = 'Backend Development';
+    const action = removeApplicantSkill(skill);
+    expect(action.type).toEqual(REMOVE_APPLICANT_SKILL);
     expect(action.skill).toEqual(skill);
   });
 
@@ -76,6 +85,23 @@ describe('Test Join Match Reducer', () => {
 
     expect(frontendDevelopment).toEqual(skill1);
     expect(backendDevelopment).toEqual(skill2);
+    done();
+  });
+
+  it('Test removeApplicantSkill should return applicant skills correctly', (done) => {
+    const skill = 'Frontend Development';
+    const action1 = { type: ADD_APPLICANT_SKILL, skill };
+    let store = JoinReducer(undefined, action1);
+
+    const action2 = { type: REMOVE_APPLICANT_SKILL, skill };
+    store = JoinReducer(store, action2);
+
+    const [
+      frontendDevelopment,
+    ] = store.applicant.skills;
+
+    expect(store.applicant.skills.length).toEqual(0);
+    expect(frontendDevelopment).toEqual(undefined);
     done();
   });
 
