@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import global from './global';
 import match from './match';
+import join from './match/join';
 import ranking from './matching/ranking';
 import user from './user';
 
@@ -13,7 +14,7 @@ const logger = createLogger();
 const middleware = [thunk, logger];
 
 export const reducers = combineReducers({
-  global, match, ranking, user,
+  global, match, ranking, user, join,
 });
 
 function initialStore(initialState = {}) {
