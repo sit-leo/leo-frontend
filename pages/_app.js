@@ -25,6 +25,9 @@ const GlobalStyle = createGlobalStyle`
   .ant-message {
     z-index: 9999;
   }
+  .anticon {
+    vertical-align: 0 !important;
+  }
 `;
 
 export default withReduxStore(
