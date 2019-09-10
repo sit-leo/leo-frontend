@@ -1,9 +1,13 @@
 export const initState = {
+  inputSkillVisible: false,
   applicant: {
     skills: [],
     experiences: '',
   },
 };
+
+
+export const SET_INPUT_SKILL_VISIBLE = 'MATCH/SET_INPUT_SKILL_VISIBLE';
 
 export const ADD_APPLICANT_SKILL = 'MATCH/ADD_APPLICANT_SKILL';
 
@@ -21,6 +25,9 @@ export default function reducer(state = initState, action = {}) {
       const applicant = { ...state.applicant, skills };
       return { ...state, applicant };
     }
+    case SET_INPUT_SKILL_VISIBLE: {
+      return { ...state, inputSkillVisible: action.inputSkillVisible };
+    }
     default: return { ...state };
   }
 }
@@ -31,4 +38,8 @@ export function setExperiences(experiences) {
 
 export function addApplicantSkill(skill) {
   return { type: ADD_APPLICANT_SKILL, skill };
+}
+
+export function setInputSkillVisible(inputSkillVisible) {
+  return { type: SET_INPUT_SKILL_VISIBLE, inputSkillVisible };
 }

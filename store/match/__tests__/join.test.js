@@ -1,6 +1,7 @@
 import JoinReducer,
 {
-  initState,
+  setInputSkillVisible,
+  SET_INPUT_SKILL_VISIBLE,
   setExperiences,
   SET_APPLICANT_EXPERIENCES,
   addApplicantSkill,
@@ -20,6 +21,12 @@ describe('Test Join Match Actions', () => {
     const action = addApplicantSkill(skill);
     expect(action.type).toEqual(ADD_APPLICANT_SKILL);
     expect(action.skill).toEqual(skill);
+  });
+
+  it('Test setInputSkillVisible action should return type and property correctly.', () => {
+    const action = setInputSkillVisible(true);
+    expect(action.type).toEqual(SET_INPUT_SKILL_VISIBLE);
+    expect(action.inputSkillVisible).toEqual(true);
   });
 });
 
@@ -60,6 +67,15 @@ describe('Test Join Match Reducer', () => {
 
     expect(frontendDevelopment).toEqual(skill1);
     expect(backendDevelopment).toEqual(skill2);
+    done();
+  });
+
+  it('Test setInputSkillVisible should return true.', (done) => {
+    const action = { type: SET_INPUT_SKILL_VISIBLE, inputSkillVisible: true };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.inputSkillVisible).toEqual(true);
     done();
   });
 });
