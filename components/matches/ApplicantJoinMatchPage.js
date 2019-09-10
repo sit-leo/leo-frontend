@@ -1,14 +1,25 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
-  Upload, Icon, Tag,
+  Upload, Icon,
 } from 'antd';
 
 import WithJoinMatch from '../layouts/join-match';
 
+import {
+  setInputSkillVisible as setInputSkillVisibleAction,
+  setSkill as setSkillAction,
+  addApplicantSkill as addApplicantSkillAction,
+  removeApplicantSkill as removeApplicantSkillAction,
+  setExperiences as setExperiencesAction,
+} from '../../store/match/join';
+
 import { Col } from '../base/Grid';
 import { TitleLarge, TitleForm, SubTitleSmallWhite } from '../base/Text';
-import { LabelInput, TextArea } from '../base/Input';
+import Input, { LabelInput, TextArea } from '../base/Input';
 import { SmallMainButton } from '../base/Button';
+import Tag from '../base/Tag';
 
 const UploadButton = () => (
   <div>
@@ -17,7 +28,17 @@ const UploadButton = () => (
   </div>
 );
 
-const ApplicantJoinMatchPage = () => (
+const ApplicantJoinMatchPage = ({
+  skills = [],
+  addApplicantSkill,
+  removeApplicantSkill,
+  skill,
+  setSkill,
+  inputSkillVisible,
+  setInputSkillVisible,
+  experiences,
+  setExperiences,
+}) => (
   <WithJoinMatch>
     <Col>
       <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
@@ -51,16 +72,49 @@ const ApplicantJoinMatchPage = () => (
     <TitleForm title="Skills" />
     <Col>
       {
-        ['UX/U Design', 'Graphic Design', 'Wireframing'].map(tag => (
-          <Tag key={tag}>
+        skills.map(tag => (
+          <Tag
+            closable
+            key={`${tag}-${Math.random()}`}
+            onClose={(e) => {
+              e.preventDefault();
+              removeApplicantSkill(tag);
+            }}
+          >
             {tag}
           </Tag>
         ))
       }
+      {
+        inputSkillVisible && (
+          <Input
+            type="text"
+            size="small"
+            style={{ width: 78 }}
+            value={skill}
+            onChange={e => setSkill(e.target.value)}
+            onBlur={() => setInputSkillVisible(false)}
+            onPressEnter={() => {
+              if (skill !== '') {
+                addApplicantSkill(skill);
+                setSkill('');
+              }
+            }}
+          />
+        )
+      }
+      {
+        !inputSkillVisible && (
+          <Tag onClick={() => setInputSkillVisible(!inputSkillVisible)}>
+            <Icon type="plus" />
+            Add Skill
+          </Tag>
+        )
+      }
     </Col>
     <TitleForm title="Experiences" />
     <Col>
-      <TextArea rows={3} value={'- Designer at Alchemist, 1 year\n- UX/UI Designer as an outsource, 5 months'} />
+      <TextArea rows={3} value={experiences} onChange={e => setExperiences(e.target.value)} />
     </Col>
     <TitleForm title="Documents" />
     <Col>
@@ -85,4 +139,19 @@ const ApplicantJoinMatchPage = () => (
   </WithJoinMatch>
 );
 
-export default ApplicantJoinMatchPage;
+const mapStateToProps = state => ({
+  inputSkillVisible: state.join.inputSkillVisible,
+  skills: state.join.applicant.skills,
+  experiences: state.join.applicant.experiences,
+  skill: state.join.skill,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addApplicantSkill: bindActionCreators(addApplicantSkillAction, dispatch),
+  removeApplicantSkill: bindActionCreators(removeApplicantSkillAction, dispatch),
+  setInputSkillVisible: bindActionCreators(setInputSkillVisibleAction, dispatch),
+  setSkill: bindActionCreators(setSkillAction, dispatch),
+  setExperiences: bindActionCreators(setExperiencesAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicantJoinMatchPage);
