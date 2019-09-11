@@ -65,10 +65,13 @@ const MatchPage = ({ match, role }) => {
     return Router.push(`/matches/${match.id}/recruiters/join`);
   }
   function convertDatePeriod(startDate, endDate) {
-    if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
-      return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMMM YYYY')}`;
+    if (day(startDate).format('YYYY') === day(endDate).format('YYYY')) {
+      if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
+        return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMMM YYYY')}`;
+      }
+      return `${day(startDate).format('DD MMMM')} - ${day(endDate).format('DD MMMM YYYY')}`;
     }
-    return `${day(startDate).format('DD MMMM')} - ${day(endDate).format('DD MMMM YYYY')}`;
+    return `${day(startDate).format('DD MMMM YYYY')} - ${day(endDate).format('DD MMMM YYYY')}`;
   }
   return (
     <WithNavbar>

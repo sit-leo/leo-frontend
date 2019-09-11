@@ -38,15 +38,15 @@ const LandingIndex = ({ role, setUser }) => {
         <ContainerRow className="py-5">
           <Col lg={4} className="py-3">
             <center>
-              <img alt="leo-logo" className="w-25" src="/static/images/leo.png" />
-              <TitleSmallWhite className="my-2">We do the matching for you.</TitleSmallWhite>
+              <img alt="leo-logo" className="w-25" src="/static/images/matching.png" />
+              <TitleSmallWhite className="my-3">We do the matching for you.</TitleSmallWhite>
               <ExtraSmalLightWhite className="my-2">We serve you the generic matching here.  </ExtraSmalLightWhite>
             </center>
           </Col>
           <Col lg={4} className="py-3">
             <center>
-              <img alt="leo-logo" className="w-25" src="/static/images/leo.png" />
-              <TitleSmallWhite className="my-2">You rank. Then, we match them.</TitleSmallWhite>
+              <img alt="leo-logo" className="w-25" src="/static/images/ranking.png" />
+              <TitleSmallWhite className="my-3">You rank. Then, we match them.</TitleSmallWhite>
               <ExtraSmalLightWhite className="my-2">
                 We use your rank and match them with
                 the other rank by deferred acceptance algorithms
@@ -57,8 +57,8 @@ const LandingIndex = ({ role, setUser }) => {
           </Col>
           <Col lg={4} className="py-3">
             <center>
-              <img alt="leo-logo" className="w-25" src="/static/images/leo.png" />
-              <TitleSmallWhite className="my-2">We use Deferred Acceptance Algorithm.</TitleSmallWhite>
+              <img alt="leo-logo" className="w-25" src="/static/images/nobel.png" />
+              <TitleSmallWhite className="my-3">We use Deferred Acceptance Algorithm.</TitleSmallWhite>
               <ExtraSmalLightWhite className="my-2">Awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.  </ExtraSmalLightWhite>
             </center>
           </Col>
