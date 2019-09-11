@@ -16,9 +16,8 @@ import {
 } from '../../store/match/join';
 
 import { Col } from '../base/Grid';
-import { TitleLarge, TitleForm, SubTitleSmallWhite } from '../base/Text';
+import { TitleLarge, TitleForm } from '../base/Text';
 import Input, { LabelInput, TextArea } from '../base/Input';
-import { SmallMainButton } from '../base/Button';
 import Tag from '../base/Tag';
 
 const UploadButton = () => (
@@ -128,13 +127,6 @@ const ApplicantJoinMatchPage = ({
         <UploadButton />
       </Upload>
       <hr />
-    </Col>
-    <Col className="text-center my-4">
-      <SmallMainButton>
-        <SubTitleSmallWhite className="mb-0">
-          Join Now
-        </SubTitleSmallWhite>
-      </SmallMainButton>
     </Col>
   </WithJoinMatch>
 );
