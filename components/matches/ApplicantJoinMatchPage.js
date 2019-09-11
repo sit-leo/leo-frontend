@@ -7,7 +7,7 @@ import {
 
 import { clientInstance } from '../../tools/request';
 
-import matchAdapter from '../../store/match/match-adapter';
+import matchingAdapter from '../../store/matching/matching-adapter';
 
 import WithJoinMatch from '../layouts/join-match';
 
@@ -32,7 +32,7 @@ const UploadButton = () => (
 );
 
 const handleConfirmApplicant = async (id) => {
-  const matchRequest = matchAdapter(clientInstance());
+  const matchRequest = matchingAdapter(clientInstance());
   await matchRequest.joinMatchApplicant(id);
 };
 
