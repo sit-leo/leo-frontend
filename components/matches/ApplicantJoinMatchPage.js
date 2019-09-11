@@ -5,6 +5,10 @@ import {
   Upload, Icon,
 } from 'antd';
 
+import { clientInstance } from '../../tools/request';
+
+import matchAdapter from '../../store/match/match-adapter';
+
 import WithJoinMatch from '../layouts/join-match';
 
 import {
@@ -27,7 +31,13 @@ const UploadButton = () => (
   </div>
 );
 
+const handleConfirmApplicant = async (id) => {
+  const matchRequest = matchAdapter(clientInstance());
+  await matchRequest.joinMatchApplicant(id);
+};
+
 const ApplicantJoinMatchPage = ({
+  match,
   skills = [],
   addApplicantSkill,
   removeApplicantSkill,
@@ -38,9 +48,11 @@ const ApplicantJoinMatchPage = ({
   experiences,
   setExperiences,
 }) => (
-  <WithJoinMatch>
+  <WithJoinMatch
+    handleConfirm={() => handleConfirmApplicant(match.id)}
+  >
     <Col>
-      <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
+      <TitleLarge className="my-2">{match.name}</TitleLarge>
     </Col>
     <TitleForm title="Profile" />
     <Col lg={6}>
@@ -132,6 +144,7 @@ const ApplicantJoinMatchPage = ({
 );
 
 const mapStateToProps = state => ({
+  match: state.match.match,
   inputSkillVisible: state.join.inputSkillVisible,
   skills: state.join.applicant.skills,
   experiences: state.join.applicant.experiences,

@@ -18,7 +18,13 @@ import { SubTitleSmallWhite } from '../base/Text';
 import Button, { DangerButton, SmallMainButton } from '../base/Button';
 import { FlexBetween } from '../base/Flex';
 
-const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
+const JoinMatch = ({
+  children,
+  match,
+  isOpenJoinModal,
+  toggleJoinModal,
+  handleConfirm = () => {},
+}) => (
   <WithNavbar>
     <ContainerRow className="my-3">
       <Col>
@@ -27,7 +33,7 @@ const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
             Matchings
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            Junior Programmer Match
+            { match.name }
           </Breadcrumb.Item>
           <Breadcrumb.Item>
             Join Matching
@@ -57,7 +63,7 @@ const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
           <DangerButton onClick={() => toggleJoinModal(!isOpenJoinModal)}>
             Cancel
           </DangerButton>
-          <Button onClick={() => console.log('clicked')}>
+          <Button onClick={() => toggleJoinModal(false) && handleConfirm()}>
             Confirm
           </Button>
         </FlexBetween>
@@ -67,6 +73,7 @@ const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
 );
 
 const mapStateToProps = state => ({
+  match: state.match.match,
   isOpenJoinModal: state.join.isOpenJoinModal,
 });
 
