@@ -4,9 +4,8 @@ import { Label } from 'reactstrap';
 import WithJoinMatch from '../layouts/join-match';
 
 import { Col } from '../base/Grid';
-import { TitleLarge, TitleForm, SubTitleSmallWhite } from '../base/Text';
+import { TitleLarge, TitleForm } from '../base/Text';
 import { LabelInput, TextArea } from '../base/Input';
-import { SmallMainButton } from '../base/Button';
 import Tag from '../base/Tag';
 import color from '../../config/color';
 
