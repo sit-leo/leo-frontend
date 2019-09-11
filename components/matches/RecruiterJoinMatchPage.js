@@ -58,13 +58,6 @@ const RecruiterJoinMatchPage = () => (
     <Col className="text-center">
       <a href="#" style={{ color: color.primary }}>+ Add more position</a>
     </Col>
-    <Col className="text-center my-4">
-      <SmallMainButton>
-        <SubTitleSmallWhite className="mb-0">
-          Join Now
-        </SubTitleSmallWhite>
-      </SmallMainButton>
-    </Col>
   </WithJoinMatch>
 );
 
