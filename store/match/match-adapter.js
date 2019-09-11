@@ -17,4 +17,12 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/user/matches?status=ended`)
       .then(({ data: matches }) => matches);
   },
+  joinMatchApplicant(id) {
+    return adapter.post(`${MATCH_API}/matches/${id}/applicants/join`)
+      .then(({ data: match }) => match);
+  },
+  joinMatchRecruiter(id) {
+    return adapter.post(`${MATCH_API}/matches/${id}/recruiters/join`)
+      .then(({ data: match }) => match);
+  },
 });
