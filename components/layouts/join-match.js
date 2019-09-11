@@ -15,7 +15,8 @@ import {
 
 import ContainerRow, { Col } from '../base/Grid';
 import { SubTitleSmallWhite } from '../base/Text';
-import { SmallMainButton } from '../base/Button';
+import Button, { DangerButton, SmallMainButton } from '../base/Button';
+import { FlexBetween } from '../base/Flex';
 
 const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
   <WithNavbar>
@@ -43,7 +44,24 @@ const JoinMatch = ({ children, isOpenJoinModal, toggleJoinModal }) => (
       </Col>
     </ContainerRow>
     <Modal isOpen={isOpenJoinModal}>
-      Helloworld
+      <ModalHeader className="justify-content-center">Confirmation</ModalHeader>
+      <ModalBody className="text-center">
+        Go to profile to edit information.
+        Are you sure to leave this page?
+      </ModalBody>
+      <ModalFooter className="flex-column text-center">
+        <span>
+          Your filled information will be saved before leaving this page.
+        </span>
+        <FlexBetween className="w-100 mt-3">
+          <DangerButton onClick={() => toggleJoinModal(!isOpenJoinModal)}>
+            Cancel
+          </DangerButton>
+          <Button onClick={() => console.log('clicked')}>
+            Confirm
+          </Button>
+        </FlexBetween>
+      </ModalFooter>
     </Modal>
   </WithNavbar>
 );
