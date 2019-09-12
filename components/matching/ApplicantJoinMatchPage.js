@@ -17,7 +17,7 @@ import {
   addApplicantSkill as addApplicantSkillAction,
   removeApplicantSkill as removeApplicantSkillAction,
   setExperiences as setExperiencesAction,
-} from '../../store/match/join';
+} from '../../store/matching/join';
 
 import { Col } from '../base/Grid';
 import { TitleLarge, TitleForm } from '../base/Text';

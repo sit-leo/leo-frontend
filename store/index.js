@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import global from './global';
 import match from './match';
-import join from './match/join';
+import join from './matching/join';
 import ranking from './matching/ranking';
 import user from './user';
 

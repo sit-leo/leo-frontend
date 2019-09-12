@@ -11,7 +11,7 @@ import WithNavbar from './with-navbar';
 
 import {
   toggleJoinModal as toggleJoinModalAction,
-} from '../../store/match/join';
+} from '../../store/matching/join';
 
 import ContainerRow, { Col } from '../base/Grid';
 import { SubTitleSmallWhite } from '../base/Text';

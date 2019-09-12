@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
 
-import RecruiterJoinMatchPage from '../../components/matches/RecruiterJoinMatchPage';
+import RecruiterJoinMatchPage from '../../components/matching/RecruiterJoinMatchPage';
 
 class RecruiterJoinMatchController extends React.Component {
   static async getInitialProps({ store, req }) {

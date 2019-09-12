@@ -10,7 +10,7 @@ import redirectToError from '../../tools/redirect-error';
 import matchAdapter from '../../store/match/match-adapter';
 import { setMatch } from '../../store/match';
 
-import ApplicantJoinMatchPage from '../../components/matches/ApplicantJoinMatchPage';
+import ApplicantJoinMatchPage from '../../components/matching/ApplicantJoinMatchPage';
 
 class ApplicantJoinMatchController extends React.Component {
   static async getInitialProps({
