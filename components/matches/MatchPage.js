@@ -8,6 +8,8 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
+import { ROLE_APPLICANT } from '../../tools/with-roles';
+import { convertDatePeriod } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
 
@@ -18,7 +20,6 @@ import Button from '../base/Button';
 import Card from '../base/Card';
 import ContainerRow, { Row, Col } from '../base/Grid';
 
-import { ROLE_APPLICANT } from '../../tools/with-roles';
 
 const Meta = styled(AntdCard.Meta)`
   .ant-card-meta-title {
@@ -49,8 +50,6 @@ const NumberLabel = ({ description, number }) => (
     <TitleSmall>{description}</TitleSmall>
   </LabelCard>
 );
-
-
 const MatchPage = ({ match, role }) => {
   function handleMatchResult() {
     if (role === ROLE_APPLICANT) {
@@ -64,15 +63,7 @@ const MatchPage = ({ match, role }) => {
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
   }
-  function convertDatePeriod(startDate, endDate) {
-    if (day(startDate).format('YYYY') === day(endDate).format('YYYY')) {
-      if (day(startDate).format('MMM') === day(endDate).format('MMM')) {
-        return `${day(startDate).format('DD')} - ${day(endDate).format('DD MMMM YYYY')}`;
-      }
-      return `${day(startDate).format('DD MMMM')} - ${day(endDate).format('DD MMMM YYYY')}`;
-    }
-    return `${day(startDate).format('DD MMMM YYYY')} - ${day(endDate).format('DD MMMM YYYY')}`;
-  }
+
   return (
     <WithNavbar>
       <ContainerRow className="py-5">
