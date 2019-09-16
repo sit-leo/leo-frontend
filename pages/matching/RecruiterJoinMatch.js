@@ -4,22 +4,22 @@ import { connect } from 'react-redux';
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
 
-import ApplicantJoinMatchPage from '../../components/matches/ApplicantJoinMatchPage';
+import RecruiterJoinMatchPage from '../../components/matching/RecruiterJoinMatchPage';
 
-class ApplicantJoinMatchController extends React.Component {
+class RecruiterJoinMatchController extends React.Component {
   static async getInitialProps({ store, req }) {
     return {};
   }
 
   render() {
     return (
-      <ApplicantJoinMatchPage />
+      <RecruiterJoinMatchPage />
     );
   }
 }
 
 export default withUser(
   withAuth(
-    connect()(ApplicantJoinMatchController),
+    connect()(RecruiterJoinMatchController),
   ),
 );

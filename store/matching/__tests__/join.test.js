@@ -10,6 +10,8 @@ import JoinReducer,
   ADD_APPLICANT_SKILL,
   removeApplicantSkill,
   REMOVE_APPLICANT_SKILL,
+  toggleJoinModal,
+  TOGGLE_JOIN_MODAL,
 } from '../join';
 
 describe('Test Join Match Actions', () => {
@@ -45,6 +47,12 @@ describe('Test Join Match Actions', () => {
     const action = setSkill(skill);
     expect(action.type).toEqual(SET_SKILL);
     expect(action.skill).toEqual(skill);
+  });
+
+  it('Test toggleJoinModal action should return type and property correctly.', () => {
+    const action = toggleJoinModal(true);
+    expect(action.type).toEqual(TOGGLE_JOIN_MODAL);
+    expect(action.isOpenJoinModal).toEqual(true);
   });
 });
 
@@ -121,6 +129,15 @@ describe('Test Join Match Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.skill).toEqual(skill);
+    done();
+  });
+
+  it('Test toggleJoinModal should return isOpenJoinModal correctly.', (done) => {
+    const action = { type: TOGGLE_JOIN_MODAL, isOpenJoinModal: true };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.isOpenJoinModal).toEqual(true);
     done();
   });
 });

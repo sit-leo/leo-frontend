@@ -1,4 +1,5 @@
 export const initState = {
+  isOpenJoinModal: false,
   inputSkillVisible: false,
   skill: '',
   applicant: {
@@ -10,6 +11,7 @@ export const initState = {
 
 export const SET_INPUT_SKILL_VISIBLE = 'MATCH/SET_INPUT_SKILL_VISIBLE';
 export const SET_SKILL = 'MATCH/SET_SKILL';
+export const TOGGLE_JOIN_MODAL = 'MATCH/TOGGLE_JOIN_MODAL';
 
 export const ADD_APPLICANT_SKILL = 'MATCH/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'MATCH/REMOVE_APPLICANT_SKILL';
@@ -42,6 +44,9 @@ export default function reducer(state = initState, action = {}) {
     case SET_SKILL: {
       return { ...state, skill: action.skill };
     }
+    case TOGGLE_JOIN_MODAL: {
+      return { ...state, isOpenJoinModal: action.isOpenJoinModal };
+    }
     default: return { ...state };
   }
 }
@@ -64,4 +69,8 @@ export function setInputSkillVisible(inputSkillVisible) {
 
 export function setSkill(skill) {
   return { type: SET_SKILL, skill };
+}
+
+export function toggleJoinModal(isOpenJoinModal) {
+  return { type: TOGGLE_JOIN_MODAL, isOpenJoinModal };
 }

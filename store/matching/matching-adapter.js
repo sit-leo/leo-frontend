@@ -57,4 +57,12 @@ export default adapter => ({
     return adapter.get(`${MATCHING_API}/user/matches/${matchId}/result`)
       .then(({ data: ranks }) => ranks);
   },
+  joinMatchApplicant(id) {
+    return adapter.post(`${MATCHING_API}/matches/${id}/applicants/join`)
+      .then(({ data: match }) => match);
+  },
+  joinMatchRecruiter(id) {
+    return adapter.post(`${MATCHING_API}/matches/${id}/recruiters/join`)
+      .then(({ data: match }) => match);
+  },
 });
