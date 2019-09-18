@@ -1,5 +1,11 @@
 import React from 'react';
 import { Label } from 'reactstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import {
+  addRecruiterPosition as addRecruiterPositionAction,
+} from '../../store/matching/join';
 
 import WithJoinMatch from '../layouts/join-match';
 
@@ -7,27 +13,10 @@ import { Col } from '../base/Grid';
 import { TitleLarge, TitleForm } from '../base/Text';
 import { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
-import color from '../../config/color';
+import { TextButton } from '../base/Button';
 
-const RecruiterJoinMatchPage = () => (
-  <WithJoinMatch>
-    <Col>
-      <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
-    </Col>
-    <TitleForm title="Profile" />
-    <Col lg={6}>
-      <LabelInput label="Company name" name="companyName" text="Facebook Thailand, Inc" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Location" name="location" text="Phayathai, BKK" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Email" name="email" text="jirapas.jil@gmail.com" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Phone Number" name="phoneNumber" text="0912121212" disabled />
-    </Col>
-    <TitleForm title="Positions" />
+const Position = ({ position }) => (
+  <React.Fragment>
     <Col lg={6}>
       <LabelInput label="Position" name="position" text="Backend Developer" disabled />
     </Col>
@@ -54,10 +43,49 @@ const RecruiterJoinMatchPage = () => (
       </div>
       <hr />
     </Col>
+  </React.Fragment>
+);
+
+const RecruiterJoinMatchPage = ({
+  positions,
+  addRecruiterPosition = () => { },
+}) => (
+  <WithJoinMatch>
+    <Col>
+      <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
+    </Col>
+
+    <TitleForm title="Profile" />
+    <Col lg={6}>
+      <LabelInput label="Company name" name="companyName" text="Facebook Thailand, Inc" disabled />
+    </Col>
+    <Col lg={6}>
+      <LabelInput label="Location" name="location" text="Phayathai, BKK" disabled />
+    </Col>
+    <Col lg={6}>
+      <LabelInput label="Email" name="email" text="jirapas.jil@gmail.com" disabled />
+    </Col>
+    <Col lg={6}>
+      <LabelInput label="Phone Number" name="phoneNumber" text="0912121212" disabled />
+    </Col>
+
+    <TitleForm title="Positions" />
+    {
+      positions.map(position => <Position position={position} />)
+    }
+
     <Col className="text-center">
-      <a href="#" style={{ color: color.primary }}>+ Add more position</a>
+      <TextButton onClick={() => addRecruiterPosition()}>+ Add more position</TextButton>
     </Col>
   </WithJoinMatch>
 );
 
-export default RecruiterJoinMatchPage;
+const mapStateToProps = state => ({
+  positions: state.join.recruiter.positions,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addRecruiterPosition: bindActionCreators(addRecruiterPositionAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJoinMatchPage);
