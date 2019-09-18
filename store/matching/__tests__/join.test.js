@@ -12,6 +12,8 @@ import JoinReducer,
   REMOVE_APPLICANT_SKILL,
   toggleJoinModal,
   TOGGLE_JOIN_MODAL,
+  addRecruiterPosition,
+  ADD_RECRUITER_POSITION,
 } from '../join';
 
 describe('Test Join Match Actions', () => {
@@ -53,6 +55,11 @@ describe('Test Join Match Actions', () => {
     const action = toggleJoinModal(true);
     expect(action.type).toEqual(TOGGLE_JOIN_MODAL);
     expect(action.isOpenJoinModal).toEqual(true);
+  });
+
+  it('Test addRecruiterPosition action should return type and property correctly.', () => {
+    const action = addRecruiterPosition();
+    expect(action.type).toEqual(ADD_RECRUITER_POSITION);
   });
 });
 
@@ -138,6 +145,16 @@ describe('Test Join Match Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.isOpenJoinModal).toEqual(true);
+    done();
+  });
+
+  it('Test addRecruiterPosition should return positions with initial position correctly.', (done) => {
+    const action = { type: ADD_RECRUITER_POSITION };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.positions.length).toEqual(2);
+    expect(store.recruiter.positions[0]).toEqual({});
     done();
   });
 });

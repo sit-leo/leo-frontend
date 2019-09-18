@@ -6,6 +6,9 @@ export const initState = {
     skills: [],
     experiences: '',
   },
+  recruiter: {
+    positions: [{}],
+  },
 };
 
 
@@ -16,6 +19,8 @@ export const TOGGLE_JOIN_MODAL = 'MATCH/TOGGLE_JOIN_MODAL';
 export const ADD_APPLICANT_SKILL = 'MATCH/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'MATCH/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'MATCH/SET_APPLICANT_EXPERIENCES';
+
+export const ADD_RECRUITER_POSITION = 'MATCH/ADD_RECRUITER_POSITION';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -47,6 +52,11 @@ export default function reducer(state = initState, action = {}) {
     case TOGGLE_JOIN_MODAL: {
       return { ...state, isOpenJoinModal: action.isOpenJoinModal };
     }
+    case ADD_RECRUITER_POSITION: {
+      const positions = [...state.recruiter.positions, {}];
+      const recruiter = { ...state.recruiter, positions };
+      return { ...state, recruiter };
+    }
     default: return { ...state };
   }
 }
@@ -73,4 +83,8 @@ export function setSkill(skill) {
 
 export function toggleJoinModal(isOpenJoinModal) {
   return { type: TOGGLE_JOIN_MODAL, isOpenJoinModal };
+}
+
+export function addRecruiterPosition() {
+  return { type: ADD_RECRUITER_POSITION };
 }
