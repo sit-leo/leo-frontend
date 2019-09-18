@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card as DefaultCard, Icon } from 'antd';
+import {
+  Card as DefaultCard, Icon, Row, Divider,
+} from 'antd';
+import SmallButton from './Button';
+import ContainerRow, { Col } from './Grid';
+import { FlexCenter } from './Flex';
+
 import colors from '../../config/color';
+import { TitleSmallPrimary, TitlePrimary, ExtraSmallText } from './Text';
 
 
 const CardContaier = styled.div`
@@ -22,6 +29,17 @@ const Card = ({ children, ...props }) => (
 
 const { Meta } = DefaultCard;
 
+const ShowAmount = ({ count, badgeText, ...props }) => (
+  <FlexCenter className="flex-column">
+    <ExtraSmallText>
+      {count}
+    </ExtraSmallText>
+    <ExtraSmallText {...props}>
+      {badgeText}
+    </ExtraSmallText>
+  </FlexCenter>
+);
+
 export const EventCard = ({
   children, title, description, src,
 }) => (
@@ -32,16 +50,18 @@ export const EventCard = ({
           src={src}
         />
       )}
-      actions={[
-        <Icon type="setting" key="setting" />,
-        <Icon type="edit" key="edit" />,
-        <Icon type="ellipsis" key="ellipsis" />,
-      ]}
     >
       <Meta
         title={title}
         description={description}
       />
+      <Divider />
+      <ContainerRow>
+        <ShowAmount count={19} badgeText="Recruiters" />
+        <ShowAmount count={19} badgeText="Applicants" />
+        <SmallButton className="w-25">Detail</SmallButton>
+      </ContainerRow>
+
       {children}
     </PlainCard>
 );
