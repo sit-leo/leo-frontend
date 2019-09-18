@@ -60,4 +60,10 @@ export const CardButton = styled.button`
   }
 `;
 
+export const TextButton = styled.button`
+  color: ${color.primary};
+  background: none;
+  border: none;
+`;
+
 export default MainButton;
