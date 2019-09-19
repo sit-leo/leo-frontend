@@ -18,7 +18,7 @@ export default adapter => ({
     return adapter.post(`${USER_API}/login`, credential)
       .then(({ data: jwt }) => {
         cookie.setToken(jwt.token);
-        Router.push('/');
+        window.location.assign('/');
         return jwt;
       });
   },
