@@ -6,7 +6,7 @@ import { withAuth } from '../../tools/with-auth';
 import withRole, { isApplicant } from '../../tools/with-roles';
 import redirectError from '../../tools/redirect-error';
 
-import { isApplicantCanRanking } from '../../tools/check-match-time';
+import { isApplicantCanRanking } from '../../tools/match-time';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';

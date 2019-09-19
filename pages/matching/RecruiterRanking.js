@@ -6,7 +6,7 @@ import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
 import redirectError from '../../tools/redirect-error';
 
-import { isRecruiterCanRanking } from '../../tools/check-match-time';
+import { isRecruiterCanRanking } from '../../tools/match-time';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';

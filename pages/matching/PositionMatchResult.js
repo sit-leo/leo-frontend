@@ -5,7 +5,7 @@ import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
 import { serverInstance } from '../../tools/request';
 
-import { isAnnouceDate } from '../../tools/check-match-time';
+import { isAnnouceDate } from '../../tools/match-time';
 
 import redirectError from '../../tools/redirect-error';
 
