@@ -9,7 +9,7 @@ import ContainerRow, { Col } from './Grid';
 import { FlexCenter } from './Flex';
 
 import colors from '../../config/color';
-import { TitleSmallPrimary, TitlePrimary, ExtraSmallText } from './Text';
+import { TitleSmallPrimary, ExtraSmallTextLight, ExtraSmallText } from './Text';
 
 
 const CardContaier = styled.div`
@@ -34,9 +34,9 @@ const ShowAmount = ({ count, badgeText, ...props }) => (
     <ExtraSmallText>
       {count}
     </ExtraSmallText>
-    <ExtraSmallText {...props}>
+    <ExtraSmallTextLight {...props}>
       {badgeText}
-    </ExtraSmallText>
+    </ExtraSmallTextLight>
   </FlexCenter>
 );
 
@@ -44,31 +44,33 @@ export const EventCard = ({
   children, title, description, src,
 }) => (
   <PlainCard
+      className="my-2"
       cover={(
         <img
           alt="example"
           src={src}
         />
       )}
+      actions={[
+        <ShowAmount count={19} badgeText="Recruiters" />,
+        <ShowAmount count={19} badgeText="Applicants" />,
+        <SmallButton className="w-100">Detail</SmallButton>,
+      ]}
     >
       <Meta
         title={title}
         description={description}
       />
-      <Divider />
-      <ContainerRow>
-        <ShowAmount count={19} badgeText="Recruiters" />
-        <ShowAmount count={19} badgeText="Applicants" />
-        <SmallButton className="w-25">Detail</SmallButton>
-      </ContainerRow>
-
       {children}
     </PlainCard>
 );
 
 const PlainCard = styled(DefaultCard)`
   width: 100%;
-  margin-top: 16;
+  margin-top: 16px;
+  li > span {
+    width:75%;
+  }
 `;
 
 export const SmallCard = styled.div`
