@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card as DefaultCard, Icon } from 'antd';
+import {
+  Card as DefaultCard, Icon, Row, Divider,
+} from 'antd';
+import SmallButton from './Button';
+import ContainerRow, { Col } from './Grid';
+import { FlexCenter } from './Flex';
+
 import colors from '../../config/color';
+import { TitleSmallPrimary, ExtraSmallTextLight, ExtraSmallText } from './Text';
 
 
 const CardContaier = styled.div`
@@ -22,10 +29,22 @@ const Card = ({ children, ...props }) => (
 
 const { Meta } = DefaultCard;
 
+const ShowAmount = ({ count, badgeText, ...props }) => (
+  <FlexCenter className="flex-column">
+    <ExtraSmallText>
+      {count}
+    </ExtraSmallText>
+    <ExtraSmallTextLight {...props}>
+      {badgeText}
+    </ExtraSmallTextLight>
+  </FlexCenter>
+);
+
 export const EventCard = ({
   children, title, description, src,
 }) => (
   <PlainCard
+      className="my-2"
       cover={(
         <img
           alt="example"
@@ -33,9 +52,9 @@ export const EventCard = ({
         />
       )}
       actions={[
-        <Icon type="setting" key="setting" />,
-        <Icon type="edit" key="edit" />,
-        <Icon type="ellipsis" key="ellipsis" />,
+        <ShowAmount count={19} badgeText="Recruiters" />,
+        <ShowAmount count={19} badgeText="Applicants" />,
+        <SmallButton className="w-100">Detail</SmallButton>,
       ]}
     >
       <Meta
@@ -48,7 +67,10 @@ export const EventCard = ({
 
 const PlainCard = styled(DefaultCard)`
   width: 100%;
-  margin-top: 16;
+  margin-top: 16px;
+  li > span {
+    width:75%;
+  }
 `;
 
 export const SmallCard = styled.div`
