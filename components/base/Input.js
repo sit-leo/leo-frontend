@@ -23,7 +23,7 @@ export const LabelInput = ({
 }) => (
   <React.Fragment>
     <Label for={name} className="mb-0">{label}</Label>
-    <Input id={name} value={text} {...props} />
+    <Input id={name} name={name} value={text} {...props} />
   </React.Fragment>
 );
 
