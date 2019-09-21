@@ -2,9 +2,11 @@ import React from 'react';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import dayjs from 'dayjs';
 
 import {
   addRecruiterPosition as addRecruiterPositionAction,
+  updateRecruiterPosition as updateRecruiterPositionAction,
 } from '../../store/matching/join';
 
 import WithJoinMatch from '../layouts/join-match';
@@ -15,27 +17,56 @@ import { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
 
-const Position = ({ position }) => (
+const Position = ({
+  dataKey,
+  position,
+  updateRecruiterPosition = () => { },
+}) => (
   <React.Fragment>
     <Col lg={6}>
-      <LabelInput label="Position" name="position" text="Backend Developer" disabled />
+      <LabelInput
+        label="Position"
+        name="name"
+        placeholder="Backend Developer"
+        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        text={position.name}
+      />
     </Col>
     <Col lg={3}>
-      <LabelInput label="Salary Range (Bath)" name="salary" text="15000 - 20000" disabled />
+      <LabelInput
+        label="Salary Range (Bath)"
+        name="salary"
+        placeholder="15000 - 20000"
+        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        text={position.salary}
+      />
     </Col>
     <Col lg={3}>
-      <LabelInput label="Capacity" name="capacity" text="Capacity of recruitment." disabled />
+      <LabelInput
+        label="Capacity"
+        name="capacity"
+        placeholder="Capacity of recruitment."
+        type="number"
+        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        text={position.capacity}
+      />
     </Col>
     <Col>
       <Label className="mb-0" for="description">Description (optional)</Label>
-      <TextArea style={{ margin: '6px 0' }} disabled value="Tell more about the position." />
+      <TextArea
+        style={{ margin: '6px 0' }}
+        name="description"
+        placeholder="Tell more about the position."
+        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        text={position.description}
+      />
     </Col>
     <Col>
       <Label className="mb-0" for="documents">Required Documents</Label>
       <div style={{ margin: '6px 0' }}>
         {
-          ['Resume', 'Transcript'].map(tag => (
-            <Tag key={tag}>
+          position.documents.map(tag => (
+            <Tag key={`${dataKey}-${tag}`}>
               {tag}
             </Tag>
           ))
@@ -49,6 +80,7 @@ const Position = ({ position }) => (
 const RecruiterJoinMatchPage = ({
   positions,
   addRecruiterPosition = () => { },
+  updateRecruiterPosition = () => { },
 }) => (
   <WithJoinMatch>
     <Col>
@@ -71,7 +103,17 @@ const RecruiterJoinMatchPage = ({
 
     <TitleForm title="Positions" />
     {
-      positions.map(position => <Position position={position} />)
+      positions.map((position, index) => {
+        const dataKey = `${index}`;
+        return (
+          <Position
+            key={dataKey}
+            dataKey={dataKey}
+            position={position}
+            updateRecruiterPosition={updateRecruiterPosition}
+          />
+        );
+      })
     }
 
     <Col className="text-center">
@@ -86,6 +128,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addRecruiterPosition: bindActionCreators(addRecruiterPositionAction, dispatch),
+  updateRecruiterPosition: bindActionCreators(updateRecruiterPositionAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJoinMatchPage);
