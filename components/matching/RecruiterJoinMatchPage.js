@@ -2,25 +2,35 @@ import React from 'react';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import dayjs from 'dayjs';
 
 import {
   addRecruiterPosition as addRecruiterPositionAction,
   updateRecruiterPosition as updateRecruiterPositionAction,
+  setInputDocumentVisible as setInputDocumentVisibleAction,
+  setDocument as setDocumentAction,
+  addRecruiterDocument as addRecruiterDocumentAction,
+  removeRecruiterDocument as removeRecruiterDocumentAction,
 } from '../../store/matching/join';
 
 import WithJoinMatch from '../layouts/join-match';
 
 import { Col } from '../base/Grid';
 import { TitleLarge, TitleForm } from '../base/Text';
-import { LabelInput, TextArea } from '../base/Input';
+import Input, { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
+import Icon from '../base/Icon';
 
 const Position = ({
   dataKey,
   position,
   updateRecruiterPosition = () => { },
+  inputDocumentVisible,
+  setInputDocumentVisible,
+  document,
+  setDocument,
+  addRecruiterDocument = () => { },
+  removeRecruiterDocument = () => { },
 }) => (
   <React.Fragment>
     <Col lg={6}>
@@ -66,10 +76,44 @@ const Position = ({
       <div style={{ margin: '6px 0' }}>
         {
           position.documents.map(tag => (
-            <Tag key={`${dataKey}-${tag}`}>
+            <Tag
+              closable
+              key={`${dataKey}-${tag}`}
+              onClose={(e) => {
+                e.preventDefault();
+                removeRecruiterDocument(dataKey, tag);
+              }}
+            >
               {tag}
             </Tag>
           ))
+        }
+        {
+          inputDocumentVisible && (
+            <Input
+              type="text"
+              size="small"
+              style={{ width: 78 }}
+              value={document}
+              onChange={e => setDocument(e.target.value)}
+              onBlur={() => setInputDocumentVisible(false)}
+              onPressEnter={() => {
+                if (document !== '') {
+                  addRecruiterDocument(dataKey, document);
+                  setDocument('');
+                }
+              }}
+            />
+          )
+        }
+
+        {
+          !inputDocumentVisible && (
+            <Tag onClick={() => setInputDocumentVisible(true)}>
+              <Icon type="plus" />
+              Add Skill
+            </Tag>
+          )
         }
       </div>
       <hr />
@@ -81,6 +125,12 @@ const RecruiterJoinMatchPage = ({
   positions,
   addRecruiterPosition = () => { },
   updateRecruiterPosition = () => { },
+  inputDocumentVisible,
+  setInputDocumentVisible,
+  document,
+  setDocument,
+  addRecruiterDocument = () => { },
+  removeRecruiterDocument = () => { },
 }) => (
   <WithJoinMatch>
     <Col>
@@ -111,6 +161,12 @@ const RecruiterJoinMatchPage = ({
             dataKey={dataKey}
             position={position}
             updateRecruiterPosition={updateRecruiterPosition}
+            inputDocumentVisible={inputDocumentVisible}
+            setInputDocumentVisible={setInputDocumentVisible}
+            document={document}
+            setDocument={setDocument}
+            addRecruiterDocument={addRecruiterDocument}
+            removeRecruiterDocument={removeRecruiterDocument}
           />
         );
       })
@@ -124,11 +180,17 @@ const RecruiterJoinMatchPage = ({
 
 const mapStateToProps = state => ({
   positions: state.join.recruiter.positions,
+  inputDocumentVisible: state.join.inputDocumentVisible,
+  document: state.join.document,
 });
 
 const mapDispatchToProps = dispatch => ({
   addRecruiterPosition: bindActionCreators(addRecruiterPositionAction, dispatch),
   updateRecruiterPosition: bindActionCreators(updateRecruiterPositionAction, dispatch),
+  setInputDocumentVisible: bindActionCreators(setInputDocumentVisibleAction, dispatch),
+  setDocument: bindActionCreators(setDocumentAction, dispatch),
+  addRecruiterDocument: bindActionCreators(addRecruiterDocumentAction, dispatch),
+  removeRecruiterDocument: bindActionCreators(removeRecruiterDocumentAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJoinMatchPage);
