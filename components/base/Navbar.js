@@ -97,12 +97,12 @@ const MenuDropdown = ({ role, logout }) => (
 const NavbarContainer = ({ role, logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
-      <Col xs={6} lg={1} className="logo text-left">
+      <Col xs={6} md={1} className="logo text-left">
         <Link href="/">
           <Image src="/static/images/leo.png" />
         </Link>
       </Col>
-      <Col lg={role !== 'guest' ? 10 : 8} className="d-none d-md-flex align-items-center">
+      <Col md={role !== 'guest' ? 10 : 8} className="d-none d-md-flex align-items-center">
         {
           role !== 'guest' && (
             <ContainerRow>
@@ -122,7 +122,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
       {
         role !== 'guest'
           ? (
-            <Col xs={6} lg={1} className="profile-avatar text-right">
+            <Col xs={6} md={1} className="profile-avatar text-right">
               <Dropdown overlay={<MenuDropdown logout={logout} />}>
                 <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
                   <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
