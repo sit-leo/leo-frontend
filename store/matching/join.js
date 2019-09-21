@@ -10,6 +10,8 @@ export const initState = {
   isOpenJoinModal: false,
   inputSkillVisible: false,
   skill: '',
+  inputDocumentVisible: false,
+  document: '',
   applicant: {
     skills: [],
     experiences: '',
@@ -23,6 +25,8 @@ export const initState = {
 export const SET_INPUT_SKILL_VISIBLE = 'MATCH/SET_INPUT_SKILL_VISIBLE';
 export const SET_SKILL = 'MATCH/SET_SKILL';
 export const TOGGLE_JOIN_MODAL = 'MATCH/TOGGLE_JOIN_MODAL';
+export const SET_INPUT_DOCUMENT_VISIBLE = 'MATCH/SET_INPUT_DOCUMENT_VISIBLE';
+export const SET_DOCUMENT = 'MATCH/SET_DOCUMENT';
 
 export const ADD_APPLICANT_SKILL = 'MATCH/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'MATCH/REMOVE_APPLICANT_SKILL';
@@ -30,6 +34,8 @@ export const SET_APPLICANT_EXPERIENCES = 'MATCH/SET_APPLICANT_EXPERIENCES';
 
 export const ADD_RECRUITER_POSITION = 'MATCH/ADD_RECRUITER_POSITION';
 export const UPDATE_RECRUITER_POSITION = 'MATCH/UPDATE_RECRUITER_POSITION';
+export const ADD_RECRUITER_DOCUMENT = 'MATCH/ADD_RECRUITER_DOCUMENT';
+export const REMOVE_RECRUITER_DOCUMENT = 'MATCH/REMOVE_RECRUITER_DOCUMENT';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -75,6 +81,31 @@ export default function reducer(state = initState, action = {}) {
       positions.splice(index, 1, position);
       return { ...state, recruiter: { ...state.recruiter, positions } };
     }
+    case SET_INPUT_DOCUMENT_VISIBLE: {
+      return { ...state, inputDocumentVisible: action.inputDocumentVisible };
+    }
+    case SET_DOCUMENT: {
+      return { ...state, document: action.document };
+    }
+    case ADD_RECRUITER_DOCUMENT: {
+      const { payload: { dataKey, document } } = action;
+      const { documents } = state.recruiter.positions[dataKey];
+      if (document && documents.indexOf(document) === -1) {
+        const position = { ...state.recruiter.positions[dataKey], documents: [...documents, document] };
+        const positions = [...state.recruiter.positions];
+        positions.splice(dataKey, 1, position);
+        return { ...state, recruiter: { ...state.recruiter, positions } };
+      }
+      return { ...state };
+    }
+    case REMOVE_RECRUITER_DOCUMENT: {
+      const { payload: { dataKey } } = action;
+      const documents = state.recruiter.positions[dataKey].documents.filter(document => document !== action.payload.document);
+      const position = { ...state.recruiter.positions[dataKey], documents };
+      const positions = [...state.recruiter.positions];
+      positions.splice(dataKey, 1, position);
+      return { ...state, recruiter: { ...state.recruiter, positions } };
+    }
     default: return { ...state };
   }
 }
@@ -109,4 +140,20 @@ export function addRecruiterPosition() {
 
 export function updateRecruiterPosition(index, attribute, value) {
   return { type: UPDATE_RECRUITER_POSITION, payload: { index, attribute, value } };
+}
+
+export function setInputDocumentVisible(inputDocumentVisible) {
+  return { type: SET_INPUT_DOCUMENT_VISIBLE, inputDocumentVisible };
+}
+
+export function setDocument(document) {
+  return { type: SET_DOCUMENT, document };
+}
+
+export function addRecruiterDocument(dataKey, document) {
+  return { type: ADD_RECRUITER_DOCUMENT, payload: { dataKey, document } };
+}
+
+export function removeRecruiterDocument(dataKey, document) {
+  return { type: REMOVE_RECRUITER_DOCUMENT, payload: { dataKey, document } };
 }
