@@ -12,8 +12,11 @@ import JoinReducer,
   REMOVE_APPLICANT_SKILL,
   toggleJoinModal,
   TOGGLE_JOIN_MODAL,
+  initPosition,
   addRecruiterPosition,
   ADD_RECRUITER_POSITION,
+  updateRecruiterPosition,
+  UPDATE_RECRUITER_POSITION,
 } from '../join';
 
 describe('Test Join Match Actions', () => {
@@ -60,6 +63,13 @@ describe('Test Join Match Actions', () => {
   it('Test addRecruiterPosition action should return type and property correctly.', () => {
     const action = addRecruiterPosition();
     expect(action.type).toEqual(ADD_RECRUITER_POSITION);
+  });
+
+  it('Test updateRecruiterPosition action should return type and property correctly.', () => {
+    const payload = { index: 0, attribute: 'name', value: 'Backend Developer' };
+    const action = updateRecruiterPosition(payload.index, payload.attribute, payload.value);
+    expect(action.type).toEqual(UPDATE_RECRUITER_POSITION);
+    expect(action.payload).toEqual(payload);
   });
 });
 
@@ -154,7 +164,18 @@ describe('Test Join Match Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.recruiter.positions.length).toEqual(2);
-    expect(store.recruiter.positions[0]).toEqual({});
+    expect(store.recruiter.positions[0]).toEqual(initPosition);
+    done();
+  });
+
+  it('Test updateRecruiterPosition should return positions with initial position correctly.', (done) => {
+    const payload = { index: 0, attribute: 'name', value: 'Backend Developer' };
+    const action = { type: UPDATE_RECRUITER_POSITION, payload };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.positions.length).toEqual(1);
+    expect(store.recruiter.positions[0]).toEqual({ ...initPosition, name: payload.value });
     done();
   });
 });

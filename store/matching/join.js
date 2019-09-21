@@ -1,3 +1,11 @@
+export const initPosition = {
+  name: '',
+  salary: '',
+  capacity: 1,
+  description: '',
+  documents: ['Resume', 'Transcript'],
+};
+
 export const initState = {
   isOpenJoinModal: false,
   inputSkillVisible: false,
@@ -7,7 +15,7 @@ export const initState = {
     experiences: '',
   },
   recruiter: {
-    positions: [{}],
+    positions: [initPosition],
   },
 };
 
@@ -21,6 +29,7 @@ export const REMOVE_APPLICANT_SKILL = 'MATCH/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'MATCH/SET_APPLICANT_EXPERIENCES';
 
 export const ADD_RECRUITER_POSITION = 'MATCH/ADD_RECRUITER_POSITION';
+export const UPDATE_RECRUITER_POSITION = 'MATCH/UPDATE_RECRUITER_POSITION';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -53,9 +62,18 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, isOpenJoinModal: action.isOpenJoinModal };
     }
     case ADD_RECRUITER_POSITION: {
-      const positions = [...state.recruiter.positions, {}];
-      const recruiter = { ...state.recruiter, positions };
-      return { ...state, recruiter };
+      const positions = [...state.recruiter.positions, initPosition];
+      return { ...state, recruiter: { ...state.recruiter, positions } };
+    }
+    case UPDATE_RECRUITER_POSITION: {
+      const { payload: { index, value, attribute } } = action;
+      const position = {
+        ...state.recruiter.positions[index],
+        [attribute]: value,
+      };
+      const positions = [...state.recruiter.positions];
+      positions.splice(index, 1, position);
+      return { ...state, recruiter: { ...state.recruiter, positions } };
     }
     default: return { ...state };
   }
@@ -87,4 +105,8 @@ export function toggleJoinModal(isOpenJoinModal) {
 
 export function addRecruiterPosition() {
   return { type: ADD_RECRUITER_POSITION };
+}
+
+export function updateRecruiterPosition(index, attribute, value) {
+  return { type: UPDATE_RECRUITER_POSITION, payload: { index, attribute, value } };
 }
