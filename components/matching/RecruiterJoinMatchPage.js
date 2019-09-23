@@ -3,6 +3,9 @@ import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { clientInstance } from '../../tools/request';
+import matchingAdapter from '../../store/matching/matching-adapter';
+
 import {
   addRecruiterPosition as addRecruiterPositionAction,
   updateRecruiterPosition as updateRecruiterPositionAction,
@@ -20,6 +23,12 @@ import Input, { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
 import Icon from '../base/Icon';
+import { FormContainer } from '../base/Form';
+
+const handleConfirmRecruiter = async (id, positions) => {
+  const matchRequest = matchingAdapter(clientInstance());
+  await matchRequest.joinMatchRecruiter(id, positions);
+};
 
 const Position = ({
   dataKey,
@@ -122,6 +131,7 @@ const Position = ({
 );
 
 const RecruiterJoinMatchPage = ({
+  match,
   positions,
   addRecruiterPosition = () => { },
   updateRecruiterPosition = () => { },
@@ -132,7 +142,9 @@ const RecruiterJoinMatchPage = ({
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
 }) => (
-  <WithJoinMatch>
+  <WithJoinMatch
+    handleConfirm={() => handleConfirmRecruiter(match.id, { positions })}
+  >
     <Col>
       <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
     </Col>
@@ -150,27 +162,28 @@ const RecruiterJoinMatchPage = ({
     <Col lg={6}>
       <LabelInput label="Phone Number" name="phoneNumber" text="0912121212" disabled />
     </Col>
-
-    <TitleForm title="Positions" />
-    {
-      positions.map((position, index) => {
-        const dataKey = `${index}`;
-        return (
-          <Position
-            key={dataKey}
-            dataKey={dataKey}
-            position={position}
-            updateRecruiterPosition={updateRecruiterPosition}
-            inputDocumentVisible={inputDocumentVisible}
-            setInputDocumentVisible={setInputDocumentVisible}
-            document={document}
-            setDocument={setDocument}
-            addRecruiterDocument={addRecruiterDocument}
-            removeRecruiterDocument={removeRecruiterDocument}
-          />
-        );
-      })
-    }
+    <FormContainer>
+      <TitleForm title="Positions" />
+      {
+        positions.map((position, index) => {
+          const dataKey = `${index}`;
+          return (
+            <Position
+              key={dataKey}
+              dataKey={dataKey}
+              position={position}
+              updateRecruiterPosition={updateRecruiterPosition}
+              inputDocumentVisible={inputDocumentVisible}
+              setInputDocumentVisible={setInputDocumentVisible}
+              document={document}
+              setDocument={setDocument}
+              addRecruiterDocument={addRecruiterDocument}
+              removeRecruiterDocument={removeRecruiterDocument}
+            />
+          );
+        })
+      }
+    </FormContainer>
 
     <Col className="text-center">
       <TextButton onClick={() => addRecruiterPosition()}>+ Add more position</TextButton>
@@ -179,6 +192,7 @@ const RecruiterJoinMatchPage = ({
 );
 
 const mapStateToProps = state => ({
+  match: state.match.match,
   positions: state.join.recruiter.positions,
   inputDocumentVisible: state.join.inputDocumentVisible,
   document: state.join.document,
