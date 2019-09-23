@@ -132,7 +132,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
             </Col>
           )
           : (
-            <Col xs={6} lg={3} className="d-flex flex-row justify-content-end align-items-center">
+            <Col xs={6} md={3} className="d-flex flex-row justify-content-end align-items-center">
               <a href="/register">
                 <TitleSmallPrimary className="mr-3">
                   Register
