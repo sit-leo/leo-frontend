@@ -62,7 +62,7 @@ export default adapter => ({
       .then(({ data: match }) => match);
   },
   joinMatchRecruiter(id, positions) {
-    return adapter.post(`${MATCHING_API}/matches/${id}/recruiters/join`, { positions })
+    return adapter.post(`${MATCHING_API}/matches/${id}/recruiters/join`, positions)
       .then(({ data: match }) => match);
   },
 });
