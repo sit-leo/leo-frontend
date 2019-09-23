@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Form } from 'antd';
 import { clientInstance } from '../../tools/request';
 
 import userAdapter from '../../store/user/user-adapter';
@@ -12,8 +11,9 @@ import WithNavbar from '../layouts/with-navbar';
 
 import { SmallMainButton } from '../base/Button';
 import Input from '../base/Input';
-import ContainerRow, { Col, Row } from '../base/Grid';
+import ContainerRow, { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
+import Form, { Item } from '../base/Form';
 
 const userRequest = userAdapter(clientInstance());
 
@@ -22,6 +22,7 @@ const LoginPage = ({
   password,
   setUsername: handleUsername,
   setPassword: handlePassword,
+  form: { getFieldDecorator },
 }) => (
   <WithNavbar>
     <FlexCenter className="vh-100">
@@ -38,19 +39,42 @@ const LoginPage = ({
             <Col className="text-center mb-3">
               <img className="w-25" src="/static/images/leo.png" alt="LEO-Logo" />
             </Col>
-            <Input
-              onChange={e => handleUsername(e.target.value)}
-              value={username}
-              placeholder="Email"
-              required
-            />
-            <Input
-              type="password"
-              onChange={e => handlePassword(e.target.value)}
-              value={password}
-              placeholder="password"
-              required
-            />
+            <Item>
+              {getFieldDecorator('email', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please fill your email.',
+                    setFieldsValue: username,
+                  },
+                ],
+              })(
+                <Input
+                  onChange={e => handleUsername(e.target.value)}
+                  placeholder="Email"
+                  required
+                />,
+              )}
+            </Item>
+
+            <Item>
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please fill your password.',
+                    setFieldsValue: password,
+                  },
+                ],
+              })(
+                <Input
+                  type="password"
+                  onChange={e => handlePassword(e.target.value)}
+                  placeholder="password"
+                  required
+                />,
+              )}
+            </Item>
             <SmallMainButton htmlType="submit" className="my-3 w-25 mx-auto">Sign in</SmallMainButton>
           </Form>
         </Col>
@@ -69,4 +93,6 @@ const mapDispatchToProps = dispatch => ({
   setPassword: bindActionCreators(setPassword, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+const WrappedLoginPage = Form.create({ name: 'login_page' })(LoginPage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedLoginPage);
