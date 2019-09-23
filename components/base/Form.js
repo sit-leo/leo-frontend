@@ -1,10 +1,19 @@
 import React from 'react';
-import { Form } from 'antd';
+import { Form as DefaultForm } from 'antd';
+import ContainerRow from './Grid';
 
-export default Form;
+export default DefaultForm;
+
+export const FormContainer = ({ children, ...props }) => (
+  <DefaultForm className="w-100" {...props}>
+    <ContainerRow>
+      {children}
+    </ContainerRow>
+  </DefaultForm>
+);
 
 export const Item = ({ children, ...props }) => (
-  <Form.Item className="mb-0" {...props}>
+  <DefaultForm.Item className="mb-0" {...props}>
     {children}
-  </Form.Item>
+  </DefaultForm.Item>
 );
