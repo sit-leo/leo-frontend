@@ -14,9 +14,9 @@ const InputDefaultStyled = styled(InputDefault)`
   }
 `;
 
-const Input = ({ text, ...props }) => (
-  <InputDefaultStyled placeholder={text} {...props} />
-);
+const Input = React.forwardRef(({ text, ...props }, ref) => (
+  <InputDefaultStyled ref={ref} placeholder={text} {...props} />
+));
 
 export const LabelInput = ({
   name, label, text, ...props
