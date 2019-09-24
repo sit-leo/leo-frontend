@@ -23,7 +23,7 @@ import Input, { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
 import Icon from '../base/Icon';
-import { FormContainer } from '../base/Form';
+import Form, { FormContainer } from '../base/Form';
 
 const handleConfirmRecruiter = async (id, positions) => {
   const matchRequest = matchingAdapter(clientInstance());
@@ -40,43 +40,51 @@ const Position = ({
   setDocument,
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
+  getFieldDecorator,
 }) => (
   <React.Fragment>
     <Col lg={6}>
       <LabelInput
         label="Position"
-        name="name"
+        attribute="name"
+        name={`position-name-${dataKey}`}
         placeholder="Backend Developer"
-        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
         text={position.name}
+        getFieldDecorator={getFieldDecorator}
       />
     </Col>
     <Col lg={3}>
       <LabelInput
         label="Salary Range (Bath)"
-        name="salary"
+        attribute="salary"
+        name={`salary-${dataKey}`}
         placeholder="15000 - 20000"
-        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
         text={position.salary}
+        getFieldDecorator={getFieldDecorator}
       />
     </Col>
     <Col lg={3}>
       <LabelInput
         label="Capacity"
-        name="capacity"
+        attribute="capacity"
+        name={`capacity-${dataKey}`}
         placeholder="Capacity of recruitment."
         type="number"
-        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
         text={position.capacity}
+        getFieldDecorator={getFieldDecorator}
       />
     </Col>
     <Col>
       <Label className="mb-0" for="description">Description (optional)</Label>
       <TextArea
         style={{ margin: '6px 0' }}
-        name="description"
+        attribute="description"
+        name={`description-${dataKey}`}
         placeholder="Tell more about the position."
-        onChange={e => updateRecruiterPosition(dataKey, e.target.name, e.target.value)}
+        onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
         text={position.description}
       />
     </Col>
@@ -141,6 +149,7 @@ const RecruiterJoinMatchPage = ({
   setDocument,
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
+  form: { getFieldDecorator },
 }) => (
   <WithJoinMatch
     handleConfirm={() => handleConfirmRecruiter(match.id, { positions })}
@@ -179,6 +188,7 @@ const RecruiterJoinMatchPage = ({
               setDocument={setDocument}
               addRecruiterDocument={addRecruiterDocument}
               removeRecruiterDocument={removeRecruiterDocument}
+              getFieldDecorator={getFieldDecorator}
             />
           );
         })
@@ -207,4 +217,6 @@ const mapDispatchToProps = dispatch => ({
   removeRecruiterDocument: bindActionCreators(removeRecruiterDocumentAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJoinMatchPage);
+const WrappedRecruiterJoinMatchPage = Form.create({ name: 'login_page' })(RecruiterJoinMatchPage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedRecruiterJoinMatchPage);
