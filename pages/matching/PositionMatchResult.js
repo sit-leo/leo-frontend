@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import withUser from '../../tools/with-user';
-import { withAuth } from '../../tools/with-auth';
 import { serverInstance } from '../../tools/request';
+import cookie from '../../tools/cookie';
 
-import { isAnnouceDate } from '../../tools/match-time';
+import withUser from '../../tools/with-user';
+import withRole, { isRecruiter } from '../../tools/with-roles';
+import { withAuth } from '../../tools/with-auth';
 
 import redirectError from '../../tools/redirect-error';
 
-import cookie from '../../tools/cookie';
+import { isAnnouceDate } from '../../tools/match-time';
+
 
 import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
@@ -51,8 +53,10 @@ class MatchResultController extends React.Component {
   }
 }
 
-export default withUser(
-  withAuth(
-    connect()(MatchResultController),
+export default withRole(isRecruiter)(
+  withUser(
+    withAuth(
+      connect()(MatchResultController),
+    ),
   ),
 );

@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
+
 import withUser from '../../tools/with-user';
+import withRole, { isRecruiter } from '../../tools/with-roles';
 import { withAuth } from '../../tools/with-auth';
+
 import redirectToError from '../../tools/redirect-error';
 
 import matchAdapter from '../../store/match/match-adapter';
@@ -36,8 +39,10 @@ class RecruiterJoinMatchController extends React.Component {
   }
 }
 
-export default withUser(
-  withAuth(
-    connect()(RecruiterJoinMatchController),
+export default withRole(isRecruiter)(
+  withUser(
+    withAuth(
+      connect()(RecruiterJoinMatchController),
+    ),
   ),
 );
