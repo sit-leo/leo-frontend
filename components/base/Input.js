@@ -5,6 +5,8 @@ import { Input as InputDefault } from 'antd';
 
 import colors from '../../config/color';
 
+import { Item } from './Form';
+
 const InputDefaultStyled = styled(InputDefault)`
   border-radius: 10px;
   border: solid 2px ${colors.disabled};
@@ -19,11 +21,28 @@ const Input = React.forwardRef(({ text, ...props }, ref) => (
 ));
 
 export const LabelInput = ({
-  name, label, text, ...props
+  name, label, text, getFieldDecorator, ...props
 }) => (
   <React.Fragment>
     <Label for={name} className="mb-0">{label}</Label>
-    <Input id={name} name={name} value={text} {...props} />
+    <Item>
+      {
+        getFieldDecorator
+          ? getFieldDecorator(name, {
+            validateTrigger: ['onBlur'],
+            rules: [
+              {
+                required: true,
+                message: `Please fill "${label}".`,
+                setFieldsValue: text,
+              },
+            ],
+          })(
+            <Input id={name} name={name} {...props} />,
+          )
+          : <Input id={name} name={name} value={text} {...props} />
+      }
+    </Item>
   </React.Fragment>
 );
 
