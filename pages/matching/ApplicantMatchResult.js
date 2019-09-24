@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
+import withRole, { isApplicant } from '../../tools/with-roles';
+
 import { serverInstance } from '../../tools/request';
 
 import { isAnnouceDate } from '../../tools/match-time';
@@ -47,8 +49,10 @@ class MatchResultController extends React.Component {
   }
 }
 
-export default withUser(
-  withAuth(
-    connect()(MatchResultController),
+export default withRole(isApplicant)(
+  withUser(
+    withAuth(
+      connect()(MatchResultController),
+    ),
   ),
 );

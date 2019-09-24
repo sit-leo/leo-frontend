@@ -5,6 +5,7 @@ import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
+import withRole, { isApplicant } from '../../tools/with-roles';
 import redirectToError from '../../tools/redirect-error';
 
 import matchAdapter from '../../store/match/match-adapter';
@@ -36,8 +37,10 @@ class ApplicantJoinMatchController extends React.Component {
   }
 }
 
-export default withUser(
-  withAuth(
-    connect()(ApplicantJoinMatchController),
+export default withRole(isApplicant)(
+  withUser(
+    withAuth(
+      connect()(ApplicantJoinMatchController),
+    ),
   ),
 );
