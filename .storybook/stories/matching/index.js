@@ -7,7 +7,7 @@ import RecruiterRankingPage from '../../../components/matching/RecruiterRankingP
 import ApplicantJoinMatchPage from '../../../components/matching/ApplicantJoinMatchPage';
 import RecruiterJoinMatchPage from '../../../components/matching/RecruiterJoinMatchPage';
 
-storiesOf('Ranking', module)
+storiesOf('Matching', module)
   .add('ApplicantRankingPage Component', () => (
     <ApplicantRankingPage />
   ))
