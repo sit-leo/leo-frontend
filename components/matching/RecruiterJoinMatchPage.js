@@ -72,6 +72,8 @@ const Position = ({
         name={`capacity-${dataKey}`}
         placeholder="Capacity of recruitment."
         type="number"
+        min={1}
+        max={99}
         onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
         text={position.capacity}
         getFieldDecorator={getFieldDecorator}
@@ -149,10 +151,14 @@ const RecruiterJoinMatchPage = ({
   setDocument,
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
-  form: { getFieldDecorator },
+  form: { getFieldDecorator, validateFields },
 }) => (
   <WithJoinMatch
-    handleConfirm={() => handleConfirmRecruiter(match.id, { positions })}
+    handleConfirm={() => validateFields((err, values) => {
+      if (!err) {
+        handleConfirmRecruiter(match.id, { positions });
+      }
+    })}
   >
     <Col>
       <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
@@ -217,6 +223,6 @@ const mapDispatchToProps = dispatch => ({
   removeRecruiterDocument: bindActionCreators(removeRecruiterDocumentAction, dispatch),
 });
 
-const WrappedRecruiterJoinMatchPage = Form.create({ name: 'login_page' })(RecruiterJoinMatchPage);
+const WrappedRecruiterJoinMatchPage = Form.create({ name: 'recruiter_join_match_page' })(RecruiterJoinMatchPage);
 
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedRecruiterJoinMatchPage);
