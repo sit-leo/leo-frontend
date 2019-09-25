@@ -130,7 +130,7 @@ const Position = ({
           !inputDocumentVisible && (
             <Tag onClick={() => setInputDocumentVisible(true)}>
               <Icon type="plus" />
-              Add Skill
+              Add Document
             </Tag>
           )
         }
