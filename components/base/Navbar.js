@@ -98,9 +98,9 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
       <Col xs={6} md={1} className="logo text-left">
-        <Link href="/">
+        <a href="/">
           <Image src="/static/images/leo.png" />
-        </Link>
+        </a>
       </Col>
       <Col md={role !== 'guest' ? 10 : 8} className="d-none d-md-flex align-items-center">
         {
