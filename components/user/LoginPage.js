@@ -22,7 +22,7 @@ const LoginPage = ({
   password,
   setUsername: handleUsername,
   setPassword: handlePassword,
-  form: { getFieldDecorator },
+  form: { getFieldDecorator, validateFields },
 }) => (
   <WithNavbar>
     <FlexCenter className="vh-100">
@@ -33,7 +33,11 @@ const LoginPage = ({
             className="w-100 py-4 px-4 card"
             onSubmit={(e) => {
               e.preventDefault();
-              userRequest.login({ username, password });
+              validateFields((err, values) => {
+                if (!err) {
+                  userRequest.login({ username, password });
+                }
+              });
             }}
           >
             <Col className="text-center mb-3">
@@ -53,7 +57,6 @@ const LoginPage = ({
                 <Input
                   onChange={e => handleUsername(e.target.value)}
                   placeholder="Email"
-                  required
                 />,
               )}
             </Item>
@@ -73,7 +76,6 @@ const LoginPage = ({
                   type="password"
                   onChange={e => handlePassword(e.target.value)}
                   placeholder="password"
-                  required
                 />,
               )}
             </Item>
