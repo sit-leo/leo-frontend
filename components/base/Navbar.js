@@ -102,7 +102,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
           <Image src="/static/images/leo.png" />
         </a>
       </Col>
-      <Col md={role !== 'guest' ? 10 : 8} className="d-none d-md-flex align-items-center">
+      <Col md={role !== 'guest' ? 10 : 7} className="d-none d-md-flex align-items-center">
         {
           role !== 'guest' && (
             <ContainerRow>
@@ -132,7 +132,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
             </Col>
           )
           : (
-            <Col xs={9} md={3} className="d-flex flex-row justify-content-end align-items-center">
+            <Col xs={9} md={4} className="d-flex flex-row justify-content-end align-items-center">
               <a href="/register">
                 <TitleSmallPrimary className="mr-3">
                   Register
