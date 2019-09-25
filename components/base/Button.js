@@ -20,6 +20,7 @@ const DefaultButtonStyled = styled(DefaultButton)`
 const MainButton = styled(DefaultButtonStyled)`
   background: ${color.primary};
   color: ${color.white};
+  min-width: 45%;
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
     background: ${color.hover};
@@ -29,6 +30,10 @@ const MainButton = styled(DefaultButtonStyled)`
 
 export const SmallMainButton = styled(MainButton)`
   min-width: 25%;
+
+  @media (max-width: 767px) {
+    min-width: 60%;
+  }
 `;
 
 export const SmallButton = styled(DefaultButtonStyled)`
@@ -41,6 +46,7 @@ export const SmallButton = styled(DefaultButtonStyled)`
 export const DangerButton = styled(DefaultButtonStyled)`
   background: ${color.error};
   color: ${color.white};
+  min-width: 45%;
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
     background: ${color.error};
