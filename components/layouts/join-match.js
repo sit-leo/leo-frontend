@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Breadcrumb } from 'antd';
-import {
-  Modal, ModalHeader, ModalBody, ModalFooter,
-} from 'reactstrap';
 
 import WithNavbar from './with-navbar';
 
@@ -17,6 +14,7 @@ import ContainerRow, { Col } from '../base/Grid';
 import { SubTitleSmallWhite } from '../base/Text';
 import Button, { DangerButton, SmallMainButton } from '../base/Button';
 import { FlexBetween } from '../base/Flex';
+import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
 
 const JoinMatch = ({
   children,

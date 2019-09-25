@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-  Modal, ModalHeader, ModalBody, ModalFooter,
-} from 'reactstrap';
+import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
 
 import { setIsConfirm } from '../../store/matching/ranking';
 
