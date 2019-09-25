@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import { Breadcrumb, Card as AntdCard, Avatar } from 'antd';
+import { Card as AntdCard, Avatar } from 'antd';
 import day from 'dayjs';
 
 import colors from '../../config/color';
 
 import { ROLE_APPLICANT } from '../../tools/with-roles';
-import { convertDatePeriod } from '../../tools/match-time';
+import { convertDatePeriod, isAnnouceDate } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
 
@@ -124,18 +124,27 @@ const MatchPage = ({ match, role }) => {
                 <NumberLabel description="Recruiters" number={match.recruiters || '0'} />
               </Col>
               <Col className="text-center">
-                <Button className="w-100" onClick={() => handleJoinMatch()}>
-                  <TitleWhite className="mb-0">Join Match</TitleWhite>
+                <Button
+                  className="w-100"
+                  onClick={() => {
+                    if (!isAnnouceDate(match.announceDate)) {
+                      handleJoinMatch();
+                    } else {
+                      handleMatchResult();
+                    }
+                  }}
+                >
+                  <TitleWhite className="mb-0">
+                    {
+                      !isAnnouceDate(match.announceDate)
+                        ? 'Join Match'
+                        : 'Match Result'
+                    }
+                  </TitleWhite>
                 </Button>
               </Col>
             </Row>
           </Card>
-        </Col>
-        <Col className="text-center">
-          <hr className="w-100" />
-          <Button onClick={handleMatchResult}>
-            Match Result
-          </Button>
         </Col>
       </ContainerRow>
     </WithNavbar>
