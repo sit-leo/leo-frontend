@@ -97,7 +97,7 @@ const MenuDropdown = ({ role, logout }) => (
 const NavbarContainer = ({ role, logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
-      <Col xs={6} md={1} className="logo text-left">
+      <Col xs={3} md={1} className="logo text-left">
         <a href="/">
           <Image src="/static/images/leo.png" />
         </a>
@@ -132,7 +132,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
             </Col>
           )
           : (
-            <Col xs={6} md={3} className="d-flex flex-row justify-content-end align-items-center">
+            <Col xs={9} md={3} className="d-flex flex-row justify-content-end align-items-center">
               <a href="/register">
                 <TitleSmallPrimary className="mr-3">
                   Register
