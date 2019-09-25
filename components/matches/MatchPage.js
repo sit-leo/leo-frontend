@@ -19,6 +19,7 @@ import {
 import Button from '../base/Button';
 import Card from '../base/Card';
 import ContainerRow, { Row, Col } from '../base/Grid';
+import { BreadcrumbList } from '../base/Breadcrumb';
 
 
 const Meta = styled(AntdCard.Meta)`
@@ -68,14 +69,12 @@ const MatchPage = ({ match, role }) => {
     <WithNavbar>
       <ContainerRow className="py-5">
         <Col>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <a href="/matches">Matches</a>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              {match.name || 'Default Match Name'}
-            </Breadcrumb.Item>
-          </Breadcrumb>
+          <BreadcrumbList
+            items={[
+              { url: '/', name: 'Matches' },
+              { name: match.name || 'Default Match Name' },
+            ]}
+          />
         </Col>
         <Col lg={7} className="text-left">
           <TitleLarge>

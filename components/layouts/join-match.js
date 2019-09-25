@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Breadcrumb } from 'antd';
 
 import WithNavbar from './with-navbar';
 
@@ -15,6 +14,7 @@ import { SubTitleSmallWhite } from '../base/Text';
 import Button, { DangerButton, SmallMainButton } from '../base/Button';
 import { FlexBetween } from '../base/Flex';
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
+import { BreadcrumbList } from '../base/Breadcrumb';
 
 const JoinMatch = ({
   children,
@@ -26,17 +26,13 @@ const JoinMatch = ({
   <WithNavbar>
     <ContainerRow className="my-3">
       <Col>
-        <Breadcrumb>
-          <Breadcrumb.Item>
-            Matchings
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            { match.name }
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            Join Matching
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <BreadcrumbList
+          items={[
+            { url: '/', name: 'Matches' },
+            { url: `/matches/${match.id}`, name: match.name || 'Default Match Name' },
+            { name: 'Join Matching' },
+          ]}
+        />
       </Col>
       {children}
       <Col className="text-center my-4">
