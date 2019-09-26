@@ -13,6 +13,9 @@ storiesOf('Base/Button', module)
       <Button>Button</Button>
       <br />
       <br />
+      <MainButtonLight>Button</MainButtonLight>
+      <br />
+      <br />
       <SmallMainButton>SmallMainButton</SmallMainButton>
       <br />
       <br />
