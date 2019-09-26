@@ -13,6 +13,7 @@ import { Title } from '../base/Text';
 import { EventCard } from '../base/Card';
 
 const initMatch = {
+  id: '0',
   name: 'Default Name',
   description: 'Default Description',
 };
@@ -20,6 +21,7 @@ const initMatch = {
 const MatchCard = ({ match = initMatch, ...props }) => (
   <Col lg={4}>
     <EventCard
+      id={match.id}
       title={match.name || ''}
       description={match.description || ''}
       src="../../static/images/match-mockup.jpg"
@@ -28,9 +30,9 @@ const MatchCard = ({ match = initMatch, ...props }) => (
   </Col>
 );
 
-const LoadingEventCard = () => (
+const LoadingEventCard = ({ type = 'default' }) => (
   [1, 2, 3].map((_, index) => (
-    <MatchCard key={index} loading />
+    <MatchCard key={`${index}-${type}`} loading />
   ))
 );
 
@@ -97,7 +99,7 @@ const EventListPage = () => {
         </Col>
         {
           loading.loadingLastchance
-            ? <LoadingEventCard />
+            ? <LoadingEventCard type="lastchance" />
             : match.lastchanceMatches.map((lastchanceMatch, index) => (
               <MatchCard key={`${index}-lastchance`} match={lastchanceMatch} />
             ))
@@ -109,7 +111,7 @@ const EventListPage = () => {
         </Col>
         {
           loading.loadingPopular
-            ? <LoadingEventCard />
+            ? <LoadingEventCard type="popular" />
             : match.popularMatches.map((popularMatch, index) => (
               <MatchCard key={`${index}-popular`} match={popularMatch} />
             ))
@@ -121,7 +123,7 @@ const EventListPage = () => {
         </Col>
         {
           loading.loadingLastestMatch
-            ? <LoadingEventCard />
+            ? <LoadingEventCard type="lastest" />
             : match.lastestMatches.map((lastestMatch, index) => <MatchCard key={`${index}-lastest`} match={lastestMatch} />)
         }
       </ContainerRow>
