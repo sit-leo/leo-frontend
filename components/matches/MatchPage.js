@@ -95,7 +95,7 @@ const MatchPage = ({ match, role }) => {
               <Col>
                 <DateLabel
                   title="Join Period"
-                  date={convertDatePeriod(day(match.startJoiningDate), day(match.announceDate))}
+                  date={convertDatePeriod(day(match.startJoiningDate), day(match.endJoiningDate))}
                 />
               </Col>
               <Col>
