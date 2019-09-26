@@ -17,4 +17,16 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/user/matches?status=ended`)
       .then(({ data: matches }) => matches);
   },
+  getLastchanceMatches(page) {
+    return adapter.get(`${MATCH_API}/matches/last-chance?page=${page}`)
+      .then(({ data: matches }) => matches);
+  },
+  getPopularMatches(page) {
+    return adapter.get(`${MATCH_API}/matches/popular?page=${page}`)
+      .then(({ data: matches }) => matches);
+  },
+  getLastestMatches(page) {
+    return adapter.get(`${MATCH_API}/matches/lastest?page=${page}`)
+      .then(({ data: matches }) => matches);
+  },
 });
