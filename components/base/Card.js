@@ -40,7 +40,7 @@ const ShowAmount = ({ count, badgeText, ...props }) => (
 );
 
 export const EventCard = ({
-  children, title, description, src, loading,
+  id, children, title, description, src, loading,
 }) => (
   <PlainCard
     loading={loading}
@@ -57,7 +57,9 @@ export const EventCard = ({
         : [
           <ShowAmount count={19} badgeText="Recruiters" />,
           <ShowAmount count={19} badgeText="Applicants" />,
-          <MainButton className="w-100">Detail</MainButton>,
+          <a href={`/matches/${id}`}>
+            <MainButton className="w-100">Detail</MainButton>
+          </a>,
         ]}
   >
     <Meta
