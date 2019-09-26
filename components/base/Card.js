@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {
-  Card as DefaultCard,
+  Card as DefaultCard, Spin, Icon,
 } from 'antd';
 import MainButton from './Button';
 import { FlexCenter } from './Flex';
@@ -40,9 +40,10 @@ const ShowAmount = ({ count, badgeText, ...props }) => (
 );
 
 export const EventCard = ({
-  children, title, description, src,
+  children, title, description, src, loading,
 }) => (
   <PlainCard
+    loading={loading}
     className="my-2"
     cover={(
       <img
@@ -50,11 +51,14 @@ export const EventCard = ({
         src={src}
       />
     )}
-    actions={[
-      <ShowAmount count={19} badgeText="Recruiters" />,
-      <ShowAmount count={19} badgeText="Applicants" />,
-      <MainButton className="w-100">Detail</MainButton>,
-    ]}
+    actions={
+      loading
+        ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: color.primary }} spin />} />]
+        : [
+          <ShowAmount count={19} badgeText="Recruiters" />,
+          <ShowAmount count={19} badgeText="Applicants" />,
+          <MainButton className="w-100">Detail</MainButton>,
+        ]}
   >
     <Meta
       title={title}
