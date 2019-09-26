@@ -53,7 +53,7 @@ export const EventCard = ({
     )}
     actions={
       loading
-        ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: color.primary }} spin />} />]
+        ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: colors.primary }} spin />} />]
         : [
           <ShowAmount count={19} badgeText="Recruiters" />,
           <ShowAmount count={19} badgeText="Applicants" />,
