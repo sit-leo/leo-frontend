@@ -11,6 +11,7 @@ import WithNavbar from '../layouts/with-navbar';
 import ContainerRow, { Col } from '../base/Grid';
 import { Title } from '../base/Text';
 import { EventCard } from '../base/Card';
+import { MainButtonLight } from '../base/Button';
 
 const initMatch = {
   id: '0',
@@ -37,6 +38,10 @@ const LoadingEventCard = ({ type = 'default' }) => (
 );
 
 const EventListPage = () => {
+  const matchRequest = matchAdapter(clientInstance());
+
+  const [lastestPage, setLastestPage] = useState(1);
+
   const [loading, setLoading] = useState({
     loadingLastchance: true,
     loadingPopular: true,
@@ -48,44 +53,55 @@ const EventListPage = () => {
     lastestMatches: [],
   });
 
+  function handleResponse(attributeType, loadingType) {
+    return (response) => {
+      if (response.content) {
+        setMatch(previous => ({
+          ...previous,
+          [attributeType]: response.content,
+        }));
+        setLoading(previous => ({
+          ...previous,
+          [loadingType]: false,
+        }));
+      }
+    };
+  }
+
+  function loadMoreLastestMatches() {
+    const newPage = lastestPage + 1;
+
+    matchRequest.getLastestMatches(newPage).then(
+      (response) => {
+        if (response.content.length > 0) {
+          setMatch(previous => ({
+            ...previous,
+            lastestMatches: [
+              ...previous.lastestMatches,
+              ...response.content,
+            ],
+          }));
+          setLoading(previous => ({
+            ...previous,
+            loadingLastestMatch: false,
+          }));
+
+          setLastestPage(newPage);
+        }
+      },
+    );
+  }
+
   useEffect(() => {
-    const matchRequest = matchAdapter(clientInstance());
-    matchRequest.getLastchanceMatches(1).then((response) => {
-      if (response.content) {
-        setMatch(previous => ({
-          ...previous,
-          lastchanceMatches: response.content,
-        }));
-        setLoading(previous => ({
-          ...previous,
-          loadingLastchance: false,
-        }));
-      }
-    });
-    matchRequest.getPopularMatches(1).then((response) => {
-      if (response.content) {
-        setMatch(previous => ({
-          ...previous,
-          popularMatches: response.content,
-        }));
-        setLoading(previous => ({
-          ...previous,
-          loadingPopular: false,
-        }));
-      }
-    });
-    matchRequest.getLastestMatches(1).then((response) => {
-      if (response.content) {
-        setMatch(previous => ({
-          ...previous,
-          lastestMatches: response.content,
-        }));
-        setLoading(previous => ({
-          ...previous,
-          loadingLastestMatch: false,
-        }));
-      }
-    });
+    matchRequest.getLastchanceMatches(1).then(
+      handleResponse('lastchanceMatches', 'loadingLastchance'),
+    );
+    matchRequest.getPopularMatches(1).then(
+      handleResponse('popularMatches', 'loadingPopular'),
+    );
+    matchRequest.getLastestMatches(1).then(
+      handleResponse('lastestMatches', 'loadingLastestMatch'),
+    );
   }, []);
 
   return (
@@ -126,6 +142,13 @@ const EventListPage = () => {
             ? <LoadingEventCard type="lastest" />
             : match.lastestMatches.map((lastestMatch, index) => <MatchCard key={`${index}-lastest`} match={lastestMatch} />)
         }
+      </ContainerRow>
+      <ContainerRow>
+        <Col className="text-center mt-3 mb-5">
+          <MainButtonLight onClick={loadMoreLastestMatches}>
+          Load more
+          </MainButtonLight>
+        </Col>
       </ContainerRow>
     </WithNavbar>
   );
