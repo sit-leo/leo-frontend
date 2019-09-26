@@ -15,12 +15,27 @@ const DefaultButtonStyled = styled(DefaultButton)`
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
     border: none;
   }
+  @media (min-width: 768px) {
+    min-width: 25%;
+  }
 `;
 
 const MainButton = styled(DefaultButtonStyled)`
   background: ${color.primary};
   color: ${color.white};
   min-width: 45%;
+
+  &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
+    background: ${color.hover};
+    color: ${color.white};
+  }
+`;
+
+export const MainButtonLight = styled(DefaultButtonStyled)`
+  background: ${color.white};
+  color: ${color.primary};
+  min-width: 45%;
+  border: solid 2px ${color.primary};
 
   &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
     background: ${color.hover};
