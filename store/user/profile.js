@@ -5,6 +5,20 @@ export const initState = {
   inputDocumentVisible: false,
   document: '',
   applicant: {
+    applicantId: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    telNo: '',
+    educations: [
+      {
+        id: 0,
+        university: '',
+        year: '',
+        major: '',
+        gpax: '',
+      },
+    ],
     skills: [],
     experiences: '',
   },
