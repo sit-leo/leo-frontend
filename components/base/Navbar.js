@@ -47,8 +47,7 @@ const menus = [
 ];
 
 const dropdownItems = [
-  { type: 'user', text: 'Profile' },
-  { type: 'setting', text: 'Account Setting' },
+  { type: 'user', text: 'Profile', path: '/profile' },
 ];
 
 const MenuItem = styled(DefaultMenu.Item)`
@@ -63,11 +62,13 @@ const DropDownItem = ({ children, handleClick }) => (
 );
 
 const IconItem = ({
-  type, text, theme = 'outlined', handleClick = () => { },
+  type, text, theme = 'outlined', handleClick = () => { }, path,
 }) => (
   <DropDownItem handleClick={handleClick}>
-    <Icon type={type} theme={theme} />
-    {text}
+    <a href={path}>
+      <Icon type={type} theme={theme} />
+      {text}
+    </a>
   </DropDownItem>
 );
 
