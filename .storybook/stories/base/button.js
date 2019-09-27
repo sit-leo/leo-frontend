@@ -4,7 +4,8 @@ import Button, {
   DangerButton,
   SmallMainButton,
   SmallButton,
-  CardButton
+  CardButton,
+  MainButtonLight,
 } from '../../../components/base/Button';
 
 storiesOf('Base/Button', module)
