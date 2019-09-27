@@ -8,7 +8,7 @@ import match from './match';
 import join from './matching/join';
 import ranking from './matching/ranking';
 import user from './user';
-import profile from './user/profile';
+import profile from './profile';
 
 const logger = createLogger();
 

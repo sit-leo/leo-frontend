@@ -12,4 +12,4 @@ module.exports = routes()
   .add('matching/ApplicantMatchResult', '/matches/:matchId/result')
   .add('matching/PositionMatchResult', '/matches/:matchId/positions/:positionId/result')
   .add('user/Login', '/login')
-  .add('user/Profile', '/profile');
+  .add('profile/Profile', '/profile');

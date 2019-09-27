@@ -22,7 +22,7 @@ import JoinReducer,
   SET_EDUCATION,
   setApplicantProfile,
   SET_APPLICANT_PROFILE,
-} from '../profile';
+} from '../index';
 
 import { applicant } from './data.json';
 

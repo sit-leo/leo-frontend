@@ -14,7 +14,7 @@ import {
   setEmail as setEmailAction,
   setTelno as setTelnoAction,
   setEducation as setEducationAction,
-} from '../../store/user/profile';
+} from '../../store/profile';
 
 import { TitleForm } from '../base/Text';
 import Input, {
