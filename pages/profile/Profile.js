@@ -10,7 +10,7 @@ import profileAdapter from '../../store/profile/profile-adapter';
 
 import ProfilePage from '../../components/profile/ProfilePage';
 
-import { setApplicantProfile } from '../../store/profile';
+import { setApplicantProfile, setEducation } from '../../store/profile';
 
 class ProfileController extends React.Component {
   static async getInitialProps({
@@ -26,6 +26,7 @@ class ProfileController extends React.Component {
     }
 
     store.dispatch(setApplicantProfile(profile));
+    store.dispatch(setEducation('applicantId', profile.applicantId));
 
     return {};
   }
