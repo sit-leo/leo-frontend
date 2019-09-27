@@ -19,6 +19,7 @@ import Icon from '../base/Icon';
 import ApplicantProfileForm from './ApplicantProfileForm';
 import { SmallMainButton } from '../base/Button';
 import { LabelInput } from '../base/Input';
+import { isApplicant, isRecruiter } from '../../tools/with-roles';
 
 const userRequest = userAdapter(clientInstance());
 
@@ -29,7 +30,8 @@ const UploadButton = () => (
   </div>
 );
 
-const LoginPage = ({
+const ProfilePage = ({
+  role,
   form: { getFieldDecorator, validateFields },
 }) => (
   <WithNavbar>
@@ -46,7 +48,14 @@ const LoginPage = ({
           });
         }}
       >
-        <ApplicantProfileForm editable />
+        {
+          // isRecruiter(role)
+          // && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
+        }
+        {
+          isApplicant(role)
+          && <ApplicantProfileForm editable getFieldDecorator={getFieldDecorator} />
+        }
         <TitleForm title="Documents" />
         <Col>
           <Upload
@@ -84,9 +93,9 @@ const LoginPage = ({
 );
 
 const mapStateToProps = state => ({
-  // profile: state.profile,
+  role: state.user.role,
 });
 
-const WrappedProfilePage = Form.create({ name: 'profile_page' })(LoginPage);
+const WrappedProfilePage = Form.create({ name: 'profile_page' })(ProfilePage);
 
 export default connect(mapStateToProps)(WrappedProfilePage);
