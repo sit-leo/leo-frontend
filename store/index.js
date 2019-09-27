@@ -8,13 +8,14 @@ import match from './match';
 import join from './matching/join';
 import ranking from './matching/ranking';
 import user from './user';
+import profile from './user/profile';
 
 const logger = createLogger();
 
 const middleware = [thunk, logger];
 
 export const reducers = combineReducers({
-  global, match, ranking, user, join,
+  global, match, ranking, user, join, profile,
 });
 
 function initialStore(initialState = {}) {
