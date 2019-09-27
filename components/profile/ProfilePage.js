@@ -30,65 +30,76 @@ const UploadButton = () => (
 
 const ProfilePage = ({
   role,
+  applicant,
+  recruiter,
   form: { getFieldDecorator, validateFields },
-}) => (
+}) => {
+  function updateProfile() {
+    const profileRequest = profileAdapter(clientInstance());
+    if (isApplicant(role)) {
+      return profileRequest.updateApplicantProfile(applicant);
+    }
+    return profileRequest.updateRecruiterProfile(recruiter);
+  }
+  return (
     <WithNavbar>
-      <ContainerRow>
-        <FormContainer
-          method="POST"
-          className="w-100 py-4 px-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            validateFields((err, values) => {
-              if (!err) {
-                console.log(values);
-              }
-            });
-          }}
-        >
-          {
-            // isRecruiter(role)
-            // && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
-          }
-          {
-            isApplicant(role)
-            && <ApplicantProfileForm editable getFieldDecorator={getFieldDecorator} />
-          }
-          <TitleForm title="Documents" />
-          <Col>
-            <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture-card"
-              fileList={[]}
-              onPreview={e => console.log(e)}
-              onChange={e => console.log(e)}
-            >
-              <UploadButton />
-            </Upload>
-            <hr />
-          </Col>
-          <TitleForm title="Change password" />
-          <Col lg={6}>
-            <LabelInput label="Current password" />
-          </Col>
-          <Col lg={6}>
-            <LabelInput label="New password" />
-          </Col>
-          <Col>
-            <NoteText>Leave it blank if you don’t want to change it.</NoteText>
-          </Col>
-          <Col className="text-center my-4">
-            <hr />
-            <SmallMainButton>
-              <SubTitleWhite className="mb-0">
-                Update Profile
-              </SubTitleWhite>
-            </SmallMainButton>
-          </Col>
-        </FormContainer>
-      </ContainerRow>
+      <FormContainer
+        className="w-100 py-4 px-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateFields((err, values) => {
+            if (!err) {
+              updateProfile();
+            }
+          });
+        }}
+      >
+        {
+          // isRecruiter(role)
+          // && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
+        }
+        {
+          isApplicant(role)
+          && (
+            <React.Fragment>
+              <ApplicantProfileForm editable getFieldDecorator={getFieldDecorator} />
+              <TitleForm title="Documents" />
+              <Col>
+                <Upload
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  listType="picture-card"
+                  fileList={[]}
+                  onPreview={e => console.log(e)}
+                  onChange={e => console.log(e)}
+                >
+                  <UploadButton />
+                </Upload>
+              </Col>
+            </React.Fragment>
+          )
+        }
+        <TitleForm title="Change password" />
+        <Col lg={6}>
+          <LabelInput label="Current password" />
+        </Col>
+        <Col lg={6}>
+          <LabelInput label="New password" />
+        </Col>
+        <Col>
+          <NoteText>Leave it blank if you don’t want to change it.</NoteText>
+        </Col>
+        <Col className="text-center my-4">
+          <hr />
+          <SmallMainButton htmlType="submit">
+            <SubTitleWhite className="mb-0">
+              Update Profile
+            </SubTitleWhite>
+          </SmallMainButton>
+        </Col>
+      </FormContainer>
     </WithNavbar>
   );
+};
 
 const mapStateToProps = state => ({
   role: state.user.role,
