@@ -16,6 +16,7 @@ module.exports = withCSS({
     matchingApi: process.env.MATCHING_API,
     matchApi: process.env.MATCH_API,
     userApi: process.env.USER_API,
+    profileApi: process.env.PROFILE_API,
     staticFolder: '/static',
   },
   webpack: (config) => {
