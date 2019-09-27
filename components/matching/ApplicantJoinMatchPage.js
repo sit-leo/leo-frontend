@@ -7,7 +7,7 @@ import matchingAdapter from '../../store/matching/matching-adapter';
 
 import WithJoinMatch from '../layouts/join-match';
 
-import ApplicantProfileForm from '../user/ApplicantProfileForm';
+import ApplicantProfileForm from '../profile/ApplicantProfileForm';
 
 import { Col } from '../base/Grid';
 import { TitleLarge } from '../base/Text';
