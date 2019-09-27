@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Upload,
+  Upload, message,
 } from 'antd';
 
 import { clientInstance } from '../../tools/request';
@@ -36,6 +36,7 @@ const ProfilePage = ({
 }) => {
   function updateProfile() {
     const profileRequest = profileAdapter(clientInstance());
+    message.success('Update profile success.');
     if (isApplicant(role)) {
       return profileRequest.updateApplicantProfile(applicant);
     }
