@@ -24,12 +24,18 @@ export const initState = {
   },
 };
 
-export const SET_INPUT_SKILL_VISIBLE = 'MATCH/SET_INPUT_SKILL_VISIBLE';
-export const SET_SKILL = 'MATCH/SET_SKILL';
+export const SET_APPLICANT_PROFILE = 'PROFILE/SET_APPLICANT_PROFILE';
+export const SET_INPUT_SKILL_VISIBLE = 'PROFILE/SET_INPUT_SKILL_VISIBLE';
+export const SET_SKILL = 'PROFILE/SET_SKILL';
+export const SET_FIRSTNAME = 'PROFILE/SET_FIRSTNAME';
+export const SET_LASTNAME = 'PROFILE/SET_LASTNAME';
+export const SET_EMAIL = 'PROFILE/SET_EMAIL';
+export const SET_TELNO = 'PROFILE/SET_TELNO';
+export const SET_EDUCATION = 'PROFILE/SET_EDUCATION';
 
-export const ADD_APPLICANT_SKILL = 'MATCH/ADD_APPLICANT_SKILL';
-export const REMOVE_APPLICANT_SKILL = 'MATCH/REMOVE_APPLICANT_SKILL';
-export const SET_APPLICANT_EXPERIENCES = 'MATCH/SET_APPLICANT_EXPERIENCES';
+export const ADD_APPLICANT_SKILL = 'PROFILE/ADD_APPLICANT_SKILL';
+export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
+export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -58,6 +64,29 @@ export default function reducer(state = initState, action = {}) {
     case SET_SKILL: {
       return { ...state, skill: action.skill };
     }
+    case SET_FIRSTNAME: {
+      return { ...state, applicant: { ...state.applicant, firstName: action.firstName } };
+    }
+    case SET_LASTNAME: {
+      return { ...state, applicant: { ...state.applicant, lastName: action.lastName } };
+    }
+    case SET_EMAIL: {
+      return { ...state, applicant: { ...state.applicant, email: action.email } };
+    }
+    case SET_TELNO: {
+      return { ...state, applicant: { ...state.applicant, telNo: action.telNo } };
+    }
+    case SET_EDUCATION: {
+      const { payload: { field, value } } = action;
+      const [education] = state.applicant.educations;
+      const educations = [{
+        ...education, [field]: value,
+      }];
+      return { ...state, applicant: { ...state.applicant, educations } };
+    }
+    case SET_APPLICANT_PROFILE: {
+      return { ...state, applicant: action.applicant };
+    }
     default: return { ...state };
   }
 }
@@ -80,4 +109,28 @@ export function setInputSkillVisible(inputSkillVisible) {
 
 export function setSkill(skill) {
   return { type: SET_SKILL, skill };
+}
+
+export function setFirstname(firstName) {
+  return { type: SET_FIRSTNAME, firstName };
+}
+
+export function setLastname(lastName) {
+  return { type: SET_LASTNAME, lastName };
+}
+
+export function setEmail(email) {
+  return { type: SET_EMAIL, email };
+}
+
+export function setTelno(telNo) {
+  return { type: SET_TELNO, telNo };
+}
+
+export function setEducation(field, value) {
+  return { type: SET_EDUCATION, payload: { field, value } };
+}
+
+export function setApplicantProfile(applicant) {
+  return { type: SET_APPLICANT_PROFILE, applicant };
 }

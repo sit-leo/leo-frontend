@@ -10,7 +10,21 @@ import JoinReducer,
   ADD_APPLICANT_SKILL,
   removeApplicantSkill,
   REMOVE_APPLICANT_SKILL,
+  setFirstname,
+  SET_FIRSTNAME,
+  setLastname,
+  SET_LASTNAME,
+  setEmail,
+  SET_EMAIL,
+  setTelno,
+  SET_TELNO,
+  setEducation,
+  SET_EDUCATION,
+  setApplicantProfile,
+  SET_APPLICANT_PROFILE,
 } from '../profile';
+
+import { applicant } from './data.json';
 
 describe('Test Profile Actions', () => {
   it('Test setApplicantExperiences action should return type and property correctly.', () => {
@@ -45,6 +59,43 @@ describe('Test Profile Actions', () => {
     const action = setSkill(skill);
     expect(action.type).toEqual(SET_SKILL);
     expect(action.skill).toEqual(skill);
+  });
+
+  it('Test setFirstname action should return type and property correctly.', () => {
+    const action = setFirstname('Keerati');
+    expect(action.type).toEqual(SET_FIRSTNAME);
+    expect(action.firstName).toEqual('Keerati');
+  });
+
+  it('Test setLastname action should return type and property correctly.', () => {
+    const action = setLastname('Jearjindarat');
+    expect(action.type).toEqual(SET_LASTNAME);
+    expect(action.lastName).toEqual('Jearjindarat');
+  });
+
+  it('Test setEmail action should return type and property correctly.', () => {
+    const action = setEmail('admin@leo.org');
+    expect(action.type).toEqual(SET_EMAIL);
+    expect(action.email).toEqual('admin@leo.org');
+  });
+
+  it('Test setTelno action should return type and property correctly.', () => {
+    const action = setTelno('0988887765');
+    expect(action.type).toEqual(SET_TELNO);
+    expect(action.telNo).toEqual('0988887765');
+  });
+
+  it('Test setEducation action should return type and property correctly.', () => {
+    const action = setEducation('university', 'KMUTT');
+    expect(action.type).toEqual(SET_EDUCATION);
+    expect(action.payload.field).toEqual('university');
+    expect(action.payload.value).toEqual('KMUTT');
+  });
+
+  it('Test setApplicantProfile action should return type and property correctly.', () => {
+    const action = setApplicantProfile(applicant);
+    expect(action.type).toEqual(SET_APPLICANT_PROFILE);
+    expect(action.applicant).toEqual(applicant);
   });
 });
 
@@ -121,6 +172,66 @@ describe('Test Profile Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.skill).toEqual(skill);
+    done();
+  });
+
+  it('Test setFirstname should return firstName correctly.', (done) => {
+    const firstName = 'Keerati';
+    const action = { type: SET_FIRSTNAME, firstName };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.applicant.firstName).toEqual(firstName);
+    done();
+  });
+
+  it('Test setLastname should return lastName correctly.', (done) => {
+    const lastName = 'Jearjindarat';
+    const action = { type: SET_LASTNAME, lastName };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.applicant.lastName).toEqual(lastName);
+    done();
+  });
+
+  it('Test setEmail should return email correctly.', (done) => {
+    const email = 'admin@leo.org';
+    const action = { type: SET_EMAIL, email };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.applicant.email).toEqual(email);
+    done();
+  });
+
+  it('Test setTelno should return telNo correctly.', (done) => {
+    const telNo = '0998886655';
+    const action = { type: SET_TELNO, telNo };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.applicant.telNo).toEqual(telNo);
+    done();
+  });
+
+  it('Test setEducation should return educations correctly.', (done) => {
+    const payload = { field: 'university', value: 'KMUTT' };
+    const action = { type: SET_EDUCATION, payload };
+
+    const store = JoinReducer(undefined, action);
+
+    const [education] = store.applicant.educations;
+    expect(education.university).toEqual('KMUTT');
+    done();
+  });
+
+  it('Test setApplicantProfile should return skill correctly.', (done) => {
+    const action = { type: SET_APPLICANT_PROFILE, applicant };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.applicant).toEqual(applicant);
     done();
   });
 });
