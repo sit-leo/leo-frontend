@@ -87,10 +87,6 @@ const mapStateToProps = state => ({
   // profile: state.profile,
 });
 
-const mapDispatchToProps = dispatch => ({
-  // setProfile: bindActionCreators(setProfileAction, dispatch),
-});
-
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(LoginPage);
 
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedProfilePage);
+export default connect(mapStateToProps)(WrappedProfilePage);
