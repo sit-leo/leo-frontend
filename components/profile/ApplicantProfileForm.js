@@ -101,8 +101,8 @@ const ApplicantProfileForm = ({
         year,
         major,
         gpax,
-      }) => (
-        <React.Fragment key={`${university}-education`}>
+      }, index) => (
+        <React.Fragment key={`education-${index}`}>
           <Col lg={6}>
             <LabelInput
               label="University"
@@ -137,26 +137,35 @@ const ApplicantProfileForm = ({
             <Label for="gpax" className="mb-0">GPAX</Label>
             <Item>
               {
-                getFieldDecorator('gpax', {
+                getFieldDecorator ? getFieldDecorator('gpax', {
                   validateTrigger: ['onBlur'],
+                  initialValue: gpax,
+                  setFieldsValue: gpax,
                   rules: [
                     {
                       required: true,
                       message: 'Please fill "GPAX".',
-                      setFieldsValue: gpax,
                     },
                   ],
                 })(
                   <InputNumber
-                    min="1.00"
-                    max="4.00"
+                    min={1.00}
+                    max={4.00}
                     step="0.01"
                     disabled={!editable}
                     onChange={value => setEducation('gpax', value)}
                     className="w-100"
                   />,
                 )
+                  : (
+                    <InputNumber
+                      value={gpax}
+                      disabled
+                      className="w-100"
+                    />
+                  )
               }
+
             </Item>
           </Col>
         </React.Fragment>
