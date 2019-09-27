@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Label } from 'reactstrap';
-import { Input as InputDefault } from 'antd';
+import {
+  Input as InputDefault,
+  InputNumber as InputNumberDefault,
+} from 'antd';
 
 import colors from '../../config/color';
 
 import { Item } from './Form';
 
-const InputDefaultStyled = styled(InputDefault)`
+const INPUT_THEME = `
   border-radius: 10px;
   border: solid 2px ${colors.disabled};
   margin: 6px 0;
@@ -16,9 +19,21 @@ const InputDefaultStyled = styled(InputDefault)`
   }
 `;
 
+const InputDefaultStyled = styled(InputDefault)`
+  ${INPUT_THEME}
+`;
+
 const Input = React.forwardRef(({ text, ...props }, ref) => (
   <InputDefaultStyled ref={ref} placeholder={text} {...props} />
 ));
+
+export default Input;
+
+export const { TextArea } = InputDefault;
+
+export const InputNumber = styled(InputNumberDefault)`
+  ${INPUT_THEME}
+`;
 
 export const LabelInput = ({
   name, label, text, getFieldDecorator, ...props
@@ -45,7 +60,3 @@ export const LabelInput = ({
     </Item>
   </React.Fragment>
 );
-
-export default Input;
-
-export const { TextArea } = InputDefault;
