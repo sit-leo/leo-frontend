@@ -1,0 +1,25 @@
+{
+  "applicant": {
+    "applicantId": 1,
+    "firstName": "Keerati",
+    "lastName": "Jearjindarat",
+    "email": "leo@gmail.com",
+    "telNo": "099-111-3344",
+    "experiences": "- Backend Super Junior\r\n- Frontend Developer",
+    "educations": [
+      {
+        "id": 1,
+        "university": "KMUTT",
+        "year": "4",
+        "major": "Information Technology",
+        "gpax": "3.46"
+      }
+    ],
+    "skills": [
+      "Java",
+      "React"
+    ],
+    "createAt": "2019-09-27T00:00:00.000+0000",
+    "updateAt": "2019-09-27T00:00:00.000+0000"
+  }
+}
