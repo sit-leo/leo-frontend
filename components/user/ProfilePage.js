@@ -46,7 +46,7 @@ const LoginPage = ({
           });
         }}
       >
-        <ApplicantProfileForm />
+        <ApplicantProfileForm editable />
         <TitleForm title="Documents" />
         <Col>
           <Upload

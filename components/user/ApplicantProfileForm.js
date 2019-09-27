@@ -17,6 +17,7 @@ import Icon from '../base/Icon';
 import { Col } from '../base/Grid';
 
 const ApplicantProfileForm = ({
+  editable,
   skills = [],
   addApplicantSkill,
   removeApplicantSkill,

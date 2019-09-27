@@ -26,7 +26,7 @@ const ApplicantJoinMatchPage = ({
     <Col>
       <TitleLarge className="my-2">{match.name}</TitleLarge>
     </Col>
-    <ApplicantProfileForm />
+    <ApplicantProfileForm editable={false} />
   </WithJoinMatch>
 );
 
