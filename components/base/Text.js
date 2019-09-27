@@ -5,6 +5,7 @@ import colors from '../../config/color';
 import font from '../../config/font';
 
 import { Col } from './Grid';
+import color from '../../config/color';
 
 const Text = styled.span`
   font-weight: ${font.weight.regular};
@@ -138,4 +139,9 @@ export const TitleForm = ({ title }) => (
 
 export const ExtraSmallTextLightPrimary = styled(ExtraSmallTextLight)`
   color: ${colors.primary};
+`;
+
+export const NoteText = styled.span`
+  color: ${color.secondary};
+  font-size: ${font.size.xsmall};
 `;

@@ -9,7 +9,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import WithNavbar from '../layouts/with-navbar';
 
 import ContainerRow, { Col } from '../base/Grid';
-import { Title } from '../base/Text';
+import { Title, NoteText } from '../base/Text';
 import { EventCard } from '../base/Card';
 import { MainButtonLight } from '../base/Button';
 
@@ -110,7 +110,7 @@ const EventListPage = () => {
         <Col lg={12} className="mt-5">
           <Title>
             Last chance to join
-            <span style={{ color: color.secondary, fontSize: '16px' }}>   Don't miss the chance to join these matches.</span>
+            <NoteText>{`   Don't miss the chance to join these matches.`}</NoteText>
           </Title>
         </Col>
         {
