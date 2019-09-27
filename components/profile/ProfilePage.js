@@ -28,7 +28,7 @@ const UploadButton = () => (
   </div>
 );
 
-const ProfilePage = ({
+export const ProfilePage = ({
   role,
   applicant,
   recruiter,
