@@ -70,10 +70,10 @@ export default function reducer(state = initState, action = {}) {
     case SET_LASTNAME: {
       return { ...state, applicant: { ...state.applicant, lastName: action.lastName } };
     }
-    case SET_EMAIL: {
+    case SET_APPLICANT_EMAIL: {
       return { ...state, applicant: { ...state.applicant, email: action.email } };
     }
-    case SET_TELNO: {
+    case SET_APPLICANT_TELNO: {
       return { ...state, applicant: { ...state.applicant, telNo: action.telNo } };
     }
     case SET_EDUCATION: {
@@ -120,11 +120,11 @@ export function setLastname(lastName) {
 }
 
 export function setEmail(email) {
-  return { type: SET_EMAIL, email };
+  return { type: SET_APPLICANT_EMAIL, email };
 }
 
 export function setTelno(telNo) {
-  return { type: SET_TELNO, telNo };
+  return { type: SET_APPLICANT_TELNO, telNo };
 }
 
 export function setEducation(field, value) {
