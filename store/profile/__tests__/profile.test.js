@@ -22,9 +22,11 @@ import JoinReducer,
   SET_EDUCATION,
   setApplicantProfile,
   SET_APPLICANT_PROFILE,
+  setRecruiterProfile,
+  SET_RECRUITER_PROFILE,
 } from '../index';
 
-import { applicant } from './data.json';
+import { applicant, recruiter } from './data.json';
 
 describe('Test Profile Actions', () => {
   it('Test setApplicantExperiences action should return type and property correctly.', () => {
@@ -96,6 +98,12 @@ describe('Test Profile Actions', () => {
     const action = setApplicantProfile(applicant);
     expect(action.type).toEqual(SET_APPLICANT_PROFILE);
     expect(action.applicant).toEqual(applicant);
+  });
+
+  it('Test setRecruiterProfile action should return type and property correctly.', () => {
+    const action = setRecruiterProfile(recruiter);
+    expect(action.type).toEqual(SET_RECRUITER_PROFILE);
+    expect(action.recruiter).toEqual(recruiter);
   });
 });
 
@@ -232,6 +240,15 @@ describe('Test Profile Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.applicant).toEqual(applicant);
+    done();
+  });
+
+  it('Test setRecruiterProfile should return skill correctly.', (done) => {
+    const action = { type: SET_RECRUITER_PROFILE, recruiter };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter).toEqual(recruiter);
     done();
   });
 });

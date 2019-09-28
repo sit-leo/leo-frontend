@@ -22,6 +22,14 @@ export const initState = {
     skills: [],
     experiences: '',
   },
+  recruiter: {
+    recruiterId: 0,
+    name: '',
+    description: '',
+    email: '',
+    telNo: '',
+    location: '',
+  },
 };
 
 export const SET_APPLICANT_PROFILE = 'PROFILE/SET_APPLICANT_PROFILE';
@@ -33,6 +41,7 @@ export const SET_APPLICANT_EMAIL = 'PROFILE/SET_APPLICANT_EMAIL';
 export const SET_APPLICANT_TELNO = 'PROFILE/SET_APPLICANT_TELNO';
 export const SET_EDUCATION = 'PROFILE/SET_EDUCATION';
 
+export const SET_RECRUITER_PROFILE = 'PROFILE/SET_RECRUITER_PROFILE';
 export const ADD_APPLICANT_SKILL = 'PROFILE/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
@@ -87,6 +96,9 @@ export default function reducer(state = initState, action = {}) {
     case SET_APPLICANT_PROFILE: {
       return { ...state, applicant: action.applicant };
     }
+    case SET_RECRUITER_PROFILE: {
+      return { ...state, recruiter: action.recruiter };
+    }
     default: return { ...state };
   }
 }
@@ -133,4 +145,8 @@ export function setEducation(field, value) {
 
 export function setApplicantProfile(applicant) {
   return { type: SET_APPLICANT_PROFILE, applicant };
+}
+
+export function setRecruiterProfile(recruiter) {
+  return { type: SET_RECRUITER_PROFILE, recruiter };
 }
