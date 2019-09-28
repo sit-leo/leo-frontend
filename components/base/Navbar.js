@@ -31,23 +31,10 @@ const NavbarContainerStyled = styled(ContainerStyled)`
   }
 `;
 
-const menus = [
-  {
-    name: 'My Matches',
-    path: '/my-matches',
-  },
-  {
-    name: 'Organizations',
-    path: '/organizations',
-  },
-  {
-    name: 'Profile',
-    path: '/profile',
-  },
-];
-
 const dropdownItems = [
   { type: 'user', text: 'Profile', path: '/profile' },
+  { type: 'setting', text: 'My Matches', path: '/my-matches' },
+  { type: 'setting', text: 'Organizations', path: '/organizations' },
 ];
 
 const MenuItem = styled(DefaultMenu.Item)`
@@ -65,7 +52,7 @@ const IconItem = ({
   type, text, theme = 'outlined', handleClick = () => { }, path,
 }) => (
   <DropDownItem handleClick={handleClick}>
-    <a href={path}>
+    <a style={{ color: color.secondary }} href={path}>
       <Icon type={type} theme={theme} />
       {text}
     </a>
@@ -90,7 +77,7 @@ const MenuDropdown = ({ fullName, logout }) => (
     {
       dropdownItems.map((item, index) => (
         <MenuItem
-          key={item.type}
+          key={item.text}
         >
           <IconItem {...item} />
         </MenuItem>
