@@ -9,12 +9,12 @@ import day from 'dayjs';
 import colors from '../../config/color';
 
 import { ROLE_APPLICANT } from '../../tools/with-roles';
-import { convertDatePeriod, isAnnouceDate } from '../../tools/match-time';
+import { convertDatePeriod, isAnnouceDate, getNextDay } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
 
 import {
-  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary,
+  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary, TitleSmallPrimary,
 } from '../base/Text';
 import Button from '../base/Button';
 import Card from '../base/Card';
@@ -40,7 +40,7 @@ const DateLabel = ({ title, date }) => (
   <Meta
     className="my-3"
     avatar={<Avatar shape="square" src="/static/images/calendar.png" />}
-    title={<TitleSmall className="m-0">{title}</TitleSmall>}
+    title={<TitleSmallPrimary className="m-0">{title}</TitleSmallPrimary>}
     description={<TitleSmall>{date}</TitleSmall>}
   />
 );
@@ -101,13 +101,13 @@ const MatchPage = ({ match, role }) => {
               <Col>
                 <DateLabel
                   title="Applicant Rank"
-                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
+                  date={convertDatePeriod(getNextDay(match.endJoiningDate), day(match.applicantRankingEndDate))}
                 />
               </Col>
               <Col>
                 <DateLabel
                   title="Recruiter Rank"
-                  date={convertDatePeriod(day(match.startJoiningDate), day(match.applicantRankingEndDate))}
+                  date={convertDatePeriod(getNextDay(match.applicantRankingEndDate), day(match.recruiterRankingEndDate))}
                 />
               </Col>
               <Col>
