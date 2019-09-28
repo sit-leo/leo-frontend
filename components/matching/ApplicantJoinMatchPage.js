@@ -6,6 +6,7 @@ import { message } from 'antd';
 import { clientInstance } from '../../tools/request';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
+import profileAdapter from '../../store/profile/profile-adapter';
 
 import WithJoinMatch from '../layouts/join-match';
 
@@ -29,9 +30,14 @@ const handleConfirmApplicant = async (id) => {
 
 const ApplicantJoinMatchPage = ({
   match,
+  applicant,
 }) => (
   <WithJoinMatch
-    handleConfirm={() => handleConfirmApplicant(match.id)}
+    handleConfirm={async () => {
+      const profileRequest = profileAdapter(clientInstance());
+      await profileRequest.updateApplicantProfile(applicant);
+      await handleConfirmApplicant(match.id);
+    }}
   >
     <Col>
       <TitleLarge className="my-2">{match.name}</TitleLarge>
@@ -42,6 +48,7 @@ const ApplicantJoinMatchPage = ({
 
 const mapStateToProps = state => ({
   match: state.match.match,
+  applicant: state.profile.applicant,
 });
 
 export default connect(mapStateToProps)(ApplicantJoinMatchPage);
