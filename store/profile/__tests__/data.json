@@ -21,5 +21,15 @@
     ],
     "createAt": "2019-09-27T00:00:00.000+0000",
     "updateAt": "2019-09-27T00:00:00.000+0000"
+  },
+  "recruiter": {
+    "recruiterId": 2,
+    "name": "Facebook Thailand, Inc",
+    "description": "Facebook, Inc. is an American online social media and social networking service company.",
+    "email": "hr@facebook.com",
+    "telNo": "-",
+    "location": "Menlo Park, California",
+    "createAt": "2019-09-28T00:00:00.000+0000",
+    "updateAt": "2019-09-28T00:00:00.000+0000"
   }
 }
