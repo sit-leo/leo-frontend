@@ -55,6 +55,8 @@ export const Profile = ({
           });
         }}
       >
+        <TitleForm title="Profile" />
+
         {
           // isRecruiter(role)
           // && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />

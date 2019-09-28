@@ -53,7 +53,6 @@ const ApplicantProfileForm = ({
   setEducation,
 }) => (
   <React.Fragment>
-    <TitleForm title="Profile" />
     <Col lg={6}>
       <LabelInput
         label="Firstname"
