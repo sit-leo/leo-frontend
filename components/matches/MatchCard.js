@@ -39,6 +39,8 @@ const MatchCard = ({
   id,
   title,
   startDate,
+  numOfApplicant,
+  numOfRecruiter,
 }) => (
   <SmallCard className="py-4 px-4">
     <Row>
@@ -56,9 +58,9 @@ const MatchCard = ({
         </MatchCardSubTitle>
       </Col>
       <Col lg={4} className="d-flex justify-content-center">
-        <CounterBox count={19} badgeText="Recruiters" />
+        <CounterBox count={numOfRecruiter} badgeText="Recruiters" />
         <VerticalLine className="mx-3" />
-        <CounterBox count={102} badgeText="Applicants" />
+        <CounterBox count={numOfApplicant} badgeText="Applicants" />
       </Col>
       <Col lg={{ size: 3, offset: 1 }} className="d-flex align-items-center justify-content-center">
         <Button

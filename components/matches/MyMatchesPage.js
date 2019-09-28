@@ -29,6 +29,8 @@ const MatchList = ({ matches = [] }) => (
         key={match.id}
         id={match.id}
         title={match.name}
+        numOfApplicant={match.numOfApplicant}
+        numOfRecruiter={match.numOfRecruiter}
         startDate={day(match.announceDate).format('DD MMM YYYY')}
       />
     ))
