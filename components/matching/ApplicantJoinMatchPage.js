@@ -20,7 +20,7 @@ const handleConfirmApplicant = async (id) => {
   matchRequest.joinMatchApplicant(id).then(({
     status, error, message: errorMessage,
   }) => {
-    if (status === 200) {
+    if (!status) {
       message.success('Join match success.');
       return Router.push(`/matches/${id}/applicants/ranking`);
     }
