@@ -118,10 +118,10 @@ const MatchPage = ({ match, role }) => {
               </Col>
               <hr className="w-100" />
               <Col lg={6}>
-                <NumberLabel description="Applicants" number={match.applicants || '0'} />
+                <NumberLabel description="Recruiters" number={match.numOfRecruiter || '0'} />
               </Col>
               <Col lg={6}>
-                <NumberLabel description="Recruiters" number={match.recruiters || '0'} />
+                <NumberLabel description="Applicants" number={match.numOfApplicant || '0'} />
               </Col>
               <Col className="text-center">
                 <Button

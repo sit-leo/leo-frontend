@@ -25,6 +25,8 @@ const MatchCard = ({ match = initMatch, ...props }) => (
       id={match.id}
       title={match.name || ''}
       description={match.description || ''}
+      numOfRecruiter={match.numOfRecruiter || 0}
+      numOfApplicant={match.numOfApplicant || 0}
       src="../../static/images/match-mockup.jpg"
       {...props}
     />
@@ -110,7 +112,7 @@ const EventListPage = () => {
         <Col lg={12} className="mt-5">
           <Title>
             Last chance to join
-            <NoteText>{`   Don't miss the chance to join these matches.`}</NoteText>
+            <NoteText>   Don't miss the chance to join these matches.</NoteText>
           </Title>
         </Col>
         {

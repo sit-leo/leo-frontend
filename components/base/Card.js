@@ -40,7 +40,7 @@ const ShowAmount = ({ count, badgeText, ...props }) => (
 );
 
 export const EventCard = ({
-  id, children, title, description, src, loading,
+  id, children, title, description, numOfApplicant, numOfRecruiter, src, loading,
 }) => (
   <PlainCard
     loading={loading}
@@ -55,8 +55,8 @@ export const EventCard = ({
       loading
         ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: colors.primary }} spin />} />]
         : [
-          <ShowAmount count={19} badgeText="Recruiters" />,
-          <ShowAmount count={19} badgeText="Applicants" />,
+          <ShowAmount count={numOfRecruiter} badgeText="Recruiters" />,
+          <ShowAmount count={numOfApplicant} badgeText="Applicants" />,
           <a href={`/matches/${id}`}>
             <MainButton className="w-100">Detail</MainButton>
           </a>,
