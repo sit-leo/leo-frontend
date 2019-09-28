@@ -31,3 +31,8 @@ export function convertDatePeriod(startDate, endDate) {
   }
   return `${startDateFormat.format('DD MMMM YYYY')} - ${endDateFormat.format('DD MMMM YYYY')}`;
 }
+
+export function getNextDay(joiningDate) {
+  const day = dayjs(joiningDate);
+  return day.add('1', 'day');
+}
