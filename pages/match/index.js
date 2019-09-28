@@ -26,13 +26,6 @@ class MatchController extends React.Component {
       return redirectToError({ req, res }, 'No Match Found.');
     }
 
-    const userRequest = userAdapter(serverInstance(cookie.getToken(req)));
-
-
-    const user = await userRequest.getUser();
-
-    await store.dispatch(setId(user.id));
-    await store.dispatch(setRole(user.role));
     await store.dispatch(setMatch(match));
     return {};
   }
