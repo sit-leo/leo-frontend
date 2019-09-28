@@ -24,6 +24,16 @@ import JoinReducer,
   SET_APPLICANT_PROFILE,
   setRecruiterProfile,
   SET_RECRUITER_PROFILE,
+  setRecruiterName,
+  SET_RECRUITER_NAME,
+  setRecruiterDescription,
+  SET_RECRUITER_DESCRIPTION,
+  setRecruiterLocation,
+  SET_RECRUITER_LOCATION,
+  setRecruiterTelno,
+  SET_RECRUITER_TELNO,
+  setRecruiterEmail,
+  SET_RECRUITER_EMAIL,
 } from '../index';
 
 import { applicant, recruiter } from './data.json';
@@ -104,6 +114,36 @@ describe('Test Profile Actions', () => {
     const action = setRecruiterProfile(recruiter);
     expect(action.type).toEqual(SET_RECRUITER_PROFILE);
     expect(action.recruiter).toEqual(recruiter);
+  });
+
+  it('Test setRecruiterName action should return type and property correctly.', () => {
+    const action = setRecruiterName('Facebook');
+    expect(action.type).toEqual(SET_RECRUITER_NAME);
+    expect(action.name).toEqual('Facebook');
+  });
+
+  it('Test setRecruiterDescription action should return type and property correctly.', () => {
+    const action = setRecruiterDescription('Facebook Description');
+    expect(action.type).toEqual(SET_RECRUITER_DESCRIPTION);
+    expect(action.description).toEqual('Facebook Description');
+  });
+
+  it('Test setRecruiterLocation action should return type and property correctly.', () => {
+    const action = setRecruiterLocation('Menlo Park, California');
+    expect(action.type).toEqual(SET_RECRUITER_LOCATION);
+    expect(action.location).toEqual('Menlo Park, California');
+  });
+
+  it('Test setRecruiterTelno action should return type and property correctly.', () => {
+    const action = setRecruiterTelno('09123444555');
+    expect(action.type).toEqual(SET_RECRUITER_TELNO);
+    expect(action.telNo).toEqual('09123444555');
+  });
+
+  it('Test setRecruiterEmail action should return type and property correctly.', () => {
+    const action = setRecruiterEmail('hr@admin.facebook.com');
+    expect(action.type).toEqual(SET_RECRUITER_EMAIL);
+    expect(action.email).toEqual('hr@admin.facebook.com');
   });
 });
 
@@ -234,7 +274,7 @@ describe('Test Profile Reducer', () => {
     done();
   });
 
-  it('Test setApplicantProfile should return skill correctly.', (done) => {
+  it('Test setApplicantProfile should return applicant profile correctly.', (done) => {
     const action = { type: SET_APPLICANT_PROFILE, applicant };
 
     const store = JoinReducer(undefined, action);
@@ -243,12 +283,57 @@ describe('Test Profile Reducer', () => {
     done();
   });
 
-  it('Test setRecruiterProfile should return skill correctly.', (done) => {
+  it('Test setRecruiterProfile should return recruiter profile correctly.', (done) => {
     const action = { type: SET_RECRUITER_PROFILE, recruiter };
 
     const store = JoinReducer(undefined, action);
 
     expect(store.recruiter).toEqual(recruiter);
+    done();
+  });
+
+  it('Test setRecruiterName should return recruiter name correctly.', (done) => {
+    const action = { type: SET_RECRUITER_NAME, name: 'Facebook' };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.name).toEqual('Facebook');
+    done();
+  });
+
+  it('Test setRecruiterDescription should return recruiter description correctly.', (done) => {
+    const action = { type: SET_RECRUITER_DESCRIPTION, description: 'Facebook, Inc. is an American online social media and social networking service company.' };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.description).toEqual('Facebook, Inc. is an American online social media and social networking service company.');
+    done();
+  });
+
+  it('Test setRecruiterEmail should return recruiter email correctly.', (done) => {
+    const action = { type: SET_RECRUITER_EMAIL, email: 'hr@facebook.com' };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.email).toEqual('hr@facebook.com');
+    done();
+  });
+
+  it('Test setRecruiterLocation should return recruiter location correctly.', (done) => {
+    const action = { type: SET_RECRUITER_LOCATION, location: 'Menlo Park, California' };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.location).toEqual('Menlo Park, California');
+    done();
+  });
+
+  it('Test setRecruiterTelno should return recruiter telno correctly.', (done) => {
+    const action = { type: SET_RECRUITER_TELNO, telNo: '0999999999' };
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.recruiter.telNo).toEqual('0999999999');
     done();
   });
 });

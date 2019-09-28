@@ -42,6 +42,12 @@ export const SET_APPLICANT_TELNO = 'PROFILE/SET_APPLICANT_TELNO';
 export const SET_EDUCATION = 'PROFILE/SET_EDUCATION';
 
 export const SET_RECRUITER_PROFILE = 'PROFILE/SET_RECRUITER_PROFILE';
+export const SET_RECRUITER_NAME = 'PROFILE/SET_RECRUITER_NAME';
+export const SET_RECRUITER_LOCATION = 'PROFILE/SET_RECRUITER_LOCATION';
+export const SET_RECRUITER_DESCRIPTION = 'PROFILE/SET_RECRUITER_DESCRIPTION';
+export const SET_RECRUITER_EMAIL = 'PROFILE/SET_RECRUITER_EMAIL';
+export const SET_RECRUITER_TELNO = 'PROFILE/SET_RECRUITER_TELNO';
+
 export const ADD_APPLICANT_SKILL = 'PROFILE/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
@@ -99,6 +105,21 @@ export default function reducer(state = initState, action = {}) {
     case SET_RECRUITER_PROFILE: {
       return { ...state, recruiter: action.recruiter };
     }
+    case SET_RECRUITER_NAME: {
+      return { ...state, recruiter: { ...state.recruiter, name: action.name } };
+    }
+    case SET_RECRUITER_DESCRIPTION: {
+      return { ...state, recruiter: { ...state.recruiter, description: action.description } };
+    }
+    case SET_RECRUITER_LOCATION: {
+      return { ...state, recruiter: { ...state.recruiter, location: action.location } };
+    }
+    case SET_RECRUITER_EMAIL: {
+      return { ...state, recruiter: { ...state.recruiter, email: action.email } };
+    }
+    case SET_RECRUITER_TELNO: {
+      return { ...state, recruiter: { ...state.recruiter, telNo: action.telNo } };
+    }
     default: return { ...state };
   }
 }
@@ -149,4 +170,24 @@ export function setApplicantProfile(applicant) {
 
 export function setRecruiterProfile(recruiter) {
   return { type: SET_RECRUITER_PROFILE, recruiter };
+}
+
+export function setRecruiterName(name) {
+  return { type: SET_RECRUITER_NAME, name };
+}
+
+export function setRecruiterDescription(description) {
+  return { type: SET_RECRUITER_DESCRIPTION, description };
+}
+
+export function setRecruiterLocation(location) {
+  return { type: SET_RECRUITER_LOCATION, location };
+}
+
+export function setRecruiterTelno(telNo) {
+  return { type: SET_RECRUITER_TELNO, telNo };
+}
+
+export function setRecruiterEmail(email) {
+  return { type: SET_RECRUITER_EMAIL, email };
 }
