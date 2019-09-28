@@ -11,8 +11,8 @@ import {
   setExperiences as setExperiencesAction,
   setFirstname as setFirstnameAction,
   setLastname as setLastnameAction,
-  setEmail as setEmailAction,
-  setTelno as setTelnoAction,
+  setApplicantEmail as setEmailAction,
+  setApplicantTelno as setTelnoAction,
   setEducation as setEducationAction,
 } from '../../store/profile';
 

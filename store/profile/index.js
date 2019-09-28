@@ -119,11 +119,11 @@ export function setLastname(lastName) {
   return { type: SET_LASTNAME, lastName };
 }
 
-export function setEmail(email) {
+export function setApplicantEmail(email) {
   return { type: SET_APPLICANT_EMAIL, email };
 }
 
-export function setTelno(telNo) {
+export function setApplicantTelno(telNo) {
   return { type: SET_APPLICANT_TELNO, telNo };
 }
 
