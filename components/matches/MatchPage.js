@@ -8,7 +8,7 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
-import { ROLE_APPLICANT, isApplicant } from '../../tools/with-roles';
+import { isApplicant } from '../../tools/with-roles';
 import { convertDatePeriod, isAnnouceDate, getNextDay } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
@@ -51,8 +51,7 @@ const NumberLabel = ({ description, number }) => (
     <TitleSmall>{description}</TitleSmall>
   </LabelCard>
 );
-const MatchPage = ({ match, role }) => {
-  const isJoinMatch = true;
+const MatchPage = ({ match, isJoinMatch, role }) => {
   function handleMatchResult() {
     if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/result`);
@@ -172,6 +171,7 @@ MatchPage.propTypes = {
 
 const mapStateToProps = state => ({
   match: state.match.match,
+  isJoinMatch: state.match.joined,
   role: state.user.role,
 });
 

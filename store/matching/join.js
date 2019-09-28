@@ -7,11 +7,14 @@ export const initPosition = {
 };
 
 export const initState = {
+  joined: false,
   isOpenJoinModal: false,
   recruiter: {
     positions: [initPosition],
   },
 };
+
+export const SET_JOINED = 'MATCH/SET_JOINED';
 
 export const TOGGLE_JOIN_MODAL = 'MATCH/TOGGLE_JOIN_MODAL';
 export const SET_INPUT_DOCUMENT_VISIBLE = 'MATCH/SET_INPUT_DOCUMENT_VISIBLE';
@@ -46,6 +49,9 @@ export default function reducer(state = initState, action = {}) {
     }
     case SET_DOCUMENT: {
       return { ...state, document: action.document };
+    }
+    case SET_JOINED: {
+      return { ...state, joined: action.joined };
     }
     case ADD_RECRUITER_DOCUMENT: {
       const { payload: { dataKey, document } } = action;
@@ -96,4 +102,8 @@ export function addRecruiterDocument(dataKey, document) {
 
 export function removeRecruiterDocument(dataKey, document) {
   return { type: REMOVE_RECRUITER_DOCUMENT, payload: { dataKey, document } };
+}
+
+export function setJoined(joined) {
+  return { type: SET_JOINED, joined };
 }

@@ -65,4 +65,8 @@ export default adapter => ({
     return adapter.post(`${MATCHING_API}/matches/${id}/recruiters/join`, positions)
       .then(({ data: match }) => match);
   },
+  isJoined(id) {
+    return adapter.get(`${MATCHING_API}/matches/${id}/isJoin`)
+      .then(({ data: isJoined }) => isJoined);
+  },
 });
