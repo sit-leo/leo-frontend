@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 
+import { message } from 'antd';
 import { clientInstance } from '../../tools/request';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
@@ -14,7 +16,15 @@ import { TitleLarge } from '../base/Text';
 
 const handleConfirmApplicant = async (id) => {
   const matchRequest = matchingAdapter(clientInstance());
-  await matchRequest.joinMatchApplicant(id);
+  matchRequest.joinMatchApplicant(id).then(({
+    status, error, message: errorMessage,
+  }) => {
+    if (status === 200) {
+      message.success('Join match success.');
+      return Router.push(`/matches/${id}/applicants/ranking`);
+    }
+    return message.error(`${error}, ${errorMessage}`);
+  });
 };
 
 const ApplicantJoinMatchPage = ({

@@ -2,6 +2,8 @@ import React from 'react';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { message } from 'antd';
+import Router from 'next/router';
 
 import { clientInstance } from '../../tools/request';
 import matchingAdapter from '../../store/matching/matching-adapter';
@@ -24,11 +26,20 @@ import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
 import Icon from '../base/Icon';
 import Form, { FormContainer } from '../base/Form';
+
 import RecruiterProfileForm from '../profile/RecruiterProfileForm';
 
 const handleConfirmRecruiter = async (id, positions) => {
   const matchRequest = matchingAdapter(clientInstance());
-  await matchRequest.joinMatchRecruiter(id, positions);
+  matchRequest.joinMatchRecruiter(id, positions).then(({
+    status, error, message: errorMessage,
+  }) => {
+    if (status === 200) {
+      message.success('Join match success.');
+      return Router.push(`/matches/${id}/recruiters/positions`);
+    }
+    return message.error(`${error}, ${errorMessage}`);
+  });
 };
 
 const Position = ({
