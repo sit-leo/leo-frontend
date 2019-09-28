@@ -13,14 +13,15 @@ function logout() {
   userRequest.logout();
 }
 
-const WithNavbar = ({ role, children }) => (
+const WithNavbar = ({ fullName, role, children }) => (
   <Fragment>
-    <Navbar role={role} logout={logout} />
+    <Navbar fullName={fullName} role={role} logout={logout} />
     { children }
   </Fragment>
 );
 
 const mapStateToProps = state => ({
+  fullName: state.user.fullName,
   role: state.user.role,
 });
 

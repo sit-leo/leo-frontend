@@ -72,12 +72,12 @@ const IconItem = ({
   </DropDownItem>
 );
 
-const MenuDropdown = ({ role, logout }) => (
+const MenuDropdown = ({ fullName, logout }) => (
   <Menu>
     <MenuItem className="h-auto">
       <Flex className="p-1 align-items-center">
         <SmallProfileAvatar className="h-50 w-50 rounded-circle mr-2" src="/static/images/avatar.png" />
-        {'Bae Joo-hyun'}
+        {fullName}
       </Flex>
     </MenuItem>
     {
@@ -95,7 +95,7 @@ const MenuDropdown = ({ role, logout }) => (
   </Menu>
 );
 
-const NavbarContainer = ({ role, logout = () => { } }) => (
+const NavbarContainer = ({ fullName, role, logout = () => { } }) => (
   <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
     <Row className="w-100">
       <Col xs={3} md={1} className="logo text-left">
@@ -124,7 +124,7 @@ const NavbarContainer = ({ role, logout = () => { } }) => (
         role !== 'guest'
           ? (
             <Col xs={6} md={1} className="profile-avatar text-right">
-              <Dropdown overlay={<MenuDropdown logout={logout} />}>
+              <Dropdown overlay={<MenuDropdown fullName={fullName} logout={logout} />}>
                 <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
                   <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
                   <b><Icon type="down" /></b>
