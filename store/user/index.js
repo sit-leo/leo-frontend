@@ -5,6 +5,7 @@ export const initState = {
   },
   id: 0,
   role: 'guest',
+  fullName: 'LEO Guest',
   username: '',
   password: '',
 };
@@ -13,6 +14,7 @@ export const initState = {
 export const SET_JWT = 'USER/SET_JWT';
 export const SET_ID = 'USER/SET_ID';
 export const SET_ROLE = 'USER/SET_ROLE';
+export const SET_FULLNAME = 'USER/SET_FULLNAME';
 export const SET_USERNAME = 'USER/SET_USERNAME';
 export const SET_PASSWORD = 'USER/SET_PASSWORD';
 
@@ -35,6 +37,10 @@ export default function reducer(state = initState, action = {}) {
       const username = action.username || initState.username;
       return { ...state, username };
     }
+    case SET_FULLNAME: {
+      const fullName = action.fullName || initState.fullName;
+      return { ...state, fullName };
+    }
     case SET_PASSWORD: {
       const password = action.password || initState.password;
       return { ...state, password };
@@ -54,6 +60,10 @@ export function setId(id) {
 
 export function setRole(role) {
   return { type: SET_ROLE, role };
+}
+
+export function setFullname(fullName) {
+  return { type: SET_FULLNAME, fullName };
 }
 
 export function setUsername(username) {
