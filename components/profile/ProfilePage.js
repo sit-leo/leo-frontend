@@ -5,21 +5,23 @@ import {
 } from 'antd';
 
 import { clientInstance } from '../../tools/request';
+import { isApplicant, isRecruiter } from '../../tools/with-roles';
 
 import profileAdapter from '../../store/profile/profile-adapter';
 
 import WithNavbar from '../layouts/with-navbar';
 
-import ContainerRow, { Col } from '../base/Grid';
+import { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
 import {
   TitleForm, SubTitleWhite, NoteText,
 } from '../base/Text';
 import Icon from '../base/Icon';
-import ApplicantProfileForm from './ApplicantProfileForm';
 import { SmallMainButton } from '../base/Button';
 import { LabelInput } from '../base/Input';
-import { isApplicant, isRecruiter } from '../../tools/with-roles';
+
+import ApplicantProfileForm from './ApplicantProfileForm';
+import RecruiterProfileForm from './RecruiterProfileForm';
 
 const UploadButton = () => (
   <div>
@@ -58,8 +60,8 @@ export const Profile = ({
         <TitleForm title="Profile" />
 
         {
-          // isRecruiter(role)
-          // && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
+          isRecruiter(role)
+          && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
         }
         {
           isApplicant(role)

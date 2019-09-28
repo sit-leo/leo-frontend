@@ -24,6 +24,7 @@ import Tag from '../base/Tag';
 import { TextButton } from '../base/Button';
 import Icon from '../base/Icon';
 import Form, { FormContainer } from '../base/Form';
+import RecruiterProfileForm from '../profile/RecruiterProfileForm';
 
 const handleConfirmRecruiter = async (id, positions) => {
   const matchRequest = matchingAdapter(clientInstance());
@@ -165,18 +166,7 @@ const RecruiterJoinMatchPage = ({
     </Col>
 
     <TitleForm title="Profile" />
-    <Col lg={6}>
-      <LabelInput label="Company name" name="companyName" text="Facebook Thailand, Inc" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Location" name="location" text="Phayathai, BKK" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Email" name="email" text="jirapas.jil@gmail.com" disabled />
-    </Col>
-    <Col lg={6}>
-      <LabelInput label="Phone Number" name="phoneNumber" text="0912121212" disabled />
-    </Col>
+    <RecruiterProfileForm editable={false} />
     <FormContainer>
       <TitleForm title="Positions" />
       {
