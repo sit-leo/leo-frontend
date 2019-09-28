@@ -15,9 +15,9 @@ import JoinReducer,
   setLastname,
   SET_LASTNAME,
   setEmail,
-  SET_EMAIL,
+  SET_APPLICANT_EMAIL,
   setTelno,
-  SET_TELNO,
+  SET_APPLICANT_TELNO,
   setEducation,
   SET_EDUCATION,
   setApplicantProfile,
@@ -75,13 +75,13 @@ describe('Test Profile Actions', () => {
 
   it('Test setEmail action should return type and property correctly.', () => {
     const action = setEmail('admin@leo.org');
-    expect(action.type).toEqual(SET_EMAIL);
+    expect(action.type).toEqual(SET_APPLICANT_EMAIL);
     expect(action.email).toEqual('admin@leo.org');
   });
 
   it('Test setTelno action should return type and property correctly.', () => {
     const action = setTelno('0988887765');
-    expect(action.type).toEqual(SET_TELNO);
+    expect(action.type).toEqual(SET_APPLICANT_TELNO);
     expect(action.telNo).toEqual('0988887765');
   });
 
@@ -197,7 +197,7 @@ describe('Test Profile Reducer', () => {
 
   it('Test setEmail should return email correctly.', (done) => {
     const email = 'admin@leo.org';
-    const action = { type: SET_EMAIL, email };
+    const action = { type: SET_APPLICANT_EMAIL, email };
 
     const store = JoinReducer(undefined, action);
 
@@ -207,7 +207,7 @@ describe('Test Profile Reducer', () => {
 
   it('Test setTelno should return telNo correctly.', (done) => {
     const telNo = '0998886655';
-    const action = { type: SET_TELNO, telNo };
+    const action = { type: SET_APPLICANT_TELNO, telNo };
 
     const store = JoinReducer(undefined, action);
 
