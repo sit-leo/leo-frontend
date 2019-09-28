@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { ProfilePage } from '../../../components/profile/ProfilePage';
+import { Profile } from '../../../components/profile/ProfilePage';
 
 storiesOf('Profile', module)
   .add('Applicant - ProfilePage Component', () => (
-    <ProfilePage
+    <Profile
       role='applicant'
       form={{
         getFieldDecorator:(a, b)=> (c) => c
@@ -13,7 +13,7 @@ storiesOf('Profile', module)
     />
   ))
   .add('Recruiter - ProfilePage Component', () => (
-    <ProfilePage
+    <Profile
       role='recruiter'
       form={{
         getFieldDecorator:(a, b)=> (c) => c

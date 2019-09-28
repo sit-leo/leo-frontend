@@ -28,7 +28,7 @@ const UploadButton = () => (
   </div>
 );
 
-export const ProfilePage = ({
+export const Profile = ({
   role,
   applicant,
   recruiter,
@@ -108,6 +108,6 @@ const mapStateToProps = state => ({
   recruiter: state.profile.recruiter,
 });
 
-const WrappedProfilePage = Form.create({ name: 'profile_page' })(ProfilePage);
+const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
 
 export default connect(mapStateToProps)(WrappedProfilePage);
