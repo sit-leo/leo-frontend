@@ -171,7 +171,7 @@ MatchPage.propTypes = {
 
 const mapStateToProps = state => ({
   match: state.match.match,
-  isJoinMatch: state.match.joined,
+  isJoinMatch: state.join.joined,
   role: state.user.role,
 });
 
