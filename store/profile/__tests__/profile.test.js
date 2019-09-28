@@ -73,13 +73,13 @@ describe('Test Profile Actions', () => {
     expect(action.lastName).toEqual('Jearjindarat');
   });
 
-  it('Test setEmail action should return type and property correctly.', () => {
+  it('Test setApplicantEmail action should return type and property correctly.', () => {
     const action = setApplicantEmail('admin@leo.org');
     expect(action.type).toEqual(SET_APPLICANT_EMAIL);
     expect(action.email).toEqual('admin@leo.org');
   });
 
-  it('Test setTelno action should return type and property correctly.', () => {
+  it('Test setApplicantTelno action should return type and property correctly.', () => {
     const action = setApplicantTelno('0988887765');
     expect(action.type).toEqual(SET_APPLICANT_TELNO);
     expect(action.telNo).toEqual('0988887765');
@@ -195,7 +195,7 @@ describe('Test Profile Reducer', () => {
     done();
   });
 
-  it('Test setEmail should return email correctly.', (done) => {
+  it('Test setApplicantEmail should return email correctly.', (done) => {
     const email = 'admin@leo.org';
     const action = { type: SET_APPLICANT_EMAIL, email };
 
@@ -205,7 +205,7 @@ describe('Test Profile Reducer', () => {
     done();
   });
 
-  it('Test setTelno should return telNo correctly.', (done) => {
+  it('Test setApplicantTelno should return telNo correctly.', (done) => {
     const telNo = '0998886655';
     const action = { type: SET_APPLICANT_TELNO, telNo };
 
