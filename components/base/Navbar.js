@@ -75,7 +75,14 @@ const IconItem = ({
 const MenuDropdown = ({ fullName, logout }) => (
   <Menu>
     <MenuItem className="h-auto">
-      <Flex className="p-1 align-items-center">
+      <Flex
+        style={{
+          maxWidth: '180px',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+        }}
+        className="p-1 align-items-center"
+      >
         <SmallProfileAvatar className="h-50 w-50 rounded-circle mr-2" src="/static/images/avatar.png" />
         {fullName}
       </Flex>
@@ -96,34 +103,17 @@ const MenuDropdown = ({ fullName, logout }) => (
 );
 
 const NavbarContainer = ({ fullName, role, logout = () => { } }) => (
-  <NavbarContainerStyled fluid className="d-flex justify-content-stretch align-items-center">
+  <NavbarContainerStyled fluid className="d-flex justify-content-center align-items-center">
     <Row className="w-100">
-      <Col xs={3} md={1} className="logo text-left">
+      <Col xs={3} md={2} className="logo text-left">
         <a href="/">
           <Image src="/static/images/leo.png" />
         </a>
       </Col>
-      <Col md={role !== 'guest' ? 10 : 7} className="d-none d-md-flex align-items-center">
-        {
-          role !== 'guest' && (
-            <ContainerRow>
-              <Col className="d-flex">
-                {
-                  menus.map(menu => (
-                    <Link key={menu.name} href={menu.path}>
-                      <NavSelected>{menu.name}</NavSelected>
-                    </Link>
-                  ))
-                }
-              </Col>
-            </ContainerRow>
-          )
-        }
-      </Col>
       {
         role !== 'guest'
           ? (
-            <Col xs={6} md={1} className="profile-avatar text-right">
+            <Col xs={{ size: 3, offset: 6 }} md={{ size: 2, offset: 8 }} className="profile-avatar text-right">
               <Dropdown overlay={<MenuDropdown fullName={fullName} logout={logout} />}>
                 <FlexCenter style={{ cursor: 'pointer' }} className="ant-dropdown-link" href="#">
                   <ProfileAvatar className="rounded-circle mr-2" src="/static/images/avatar.png" />
@@ -133,7 +123,7 @@ const NavbarContainer = ({ fullName, role, logout = () => { } }) => (
             </Col>
           )
           : (
-            <Col xs={9} md={4} className="d-flex flex-row justify-content-end align-items-center">
+            <Col xs={9} md={{ size: 4, offset: 6 }} className="d-flex flex-row justify-content-end align-items-center">
               <a href="/register">
                 <TitleSmallPrimary className="mr-3">
                   Register
