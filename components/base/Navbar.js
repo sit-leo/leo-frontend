@@ -33,8 +33,8 @@ const NavbarContainerStyled = styled(ContainerStyled)`
 
 const dropdownItems = [
   { type: 'user', text: 'Profile', path: '/profile' },
-  { type: 'setting', text: 'My Matches', path: '/my-matches' },
-  { type: 'setting', text: 'Organizations', path: '/organizations' },
+  { type: 'appstore', text: 'My Matches', path: '/my-matches' },
+  { type: 'shop', text: 'Organizations', path: '/organizations' },
 ];
 
 const MenuItem = styled(DefaultMenu.Item)`
