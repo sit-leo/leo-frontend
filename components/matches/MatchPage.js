@@ -8,7 +8,7 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
-import { ROLE_APPLICANT } from '../../tools/with-roles';
+import { ROLE_APPLICANT, isApplicant } from '../../tools/with-roles';
 import { convertDatePeriod, isAnnouceDate, getNextDay } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
@@ -52,14 +52,21 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 const MatchPage = ({ match, role }) => {
+  const isJoinMatch = true;
   function handleMatchResult() {
-    if (role === ROLE_APPLICANT) {
+    if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/result`);
     }
     return Router.push(`/matches/${match.id}/result/positions`);
   }
+  function handleRankingMatch() {
+    if (isApplicant(role)) {
+      return Router.push(`/matches/${match.id}/applicants/ranking`);
+    }
+    return Router.push(`/matches/${match.id}/recruiters/positions`);
+  }
   function handleJoinMatch() {
-    if (role === ROLE_APPLICANT) {
+    if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/applicants/join`);
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
@@ -127,18 +134,24 @@ const MatchPage = ({ match, role }) => {
                 <Button
                   className="w-100"
                   onClick={() => {
-                    if (!isAnnouceDate(match.announceDate)) {
-                      handleJoinMatch();
-                    } else {
+                    if (isAnnouceDate(match.announceDate)) {
                       handleMatchResult();
+                    } else if (isJoinMatch) {
+                      handleRankingMatch();
+                    } else {
+                      handleJoinMatch();
                     }
                   }}
                 >
                   <TitleWhite className="mb-0">
                     {
-                      !isAnnouceDate(match.announceDate)
-                        ? 'Join Match'
-                        : 'Match Result'
+                       !isJoinMatch && !(isAnnouceDate(match.announceDate))
+                         ? 'Join Match'
+                         : 'Ranking'
+                    }
+                    {
+                      isAnnouceDate(match.announceDate)
+                        && 'Match Result'
                     }
                   </TitleWhite>
                 </Button>
