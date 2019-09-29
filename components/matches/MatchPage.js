@@ -93,7 +93,10 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
         ? !isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
         : !isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate);
     }
-    return isCanJoinMatch(match.startJoiningDate, match.endJoiningDate);
+    if (!isJoinMatch) {
+      return !isCanJoinMatch(match.startJoiningDate, match.endJoiningDate);
+    }
+    return false;
   }
 
   return (
