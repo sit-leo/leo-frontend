@@ -8,8 +8,9 @@ function isCanJoinMatch(startJoiningDate, endJoiningDate) {
 
 export default isCanJoinMatch;
 
-export function isApplicantCanRanking(applicantRankingTime) {
-  return !TODAY.isAfter(applicantRankingTime);
+
+export function isApplicantCanRanking(endJoiningDate, applicantRankingTime) {
+  return TODAY.isAfter(endJoiningDate) && !TODAY.isAfter(applicantRankingTime);
 }
 
 export function isRecruiterCanRanking(applicantRankingTime, recruiterRankingTime) {

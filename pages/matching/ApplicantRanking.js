@@ -37,7 +37,7 @@ class ApplicantRankingController extends React.Component {
       return redirectError({ req, res }, 'No Match Found.');
     }
 
-    if (!isApplicantCanRanking(match.applicantRankingEndDate)) {
+    if (!isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)) {
       return redirectError({ req, res }, 'Applicant Ranking Day has ended.');
     }
 
