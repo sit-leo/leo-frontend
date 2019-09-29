@@ -4,6 +4,7 @@ import { Label } from 'reactstrap';
 import {
   Input as InputDefault,
   InputNumber as InputNumberDefault,
+  Select as SelectDefault,
 } from 'antd';
 
 import colors from '../../config/color';
@@ -20,6 +21,18 @@ const INPUT_THEME = `
 `;
 
 const InputDefaultStyled = styled(InputDefault)`
+  ${INPUT_THEME}
+`;
+
+export const Select = styled(SelectDefault)`
+  ${INPUT_THEME}
+  div.ant-select-selection {
+    border: none !important;
+    border-radius: 10px !important;
+  }
+`;
+
+export const Option = styled(SelectDefault.Option)`
   ${INPUT_THEME}
 `;
 
