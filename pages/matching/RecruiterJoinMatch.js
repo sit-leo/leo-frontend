@@ -7,6 +7,7 @@ import cookie from '../../tools/cookie';
 import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
 import { withAuth } from '../../tools/with-auth';
+import isCanJoinMatch from '../../tools/match-time';
 
 import redirectToError from '../../tools/redirect-error';
 
@@ -26,6 +27,10 @@ class RecruiterJoinMatchController extends React.Component {
 
     if (match.error) {
       return redirectToError({ req, res }, 'No Match Found.');
+    }
+
+    if (isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
+      return redirectToError({ req, res }, 'Not joining period.');
     }
 
     await store.dispatch(setMatch(match));
