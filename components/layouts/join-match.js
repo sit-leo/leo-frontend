@@ -46,12 +46,13 @@ const JoinMatch = ({
     <Modal isOpen={isOpenJoinModal}>
       <ModalHeader className="justify-content-center">Confirmation</ModalHeader>
       <ModalBody className="text-center">
-        Go to profile to edit information.
-        Are you sure to leave this page?
+        Are you sure to join this match?
+        You won't be able to quit the match.
       </ModalBody>
       <ModalFooter className="flex-column text-center">
         <span>
-          Your filled information will be saved before leaving this page.
+        Confirm to join this match?
+        Please check your information before confirm.
         </span>
         <FlexBetween className="w-100 mt-3">
           <DangerButton onClick={() => toggleJoinModal(!isOpenJoinModal)}>
