@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 
 const TODAY = dayjs();
 
-function isCanJoinMatch(joinMatchTime) {
-  return !TODAY.isAfter(joinMatchTime);
+function isCanJoinMatch(startJoiningDate, endJoiningDate) {
+  return !TODAY.isAfter(endJoiningDate) && !TODAY.isBefore(startJoiningDate);
 }
 
 export default isCanJoinMatch;
