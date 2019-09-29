@@ -69,11 +69,11 @@ const Position = ({
     <Col lg={3}>
       <LabelInput
         label="Salary Range (Bath)"
-        attribute="salary"
-        name={`salary-${dataKey}`}
+        attribute="money"
+        name={`money-${dataKey}`}
         placeholder="15000 - 20000"
         onChange={e => updateRecruiterPosition(dataKey, e.target.getAttribute('attribute'), e.target.value)}
-        text={position.salary}
+        text={position.money}
         getFieldDecorator={getFieldDecorator}
       />
     </Col>
