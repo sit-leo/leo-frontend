@@ -52,6 +52,15 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 const MatchPage = ({ match, isJoinMatch, role }) => {
+  let buttonText = 'Match Result';
+  if (!isAnnouceDate(match.announceDate)) {
+    if (!isJoinMatch) {
+      buttonText = 'Join Match';
+    } else {
+      buttonText = 'Ranking';
+    }
+  }
+
   function handleMatchResult() {
     if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/result`);
@@ -143,15 +152,7 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                   }}
                 >
                   <TitleWhite className="mb-0">
-                    {
-                       !isJoinMatch && !(isAnnouceDate(match.announceDate))
-                         ? 'Join Match'
-                         : 'Ranking'
-                    }
-                    {
-                      isAnnouceDate(match.announceDate)
-                        && 'Match Result'
-                    }
+                    {buttonText}
                   </TitleWhite>
                 </Button>
               </Col>
