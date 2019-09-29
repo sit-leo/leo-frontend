@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Label } from 'reactstrap';
+import { Select } from 'antd';
 
 import {
   setInputSkillVisible as setInputSkillVisibleAction,
@@ -26,6 +27,8 @@ import Tag from '../base/Tag';
 import Icon from '../base/Icon';
 import { Col } from '../base/Grid';
 import { Item } from '../base/Form';
+
+const { Option } = Select;
 
 const ApplicantProfileForm = ({
   editable,
@@ -113,14 +116,33 @@ const ApplicantProfileForm = ({
             />
           </Col>
           <Col lg={6}>
-            <LabelInput
-              label="Year"
-              name="year"
-              text={year}
-              disabled={!editable}
-              getFieldDecorator={getFieldDecorator}
-              onChange={e => setEducation('year', e.target.value)}
-            />
+            <Label for="year" className="mb-0">Year</Label>
+            {
+                getFieldDecorator('year', {
+                  validateTrigger: ['onBlur'],
+                  initialValue: year,
+                  setFieldsValue: year,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please select "Year".',
+                    },
+                  ],
+                })(
+                  <Select
+                    value={year}
+                    className="w-100"
+                    onChange={value => setEducation('year', value)}
+                    disabled={!editable}
+                  >
+                    <Option value="1">1</Option>
+                    <Option value="2">2</Option>
+                    <Option value="3">3</Option>
+                    <Option value="4">4</Option>
+                    <Option value="Graduated">Graduated</Option>
+                  </Select>,
+                )
+              }
           </Col>
           <Col lg={6}>
             <LabelInput
