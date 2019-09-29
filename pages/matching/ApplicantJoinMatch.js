@@ -28,7 +28,7 @@ class ApplicantJoinMatchController extends React.Component {
       return redirectToError({ req, res }, 'No Match Found.');
     }
 
-    if (isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
+    if (!isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
       return redirectToError({ req, res }, 'Not joining period.');
     }
 
