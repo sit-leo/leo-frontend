@@ -143,7 +143,7 @@ const ApplicantProfileForm = ({
                     </Select>,
                   )
                   : (
-                    <LabelInput
+                    <Input
                       label="Year"
                       name="year"
                       text={year}
