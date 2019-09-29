@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 import color from '../../config/color';
 
@@ -24,30 +25,32 @@ const VerticalLine = styled.div`
   border: solid 1px ${color.outline};
 `;
 
-const Time = () => (
+const Time = ({
+  match,
+}) => (
   <Hero>
     <ContainerRow>
       <Col lg={6}>
         <Title className="mb-3">
-          15th Matching
+          {match.name || 'Default Match Name'}
         </Title>
         <Title className="d-flex align-items-center">
           <Icon type="calendar" style={{ fontSize: '30px' }} className="mr-2" />
-          Matching date: 15 Nov 2019
+          {`Matching date: ${dayjs(match.announceDate).format('DD MMM YYYY')}`}
         </Title>
       </Col>
       <Col lg={4} className="d-flex justify-content-between">
-        <CounterBox counter={20} text="Recruiters" />
+        <CounterBox counter={match.numOfRecruiter} text="Recruiters" />
         <VerticalLine />
-        <CounterBox counter={84} text="Applicants" />
+        <CounterBox counter={match.numOfApplicant} text="Applicants" />
       </Col>
     </ContainerRow>
   </Hero>
 );
 
-const MatchingLayout = ({ children }) => (
+const MatchingLayout = ({ match, children }) => (
   <WithNavbar>
-    <Time />
+    <Time match={match} />
     <ContainerRow className="py-5">
       {children}
     </ContainerRow>

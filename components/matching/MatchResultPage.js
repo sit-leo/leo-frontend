@@ -70,12 +70,13 @@ const ResultList = ({ role, matchResults = [] }) => (
 );
 
 const MatchResultPage = ({
+  match,
   role,
   matchResults = [],
 }) => {
   const resultCount = matchResults.length;
   return (
-    <MatchingLayout>
+    <MatchingLayout match={match}>
       <Col>
         <Card>
           <Row>

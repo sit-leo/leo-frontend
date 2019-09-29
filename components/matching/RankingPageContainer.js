@@ -100,6 +100,8 @@ const RankStep = ({ steps = [], stepIndex }) => (
 );
 
 const RankingPageContainer = ({
+  match,
+
   role,
   rankingSteps,
 
@@ -129,7 +131,7 @@ const RankingPageContainer = ({
   }
 
   return (
-    <MatchingLayout>
+    <MatchingLayout match={match}>
       <Col>
         <Card>
           <Row className="sticky-top bg-white pb-3">

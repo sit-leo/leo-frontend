@@ -38,7 +38,7 @@ const RecruiterPosition = ({
   textAction = 'Choose position to rank',
   redirect = () => {},
 }) => (
-  <MatchingLayout>
+  <MatchingLayout match={match}>
     <Col>
       <Card>
         <Row>
