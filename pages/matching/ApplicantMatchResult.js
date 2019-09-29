@@ -17,6 +17,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatchResults } from '../../store/matching/ranking';
+import { setMatch } from '../../store/match';
 
 import MatchResultPage from '../../components/matching/MatchResultPage';
 
@@ -46,6 +47,7 @@ class MatchResultController extends React.Component {
 
     const matchResults = await matchingRequest.getMatchResultByMatchId(matchId);
 
+    await store.dispatch(setMatch(match));
     await store.dispatch(setMatchResults(matchResults));
     return {};
   }

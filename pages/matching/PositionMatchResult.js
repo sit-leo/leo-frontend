@@ -17,6 +17,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
 
 import { setMatchResults } from '../../store/matching/ranking';
+import { setMatch } from '../../store/match';
 
 import MatchResultPage from '../../components/matching/MatchResultPage';
 
@@ -49,6 +50,7 @@ class MatchResultController extends React.Component {
     const positionMatchResults = await matchResults
       .filter(({ position }) => position.id === +positionId);
 
+    await store.dispatch(setMatch(match));
     await store.dispatch(setMatchResults(positionMatchResults));
 
     return {};
