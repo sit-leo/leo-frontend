@@ -9,12 +9,13 @@ import day from 'dayjs';
 import colors from '../../config/color';
 
 import { isApplicant } from '../../tools/with-roles';
-import {
+import isCanJoinMatch, {
   convertDatePeriod,
   isAnnouceDate,
   getNextDay,
   isApplicantCanRanking,
   isRecruiterCanRanking,
+  isRankingPeriod,
 } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
@@ -84,6 +85,15 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
       return Router.push(`/matches/${match.id}/applicants/join`);
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
+  }
+
+  function isDisabled() {
+    if (isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
+      return isApplicant(role)
+        ? !isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
+        : !isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate);
+    }
+    return isCanJoinMatch(match.startJoiningDate, match.endJoiningDate);
   }
 
   return (
@@ -156,11 +166,7 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                       handleJoinMatch();
                     }
                   }}
-                  disabled={
-                    isApplicant(role)
-                      ? !isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
-                      : !isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate)
-                  }
+                  disabled={isDisabled()}
                 >
                   <TitleWhite className="mb-0">
                     {buttonText}

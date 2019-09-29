@@ -17,6 +17,10 @@ export function isRecruiterCanRanking(applicantRankingTime, recruiterRankingTime
   return TODAY.isAfter(applicantRankingTime) && !TODAY.isAfter(recruiterRankingTime);
 }
 
+export function isRankingPeriod(endJoiningDate, recruiterRankingTime) {
+  return TODAY.isAfter(endJoiningDate) && !TODAY.isAfter(recruiterRankingTime);
+}
+
 export function isAnnouceDate(annouceDate) {
   return TODAY.isSame(annouceDate) || TODAY.isAfter(annouceDate);
 }
