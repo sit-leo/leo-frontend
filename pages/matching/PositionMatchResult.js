@@ -34,6 +34,12 @@ class MatchResultController extends React.Component {
       return redirectError({ req, res }, 'No Match Found.');
     }
 
+    const { joined } = await matchingRequest.isJoined(matchId);
+
+    if (!joined) {
+      return redirectError({ req, res }, 'You are not joined this match.');
+    }
+
     if (!isAnnouceDate(match.announceDate)) {
       return redirectError({ req, res }, 'Announce Day not started.');
     }
