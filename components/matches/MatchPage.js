@@ -9,7 +9,13 @@ import day from 'dayjs';
 import colors from '../../config/color';
 
 import { isApplicant } from '../../tools/with-roles';
-import { convertDatePeriod, isAnnouceDate, getNextDay } from '../../tools/match-time';
+import {
+  convertDatePeriod,
+  isAnnouceDate,
+  getNextDay,
+  isApplicantCanRanking,
+  isRecruiterCanRanking,
+} from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
 
@@ -150,6 +156,11 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                       handleJoinMatch();
                     }
                   }}
+                  disabled={
+                    isApplicant(role)
+                      ? !isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
+                      : !isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate)
+                  }
                 >
                   <TitleWhite className="mb-0">
                     {buttonText}
