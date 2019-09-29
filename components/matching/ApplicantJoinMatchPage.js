@@ -22,7 +22,7 @@ const handleConfirmApplicant = async (id) => {
   }) => {
     if (!status) {
       message.success('Join match success.');
-      return Router.push(`/matches/${id}/applicants/ranking`);
+      return Router.push('/my-matches');
     }
     return message.error(`${error}, ${errorMessage}`);
   });

@@ -36,7 +36,7 @@ const handleConfirmRecruiter = async (id, positions) => {
   }) => {
     if (!status) {
       message.success('Join match success.');
-      return Router.push(`/matches/${id}/recruiters/positions`);
+      return Router.push('/my-matches');
     }
     return message.error(`${error}, ${errorMessage}`);
   });
