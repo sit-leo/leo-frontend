@@ -69,4 +69,14 @@ export default adapter => ({
     return adapter.get(`${MATCHING_API}/matches/${id}/isJoin`)
       .then(({ data: isJoined }) => isJoined);
   },
+  uploadFile(file) {
+    const body = new FormData();
+    body.append('files', file);
+    return adapter.post(`${MATCHING_API}/matches/1/upload-file`, body)
+      .then(({ data }) => data);
+  },
+  getFiles() {
+    return adapter.get(`${MATCHING_API}/matches/1/get-file`)
+      .then(({ data }) => data);
+  },
 });
