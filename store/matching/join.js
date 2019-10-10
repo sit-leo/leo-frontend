@@ -1,6 +1,6 @@
 export const initPosition = {
   name: '',
-  salary: '',
+  money: '',
   capacity: 1,
   description: '',
   documents: ['Resume', 'Transcript'],
