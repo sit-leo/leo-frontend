@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   Upload, message,
@@ -7,9 +9,16 @@ import {
 import { clientInstance } from '../../tools/request';
 import { isApplicant, isRecruiter } from '../../tools/with-roles';
 
+import color from '../../config/color';
+
+import matchingAdapter from '../../store/matching/matching-adapter';
 import profileAdapter from '../../store/profile/profile-adapter';
 
 import WithNavbar from '../layouts/with-navbar';
+
+import {
+  addApplicantFiles as addApplicantFilesAction,
+} from '../../store/profile';
 
 import { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
@@ -23,6 +32,24 @@ import { LabelInput } from '../base/Input';
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
 
+const DumpUpload = styled(Upload)`
+  max-width: 102px;
+  margin-right: 16px;
+  border-radius: 4px;
+  .ant-upload-select {
+    border: solid 2px ${color.disabled};
+    background: ${color.white};
+  }
+  img {
+    max-width: 30px;
+  }
+  span {
+    text-overflow: ellipsis;
+    max-width: 86px;
+    overflow: hidden;
+  }
+`;
+
 const UploadButton = () => (
   <div>
     <Icon type="plus" />
@@ -34,7 +61,9 @@ export const Profile = ({
   role,
   applicant,
   recruiter,
+  files,
   form: { getFieldDecorator, validateFields },
+  addApplicantFiles,
 }) => {
   function updateProfile() {
     const profileRequest = profileAdapter(clientInstance());
@@ -69,13 +98,31 @@ export const Profile = ({
             <React.Fragment>
               <ApplicantProfileForm editable getFieldDecorator={getFieldDecorator} />
               <TitleForm title="Documents" />
-              <Col>
+              <Col className="d-flex">
+                {
+                  files.map(file => (
+                    <DumpUpload
+                      listType="picture-card"
+                      key={file.uid}
+                    >
+                      <div>
+                        <img src="/static/images/file.png" alt={file.name} />
+                        <span className="d-block mt-2">{`${file.name}`}</span>
+                      </div>
+                    </DumpUpload>
+                  ))
+                }
                 <Upload
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  customRequest={({ file }) => {
+                    const matchingRequest = matchingAdapter(
+                      clientInstance(true, { 'Content-Type': 'multipart/form-data' }),
+                    );
+                    matchingRequest.uploadFile(file).then(() => message.success('Upload success.'));
+                  }}
                   listType="picture-card"
-                  fileList={[]}
-                  onPreview={e => console.log(e)}
-                  onChange={e => console.log(e)}
+                  fileList={files}
+                  showUploadList={false}
+                  onChange={({ fileList }) => addApplicantFiles(fileList)}
                 >
                   <UploadButton />
                 </Upload>
@@ -110,8 +157,13 @@ const mapStateToProps = state => ({
   role: state.user.role,
   applicant: state.profile.applicant,
   recruiter: state.profile.recruiter,
+  files: state.profile.files,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addApplicantFiles: bindActionCreators(addApplicantFilesAction, dispatch),
 });
 
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
 
-export default connect(mapStateToProps)(WrappedProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedProfilePage);
