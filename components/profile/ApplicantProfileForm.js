@@ -130,7 +130,6 @@ const ApplicantProfileForm = ({
                     ],
                   })(
                     <Select
-                      value={year}
                       className="w-100"
                       onChange={value => setEducation('year', value)}
                       disabled={!editable}
