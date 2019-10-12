@@ -25,7 +25,9 @@ class ProfileController extends React.Component {
     if (isApplicant(user.role)) {
       const matchingRequest = matchingAdapter(serverInstance(token));
       const files = await matchingRequest.getFiles();
-      await store.dispatch(addApplicantFiles(files));
+      if (Array.isArray(files) && files.length > 0) {
+        await store.dispatch(addApplicantFiles(files));
+      }
     }
 
     return {};
