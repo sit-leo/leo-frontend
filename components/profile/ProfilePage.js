@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -8,8 +7,6 @@ import {
 
 import { clientInstance } from '../../tools/request';
 import { isApplicant, isRecruiter } from '../../tools/with-roles';
-
-import color from '../../config/color';
 
 import profileAdapter from '../../store/profile/profile-adapter';
 
@@ -24,37 +21,12 @@ import Form, { FormContainer } from '../base/Form';
 import {
   TitleForm, SubTitleWhite, NoteText,
 } from '../base/Text';
-import Icon from '../base/Icon';
 import { SmallMainButton } from '../base/Button';
 import { LabelInput } from '../base/Input';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
-
-const DumpUpload = styled(Upload)`
-  max-width: 102px;
-  margin-right: 16px;
-  border-radius: 4px;
-  .ant-upload-select {
-    border: solid 2px ${color.disabled};
-    background: ${color.white};
-  }
-  img {
-    max-width: 30px;
-  }
-  span {
-    text-overflow: ellipsis;
-    max-width: 86px;
-    overflow: hidden;
-  }
-`;
-
-const UploadButton = () => (
-  <div>
-    <Icon type="plus" />
-    <div className="ant-upload-text">Upload</div>
-  </div>
-);
+import { DumpUpload, UploadButton } from '../base/Upload';
 
 export const Profile = ({
   role,
