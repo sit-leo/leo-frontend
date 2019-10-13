@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import RankingCard from './RankingCard';
 
-const Upload = ({
+const DocumentStep = ({
   applicantRanks,
   files,
 }) => (
@@ -34,4 +34,4 @@ const mapDispatchToRankProps = dispatch => ({
   // updateRank: bindActionCreators(updateApplicantRank, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToRankProps)(Upload);
+export default connect(mapStateToProps, mapDispatchToRankProps)(DocumentStep);

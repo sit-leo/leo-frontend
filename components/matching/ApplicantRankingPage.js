@@ -15,14 +15,14 @@ import RankingPageContainer from './RankingPageContainer';
 import PositionListStep from './PositionListStep';
 import RankingStep from './RankingStep';
 import Confirmation from './Confirmation';
-import UploadStep from './UploadStep';
+import DocumentStep from './DocumentStep';
 
 const matchingRequest = matchingAdapter(clientInstance());
 
 const APPLICANT_RANKING_STEPS = [
   'Add to rank',
   'Arrange rank',
-  'Upload documents',
+  'Choose documents',
 ];
 
 export const ApplicantRanking = ({
@@ -71,7 +71,7 @@ export const ApplicantRanking = ({
                 />
               )
             }
-      { step === 2 && (<UploadStep />) }
+      { step === 2 && (<DocumentStep />) }
       <Confirmation
         handleConfirm={handleConfirm}
         isOpenConfirm={isOpenConfirm}
