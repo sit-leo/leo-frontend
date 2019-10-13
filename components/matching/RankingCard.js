@@ -10,6 +10,7 @@ import { SmallCard } from '../base/Card';
 import Flex, { FlexCenter } from '../base/Flex';
 import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
+import { PreviewFile } from '../base/Upload';
 
 const CardLeft = ({ imagePath }) => (
   <RankingAvatar className="w-75 rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
@@ -38,12 +39,21 @@ const CardRight = ({
 const CardCollapse = ({
   isOpen,
   informations = [{ header: 'No Informaiton', detail: '- none' }],
+  files = [],
 }) => (
   <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
     <ContainerRow>
       {
         informations.map(({ header, detail }) => (
           <Information key={header} header={header} detail={detail} />
+        ))
+      }
+      {
+        files.map(file => (
+          <PreviewFile
+            key={file.uid || file.id}
+            fileName={file.fileName}
+          />
         ))
       }
     </ContainerRow>
@@ -66,6 +76,8 @@ const RankingCard = ({
   badgeText,
   actionButton,
   rankingButton,
+  informations = [],
+  files = [],
 }) => {
   const [isOpen, toggle] = useState(false);
   return (
@@ -87,7 +99,7 @@ const RankingCard = ({
             </Col>
           )
         }
-        <CardCollapse isOpen={isOpen} />
+        <CardCollapse isOpen={isOpen} informations={informations} files={files} />
       </ContainerRow>
       <CardButton className="mt-3 py-1 bg-white" onClick={() => toggle(!isOpen)}>
         <ExtraSmallTextLightPrimary className="mb-0">
