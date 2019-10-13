@@ -105,8 +105,8 @@ export const Profile = ({
                       key={file.uid}
                     >
                       <div>
-                        <img src="/static/images/file.png" alt={file.name} />
-                        <span className="d-block mt-2">{`${file.name}`}</span>
+                        <img src="/static/images/file.png" alt={file.name || file.fileName} />
+                        <span className="d-block mt-2">{`${file.name || file.fileName}`}</span>
                       </div>
                     </DumpUpload>
                   ))
