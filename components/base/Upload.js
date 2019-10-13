@@ -6,6 +6,9 @@ import color from '../../config/color';
 
 import Icon from './Icon';
 
+const File = styled.div`
+`;
+
 export const DumpUpload = styled(Upload)`
   max-width: 102px;
   margin-right: 16px;
@@ -29,6 +32,15 @@ export const UploadButton = () => (
     <Icon type="plus" />
     <div className="ant-upload-text">Upload</div>
   </div>
+);
+
+export const PreviewFile = ({
+  fileName,
+}) => (
+  <File>
+    <img src="/static/images/file.png" alt="file" />
+    <span>{fileName}</span>
+  </File>
 );
 
 export default Upload;
