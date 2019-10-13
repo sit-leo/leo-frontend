@@ -74,7 +74,7 @@ export const Profile = ({
                   files.map(file => (
                     <DumpUpload
                       listType="picture-card"
-                      key={file.uid}
+                      key={file.uid || file.id}
                     >
                       <div>
                         <img src="/static/images/file.png" alt={file.name || file.fileName} />
