@@ -16,4 +16,14 @@ export default adapter => ({
     return adapter.put(`${PROFILE_API}/profile/recruiter`, recruiter)
       .then(({ data: profile }) => profile);
   },
+  uploadFile(file) {
+    const body = new FormData();
+    body.append('files', file);
+    return adapter.post(`${PROFILE_API}/profile/documents`, body)
+      .then(({ data }) => data);
+  },
+  getFiles() {
+    return adapter.get(`${PROFILE_API}/profile/documents`)
+      .then(({ data }) => data);
+  },
 });

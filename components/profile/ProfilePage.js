@@ -11,7 +11,6 @@ import { isApplicant, isRecruiter } from '../../tools/with-roles';
 
 import color from '../../config/color';
 
-import matchingAdapter from '../../store/matching/matching-adapter';
 import profileAdapter from '../../store/profile/profile-adapter';
 
 import WithNavbar from '../layouts/with-navbar';
@@ -114,10 +113,10 @@ export const Profile = ({
                 }
                 <Upload
                   customRequest={({ file }) => {
-                    const matchingRequest = matchingAdapter(
+                    const profileRequest = profileAdapter(
                       clientInstance(true, { 'Content-Type': 'multipart/form-data' }),
                     );
-                    matchingRequest.uploadFile(file).then(() => message.success('Upload success.'));
+                    profileRequest.uploadFile(file).then(() => message.success('Upload success.'));
                   }}
                   listType="picture-card"
                   fileList={files}

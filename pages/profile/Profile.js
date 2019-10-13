@@ -8,10 +8,10 @@ import { isApplicant } from '../../tools/with-roles';
 import withUser from '../../tools/with-user';
 
 import userAdapter from '../../store/user/user-adapter';
-import matchingAdapter from '../../store/matching/matching-adapter';
 import { addApplicantFiles } from '../../store/profile';
 
 import ProfilePage from '../../components/profile/ProfilePage';
+import profileAdapter from '../../store/profile/profile-adapter';
 
 class ProfileController extends React.Component {
   static async getInitialProps({
@@ -23,8 +23,8 @@ class ProfileController extends React.Component {
     const user = await userRequest.getUser();
 
     if (isApplicant(user.role)) {
-      const matchingRequest = matchingAdapter(serverInstance(token));
-      const files = await matchingRequest.getFiles();
+      const profileRequest = profileAdapter(serverInstance(token));
+      const files = await profileRequest.getFiles();
       if (Array.isArray(files) && files.length > 0) {
         await store.dispatch(addApplicantFiles(files));
       }
