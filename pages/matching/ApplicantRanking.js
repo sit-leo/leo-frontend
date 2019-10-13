@@ -13,7 +13,9 @@ import cookie from '../../tools/cookie';
 
 import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
+import profileAdapter from '../../store/profile/profile-adapter';
 
+import { addApplicantFiles } from '../../store/profile';
 import { setMatch } from '../../store/match';
 import {
   setHaveRank,
@@ -29,6 +31,7 @@ class ApplicantRankingController extends React.Component {
   }) {
     const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
     const matchingRequest = matchingAdapter(serverInstance(cookie.getToken(req)));
+    const profileRequest = profileAdapter(serverInstance(cookie.getToken(req)));
 
     const { matchId } = query;
     const match = await matchRequest.getMatchByMatchId(matchId);
@@ -52,6 +55,12 @@ class ApplicantRankingController extends React.Component {
       await store.dispatch(setApplicantRanks(ranks));
       await store.dispatch(setHaveRank(true));
     }
+
+    const files = await profileRequest.getFiles();
+    if (Array.isArray(files) && files.length > 0) {
+      await store.dispatch(addApplicantFiles(files));
+    }
+
     return {};
   }
 
