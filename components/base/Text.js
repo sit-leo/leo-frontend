@@ -5,7 +5,6 @@ import colors from '../../config/color';
 import font from '../../config/font';
 
 import { Col } from './Grid';
-import color from '../../config/color';
 
 const Text = styled.span`
   font-weight: ${font.weight.regular};
@@ -25,6 +24,10 @@ export const TitleLarge = styled.h1`
   font-size: ${font.size.xlarge};
   color: ${colors.text.main};
   font-weight: ${font.weight.regular};
+`;
+
+export const TitleLargePrimary = styled(TitleLarge)`
+  color: ${colors.primary};
 `;
 
 export const TitlePrimary = styled(Title)`
@@ -142,6 +145,6 @@ export const ExtraSmallTextLightPrimary = styled(ExtraSmallTextLight)`
 `;
 
 export const NoteText = styled.span`
-  color: ${color.secondary};
+  color: ${colors.secondary};
   font-size: ${font.size.xsmall};
 `;
