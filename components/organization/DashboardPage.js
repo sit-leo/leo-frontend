@@ -17,6 +17,7 @@ const StatisticCard = styled.a`
   padding: 8px 16px;
   margin: 10px 0;
   max-height: 89px;
+  min-height: 89px;
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgba(96, 84, 84, 0.1);
   text-decoration: none !important;
@@ -40,12 +41,12 @@ const Statistic = ({
   cardColor,
 }) => (
   <StatisticCard href={url} className="d-block w-100" color={cardColor}>
-    <Row>
+    <Row className={text ? 'mt-2' : 'mt-1'}>
       <Col xs={9}>
         <TitleLargeWhite className="mb-0">
           {number}
         </TitleLargeWhite>
-        <SubTitleStatistic>
+        <SubTitleStatistic className="mb-0">
           {text}
         </SubTitleStatistic>
       </Col>
@@ -62,7 +63,7 @@ const DashboardPage = () => (
       <Statistic url="/organizations/matches" number={5} text="Matches" cardColor="#58b0ad" />
       <Statistic url="/organizations/recruiters" number={19} text="Recruiters" cardColor="#58b09e" />
       <Statistic url="/organizations/applicants" number={439} text="Applicants" cardColor="#58b090" />
-      <Statistic url="/organizations/matches/create" number="Create Now" text="Current Matches" cardColor="#58b081" />
+      <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
     </Col>
     <Col>
       <Card className="my-3">
