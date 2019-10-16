@@ -3,7 +3,6 @@ import React from 'react';
 import WithNavbar from './with-navbar';
 
 import { TitleLargePrimary } from '../base/Text';
-import Card from '../base/Card';
 import ContainerRow, { Col } from '../base/Grid';
 
 const Organization = ({ children, title }) => (
