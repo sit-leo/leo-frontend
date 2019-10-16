@@ -3,6 +3,7 @@ const routes = require('next-routes');
 module.exports = routes()
   .add('match/index', '/matches/:matchId')
   .add('match/MyMatches', '/my-matches')
+  .add('organization/index', '/organizations')
   .add('organization/Dashboard', '/organizations/dashboard')
   .add('organization/AddApplicant', '/organizations/applicants/add')
   .add('organization/AddRecruiter', '/organizations/recruiters/add')
