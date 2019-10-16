@@ -98,7 +98,7 @@ const DashboardPage = ({
         <Statistic url="/my-matches" number={5} text="Matches" cardColor="#58b0ad" />
         <Statistic url="#members" onClick={() => setTab('1')} number={439} text="Applicants" cardColor="#58b09e" />
         <Statistic url="#members" onClick={() => setTab('2')} number={19} text="Recruiters" cardColor="#58b090" />
-        <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
+        <Statistic url="/organizations/matches/manage" number="Create Match" cardColor="#58b081" />
       </Col>
       <Col>
         <Card className="my-3">
