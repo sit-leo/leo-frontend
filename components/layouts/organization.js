@@ -14,11 +14,7 @@ const Organization = ({ children, title }) => (
           {title}
         </TitleLargePrimary>
       </Col>
-      <Col>
-        <Card>
-          {children}
-        </Card>
-      </Col>
+      {children}
     </ContainerRow>
   </WithNavbar>
 );
