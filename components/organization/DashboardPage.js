@@ -42,8 +42,9 @@ const Statistic = ({
   text,
   url,
   cardColor,
+  onClick = () => {},
 }) => (
-  <StatisticCard href={url} className="d-block w-100" color={cardColor}>
+  <StatisticCard href={url} onClick={onClick} className="d-block w-100" color={cardColor}>
     <Row className={text ? 'mt-2' : 'mt-1'}>
       <Col xs={9}>
         <TitleLargeWhite className="mb-0">
@@ -67,8 +68,8 @@ const DashboardPage = () => {
     <Organization title="About Organization">
       <Col className="d-lg-flex justify-content-between">
         <Statistic url="/my-matches" number={5} text="Matches" cardColor="#58b0ad" />
-        <Statistic url="#members" number={19} text="Recruiters" cardColor="#58b09e" />
-        <Statistic url="#members" number={439} text="Applicants" cardColor="#58b090" />
+        <Statistic url="#members" onClick={() => setTab('1')} number={439} text="Applicants" cardColor="#58b09e" />
+        <Statistic url="#members" onClick={() => setTab('2')} number={19} text="Recruiters" cardColor="#58b090" />
         <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
       </Col>
       <Col>
@@ -84,11 +85,16 @@ const DashboardPage = () => {
           <TitleLargePrimary>
             Members
           </TitleLargePrimary>
-          <Tabs defaultActiveKey="1" onChange={key => setTab(key)} animated={false}>
+          <Tabs
+            defaultActiveKey="1"
+            activeKey={tab}
+            onChange={key => setTab(key)}
+            animated={false}
+          >
             {
-              TABS.map((tap, key) => (
-                <TabPane tab={tap} key={`${key + 1}`}>
-                  {tab}
+              TABS.map((name, key) => (
+                <TabPane tab={name} key={`${key + 1}`}>
+                  {name}
                 </TabPane>
               ))
             }
