@@ -4,6 +4,8 @@ import { Table } from 'antd';
 
 import Organization from '../layouts/organization';
 
+import color from '../../config/color';
+
 import { Col, Row } from '../base/Grid';
 import {
   TitleLargePrimary,
@@ -12,8 +14,8 @@ import {
 } from '../base/Text';
 import Card from '../base/Card';
 import { IconLargeWhite } from '../base/Icon';
-import color from '../../config/color';
 import Tabs, { TabPane } from '../base/Tabs';
+import { LinkButton } from '../base/Button';
 
 import { columns as applicantColumns, dataSource as stubApplicants } from './AddApplicantPage';
 import { columns as recruiterColumns, dataSource as stubRecruiters } from './AddRecruiterPage';
@@ -69,14 +71,18 @@ const DashboardPage = ({
 }) => {
   const TABS = [
     {
+      index: 1,
       name: 'Applicants',
+      key: 'applicants',
       props: {
         dataSource: applicants || stubApplicants,
         columns: applicantColumns,
       },
     },
     {
+      index: 2,
       name: 'Recruiters',
+      key: 'recruiters',
       props: {
         dataSource: recruiters || stubRecruiters,
         columns: recruiterColumns,
@@ -114,8 +120,13 @@ const DashboardPage = ({
             animated={false}
           >
             {
-              TABS.map(({ name, props }, key) => (
-                <TabPane tab={name} key={`${key + 1}`}>
+              TABS.map(({
+                name, props, key, index,
+              }) => (
+                <TabPane tab={name} key={index}>
+                  <div className="text-right mb-3">
+                    <LinkButton href={`/organizations/${key}/add`}>{`+ Add more ${key}`}</LinkButton>
+                  </div>
                   <Table {...props} />
                 </TabPane>
               ))
