@@ -59,9 +59,9 @@ const Statistic = ({
 const DashboardPage = () => (
   <Organization title="About Organization">
     <Col className="d-lg-flex justify-content-between">
-      <Statistic url="#" number={5} text="Matches" cardColor="#58b0ad" />
-      <Statistic url="/organizations/recruiters/add" number={19} text="Recruiters" cardColor="#58b09e" />
-      <Statistic url="/organizations/applicants/add" number={439} text="Applicants" cardColor="#58b090" />
+      <Statistic url="/organizations/matches" number={5} text="Matches" cardColor="#58b0ad" />
+      <Statistic url="/organizations/recruiters" number={19} text="Recruiters" cardColor="#58b09e" />
+      <Statistic url="/organizations/applicants" number={439} text="Applicants" cardColor="#58b090" />
       <Statistic url="/organizations/matches/create" number="Create Now" text="Current Matches" cardColor="#58b081" />
     </Col>
     <Col>
