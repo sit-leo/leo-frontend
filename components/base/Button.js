@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button as DefaultButton } from 'antd';
 
 import color from '../../config/color';
+import font from '../../config/font';
 
 const DefaultButtonStyled = styled(DefaultButton)`
   text-align: center;
@@ -85,6 +86,13 @@ export const TextButton = styled.button`
   color: ${color.primary};
   background: none;
   border: none;
+`;
+
+export const LinkButton = styled.a`
+  color: ${color.primary};
+  font-size: ${font.size.small};
+  text-decoration: underline;
+  font-weight: 100;
 `;
 
 export default MainButton;
