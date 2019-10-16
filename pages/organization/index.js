@@ -11,14 +11,15 @@ class OrganizationController extends React.Component {
     const isAdmin = true;
 
     if (isAdmin) {
-      res.writeHead(302, { Location: '/organization/dashboard' });
+      res.writeHead(302, { Location: '/organizations/dashboard' });
       res.end();
-      return {};
     }
 
-    res.writeHead(302, { Location: '/organization/matches' });
-    res.end();
     return {};
+  }
+
+  render() {
+    return <div>Orgainzations Controller</div>;
   }
 }
 
