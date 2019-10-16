@@ -2,7 +2,7 @@ import React from 'react';
 
 import AddMemberContainer from './AddMemberContainer';
 
-const columns = [
+export const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -20,7 +20,7 @@ const columns = [
   },
 ];
 
-const dataSource = [
+export const dataSource = [
   {
     key: '1',
     name: 'Jirapa Songchom',

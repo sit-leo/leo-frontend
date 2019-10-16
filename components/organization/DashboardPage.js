@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Table } from 'antd';
 
 import Organization from '../layouts/organization';
 
@@ -13,6 +14,9 @@ import Card from '../base/Card';
 import { IconLargeWhite } from '../base/Icon';
 import color from '../../config/color';
 import Tabs, { TabPane } from '../base/Tabs';
+
+import { columns as applicantColumns, dataSource as stubApplicants } from './AddApplicantPage';
+import { columns as recruiterColumns, dataSource as stubRecruiters } from './AddRecruiterPage';
 
 const TABS = ['Applicants', 'Recruiters'];
 
@@ -61,7 +65,10 @@ const Statistic = ({
   </StatisticCard>
 );
 
-const DashboardPage = () => {
+const DashboardPage = ({
+  applicants = stubApplicants,
+  recruiters = stubRecruiters,
+}) => {
   const [tab, setTab] = useState('1');
 
   return (
@@ -94,7 +101,12 @@ const DashboardPage = () => {
             {
               TABS.map((name, key) => (
                 <TabPane tab={name} key={`${key + 1}`}>
-                  {name}
+                  {
+                    name === TABS[0] && <Table dataSource={applicants} columns={applicantColumns} />
+                  }
+                  {
+                    name === TABS[1] && <Table dataSource={recruiters} columns={recruiterColumns} />
+                  }
                 </TabPane>
               ))
             }
