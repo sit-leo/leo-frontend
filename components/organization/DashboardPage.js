@@ -18,8 +18,6 @@ import Tabs, { TabPane } from '../base/Tabs';
 import { columns as applicantColumns, dataSource as stubApplicants } from './AddApplicantPage';
 import { columns as recruiterColumns, dataSource as stubRecruiters } from './AddRecruiterPage';
 
-const TABS = ['Applicants', 'Recruiters'];
-
 const StatisticCard = styled.a`
   padding: 8px 16px;
   margin: 10px 0;
@@ -46,7 +44,7 @@ const Statistic = ({
   text,
   url,
   cardColor,
-  onClick = () => {},
+  onClick = () => { },
 }) => (
   <StatisticCard href={url} onClick={onClick} className="d-block w-100" color={cardColor}>
     <Row className={text ? 'mt-2' : 'mt-1'}>
@@ -66,9 +64,26 @@ const Statistic = ({
 );
 
 const DashboardPage = ({
-  applicants = stubApplicants,
-  recruiters = stubRecruiters,
+  applicants,
+  recruiters,
 }) => {
+  const TABS = [
+    {
+      name: 'Applicants',
+      props: {
+        dataSource: applicants || stubApplicants,
+        columns: applicantColumns,
+      },
+    },
+    {
+      name: 'Recruiters',
+      props: {
+        dataSource: recruiters || stubRecruiters,
+        columns: recruiterColumns,
+      },
+    },
+  ];
+
   const [tab, setTab] = useState('1');
 
   return (
@@ -82,7 +97,7 @@ const DashboardPage = ({
       <Col>
         <Card className="my-3">
           <TitleLargePrimary>
-          Statistics
+            Statistics
             <hr />
           </TitleLargePrimary>
         </Card>
@@ -99,14 +114,9 @@ const DashboardPage = ({
             animated={false}
           >
             {
-              TABS.map((name, key) => (
+              TABS.map(({ name, props }, key) => (
                 <TabPane tab={name} key={`${key + 1}`}>
-                  {
-                    name === TABS[0] && <Table dataSource={applicants} columns={applicantColumns} />
-                  }
-                  {
-                    name === TABS[1] && <Table dataSource={recruiters} columns={recruiterColumns} />
-                  }
+                  <Table {...props} />
                 </TabPane>
               ))
             }
