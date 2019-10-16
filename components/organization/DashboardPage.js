@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Organization from '../layouts/organization';
@@ -12,6 +12,9 @@ import {
 import Card from '../base/Card';
 import { IconLargeWhite } from '../base/Icon';
 import color from '../../config/color';
+import Tabs, { TabPane } from '../base/Tabs';
+
+const TABS = ['Applicants', 'Recruiters'];
 
 const StatisticCard = styled.a`
   padding: 8px 16px;
@@ -57,23 +60,43 @@ const Statistic = ({
   </StatisticCard>
 );
 
-const DashboardPage = () => (
-  <Organization title="About Organization">
-    <Col className="d-lg-flex justify-content-between">
-      <Statistic url="/organizations/matches" number={5} text="Matches" cardColor="#58b0ad" />
-      <Statistic url="/organizations/recruiters" number={19} text="Recruiters" cardColor="#58b09e" />
-      <Statistic url="/organizations/applicants" number={439} text="Applicants" cardColor="#58b090" />
-      <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
-    </Col>
-    <Col>
-      <Card className="my-3">
-        <TitleLargePrimary>
+const DashboardPage = () => {
+  const [tab, setTab] = useState('1');
+
+  return (
+    <Organization title="About Organization">
+      <Col className="d-lg-flex justify-content-between">
+        <Statistic url="/my-matches" number={5} text="Matches" cardColor="#58b0ad" />
+        <Statistic url="#members" number={19} text="Recruiters" cardColor="#58b09e" />
+        <Statistic url="#members" number={439} text="Applicants" cardColor="#58b090" />
+        <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
+      </Col>
+      <Col>
+        <Card className="my-3">
+          <TitleLargePrimary>
           Statistics
-          <hr />
-        </TitleLargePrimary>
-      </Card>
-    </Col>
-  </Organization>
-);
+            <hr />
+          </TitleLargePrimary>
+        </Card>
+      </Col>
+      <Col id="members">
+        <Card>
+          <TitleLargePrimary>
+            Members
+          </TitleLargePrimary>
+          <Tabs defaultActiveKey="1" onChange={key => setTab(key)} animated={false}>
+            {
+              TABS.map((tap, key) => (
+                <TabPane tab={tap} key={`${key + 1}`}>
+                  {tab}
+                </TabPane>
+              ))
+            }
+          </Tabs>
+        </Card>
+      </Col>
+    </Organization>
+  );
+};
 
 export default DashboardPage;
