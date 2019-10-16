@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 export const ROLE_APPLICANT = 'applicant';
 export const ROLE_RECRUITER = 'recruiter';
+export const ROLE_ORGANIZER = 'organizer';
 
 export function isApplicant(userRole) {
   return userRole === ROLE_APPLICANT;
@@ -10,6 +11,10 @@ export function isApplicant(userRole) {
 
 export function isRecruiter(userRole) {
   return userRole === ROLE_RECRUITER;
+}
+
+export function isOrganizer(userRole) {
+  return userRole === ROLE_ORGANIZER;
 }
 
 function redirectToRoot(res) {
