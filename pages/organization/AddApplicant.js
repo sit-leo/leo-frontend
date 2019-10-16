@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { withAuth } from '../../tools/with-auth';
+import withUser from '../../tools/with-user';
 
 import AddApplicantPage from '../../components/organization/AddApplicantPage';
 
@@ -14,4 +18,8 @@ class AddApplicantController extends React.Component {
   }
 }
 
-export default AddApplicantController;
+export default withUser(
+  withAuth(
+    connect()(AddApplicantController),
+  ),
+);

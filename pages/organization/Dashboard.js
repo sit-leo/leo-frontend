@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { withAuth } from '../../tools/with-auth';
+import withUser from '../../tools/with-user';
 
 import DashboardPage from '../../components/organization/DashboardPage';
 
@@ -14,4 +18,8 @@ class DashboardController extends React.Component {
   }
 }
 
-export default DashboardController;
+export default withUser(
+  withAuth(
+    connect()(DashboardController),
+  ),
+);

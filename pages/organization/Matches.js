@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { withAuth } from '../../tools/with-auth';
+import withUser from '../../tools/with-user';
 
 import MatchesPage from '../../components/organization/MatchesPage';
 
@@ -14,4 +18,9 @@ class MatchesController extends React.Component {
   }
 }
 
-export default MatchesController;
+
+export default withUser(
+  withAuth(
+    connect()(MatchesController),
+  ),
+);
