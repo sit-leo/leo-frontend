@@ -7,6 +7,8 @@ import {
   Select as SelectDefault,
 } from 'antd';
 
+import Icon from './Icon';
+
 import colors from '../../config/color';
 
 import { Item } from './Form';
@@ -73,4 +75,14 @@ export const LabelInput = ({
       }
     </Item>
   </React.Fragment>
+);
+
+export const Search = ({ ...props }) => (
+  <InputDefault
+    size="large"
+    prefix={<Icon type="search" />}
+    onChange={value => console.log(value)}
+    onPressEnter={value => console.log(value)}
+    {...props}
+  />
 );
