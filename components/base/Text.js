@@ -26,6 +26,10 @@ export const TitleLarge = styled.h1`
   font-weight: ${font.weight.regular};
 `;
 
+export const TitleLargeWhite = styled(TitleLarge)`
+  color: ${colors.white};
+`;
+
 export const TitleLargePrimary = styled(TitleLarge)`
   color: ${colors.primary};
 `;
@@ -40,6 +44,10 @@ export const TitleError = styled(Title)`
 
 export const TitleWhite = styled(Title)`
   color: ${colors.white};
+`;
+
+export const SubTitleStatistic = styled(TitleWhite)`
+  font-weight: 100;
 `;
 
 export const TitleLight = styled(Title)`
