@@ -16,6 +16,8 @@ const rowSelection = {
   }),
 };
 
+const expandedRowRender = record => <p>description</p>;
+
 const AddMemberContainer = ({
   title,
   columns,
@@ -28,6 +30,7 @@ const AddMemberContainer = ({
       </Col>
       <Col className="my-4" md={{ size: 10, offset: 1 }}>
         <Table
+          expandedRowRender={expandedRowRender}
           rowSelection={rowSelection}
           columns={columns}
           dataSource={dataSource}
