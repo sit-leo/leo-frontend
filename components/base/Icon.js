@@ -19,3 +19,8 @@ export const DeletedIcon = styled(Icon)`
     color: ${color.error};
     cursor: pointer;
 `;
+
+export const IconLargeWhite = styled(Icon)`
+    font-size: ${font.size.large};
+    color: ${color.white}
+`;
