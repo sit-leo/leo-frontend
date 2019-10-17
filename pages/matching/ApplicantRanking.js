@@ -15,7 +15,6 @@ import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
 import profileAdapter from '../../store/profile/profile-adapter';
 
-import { addApplicantFiles } from '../../store/profile';
 import { setMatch } from '../../store/match';
 import {
   setHaveRank,
@@ -24,6 +23,10 @@ import {
 } from '../../store/matching/ranking';
 
 import ApplicantRankingPage from '../../components/matching/ApplicantRankingPage';
+
+function mapFilesToPositions(positions, files) {
+  return positions.map(position => ({ ...position, files }));
+}
 
 class ApplicantRankingController extends React.Component {
   static async getInitialProps({
@@ -44,21 +47,23 @@ class ApplicantRankingController extends React.Component {
       return redirectError({ req, res }, 'Applicant Ranking Day has ended.');
     }
 
-    const positions = await matchingRequest.getMatchPositionsByMatchId(matchId);
-    const ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
-
     await store.dispatch(setMatch(match));
+
+    const positions = await matchingRequest.getMatchPositionsByMatchId(matchId);
+
     if (positions && positions.length > 0) {
       await store.dispatch(setPositions(positions));
     }
+
+    let ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
+
     if (ranks && ranks.length > 0) {
+      const files = await profileRequest.getFiles();
+      if (Array.isArray(files) && files.length > 0) {
+        ranks = await mapFilesToPositions(ranks, files);
+      }
       await store.dispatch(setApplicantRanks(ranks));
       await store.dispatch(setHaveRank(true));
-    }
-
-    const files = await profileRequest.getFiles();
-    if (Array.isArray(files) && files.length > 0) {
-      await store.dispatch(addApplicantFiles(files));
     }
 
     return {};
