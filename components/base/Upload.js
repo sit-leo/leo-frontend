@@ -20,6 +20,12 @@ const File = styled.div`
     max-width: 102px;
     overflow: hidden;
   }
+  .anticon-close {
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color: ${color.text.main};
+  }
 `;
 
 export const DumpUpload = styled(Upload)`
@@ -50,7 +56,8 @@ export const UploadButton = () => (
 export const PreviewFile = ({
   fileName,
 }) => (
-  <File className="text-center p-3">
+  <File className="text-center p-3 position-relative">
+    <Icon className="position-absolute" type="close" />
     <img src="/static/images/file.png" alt="file" />
     <span className="d-block">{fileName}</span>
   </File>
