@@ -17,6 +17,8 @@ import { IconLargeWhite } from '../base/Icon';
 import Tabs, { TabPane } from '../base/Tabs';
 import { LinkButton } from '../base/Button';
 
+import Chart from './Chart';
+
 import { columns as applicantColumns, dataSource as stubApplicants } from './AddApplicantPage';
 import { columns as recruiterColumns, dataSource as stubRecruiters } from './AddRecruiterPage';
 
@@ -98,7 +100,7 @@ const DashboardPage = ({
         <Statistic url="/my-matches" number={5} text="Matches" cardColor="#58b0ad" />
         <Statistic url="#members" onClick={() => setTab('1')} number={439} text="Applicants" cardColor="#58b09e" />
         <Statistic url="#members" onClick={() => setTab('2')} number={19} text="Recruiters" cardColor="#58b090" />
-        <Statistic url="/organizations/matches/manage" number="Create Match" cardColor="#58b081" />
+        <Statistic url="/organizations/matches/management" number="Create Match" cardColor="#58b081" />
       </Col>
       <Col>
         <Card className="my-3">
@@ -106,6 +108,7 @@ const DashboardPage = ({
             Statistics
             <hr />
           </TitleLargePrimary>
+          <Chart />
         </Card>
       </Col>
       <Col id="members">
