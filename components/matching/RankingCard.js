@@ -94,7 +94,10 @@ const RankingCard = ({
   informations = [],
   files = [],
   sequence,
-  position,
+  position = {
+    positionId: 0,
+    removePositionFile: () => {},
+  },
 }) => {
   const [isOpen, toggle] = useState(false);
   return (
