@@ -22,7 +22,7 @@ const matchingRequest = matchingAdapter(clientInstance());
 const APPLICANT_RANKING_STEPS = [
   'Add to rank',
   'Arrange rank',
-  'Choose documents',
+  'Upload documents',
 ];
 
 export const ApplicantRanking = ({
