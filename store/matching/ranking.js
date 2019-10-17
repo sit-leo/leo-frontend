@@ -13,6 +13,11 @@ export const initState = {
     //   name: 'No Position Found',
     //   capacity: 0,
     //   money: 0,
+    //   files: [{
+    //      id: 0,
+    //      fileName: '',
+    //      applicantProfile: {}
+    //   }],
     //   location: 'No Location',
     // },
   ],
