@@ -78,14 +78,24 @@ const RankingCard = ({
   rankingButton,
   informations = [],
   files = [],
+  sequence,
 }) => {
   const [isOpen, toggle] = useState(false);
   return (
     <SmallCard>
       <ContainerRow className="pt-4">
-        {
-          rankingButton && <Col lg={1} className="d-flex align-items-center justify-content-center">{ rankingButton }</Col>
-        }
+        { rankingButton && (
+          <Col lg={1} className="d-flex align-items-center justify-content-center">
+            { rankingButton }
+          </Col>
+        )}
+        { sequence && (
+          <Col lg={1} className="d-flex align-items-center justify-content-center">
+            <SubTitleSmall>
+              { sequence }
+            </SubTitleSmall>
+          </Col>
+        )}
         <Col lg={2} className="text-center">
           <CardLeft imagePath={imagePath} rankingButton={rankingButton} />
         </Col>
