@@ -6,6 +6,7 @@ import RankingReducer,
   ADD_RECRUITER_RANKS,
   REMOVE_RECRUITER_RANKS,
   UPDATE_RECRUITER_RANKS,
+  removePositionFile,
 } from '../ranking';
 
 describe('Test Ranking Reducer', () => {
@@ -214,5 +215,28 @@ describe('Test Ranking Reducer', () => {
     };
     expect(store).toEqual(expected);
     done();
+  });
+
+  it('Test removePositionFile with position that already have file should remove correctly.', () => {
+    const position = {
+      position: { id: 1, name: 'Software Developer' },
+      positionId: 1,
+      sequence: 1,
+      files: [{
+        id: 112,
+        fileName: 'Transcript.pdf',
+      }],
+    };
+    const action = removePositionFile(1, 112);
+
+    const initState = { applicantRanks: [position] };
+    const store = RankingReducer(initState, action);
+
+    const expected = [{
+      ...position,
+      files: [],
+    }];
+
+    expect(store.applicantRanks).toEqual(expected);
   });
 });

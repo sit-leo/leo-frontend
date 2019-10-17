@@ -66,6 +66,8 @@ export const REMOVE_RECRUITER_RANKS = 'RANKING/REMOVE_RECRUITER_RANKS';
 
 export const SET_MATCH_RESULTS = 'RANKING/SET_MATCH_RESULTS';
 
+export const REMOVE_POSITION_FILE = 'RANKING/REMOVE_POSITION_FILE';
+
 // Utilities
 function isRankEqualPosition(rank, position) {
   return rank.positionId === position.positionId;
@@ -225,6 +227,16 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, recruiterRanks };
     }
 
+    case REMOVE_POSITION_FILE: {
+      const { payload: { positionId, fileId } } = action;
+      const index = state.applicantRanks.findIndex(position => position.positionId === positionId);
+      const applicantRank = state.applicantRanks[index];
+      const files = applicantRank.files.filter(file => file.id !== fileId);
+      const applicantRanks = [...state.applicantRanks];
+      applicantRanks.splice(index, 1, { ...applicantRank, files });
+      return { ...state, applicantRanks };
+    }
+
     default: return { ...state };
   }
 }
@@ -288,4 +300,8 @@ export function setRecruiterRanks(recruiterRanks) {
 
 export function setMatchResults(matchResults) {
   return { type: SET_MATCH_RESULTS, matchResults };
+}
+
+export function removePositionFile(positionId, fileId) {
+  return { type: REMOVE_POSITION_FILE, payload: { positionId, fileId } };
 }
