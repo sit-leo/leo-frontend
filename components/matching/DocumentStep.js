@@ -1,50 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Alert } from 'antd';
 
+import { clientInstance } from '../../tools/request';
+
+import matchingAdapter from '../../store/matching/matching-adapter';
+
 import { removePositionFile as removePositionFileAction } from '../../store/matching/ranking';
 
+import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
+import MainButton, { DangerButton } from '../base/Button';
+
 import RankingCard from './RankingCard';
+import { FlexBetween } from '../base/Flex';
+
+function handleConfirmDocument(applicantRanks) {
+  const matchingRequest = matchingAdapter(clientInstance());
+  return matchingRequest.confirmDocument(applicantRanks);
+}
 
 const DocumentStep = ({
   applicantRanks,
   removePositionFile = () => {},
-}) => (
-  <React.Fragment>
-    <Alert
-      message="Information"
-      description='Please remove "unused" or "not required" document in "Show more" section before clicking "Confirm Button". Document will be uploaded to the recruiter of positions.'
-      type="info"
-      showIcon
-    />
-    {
-      applicantRanks.map(({ position, sequence, files }, index) => (
-        <RankingCard
-          sequence={sequence}
-          key={position.id}
-          title={position.name}
-          value={position.money}
-          subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
-          capacity={position.capacity}
-          informations={[
-            {
-              header: 'Required Documents',
-              detail: 'Resume, Transcript',
-            },
-          ]}
-          files={files}
-          actionButton={null}
-          position={{
-            positionId: position.id,
-            removePositionFile,
-          }}
-        />
-      ))
-    }
-    <button onClick={() => console.log(JSON.stringify(applicantRanks))}>Confirm Document</button>
-  </React.Fragment>
-);
+}) => {
+  const [isOpenConfirm, toggleConfirm] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  return (
+    <React.Fragment>
+      <Alert
+        message="Information"
+        description='Please remove "unused" or "not required" document in "Show more" section before clicking "Confirm Button". Document will be uploaded to the recruiter of positions.'
+        type="info"
+        showIcon
+      />
+      {
+        applicantRanks.map(({ position, sequence, files }, index) => (
+          <RankingCard
+            sequence={sequence}
+            key={position.id}
+            title={position.name}
+            value={position.money}
+            subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
+            capacity={position.capacity}
+            informations={[
+              {
+                header: 'Required Documents',
+                detail: 'Resume, Transcript',
+              },
+            ]}
+            files={files}
+            actionButton={null}
+            position={{
+              positionId: position.id,
+              removePositionFile,
+            }}
+          />
+        ))
+      }
+      <div className="text-center">
+        <MainButton onClick={() => toggleConfirm(true)}>Confirm Document</MainButton>
+      </div>
+      <Modal isOpen={isOpenConfirm}>
+        <ModalHeader className="justify-content-center">Confirmation Document</ModalHeader>
+        <ModalBody className="text-center">
+          Are you sure to confirm this document?
+          Please check the document before confirming.
+        </ModalBody>
+        <ModalFooter className="flex-column text-center">
+          <span>
+          You can't edit your document.
+          </span>
+          <FlexBetween className="w-100 mt-3">
+            <DangerButton onClick={() => toggleConfirm(false)}>
+            Cancel
+            </DangerButton>
+            <MainButton onClick={() => toggleConfirm(false) && handleConfirmDocument(applicantRanks)}>
+            Confirm
+            </MainButton>
+          </FlexBetween>
+        </ModalFooter>
+      </Modal>
+    </React.Fragment>
+  );
+};
 
 const mapStateToProps = state => ({
   match: state.match.match,
