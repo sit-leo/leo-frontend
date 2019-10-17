@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 import ContainerRow, { Col } from '../base/Grid';
-import Text, {
-  TitleSmall, TitleSmallPrimary, Title, SubTitleSmall, TitlePrimary, ExtraSmallTextLightPrimary,
+import {
+  TitleSmall,
+  TitleSmallPrimary,
+  Title,
+  SubTitleSmall,
+  ExtraSmallTextLightPrimary,
+  InformationHeader,
+  InformationDetail,
 } from '../base/Text';
 import { RankingAvatar } from '../base/Image';
 import { SmallCard } from '../base/Card';
@@ -62,8 +68,8 @@ const CardCollapse = ({
 
 const Information = ({ header, detail }) => (
   <Col>
-    <TitleSmall>{ header }</TitleSmall>
-    <Text>{ detail }</Text>
+    <InformationHeader>{ header }</InformationHeader>
+    <InformationDetail>{ detail }</InformationDetail>
   </Col>
 );
 
