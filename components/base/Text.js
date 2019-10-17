@@ -166,4 +166,5 @@ export const InformationDetail = styled.h2`
   color: ${colors.text.main};
   font-size: ${font.size.small};
   font-weight: ${font.weight.light};
+  margin-left: 30px;
 `;
