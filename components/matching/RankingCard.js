@@ -46,6 +46,10 @@ const CardCollapse = ({
   isOpen,
   informations = [{ header: 'No Informaiton', detail: '- none' }],
   files = [],
+  position: {
+    positionId,
+    removePositionFile,
+  },
 }) => (
   <InformationCollapse className="mt-3 pt-3" isOpen={isOpen}>
     <ContainerRow>
@@ -58,7 +62,10 @@ const CardCollapse = ({
         {
           files.map(file => (
             <PreviewFile
+              positionId={positionId}
               key={file.uid || file.id}
+              fileId={file.id}
+              removePositionFile={removePositionFile}
               fileName={file.fileName}
             />
           ))
@@ -87,6 +94,7 @@ const RankingCard = ({
   informations = [],
   files = [],
   sequence,
+  position,
 }) => {
   const [isOpen, toggle] = useState(false);
   return (
@@ -117,7 +125,12 @@ const RankingCard = ({
             </Col>
           )
         }
-        <CardCollapse isOpen={isOpen} informations={informations} files={files} />
+        <CardCollapse
+          position={position}
+          isOpen={isOpen}
+          informations={informations}
+          files={files}
+        />
       </ContainerRow>
       <CardButton className="mt-3 py-1 bg-white" onClick={() => toggle(!isOpen)}>
         <ExtraSmallTextLightPrimary className="mb-0">

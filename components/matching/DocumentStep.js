@@ -1,11 +1,15 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Alert } from 'antd';
+
+import { removePositionFile as removePositionFileAction } from '../../store/matching/ranking';
 
 import RankingCard from './RankingCard';
 
 const DocumentStep = ({
   applicantRanks,
+  removePositionFile = () => {},
 }) => (
   <React.Fragment>
     <Alert
@@ -31,9 +35,14 @@ const DocumentStep = ({
           ]}
           files={files}
           actionButton={null}
+          position={{
+            positionId: position.id,
+            removePositionFile,
+          }}
         />
       ))
     }
+    <button onClick={() => console.log(JSON.stringify(applicantRanks))}>Confirm Document</button>
   </React.Fragment>
 );
 
@@ -43,7 +52,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToRankProps = dispatch => ({
-  // updateRank: bindActionCreators(updateApplicantRank, dispatch),
+  removePositionFile: bindActionCreators(removePositionFileAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(DocumentStep);
