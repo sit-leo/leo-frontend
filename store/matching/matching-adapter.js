@@ -69,4 +69,8 @@ export default adapter => ({
     return adapter.get(`${MATCHING_API}/matches/${id}/isJoin`)
       .then(({ data: isJoined }) => isJoined);
   },
+  confirmDocument(applicantRanks) {
+    return adapter.post(`${MATCHING_API}/positions/documents`, applicantRanks)
+      .then(({ data }) => data);
+  },
 });
