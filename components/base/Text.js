@@ -156,3 +156,14 @@ export const NoteText = styled.span`
   color: ${colors.secondary};
   font-size: ${font.size.xsmall};
 `;
+
+export const InformationHeader = styled.h1`
+  color: ${colors.text.main};
+  font-size: ${font.size.medium};
+`;
+
+export const InformationDetail = styled.h2`
+  color: ${colors.text.main};
+  font-size: ${font.size.small};
+  font-weight: ${font.weight.light};
+`;
