@@ -54,14 +54,16 @@ const CardCollapse = ({
           <Information key={header} header={header} detail={detail} />
         ))
       }
-      {
-        files.map(file => (
-          <PreviewFile
-            key={file.uid || file.id}
-            fileName={file.fileName}
-          />
-        ))
-      }
+      <Col>
+        {
+          files.map(file => (
+            <PreviewFile
+              key={file.uid || file.id}
+              fileName={file.fileName}
+            />
+          ))
+        }
+      </Col>
     </ContainerRow>
   </InformationCollapse>
 );
