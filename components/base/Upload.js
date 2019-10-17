@@ -7,6 +7,19 @@ import color from '../../config/color';
 import Icon from './Icon';
 
 const File = styled.div`
+  max-width: 120px;
+  margin-right: 16px;
+  border-radius: 4px;
+  border: solid 2px ${color.disabled};
+  background: ${color.white};
+  img {
+    max-width: 30px;
+  }
+  span {
+    text-overflow: ellipsis;
+    max-width: 102px;
+    overflow: hidden;
+  }
 `;
 
 export const DumpUpload = styled(Upload)`
@@ -37,9 +50,9 @@ export const UploadButton = () => (
 export const PreviewFile = ({
   fileName,
 }) => (
-  <File>
+  <File className="text-center p-3">
     <img src="/static/images/file.png" alt="file" />
-    <span>{fileName}</span>
+    <span className="d-block">{fileName}</span>
   </File>
 );
 
