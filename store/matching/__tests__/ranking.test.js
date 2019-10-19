@@ -7,6 +7,7 @@ import RankingReducer,
   REMOVE_RECRUITER_RANKS,
   UPDATE_RECRUITER_RANKS,
   removePositionFile,
+  setFinished,
 } from '../ranking';
 
 describe('Test Ranking Reducer', () => {
@@ -238,5 +239,14 @@ describe('Test Ranking Reducer', () => {
     }];
 
     expect(store.applicantRanks).toEqual(expected);
+  });
+
+  it('Test setFinished should set isFinished correctly', () => {
+    const action = setFinished(true);
+    const initState = { isFiniseh: false };
+
+    const store = RankingReducer(initState, action);
+
+    expect(store.isFinished).toEqual(true);
   });
 });

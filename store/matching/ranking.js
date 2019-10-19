@@ -4,6 +4,7 @@ export const initState = {
   haveRank: false,
   isUpdateRank: false,
   isConfirm: false,
+  isFinished: false,
 
   position: { id: 0 },
 
@@ -67,6 +68,7 @@ export const REMOVE_RECRUITER_RANKS = 'RANKING/REMOVE_RECRUITER_RANKS';
 export const SET_MATCH_RESULTS = 'RANKING/SET_MATCH_RESULTS';
 
 export const REMOVE_POSITION_FILE = 'RANKING/REMOVE_POSITION_FILE';
+export const SET_FINISHED = 'RANKING/SET_FINISHED';
 
 // Utilities
 function isRankEqualPosition(rank, position) {
@@ -237,6 +239,10 @@ export default function reducer(state = initState, action = {}) {
       return { ...state, applicantRanks };
     }
 
+    case SET_FINISHED: {
+      const { isFinished } = action;
+      return { ...state, isFinished };
+    }
     default: return { ...state };
   }
 }
@@ -304,4 +310,8 @@ export function setMatchResults(matchResults) {
 
 export function removePositionFile(positionId, fileId) {
   return { type: REMOVE_POSITION_FILE, payload: { positionId, fileId } };
+}
+
+export function setFinished(isFinished) {
+  return { type: SET_FINISHED, isFinished };
 }
