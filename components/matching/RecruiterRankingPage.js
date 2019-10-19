@@ -8,6 +8,7 @@ import matchAdapter from '../../store/matching/matching-adapter';
 import {
   updateRecruiterRank,
   removeRecruiterRank,
+  setFinished as setFinishedAction,
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
@@ -31,6 +32,7 @@ export const RecruiterRanking = ({
   recruiterRanks = [],
   updateRank = () => {},
   removeRank = () => {},
+  setFinished = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
@@ -48,6 +50,7 @@ export const RecruiterRanking = ({
       );
     }
     toggleConfirm(false);
+    return setFinished(true) && handleStep(2);
   }
   return (
     <RankingPageContainer
@@ -92,6 +95,7 @@ const mapStateToProps = state => ({
 const mapDispatchToRankProps = dispatch => ({
   updateRank: bindActionCreators(updateRecruiterRank, dispatch),
   removeRank: bindActionCreators(removeRecruiterRank, dispatch),
+  setFinished: bindActionCreators(setFinishedAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(RecruiterRanking);

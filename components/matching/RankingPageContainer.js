@@ -9,8 +9,6 @@ import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import color from '../../config/color';
 
-import { ROLE_APPLICANT } from '../../tools/with-roles';
-
 import MatchingLayout from '../layouts/matching';
 
 import { Col, Row } from '../base/Grid';
@@ -117,6 +115,7 @@ const RankingPageContainer = ({
   setIsUpdate,
 
   isConfirm,
+  isFinished,
   children,
 }) => {
   function decreaseStep() {
@@ -143,7 +142,7 @@ const RankingPageContainer = ({
             </Col>
             <Col><hr /></Col>
             {
-              (step !== 2 || role === ROLE_APPLICANT)
+              !isFinished
               && (
                 <React.Fragment>
                   <Col lg={{ size: 2, offset: 1 }}>
@@ -199,6 +198,7 @@ const mapStateToProps = state => ({
   haveRank: state.ranking.haveRank,
   isUpdateRank: state.ranking.isUpdateRank,
   isConfirm: state.ranking.isConfirm,
+  isFinished: state.ranking.isFinished,
 });
 
 
