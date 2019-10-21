@@ -24,6 +24,7 @@
     "react": "^16.8.4",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.8.4",
+    "react-hot-loader": "^4.12.15",
     "react-redux": "^6.0.1",
     "react-transition-group": "^4.0.1",
     "reactstrap": "^8.0.0",
