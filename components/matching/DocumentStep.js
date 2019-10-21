@@ -18,6 +18,7 @@ import MainButton, { DangerButton } from '../base/Button';
 import RankingCard from './RankingCard';
 import { FlexBetween } from '../base/Flex';
 import Finished from './Finished';
+import { getPositionInformations } from '../../tools/ranking-informations';
 
 function handleConfirmDocument(applicantRanks) {
   const matchingRequest = matchingAdapter(clientInstance());
@@ -55,12 +56,7 @@ const DocumentStep = ({
             value={position.money}
             subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
             capacity={position.capacity}
-            informations={[
-              {
-                header: 'Required Documents',
-                detail: position.documents.join(', '),
-              },
-            ]}
+            informations={getPositionInformations(position)}
             files={files}
             actionButton={null}
             position={{

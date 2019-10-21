@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { getPositionInformations } from '../../tools/ranking-informations';
+
 import { addApplicantRank, setIsUpdateRank, removeApplicantRank } from '../../store/matching/ranking';
 
 import RankingCard from './RankingCard';
 import ActionButton from './ActionButton';
-
 
 function isPositionInApplicantRanks(applicantRanks, positionId) {
   return applicantRanks.findIndex(rank => rank.positionId === positionId) !== -1;
@@ -28,6 +29,7 @@ const PositionList = ({
             value={position.money}
             subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
             capacity={position.capacity}
+            informations={getPositionInformations(position)}
             actionButton={(
               <ActionButton
                 isInRank={!isPositionInApplicantRanks(applicantRanks, position.positionId)}

@@ -2,6 +2,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { getApplicantInformations, getPositionInformations } from '../../tools/ranking-informations';
+import { isApplicant } from '../../tools/with-roles';
+
 import { setIsUpdateRank } from '../../store/matching/ranking';
 
 import Button from '../base/Button';
@@ -65,6 +68,7 @@ const RankingErrorText = () => (
 );
 
 const RankingStep = ({
+  role,
   isConfirm,
   haveRank,
   isUpdateRank,
@@ -116,6 +120,7 @@ const RankingStep = ({
             const subtitle = nestedValue.educationName || `${nestedValue.name}, ${nestedValue.location}`;
             const value = nestedValue.gpax || ranked.money;
             const capacity = getApplicantDocuments(ranked) || ranked.capacity;
+            const informations = isApplicant(role) ? getPositionInformations(rank.position) : getApplicantInformations(rank.applicantMatch, rank.applicantMatch.applicant);
             return (
               <RankingCard
                 key={ranked.id}
@@ -123,7 +128,7 @@ const RankingStep = ({
                 value={value}
                 subtitle={subtitle}
                 capacity={capacity}
-                badgeText={!(rank.position) && 'Documents'}
+                informations={informations}
                 rankingButton={
                   <DeletedIcon type="delete" theme="filled" onClick={() => remove(rank)} />
                   }
@@ -165,6 +170,7 @@ const RankingStep = ({
 };
 
 const mapStateToProps = state => ({
+  role: state.user.role,
   isConfirm: state.ranking.isConfirm,
   haveRank: state.ranking.haveRank,
   isUpdateRank: state.ranking.isUpdateRank,
