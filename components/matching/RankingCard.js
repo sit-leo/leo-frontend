@@ -90,7 +90,6 @@ const RankingCard = ({
   subtitle,
   capacity,
   imagePath,
-  badgeText,
   actionButton,
   rankingButton,
   informations = [],
