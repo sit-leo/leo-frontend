@@ -150,7 +150,7 @@ const RankingPageContainer = ({
                 Previous
                     </Button>
                   </Col>
-                  <Col lg={6} className="d-flex justify-content-center">
+                  <Col lg={6} className="d-flex justify-content-center my-2">
                     {
                       step === 0
                         ? (
@@ -160,7 +160,7 @@ const RankingPageContainer = ({
                             className="w-50"
                           />
                         )
-                        : (<Title>Your Rank</Title>)
+                        : (<Title className="mb-0">Your Rank</Title>)
                     }
                   </Col>
                   <Col lg={2}>
