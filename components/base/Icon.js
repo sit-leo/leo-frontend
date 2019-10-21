@@ -22,5 +22,11 @@ export const DeletedIcon = styled(Icon)`
 
 export const IconLargeWhite = styled(Icon)`
     font-size: ${font.size.large};
-    color: ${color.white}
+    color: ${color.white};
+`;
+
+export const IconCircle = styled(Icon)`
+    background-color: ${color.primary};
+    color: ${color.white};
+    padding: .5em;
 `;
