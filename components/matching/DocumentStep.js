@@ -49,6 +49,7 @@ const DocumentStep = ({
         applicantRanks.map(({ position, sequence, files }, index) => (
           <RankingCard
             sequence={sequence}
+            isFinished={isFinished}
             key={position.id}
             title={position.name}
             value={position.money}

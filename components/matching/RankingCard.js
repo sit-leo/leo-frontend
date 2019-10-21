@@ -44,6 +44,7 @@ const CardRight = ({
 
 const CardCollapse = ({
   isOpen,
+  isFinished,
   informations = [{ header: 'No Informaiton', detail: '- none' }],
   files = [],
   position: {
@@ -58,7 +59,7 @@ const CardCollapse = ({
           <Information key={header} header={header} detail={detail} />
         ))
       }
-      <Col>
+      <Col className="d-flex">
         {
           files.map(file => (
             <PreviewFile
@@ -67,6 +68,7 @@ const CardCollapse = ({
               fileId={file.id}
               removePositionFile={removePositionFile}
               fileName={file.fileName}
+              isFinished={isFinished}
             />
           ))
         }
@@ -98,6 +100,7 @@ const RankingCard = ({
     positionId: 0,
     removePositionFile: () => {},
   },
+  isFinished,
 }) => {
   const [isOpen, toggle] = useState(false);
   return (
@@ -133,6 +136,7 @@ const RankingCard = ({
           isOpen={isOpen}
           informations={informations}
           files={files}
+          isFinished={isFinished}
         />
       </ContainerRow>
       <CardButton className="mt-3 py-1 bg-white" onClick={() => toggle(!isOpen)}>
