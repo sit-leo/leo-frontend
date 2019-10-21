@@ -5,6 +5,7 @@ import './font.css';
 import { configure, addDecorator } from '@storybook/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import { setConfig } from 'react-hot-loader';
 
 import { initState as global } from '../store/global'
 import { initState as user } from '../store/user'
@@ -16,6 +17,7 @@ import { initState as profile } from '../store/profile'
 const stories = require.context('./stories', true, /.js$/);
 
 function loadStories() {
+  setConfig({ pureSFC: true });
   stories.keys().forEach(filename => stories(filename));
 }
 
