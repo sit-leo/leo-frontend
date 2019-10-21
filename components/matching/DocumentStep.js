@@ -58,7 +58,7 @@ const DocumentStep = ({
             informations={[
               {
                 header: 'Required Documents',
-                detail: 'Resume, Transcript',
+                detail: position.documents.join(', '),
               },
             ]}
             files={files}
