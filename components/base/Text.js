@@ -167,4 +167,5 @@ export const InformationDetail = styled.h2`
   font-size: ${font.size.small};
   font-weight: ${font.weight.light};
   margin-left: 30px;
+  white-space: pre-wrap;
 `;
