@@ -32,7 +32,7 @@ export const Profile = ({
   role,
   applicant,
   recruiter,
-  files,
+  files = [],
   form: { getFieldDecorator, validateFields },
   addApplicantFiles,
 }) => {
