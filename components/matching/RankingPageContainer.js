@@ -145,25 +145,25 @@ const RankingPageContainer = ({
               !isFinished
               && (
                 <React.Fragment>
-                  <Col lg={{ size: 2, offset: 1 }}>
+                  <Col lg={{ size: 2, offset: 1 }} className="d-flex justify-content-center my-2">
                     <Button className="w-100" disabled={step === 0} onClick={decreaseStep}>
-                Previous
+                      Previous
                     </Button>
                   </Col>
-                  <Col lg={6} className="d-flex justify-content-center my-2">
+                  <Col lg={6} className="d-flex align-items-center justify-content-center my-2">
                     {
                       step === 0
                         ? (
                           <Input
                             prefix={<Icon type="search" />}
                             type="text"
-                            className="w-50"
+                            className="w-100"
                           />
                         )
                         : (<Title className="mb-0">Your Rank</Title>)
                     }
                   </Col>
-                  <Col lg={2}>
+                  <Col lg={2} className="d-flex justify-content-center my-2">
                     <Button
                       className="w-100"
                       disabled={
