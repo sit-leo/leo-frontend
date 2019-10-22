@@ -2,6 +2,20 @@ import React from 'react';
 
 import { IconCircle as Icon } from '../components/base/Icon';
 
+function getOrdinalNumbers(year) {
+  switch (year) {
+    case '1':
+      return `${year}st Year`;
+    case '2':
+      return `${year}nd Year`;
+    case '3':
+      return `${year}rd Year`;
+    case '4':
+      return `${year}th Year`;
+    default: return '';
+  }
+}
+
 export function getPositionInformations(position) {
   const { recruiter: { telno, email, website } } = position;
   return [
@@ -36,7 +50,28 @@ export function getPositionInformations(position) {
 }
 
 export function getApplicantInformations(applicantMatch) {
-  return {
-    applicantMatch,
-  };
+  const { applicant: { educations } } = applicantMatch;
+  const [{ year, major, university }] = educations;
+  return [
+    {
+      header: 'Education',
+      detail: `${university}, ${major}, (${getOrdinalNumbers(year)})`,
+    },
+    {
+      header: 'Skills',
+      detail: 'Idiot',
+    },
+    {
+      header: 'Experiences',
+      detail: 'Idiot',
+    },
+    {
+      header: 'Contact',
+      detail: 'Idiot',
+    },
+    {
+      header: 'Documents',
+      detail: 'Idiot',
+    },
+  ];
 }
