@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { getApplicantInformations } from '../../tools/ranking-informations';
+
 import { addRecruiterRank, removeRecruiterRank, setIsUpdateRank } from '../../store/matching/ranking';
 
 import RankingCard from './RankingCard';
@@ -20,23 +22,27 @@ const ApplicantList = ({
 }) => (
   <React.Fragment>
     {
-        applicants.map((applicantMatch => (
-          <RankingCard
-            key={applicantMatch.applicant.id}
-            title={applicantMatch.applicant.name}
-            value={applicantMatch.applicant.educations[0].gpax}
-            subtitle={applicantMatch.applicant.educations[0].educationName}
-            capacity={0}
-            badgeText="Documents"
-            actionButton={(
-              <ActionButton
-                isInRank={!isApplicantInRecruiterRanks(recruiterRanks, applicantMatch.participantId)}
-                addRank={() => setIsUpdate(true) && addRank(applicantMatch)}
-                removeRank={() => setIsUpdate(true) && removeRank(applicantMatch)}
-              />
-)}
-          />
-        )))
+        applicants.map(((applicantMatch) => {
+          const { applicant: { id, name, educations } } = applicantMatch;
+          const [{ gpax, major, university }] = educations;
+          return (
+            <RankingCard
+              key={id}
+              title={name}
+              value={`GPAX ${gpax}`}
+              subtitle={`${major}, ${university}`}
+              capacity={0}
+              informations={getApplicantInformations(applicantMatch)}
+              actionButton={(
+                <ActionButton
+                  isInRank={!isApplicantInRecruiterRanks(recruiterRanks, applicantMatch.participantId)}
+                  addRank={() => setIsUpdate(true) && addRank(applicantMatch)}
+                  removeRank={() => setIsUpdate(true) && removeRank(applicantMatch)}
+                />
+              )}
+            />
+          );
+        }))
     }
   </React.Fragment>
 );

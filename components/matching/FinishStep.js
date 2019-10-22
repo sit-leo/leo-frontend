@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { getApplicantInformations } from '../../tools/ranking-informations';
+
 import RankingCard from './RankingCard';
 import Finished from './Finished';
 
@@ -10,16 +12,21 @@ const FinishStep = ({
   <React.Fragment>
     <Finished />
     {
-      recruiterRanks.map(({ applicantMatch, sequence }) => (
-        <RankingCard
-          sequence={sequence}
-          key={applicantMatch.applicant.id}
-          title={applicantMatch.applicant.name}
-          value={applicantMatch.applicant.educations[0].gpax}
-          subtitle={applicantMatch.applicant.educations[0].educationName}
-          actionButton={null}
-        />
-      ))
+      recruiterRanks.map(({ applicantMatch, sequence }) => {
+        const { applicant: { id, name, educations } } = applicantMatch;
+        const [{ gpax, major, university }] = educations;
+        return (
+          <RankingCard
+            sequence={sequence}
+            key={id}
+            title={name}
+            value={`GPAX ${gpax}`}
+            subtitle={`${major}, ${university}`}
+            informations={getApplicantInformations(applicantMatch)}
+            actionButton={null}
+          />
+        );
+      })
     }
   </React.Fragment>
 );

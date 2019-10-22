@@ -117,10 +117,10 @@ const RankingStep = ({
             const rankIndex = index + 1;
             const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
             const nestedValue = getRankedNestedValue(ranked);
-            const subtitle = nestedValue.educationName || `${nestedValue.name}, ${nestedValue.location}`;
-            const value = nestedValue.gpax || ranked.money;
+            const subtitle = nestedValue.educationName || `${nestedValue.major}, ${nestedValue.university}`;
+            const value = (nestedValue.gpax && `GPAX ${nestedValue.gpax}`) || ranked.money;
             const capacity = getApplicantDocuments(ranked) || ranked.capacity;
-            const informations = isApplicant(role) ? getPositionInformations(rank.position) : getApplicantInformations(rank.applicantMatch, rank.applicantMatch.applicant);
+            const informations = isApplicant(role) ? getPositionInformations(rank.position) : getApplicantInformations(rank.applicantMatch);
             return (
               <RankingCard
                 key={ranked.id}
