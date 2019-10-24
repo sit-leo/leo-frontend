@@ -7,6 +7,7 @@ import withRole, { isApplicant } from '../../tools/with-roles';
 import redirectError from '../../tools/redirect-error';
 
 import { isApplicantCanRanking } from '../../tools/match-time';
+import { mapFilesToPositions } from '../../tools/ranking-utils';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
@@ -24,9 +25,6 @@ import {
 
 import ApplicantRankingPage from '../../components/matching/ApplicantRankingPage';
 
-function mapFilesToPositions(positions, files) {
-  return positions.map(position => ({ ...position, files }));
-}
 
 class ApplicantRankingController extends React.Component {
   static async getInitialProps({
