@@ -93,7 +93,9 @@ function setSequenceByRankIndex(rank, rankIndex) {
 
 function setAttributeForApplicantRank(rank) {
   const newRank = rank;
-  delete newRank.applicantMatch.applicant;
+  if (newRank.applicantMatch) {
+    delete newRank.applicantMatch.applicant;
+  }
   return { ...newRank, positionId: rank.position.id };
 }
 
