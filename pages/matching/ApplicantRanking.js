@@ -16,6 +16,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import matchingAdapter from '../../store/matching/matching-adapter';
 import profileAdapter from '../../store/profile/profile-adapter';
 
+import { addApplicantFiles } from '../../store/profile';
 import { setMatch } from '../../store/match';
 import {
   setHaveRank,
@@ -54,9 +55,10 @@ class ApplicantRankingController extends React.Component {
     }
 
     let ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
+    const files = await profileRequest.getFiles();
+    await store.dispatch(addApplicantFiles(files));
 
     if (ranks && ranks.length > 0) {
-      const files = await profileRequest.getFiles();
       if (Array.isArray(files) && files.length > 0) {
         ranks = await mapFilesToPositions(ranks, files);
       }
