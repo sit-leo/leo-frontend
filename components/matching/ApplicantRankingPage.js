@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { clientInstance } from '../../tools/request';
+import { mapFilesToPositions } from '../../tools/ranking-utils';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
 
 import {
   updateApplicantRank,
   removeApplicantRank,
+  setApplicantRanks as setApplicantRanksAction,
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
@@ -28,9 +30,11 @@ const APPLICANT_RANKING_STEPS = [
 export const ApplicantRanking = ({
   match,
   haveRank,
+  files = [],
   applicantRanks = [],
   updateRank = () => {},
   removeRank = () => {},
+  setApplicantRanks = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
@@ -47,6 +51,7 @@ export const ApplicantRanking = ({
       );
     }
     toggleConfirm(false);
+    setApplicantRanks(mapFilesToPositions(applicantRanks, files));
   }
   return (
     <RankingPageContainer
@@ -85,11 +90,13 @@ const mapStateToProps = state => ({
   match: state.match.match,
   applicantRanks: state.ranking.applicantRanks,
   haveRank: state.ranking.haveRank,
+  files: state.profile.files,
 });
 
 const mapDispatchToRankProps = dispatch => ({
   updateRank: bindActionCreators(updateApplicantRank, dispatch),
   removeRank: bindActionCreators(removeApplicantRank, dispatch),
+  setApplicantRanks: bindActionCreators(setApplicantRanksAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(ApplicantRanking);
