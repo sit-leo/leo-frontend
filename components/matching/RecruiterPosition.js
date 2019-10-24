@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { Input } from 'antd';
+
+import { getPositionInformations } from '../../tools/ranking-informations';
 
 import MatchingLayout from '../layouts/matching';
 
@@ -19,8 +20,9 @@ const PositionList = ({ match, positions, redirect }) => (
           key={position.name}
           title={position.name}
           value={position.money}
-          subtitle={position.location}
+          subtitle={(position.recruiter && `${position.recruiter.name}, ${position.recruiter.location}`) || '-'}
           capacity={position.capacity}
+          informations={getPositionInformations(position)}
           actionButton={(
             <MainButton className="w-75" onClick={() => redirect(match.id, position.id)}>
               Select
@@ -36,25 +38,25 @@ const RecruiterPosition = ({
   match,
   positions = [],
   textAction = 'Choose position to rank',
-  redirect = () => {},
+  redirect = () => { },
 }) => (
   <MatchingLayout match={match}>
-    <Col>
-      <Card>
-        <Row>
-          <Col lg={{ offset: 1, size: 6 }}>
-            <TitleSmall>{textAction}</TitleSmall>
-          </Col>
-          <Col lg={4}>
-            <Input />
-          </Col>
-          <Col lg={{ size: 10, offset: 1 }}>
-            <PositionList match={match} positions={positions} redirect={redirect} />
-          </Col>
-        </Row>
-      </Card>
-    </Col>
-  </MatchingLayout>
+      <Col>
+        <Card>
+          <Row>
+            <Col lg={{ offset: 1, size: 6 }}>
+              <TitleSmall>{textAction}</TitleSmall>
+            </Col>
+            <Col lg={4}>
+              <Input />
+            </Col>
+            <Col lg={{ size: 10, offset: 1 }}>
+              <PositionList match={match} positions={positions} redirect={redirect} />
+            </Col>
+          </Row>
+        </Card>
+      </Col>
+    </MatchingLayout>
 );
 
 export default RecruiterPosition;
