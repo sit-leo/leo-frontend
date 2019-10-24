@@ -16,6 +16,23 @@ function getOrdinalNumbers(year) {
   }
 }
 
+const Contact = ({ telno, email, website }) => (
+  <React.Fragment>
+    <span className="d-block my-1">
+      <Icon type="phone" theme="filled" className="rounded-circle" />
+      {`  ${telno || '-'}`}
+    </span>
+    <span className="d-block my-1">
+      <Icon type="mail" theme="filled" className="rounded-circle" />
+      {`  ${email || '-'}`}
+    </span>
+    <span className="d-block my-1">
+      <Icon type="global" className="rounded-circle" />
+      {`  ${website || '-'}`}
+    </span>
+  </React.Fragment>
+);
+
 export function getPositionInformations(position) {
   const { recruiter: { telno, email, website } } = position;
   return [
@@ -30,27 +47,18 @@ export function getPositionInformations(position) {
     {
       header: 'Contact',
       detail: (
-        <React.Fragment>
-          <span className="d-block my-1">
-            <Icon type="phone" theme="filled" className="rounded-circle" />
-            {`  ${telno || '-'}`}
-          </span>
-          <span className="d-block my-1">
-            <Icon type="mail" theme="filled" className="rounded-circle" />
-            {`  ${email || '-'}`}
-          </span>
-          <span className="d-block my-1">
-            <Icon type="global" className="rounded-circle" />
-            {`  ${website || '-'}`}
-          </span>
-        </React.Fragment>
+        <Contact telno={telno} email={email} website={website} />
       ),
     },
   ];
 }
 
 export function getApplicantInformations(applicantMatch) {
-  const { applicant: { educations } } = applicantMatch;
+  const {
+    applicant: {
+      educations, email, telno, skills, website, experiences,
+    },
+  } = applicantMatch;
   const [{ year, major, university }] = educations;
   return [
     {
@@ -59,15 +67,17 @@ export function getApplicantInformations(applicantMatch) {
     },
     {
       header: 'Skills',
-      detail: 'Idiot',
+      detail: Array.isArray(skills) ? skills.joins(', ') : '-',
     },
     {
       header: 'Experiences',
-      detail: 'Idiot',
+      detail: `${experiences || '-'}`,
     },
     {
       header: 'Contact',
-      detail: 'Idiot',
+      detail: (
+        <Contact telno={telno} email={email} website={website} />
+      ),
     },
     {
       header: 'Documents',
