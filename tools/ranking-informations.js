@@ -67,7 +67,7 @@ export function getApplicantInformations(applicantMatch) {
     },
     {
       header: 'Skills',
-      detail: Array.isArray(skills) ? skills.joins(', ') : '-',
+      detail: Array.isArray(skills) ? skills.join(', ') : '-',
     },
     {
       header: 'Experiences',
