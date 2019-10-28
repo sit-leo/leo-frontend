@@ -16,13 +16,14 @@ import {
   addApplicantFiles as addApplicantFilesAction,
 } from '../../store/profile';
 
-import { Col } from '../base/Grid';
+import ContainerRow, { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
 import {
   TitleForm, SubTitleWhite, NoteText,
 } from '../base/Text';
 import { SmallMainButton } from '../base/Button';
 import { LabelInput } from '../base/Input';
+import { TitleLargePrimary } from '../base/Text';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
@@ -46,6 +47,13 @@ export const Profile = ({
   }
   return (
     <WithNavbar>
+      <ContainerRow>
+        <Col lg={3}>
+          <TitleLargePrimary className="my-3">
+            Profile
+          </TitleLargePrimary>
+        </Col>
+      </ContainerRow>
       <FormContainer
         className="w-100 py-4 px-4"
         onSubmit={(e) => {
