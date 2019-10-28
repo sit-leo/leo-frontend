@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withAuth } from '../../tools/with-auth';
 import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
+import withJoinMatch from '../../tools/with-join-match';
 import redirectError from '../../tools/redirect-error';
 
 import { isRecruiterCanRanking } from '../../tools/match-time';
@@ -66,10 +67,12 @@ class RecruiterRankingController extends React.Component {
   }
 }
 
-export default withRole(isRecruiter)(
-  withUser(
-    withAuth(
-      connect()(RecruiterRankingController),
+export default withJoinMatch(
+  withRole(isRecruiter)(
+    withUser(
+      withAuth(
+        connect()(RecruiterRankingController),
+      ),
     ),
   ),
 );

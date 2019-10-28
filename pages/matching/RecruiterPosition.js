@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withAuth } from '../../tools/with-auth';
 import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
+import withJoinMatch from '../../tools/with-join-match';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
@@ -37,10 +38,12 @@ class RecruiterPositionController extends React.Component {
   }
 }
 
-export default withRole(isRecruiter)(
-  withUser(
-    withAuth(
-      connect()(RecruiterPositionController),
+export default withJoinMatch(
+  withRole(isRecruiter)(
+    withUser(
+      withAuth(
+        connect()(RecruiterPositionController),
+      ),
     ),
   ),
 );

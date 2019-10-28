@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import withUser from '../../tools/with-user';
 import { withAuth } from '../../tools/with-auth';
 import withRole, { isApplicant } from '../../tools/with-roles';
+import withJoinMatch from '../../tools/with-join-match';
 
 import { serverInstance } from '../../tools/request';
 
@@ -57,10 +58,13 @@ class MatchResultController extends React.Component {
   }
 }
 
-export default withRole(isApplicant)(
-  withUser(
-    withAuth(
-      connect()(MatchResultController),
+
+export default withJoinMatch(
+  withRole(isApplicant)(
+    withUser(
+      withAuth(
+        connect()(MatchResultController),
+      ),
     ),
   ),
 );

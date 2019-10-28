@@ -7,6 +7,7 @@ import cookie from '../../tools/cookie';
 import withUser from '../../tools/with-user';
 import withRole, { isRecruiter } from '../../tools/with-roles';
 import { withAuth } from '../../tools/with-auth';
+import withJoinMatch from '../../tools/with-join-match';
 
 import redirectError from '../../tools/redirect-error';
 
@@ -61,10 +62,12 @@ class MatchResultController extends React.Component {
   }
 }
 
-export default withRole(isRecruiter)(
-  withUser(
-    withAuth(
-      connect()(MatchResultController),
+export default withJoinMatch(
+  withRole(isRecruiter)(
+    withUser(
+      withAuth(
+        connect()(MatchResultController),
+      ),
     ),
   ),
 );
