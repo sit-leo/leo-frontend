@@ -22,14 +22,14 @@ const withUser = WrappedComponent => class extends Component {
     const userRequest = userAdapter(serverInstance(props.token));
     const user = await userRequest.getUser();
 
-    if (user.error) {
-      // redirect error or to login page.
+    const profileRequest = profileAdapter(serverInstance(props.token));
+    const profile = await profileRequest.getProfile();
+
+    if (user.error || profile.error) {
+      ctx.res.writeHead(302, { Location: '/login' });
+      ctx.res.end();
       return {};
     }
-
-    const profileRequest = profileAdapter(serverInstance(props.token));
-
-    const profile = await profileRequest.getProfile();
 
     await ctx.store.dispatch(setId(user.id));
     await ctx.store.dispatch(setRole(user.role));
