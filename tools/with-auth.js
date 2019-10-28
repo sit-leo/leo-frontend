@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 
 import cookie from './cookie';
+import redirectToLogin from './reditect-login';
 
 
 export const auth = (ctx) => {
   const token = cookie.getToken(ctx.req);
 
   if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
+    redirectToLogin(ctx);
     return;
   }
 

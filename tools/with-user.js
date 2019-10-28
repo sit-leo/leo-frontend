@@ -12,6 +12,7 @@ import {
   setEducation,
   setRecruiterProfile,
 } from '../store/profile';
+import redirectToLogin from './reditect-login';
 
 
 const withUser = WrappedComponent => class extends Component {
@@ -26,8 +27,7 @@ const withUser = WrappedComponent => class extends Component {
     const profile = await profileRequest.getProfile();
 
     if (user.error || profile.error) {
-      ctx.res.writeHead(302, { Location: '/login' });
-      ctx.res.end();
+      redirectToLogin(ctx);
       return {};
     }
 
