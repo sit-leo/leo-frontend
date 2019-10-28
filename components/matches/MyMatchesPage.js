@@ -16,7 +16,7 @@ import WithNavbar from '../layouts/with-navbar';
 import ContainerRow, { Col, Row } from '../base/Grid';
 import Tabs, { TabPane } from '../base/Tabs';
 import Card from '../base/Card';
-import { TitleSmall } from '../base/Text';
+import { TitleSmall, TitleLargePrimary } from '../base/Text';
 
 import MatchCard from './MatchCard';
 
@@ -58,18 +58,25 @@ const MyMatchPage = ({ matches, setMatches, setLoading }) => {
   return (
     <WithLoading>
       <WithNavbar>
+        <ContainerRow>
+          <Col lg={3}>
+            <TitleLargePrimary className="mt-3">
+              My Matches
+            </TitleLargePrimary>
+          </Col>
+        </ContainerRow>
         <ContainerRow className="py-5">
           <Card className="px-lg-0">
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>
                 <Tabs defaultActiveKey="1" onChange={key => setTab(key)} animated={false}>
                   {
-                  TABS.map((tap, key) => (
-                    <TabPane tab={tap} key={`${key + 1}`}>
-                      <MatchList matches={matches} />
-                    </TabPane>
-                  ))
-                }
+                    TABS.map((tap, key) => (
+                      <TabPane tab={tap} key={`${key + 1}`}>
+                        <MatchList matches={matches} />
+                      </TabPane>
+                    ))
+                  }
                 </Tabs>
               </Col>
             </Row>
