@@ -108,8 +108,7 @@ export const Profile = ({
             </React.Fragment>
           )
         }
-        <Col className="text-center my-4">
-          <hr />
+        <Col className="text-center mt-4">
           <SmallMainButton htmlType="submit">
             <SubTitleWhite className="mb-0">
               Update Profile
@@ -119,7 +118,7 @@ export const Profile = ({
       </FormContainer>
 
       <FormContainer
-        className="w-100 py-4 px-4"
+        className="w-100 pb-4 px-4"
         onSubmit={(e) => {
           e.preventDefault();
           validateFields((err, values) => {
