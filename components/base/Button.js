@@ -52,6 +52,18 @@ export const SmallMainButton = styled(MainButton)`
   }
 `;
 
+export const ExtraSmallMainButton = styled(MainButton)`
+  font-size: ${font.size.xsmall};
+  min-width: 10%;
+  
+  @media (min-width: 768px) {
+    min-width: 15%;
+  }
+  @media (max-width: 767px) {
+    min-width: 30%;
+  }
+`;
+
 export const SmallButton = styled(DefaultButtonStyled)`
   min-width: 25%;
   border-color: ${color.hover} !important;
