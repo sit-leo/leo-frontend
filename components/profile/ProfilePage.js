@@ -19,11 +19,10 @@ import {
 import ContainerRow, { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
 import {
-  TitleForm, SubTitleWhite, NoteText,
+  TitleLargePrimary, TitleForm, SubTitleWhite, NoteText,
 } from '../base/Text';
-import { SmallMainButton } from '../base/Button';
+import { SmallMainButton, ExtraSmallMainButton } from '../base/Button';
 import { LabelInput } from '../base/Input';
-import { TitleLargePrimary } from '../base/Text';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
@@ -109,16 +108,6 @@ export const Profile = ({
             </React.Fragment>
           )
         }
-        <TitleForm title="Change password" />
-        <Col lg={6}>
-          <LabelInput label="Current password" />
-        </Col>
-        <Col lg={6}>
-          <LabelInput label="New password" />
-        </Col>
-        <Col>
-          <NoteText>Leave it blank if you don’t want to change it.</NoteText>
-        </Col>
         <Col className="text-center my-4">
           <hr />
           <SmallMainButton htmlType="submit">
@@ -127,6 +116,35 @@ export const Profile = ({
             </SubTitleWhite>
           </SmallMainButton>
         </Col>
+      </FormContainer>
+
+      <FormContainer
+        className="w-100 py-4 px-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateFields((err, values) => {
+            if (!err) {
+              // changePassword();
+            }
+          });
+        }}
+      >
+        <TitleForm title="Change password" />
+        <Col lg={6}>
+          <LabelInput label="Current password" />
+        </Col>
+        <Col lg={6}>
+          <LabelInput label="New password" />
+        </Col>
+        <Col className="d-flex justify-content-between my-2">
+          <NoteText>Leave it blank if you don’t want to change it.</NoteText>
+          <ExtraSmallMainButton htmlType="submit">
+            <SubTitleWhite className="mb-0">
+              Update
+            </SubTitleWhite>
+          </ExtraSmallMainButton>
+        </Col>
+        <Col><hr /></Col>
       </FormContainer>
     </WithNavbar>
   );
