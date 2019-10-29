@@ -5,9 +5,12 @@ import { bindActionCreators } from 'redux';
 import { clientInstance } from '../../tools/request';
 
 import userAdapter from '../../store/user/user-adapter';
+
+import { setLoading as setLoadingAction } from '../../store/global';
 import { setRole as setRoleAction } from '../../store/user';
 
 import Navbar from '../base/Navbar';
+import WithLoading from './with-loading';
 
 
 function logout() {
@@ -16,16 +19,16 @@ function logout() {
 }
 
 const WithNavbar = ({
-  fullName, role, setRole, children,
+  loading, setLoading, fullName, role, setRole, children,
 }) => (
-  <Fragment>
+  <WithLoading loading={loading}>
     <Navbar
       fullName={fullName}
       role={role}
-      logout={() => setRole('guest') && logout()}
+      logout={() => setLoading(true) && setRole('guest') && logout()}
     />
     { children }
-  </Fragment>
+  </WithLoading>
 );
 
 const mapStateToProps = state => ({
@@ -35,6 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setRole: bindActionCreators(setRoleAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithNavbar);
