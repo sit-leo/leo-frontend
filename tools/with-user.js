@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { serverInstance } from './request';
 
-import { isApplicant, isRecruiter } from './with-roles';
+import { isApplicant, isRecruiter, isOrganizer } from './with-roles';
 
 import userAdapter from '../store/user/user-adapter';
 import profileAdapter from '../store/profile/profile-adapter';
@@ -26,7 +26,8 @@ const withUser = WrappedComponent => class extends Component {
     const profileRequest = profileAdapter(serverInstance(props.token));
     const profile = await profileRequest.getProfile();
 
-    if (user.error || profile.error) {
+    // TODO: delte bypass for organizer in the future
+    if (!isOrganizer(user.role) && (user.error || profile.error)) {
       redirectToLogin(ctx);
       return {};
     }
