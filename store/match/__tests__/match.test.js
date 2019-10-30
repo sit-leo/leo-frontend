@@ -23,13 +23,13 @@ describe('Test Match Reducer', () => {
     expect(store).toEqual({
       match: {
         id: 0,
-        name: 'No Match Found',
-        annouceDate: 'No Date Found',
-        description: 'No Description Found',
-        endApplicantRankingDate: 'No Date Found',
-        endJoiningDate: 'No Date Found',
-        endRecruiterRankingDate: 'No Date Found',
-        startJoiningDate: 'No Date Found',
+        name: '',
+        description: '',
+        startJoiningDate: null,
+        endJoiningDate: null,
+        endApplicantRankingDate: null,
+        endRecruiterRankingDate: null,
+        announceDate: null,
       },
     });
     done();
