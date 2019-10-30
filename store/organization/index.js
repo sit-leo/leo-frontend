@@ -1,7 +1,18 @@
-export const initState = {
-  organizations: [{
+const initOrganization = {
+  id: 0,
+  name: 'Organization Name',
+  description: 'Organization Description',
+  numOfApplicant: 0,
+  numOfRecruiter: 0,
+};
 
-  }],
+export const initState = {
+  organizations: [
+    initOrganization,
+    initOrganization,
+    initOrganization,
+  ],
+  organization: initOrganization,
 };
 
 // Actions
