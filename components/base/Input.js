@@ -44,7 +44,9 @@ const Input = React.forwardRef(({ text, ...props }, ref) => (
 
 export default Input;
 
-export const { TextArea } = InputDefault;
+export const TextArea = styled(InputDefault.TextArea)`
+  ${INPUT_THEME}
+`;
 
 export const InputNumber = styled(InputNumberDefault)`
   ${INPUT_THEME}
