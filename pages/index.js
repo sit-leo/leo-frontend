@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import cookie from '../tools/cookie';
 
 import LandingPage from '../components/landing';
+import { setLoading } from '../store/global';
 
 class LandingController extends React.Component {
   static async getInitialProps({
@@ -15,6 +16,7 @@ class LandingController extends React.Component {
       res.end();
       return { token };
     }
+    store.dispatch(setLoading(false));
     return {};
   }
 
