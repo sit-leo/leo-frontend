@@ -5,6 +5,7 @@ import { withAuth } from '../../tools/with-auth';
 import withUser from '../../tools/with-user';
 
 import EventListPage from '../../components/landing/EventListPage';
+import { withOrganizer } from '../../tools/with-roles';
 
 class LandingController extends React.Component {
   static async getInitialProps({
@@ -18,8 +19,10 @@ class LandingController extends React.Component {
   }
 }
 
-export default withUser(
-  withAuth(
-    connect()(LandingController),
+export default withOrganizer(
+  withUser(
+    withAuth(
+      connect()(LandingController),
+    ),
   ),
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import cookie from '../tools/cookie';
+import { withOrganizer } from '../tools/with-roles';
 
 import LandingPage from '../components/landing';
 import { setLoading } from '../store/global';
@@ -25,4 +26,6 @@ class LandingController extends React.Component {
   }
 }
 
-export default connect()(LandingController);
+export default withOrganizer(
+  connect()(LandingController),
+);
