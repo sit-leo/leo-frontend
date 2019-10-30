@@ -2,6 +2,7 @@ const routes = require('next-routes');
 
 module.exports = routes()
   .add('match/index', '/matches/:matchId')
+  .add('match/Matches', '/matches')
   .add('match/MyMatches', '/my-matches')
   .add('organization/index', '/organizations')
   .add('organization/Dashboard', '/organizations/dashboard')
