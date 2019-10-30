@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import color from '../../config/color';
-
 import { clientInstance } from '../../tools/request';
 
 import matchAdapter from '../../store/match/match-adapter';
