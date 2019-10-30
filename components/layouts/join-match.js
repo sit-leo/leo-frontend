@@ -28,7 +28,7 @@ const JoinMatch = ({
       <Col>
         <BreadcrumbList
           items={[
-            { url: '/', name: 'Matches' },
+            { url: '/matches', name: 'Matches' },
             { url: `/matches/${match.id}`, name: match.name || 'Default Match Name' },
             { name: 'Join Matching' },
           ]}

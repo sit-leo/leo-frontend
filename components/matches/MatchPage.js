@@ -120,7 +120,7 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
         <Col>
           <BreadcrumbList
             items={[
-              { url: '/', name: 'Matches' },
+              { url: '/matches', name: 'Matches' },
               { name: match.name || 'Default Match Name' },
             ]}
           />
