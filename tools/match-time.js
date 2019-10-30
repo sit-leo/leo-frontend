@@ -8,9 +8,13 @@ function isCanJoinMatch(startJoiningDate, endJoiningDate) {
 
 export default isCanJoinMatch;
 
+export function getNextDay(joiningDate) {
+  const day = dayjs(joiningDate);
+  return day.add('1', 'day');
+}
 
 export function isApplicantCanRanking(endJoiningDate, applicantRankingTime) {
-  return TODAY.isAfter(endJoiningDate) && !TODAY.isAfter(applicantRankingTime);
+  return TODAY.isAfter(getNextDay(endJoiningDate)) && !TODAY.isAfter(applicantRankingTime);
 }
 
 export function isRecruiterCanRanking(applicantRankingTime, recruiterRankingTime) {
@@ -35,9 +39,4 @@ export function convertDatePeriod(startDate, endDate) {
     return `${startDateFormat.format('DD MMMM')} - ${endDateFormat.format('DD MMMM YYYY')}`;
   }
   return `${startDateFormat.format('DD MMMM YYYY')} - ${endDateFormat.format('DD MMMM YYYY')}`;
-}
-
-export function getNextDay(joiningDate) {
-  const day = dayjs(joiningDate);
-  return day.add('1', 'day');
 }
