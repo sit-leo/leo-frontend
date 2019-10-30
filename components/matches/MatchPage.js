@@ -8,7 +8,7 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
-import { isApplicant } from '../../tools/with-roles';
+import { isApplicant, isRecruiter } from '../../tools/with-roles';
 import isCanJoinMatch, {
   convertDatePeriod,
   isAnnouceDate,
@@ -74,12 +74,14 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
     }
     return Router.push(`/matches/${match.id}/result/positions`);
   }
+
   function handleRankingMatch() {
     if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/applicants/ranking`);
     }
     return Router.push(`/matches/${match.id}/recruiters/positions`);
   }
+
   function handleJoinMatch() {
     if (isApplicant(role)) {
       return Router.push(`/matches/${match.id}/applicants/join`);
@@ -88,15 +90,28 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
   }
 
   function isDisabled() {
-    if (isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
-      return isApplicant(role)
-        ? !isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
-        : !isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate);
+    if (isAnnouceDate(match.announceDate)) {
+      return false;
     }
-    if (!isJoinMatch) {
-      return !isCanJoinMatch(match.startJoiningDate, match.endJoiningDate);
+
+    if (!isJoinMatch && isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
+      return false;
     }
-    return false;
+
+    if (isJoinMatch && isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
+      if (isApplicant(role)
+        && isApplicantCanRanking(match.endJoiningDate, match.applicantRankingEndDate)
+      ) {
+        return false;
+      }
+      if (isRecruiter(role)
+        && isRecruiterCanRanking(match.applicantRankingEndDate, match.recruiterRankingEndDate)
+      ) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   return (
@@ -162,11 +177,17 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                   className="w-100"
                   onClick={() => {
                     if (isAnnouceDate(match.announceDate)) {
-                      handleMatchResult();
-                    } else if (isJoinMatch) {
-                      handleRankingMatch();
-                    } else {
-                      handleJoinMatch();
+                      return handleMatchResult();
+                    }
+
+                    if (!isJoinMatch
+                    && isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
+                      return handleJoinMatch();
+                    }
+
+                    if (isJoinMatch
+                    && isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
+                      return handleRankingMatch();
                     }
                   }}
                   disabled={isDisabled()}
