@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IconCircle as Icon } from '../components/base/Icon';
+import { PreviewFile } from '../components/base/Upload';
 
 function getOrdinalNumbers(year) {
   switch (year) {
@@ -58,6 +59,7 @@ export function getApplicantInformations(applicantMatch) {
     applicant: {
       educations, email, telno, skills, website, experiences,
     },
+    documents,
   } = applicantMatch;
   const [{ year, major, university }] = educations;
   return [
@@ -81,7 +83,23 @@ export function getApplicantInformations(applicantMatch) {
     },
     {
       header: 'Documents',
-      detail: 'Idiot',
+      detail: Array.isArray(documents)
+        ? (
+          <div className='d-flex'>
+            {
+              documents.map(
+                ({ id, fileName }) => (
+                  <PreviewFile
+                    fileId={id}
+                    fileName={fileName}
+                    key={id}
+                    isFinished
+                  />
+                ),
+              )
+            }
+          </div>
+        ) : '-',
     },
   ];
 }
