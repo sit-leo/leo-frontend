@@ -59,7 +59,6 @@ export const LabelInput = ({
       {
         getFieldDecorator
           ? getFieldDecorator(name, {
-            validateTrigger: ['onBlur'],
             initialValue: text,
             setFieldsValue: text,
             rules: [

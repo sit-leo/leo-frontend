@@ -119,7 +119,6 @@ const ApplicantProfileForm = ({
             {
                 getFieldDecorator
                   ? getFieldDecorator('year', {
-                    validateTrigger: ['onBlur'],
                     initialValue: year,
                     setFieldsValue: year,
                     rules: [
@@ -166,7 +165,6 @@ const ApplicantProfileForm = ({
             <Item>
               {
                 getFieldDecorator ? getFieldDecorator('gpax', {
-                  validateTrigger: ['onBlur'],
                   initialValue: gpax,
                   setFieldsValue: gpax,
                   rules: [

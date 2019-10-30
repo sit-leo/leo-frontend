@@ -75,7 +75,6 @@ const LoginPage = ({
                 }
                 <Item>
                   {getFieldDecorator('email', {
-                    validateTrigger: ['onBlur'],
                     rules: [
                       {
                         required: true,
@@ -93,7 +92,6 @@ const LoginPage = ({
 
                 <Item>
                   {getFieldDecorator('password', {
-                    validateTrigger: ['onBlur'],
                     rules: [
                       {
                         required: true,
