@@ -1,7 +1,15 @@
+import moment from 'moment';
+
 export const initState = {
   match: {
     id: 0,
-    name: 'No Match Found',
+    name: '',
+    description: '',
+    startJoiningDate: null,
+    endJoiningDate: null,
+    endApplicantRankingDate: null,
+    endRecruiterRankingDate: null,
+    announceDate: null,
   },
   matches: [{
     id: 0,
@@ -11,6 +19,7 @@ export const initState = {
 
 // Actions
 export const SET_MATCH = 'MATCH/SET_MATCH';
+export const SET_MATCH_VALUE_WITH_ATTRIBUTE = 'MATCH/SET_MATCH_VALUE_WITH_ATTRIBUTE';
 
 export const SET_MATCHES = 'MATCH/SET_MATCHES';
 
@@ -25,6 +34,11 @@ export default function reducer(state = initState, action = {}) {
       const matches = action.matches || initState.matches;
       return { ...state, matches };
     }
+    case SET_MATCH_VALUE_WITH_ATTRIBUTE: {
+      const { payload: { field, value } } = action;
+      const match = { ...state.match, [field]: value };
+      return { ...state, match };
+    }
     default: return { ...state };
   }
 }
@@ -36,4 +50,8 @@ export function setMatch(match) {
 
 export function setMatches(matches) {
   return { type: SET_MATCHES, matches };
+}
+
+export function setMatchValueByAttribute(field, value) {
+  return { type: SET_MATCH_VALUE_WITH_ATTRIBUTE, payload: { field, value } };
 }
