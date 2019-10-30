@@ -8,18 +8,23 @@ import Icon from './Icon';
 
 const File = styled.div`
   max-width: 120px;
+  max-height: 120px;
   margin-right: 16px;
   border-radius: 4px;
   border: solid 2px ${color.disabled};
   background: ${color.white};
+
   img {
     max-width: 30px;
   }
+  
   span {
-    text-overflow: ellipsis;
     max-width: 102px;
+    max-height: 42px;
+    text-overflow: ellipsis;
     overflow: hidden;
   }
+  
   .anticon-close {
     top: 4px;
     right: 4px;
