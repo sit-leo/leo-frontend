@@ -62,9 +62,9 @@ export const withOrganizer = WrappedComponent => connect()(
       const token = cookie.getToken(ctx.req);
 
       if (token) {
+        const userRequest = userAdapter(serverInstance(token));
+        const user = await userRequest.getUser();
         if (!user.error && isOrganizer(user.role)) {
-          const userRequest = userAdapter(serverInstance(token));
-          const user = await userRequest.getUser();
           switch (ctx.req.url) {
             case '/organizations':
             default: {
