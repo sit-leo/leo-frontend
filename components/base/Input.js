@@ -5,6 +5,7 @@ import {
   Input as InputDefault,
   InputNumber as InputNumberDefault,
   Select as SelectDefault,
+  DatePicker as DefaultDatePicker,
 } from 'antd';
 
 import Icon from './Icon';
@@ -12,6 +13,8 @@ import Icon from './Icon';
 import colors from '../../config/color';
 
 import { Item } from './Form';
+
+const { RangePicker } = DefaultDatePicker;
 
 const INPUT_THEME = `
   border-radius: 10px;
@@ -86,4 +89,62 @@ export const Search = ({ ...props }) => (
     onPressEnter={value => console.log(value)}
     {...props}
   />
+);
+
+export const DateRangePicker = ({
+  label,
+  name,
+  value,
+  getFieldDecorator = () => {},
+  onChange = () => {},
+}) => (
+  <React.Fragment>
+    <Label for={name} className="mb-0">{label}</Label>
+    <Item>
+      {
+        getFieldDecorator(name, {
+          initialValue: [value.startJoiningDate, value.endJoiningDate],
+          rules: [
+            {
+              type: 'array',
+              required: true,
+              message: `Please fill "${label}".`,
+            },
+          ],
+        })(
+          <RangePicker className="w-100" onChange={onChange} />,
+        )
+      }
+    </Item>
+  </React.Fragment>
+);
+
+export const DatePicker = ({
+  label,
+  name,
+  value,
+  onChange = () => {},
+  getFieldDecorator = () => {},
+}) => (
+  <React.Fragment>
+    <Label for={name} className="mb-0">{label}</Label>
+    <Item>
+      {
+        getFieldDecorator(name, {
+          initialValue: value,
+          rules: [
+            {
+              required: true,
+              message: `Please fill "${label}".`,
+            },
+          ],
+        })(
+          <DefaultDatePicker
+            className="w-100"
+            onChange={onChange}
+          />,
+        )
+      }
+    </Item>
+  </React.Fragment>
 );
