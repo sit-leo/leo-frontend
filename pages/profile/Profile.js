@@ -8,7 +8,7 @@ import { isApplicant } from '../../tools/with-roles';
 import withUser from '../../tools/with-user';
 
 import userAdapter from '../../store/user/user-adapter';
-import { addApplicantFile } from '../../store/profile';
+import { addApplicantFiles } from '../../store/profile';
 
 import ProfilePage from '../../components/profile/ProfilePage';
 import profileAdapter from '../../store/profile/profile-adapter';
@@ -26,9 +26,7 @@ class ProfileController extends React.Component {
       const profileRequest = profileAdapter(serverInstance(token));
       const files = await profileRequest.getFiles();
       if (Array.isArray(files) && files.length > 0) {
-        await files.map(
-          file => store.dispatch(addApplicantFile(file)),
-        );
+        await store.dispatch(addApplicantFiles(files));
       }
     }
 

@@ -53,6 +53,7 @@ export const ADD_APPLICANT_SKILL = 'PROFILE/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
 export const ADD_APPLICANT_FILE = 'PROFILE/ADD_APPLICANT_FILE';
+export const ADD_APPLICANT_FILES = 'PROFILE/ADD_APPLICANT_FILES';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -124,6 +125,10 @@ export default function reducer(state = initState, action = {}) {
     }
     case ADD_APPLICANT_FILE: {
       const files = [...state.files, action.file];
+      return { ...state, files };
+    }
+    case ADD_APPLICANT_FILES: {
+      const files = [...state.files, ...action.files];
       return { ...state, files };
     }
     default: return { ...state };
@@ -200,4 +205,8 @@ export function setRecruiterEmail(email) {
 
 export function addApplicantFile(file) {
   return { type: ADD_APPLICANT_FILE, file };
+}
+
+export function addApplicantFiles(files) {
+  return { type: ADD_APPLICANT_FILES, files };
 }

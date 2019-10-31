@@ -57,7 +57,9 @@ class ApplicantRankingController extends React.Component {
 
     let ranks = await matchingRequest.getApplicantRankingByMatchId(matchId);
     const files = await profileRequest.getFiles();
-    await store.dispatch(addApplicantFiles(files));
+    if (Array.isArray(files) && files.length > 0) {
+      await store.dispatch(addApplicantFiles(files));
+    }
 
     if (ranks && ranks.length > 0) {
       if (Array.isArray(files) && files.length > 0) {
