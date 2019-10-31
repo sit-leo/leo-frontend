@@ -5,8 +5,9 @@ import { Upload } from 'antd';
 import color from '../../config/color';
 
 import Icon from './Icon';
+import displayFile from '../../tools/display-file';
 
-const File = styled.div`
+const File = styled.button`
   max-width: 120px;
   max-height: 120px;
   margin-right: 16px;
@@ -65,7 +66,11 @@ export const PreviewFile = ({
   fileName,
   removePositionFile = () => {},
 }) => (
-  <File className="text-center p-3 position-relative">
+  <File
+    className="text-center p-3 position-relative"
+    onClick={() => displayFile(fileId)}
+    type="button"
+  >
     {
       !isFinished
       && (
