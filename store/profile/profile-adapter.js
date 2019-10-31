@@ -26,4 +26,8 @@ export default adapter => ({
     return adapter.get(`${PROFILE_API}/profile/documents`)
       .then(({ data }) => data);
   },
+  getDocument(fileId) {
+    return adapter.get(`${PROFILE_API}/documents/${fileId}`)
+      .then(data => data);
+  },
 });
