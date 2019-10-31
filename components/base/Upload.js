@@ -7,12 +7,24 @@ import color from '../../config/color';
 import Icon from './Icon';
 import displayFile from '../../tools/display-file';
 
-const File = styled.button`
-  max-width: 120px;
-  max-height: 120px;
+const FileContainer = styled.div`
   margin-right: 16px;
   border-radius: 4px;
   border: solid 2px ${color.disabled};
+  background: ${color.white};
+  
+  .anticon-close {
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color: ${color.text.main};
+  }
+`;
+
+const File = styled.button`
+  border: none;
+  max-width: 120px;
+  max-height: 120px;
   background: ${color.white};
 
   img {
@@ -24,13 +36,6 @@ const File = styled.button`
     max-height: 42px;
     text-overflow: ellipsis;
     overflow: hidden;
-  }
-  
-  .anticon-close {
-    top: 4px;
-    right: 4px;
-    cursor: pointer;
-    color: ${color.text.main};
   }
 `;
 
@@ -48,20 +53,22 @@ export const PreviewFile = ({
   fileName,
   removePositionFile = () => {},
 }) => (
-  <File
-    className="text-center p-3 position-relative"
-    onClick={() => displayFile(fileId)}
-    type="button"
-  >
+  <FileContainer className="position-relative">
     {
       !isFinished
       && (
         <Icon onClick={() => removePositionFile(positionId, fileId)} className="position-absolute" type="close" />
       )
     }
-    <img src="/static/images/file.png" alt="file" />
-    <span className="d-block">{fileName}</span>
-  </File>
+    <File
+      className="text-center p-3"
+      onClick={() => displayFile(fileId)}
+      type="button"
+    >
+      <img src="/static/images/file.png" alt="file" />
+      <span className="d-block">{fileName}</span>
+    </File>
+  </FileContainer>
 );
 
 export default Upload;
