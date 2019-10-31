@@ -26,7 +26,7 @@ import { LabelInput } from '../base/Input';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
-import { DumpUpload, UploadButton } from '../base/Upload';
+import { UploadButton, PreviewFile } from '../base/Upload';
 
 export const Profile = ({
   role,
@@ -79,15 +79,12 @@ export const Profile = ({
               <Col className="d-flex">
                 {
                   files.map(file => (
-                    <DumpUpload
-                      listType="picture-card"
+                    <PreviewFile
                       key={file.uid || file.id}
-                    >
-                      <div>
-                        <img src="/static/images/file.png" alt={file.name || file.fileName} />
-                        <span className="d-block mt-2">{`${file.name || file.fileName}`}</span>
-                      </div>
-                    </DumpUpload>
+                      fileId={file.id}
+                      fileName={file.name || file.fileName}
+                      isFinished
+                    />
                   ))
                 }
                 <Upload
