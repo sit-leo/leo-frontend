@@ -85,7 +85,7 @@ export function getApplicantInformations(applicantMatch) {
       header: 'Documents',
       detail: Array.isArray(documents)
         ? (
-          <div className='d-flex'>
+          <div className="d-flex">
             {
               documents.map(
                 ({ id, fileName }) => (
