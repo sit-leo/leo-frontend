@@ -13,8 +13,12 @@ import profileAdapter from '../../store/profile/profile-adapter';
 import WithNavbar from '../layouts/with-navbar';
 
 import {
-  addApplicantFiles as addApplicantFilesAction,
+  addApplicantFile as addApplicantFileAction,
 } from '../../store/profile';
+
+import {
+  setLoading as setLoadingAction,
+} from '../../store/global';
 
 import ContainerRow, { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
@@ -34,7 +38,8 @@ export const Profile = ({
   recruiter,
   files = [],
   form: { getFieldDecorator, validateFields },
-  addApplicantFiles,
+  addApplicantFile,
+  setLoading,
 }) => {
   function updateProfile() {
     const profileRequest = profileAdapter(clientInstance());
@@ -80,24 +85,30 @@ export const Profile = ({
                 {
                   files.map(file => (
                     <PreviewFile
-                      key={file.uid || file.id}
+                      key={`${file.id}-${file.fileName}`}
                       fileId={file.id}
-                      fileName={file.name || file.fileName}
+                      fileName={file.fileName}
                       isFinished
                     />
                   ))
                 }
                 <Upload
                   customRequest={({ file }) => {
+                    message.info('Uploading.');
+                    setLoading(true);
                     const profileRequest = profileAdapter(
                       clientInstance(true, { 'Content-Type': 'multipart/form-data' }),
                     );
-                    profileRequest.uploadFile(file).then(() => message.success('Upload success.'));
+                    profileRequest.uploadFile(file).then((response) => {
+                      const [data] = response;
+                      addApplicantFile(data);
+                      setLoading(false);
+                      message.success('Upload success.');
+                    });
                   }}
                   listType="picture-card"
                   fileList={files}
                   showUploadList={false}
-                  onChange={({ fileList }) => addApplicantFiles(fileList)}
                 >
                   <UploadButton />
                 </Upload>
@@ -154,7 +165,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addApplicantFiles: bindActionCreators(addApplicantFilesAction, dispatch),
+  addApplicantFile: bindActionCreators(addApplicantFileAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
