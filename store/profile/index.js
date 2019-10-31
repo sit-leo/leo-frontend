@@ -52,7 +52,7 @@ export const SET_RECRUITER_TELNO = 'PROFILE/SET_RECRUITER_TELNO';
 export const ADD_APPLICANT_SKILL = 'PROFILE/ADD_APPLICANT_SKILL';
 export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
-export const ADD_APPLICANT_FILES = 'PROFILE/ADD_APPLICANT_FILES';
+export const ADD_APPLICANT_FILE = 'PROFILE/ADD_APPLICANT_FILE';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -122,8 +122,8 @@ export default function reducer(state = initState, action = {}) {
     case SET_RECRUITER_TELNO: {
       return { ...state, recruiter: { ...state.recruiter, telNo: action.telNo } };
     }
-    case ADD_APPLICANT_FILES: {
-      const files = action.files.map(file => ({ ...file, thumbUrl: '/static/images/file.png' }));
+    case ADD_APPLICANT_FILE: {
+      const files = [...state.files, action.file];
       return { ...state, files };
     }
     default: return { ...state };
@@ -198,6 +198,6 @@ export function setRecruiterEmail(email) {
   return { type: SET_RECRUITER_EMAIL, email };
 }
 
-export function addApplicantFiles(files) {
-  return { type: ADD_APPLICANT_FILES, files };
+export function addApplicantFile(file) {
+  return { type: ADD_APPLICANT_FILE, file };
 }
