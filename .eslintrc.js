@@ -12,5 +12,8 @@ module.exports = {
             "no-undef": [0]
           }
         }
-    ]
+    ],
+    "env": {
+        "browser": true,
+    },
 };
