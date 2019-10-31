@@ -26,8 +26,7 @@ const withUser = WrappedComponent => class extends Component {
     const profileRequest = profileAdapter(serverInstance(props.token));
     const profile = await profileRequest.getProfile();
 
-    // TODO: delte bypass for organizer in the future
-    if (!isOrganizer(user.role) && (user.error || profile.error)) {
+    if (user.error || profile.error) {
       redirectToLogin(ctx);
       return {};
     }
