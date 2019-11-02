@@ -59,26 +59,26 @@ export const LabelInput = ({
   name, label, text, getFieldDecorator, ...props
 }) => (
   <React.Fragment>
-    <Label for={name} className="mb-0">{label}</Label>
-    <Item>
-      {
-        getFieldDecorator
-          ? getFieldDecorator(name, {
-            initialValue: text,
-            setFieldsValue: text,
-            rules: [
-              {
-                required: true,
-                message: `Please fill "${label}".`,
-              },
-            ],
-          })(
-            <Input id={name} name={name} {...props} />,
-          )
-          : <Input id={name} name={name} value={text} {...props} />
-      }
-    </Item>
-  </React.Fragment>
+      <Label for={name} className="mb-0">{label}</Label>
+      <Item>
+        {
+          getFieldDecorator
+            ? getFieldDecorator(name, {
+              initialValue: text,
+              setFieldsValue: text,
+              rules: [
+                {
+                  required: true,
+                  message: `Please fill "${label}".`,
+                },
+              ],
+            })(
+              <Input id={name} name={name} {...props} />,
+            )
+            : <Input id={name} name={name} value={text} {...props} />
+        }
+      </Item>
+    </React.Fragment>
 );
 
 export const Search = ({ ...props }) => (
@@ -95,56 +95,66 @@ export const DateRangePicker = ({
   label,
   name,
   value,
-  getFieldDecorator = () => {},
-  onChange = () => {},
+  getFieldDecorator = () => { },
+  onChange = () => { },
 }) => (
   <React.Fragment>
-    <Label for={name} className="mb-0">{label}</Label>
-    <Item>
-      {
-        getFieldDecorator(name, {
-          initialValue: [value.startJoiningDate, value.endJoiningDate],
-          rules: [
-            {
-              type: 'array',
-              required: true,
-              message: `Please fill "${label}".`,
-            },
-          ],
-        })(
-          <RangePicker className="w-100" onChange={onChange} />,
-        )
-      }
-    </Item>
-  </React.Fragment>
+      <Label for={name} className="mb-0">{label}</Label>
+      <Item>
+        {
+          getFieldDecorator(name, {
+            initialValue: [value.startJoiningDate, value.endJoiningDate],
+            rules: [
+              {
+                type: 'array',
+                required: true,
+                message: `Please fill "${label}".`,
+              },
+            ],
+          })(
+            <RangePicker className="w-100" onChange={onChange} />,
+          )
+        }
+      </Item>
+    </React.Fragment>
 );
 
 export const DatePicker = ({
   label,
   name,
   value,
-  onChange = () => {},
-  getFieldDecorator = () => {},
-}) => (
-  <React.Fragment>
-    <Label for={name} className="mb-0">{label}</Label>
-    <Item>
-      {
-        getFieldDecorator(name, {
-          initialValue: value,
-          rules: [
-            {
-              required: true,
-              message: `Please fill "${label}".`,
-            },
-          ],
-        })(
-          <DefaultDatePicker
-            className="w-100"
-            onChange={onChange}
-          />,
-        )
-      }
-    </Item>
-  </React.Fragment>
-);
+  onChange = () => { },
+  getFieldDecorator = () => { },
+  validator,
+}) => {
+  const rules = [
+    {
+      required: true,
+      message: `Please fill "${label}".`,
+    },
+    {
+      validator,
+    }];
+  if (validator) {
+    rules.push({ validator });
+  }
+  return (
+
+    <React.Fragment>
+      <Label for={name} className="mb-0">{label}</Label>
+      <Item>
+        {
+          getFieldDecorator(name, {
+            initialValue: value,
+            rules,
+          })(
+            <DefaultDatePicker
+              className="w-100"
+              onChange={onChange}
+            />,
+          )
+        }
+      </Item>
+    </React.Fragment>
+  );
+};
