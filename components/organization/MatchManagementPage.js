@@ -28,8 +28,8 @@ const MatchManagementPage = ({
     description,
     startJoiningDate,
     endJoiningDate,
-    endApplicantRankingDate,
-    endRecruiterRankingDate,
+    applicantRankingEndDate,
+    recruiterRankingEndDate,
     announceDate,
   },
   form: { getFieldDecorator, setFieldsValue, validateFields },
@@ -100,11 +100,11 @@ const MatchManagementPage = ({
       <Col lg={6} className="my-2">
         <DatePicker
           label="Applicant Ranking End Date"
-          name="endApplicantRankingDate"
-          value={announceDate}
+            name="applicantRankingEndDate"
+            value={applicantRankingEndDate}
           onChange={(date) => {
-            setMatchValue('endApplicantRankingDate', date.format());
-            setFieldsValue({ endApplicantRankingDate: date });
+              setMatchValue('applicantRankingEndDate', date.format());
+              setFieldsValue({ applicantRankingEndDate: date });
           }}
           getFieldDecorator={getFieldDecorator}
         />
@@ -112,11 +112,11 @@ const MatchManagementPage = ({
       <Col lg={6} className="my-2">
         <DatePicker
           label="Recruiter Ranking End Date"
-          name="endRecruiterRankingDate"
-          value={announceDate}
+            name="recruiterRankingEndDate"
+            value={recruiterRankingEndDate}
           onChange={(date) => {
-            setMatchValue('endRecruiterRankingDate', date.format());
-            setFieldsValue({ endRecruiterRankingDate: date });
+              setMatchValue('recruiterRankingEndDate', date.format());
+              setFieldsValue({ recruiterRankingEndDate: date });
           }}
           getFieldDecorator={getFieldDecorator}
         />

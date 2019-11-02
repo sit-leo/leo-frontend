@@ -27,8 +27,8 @@ describe('Test Match Reducer', () => {
         description: '',
         startJoiningDate: null,
         endJoiningDate: null,
-        endApplicantRankingDate: null,
-        endRecruiterRankingDate: null,
+        applicantRankingEndDate: null,
+        recruiterRankingEndDate: null,
         announceDate: null,
       },
     });

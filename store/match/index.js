@@ -5,8 +5,8 @@ export const initState = {
     description: '',
     startJoiningDate: null,
     endJoiningDate: null,
-    endApplicantRankingDate: null,
-    endRecruiterRankingDate: null,
+    applicantRankingEndDate: null,
+    recruiterRankingEndDate: null,
     announceDate: null,
   },
   matches: [{
