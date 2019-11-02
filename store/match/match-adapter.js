@@ -29,4 +29,12 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/matches/lastest?page=${page}`)
       .then(({ data: matches }) => matches);
   },
+  createMatch(match) {
+    return adapter.post(`${MATCH_API}/match`, match)
+      .then(({ data }) => data);
+  },
+  updateMatch(match) {
+    return adapter.post(`${MATCH_API}/match`, match)
+      .then(({ data }) => data);
+  },
 });
