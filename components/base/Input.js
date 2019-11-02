@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 import { Label } from 'reactstrap';
 import {
@@ -59,9 +60,9 @@ export const LabelInput = ({
   name, label, text, getFieldDecorator, ...props
 }) => (
   <React.Fragment>
-      <Label for={name} className="mb-0">{label}</Label>
-      <Item>
-        {
+    <Label for={name} className="mb-0">{label}</Label>
+    <Item>
+      {
           getFieldDecorator
             ? getFieldDecorator(name, {
               initialValue: text,
@@ -77,8 +78,8 @@ export const LabelInput = ({
             )
             : <Input id={name} name={name} value={text} {...props} />
         }
-      </Item>
-    </React.Fragment>
+    </Item>
+  </React.Fragment>
 );
 
 export const Search = ({ ...props }) => (
@@ -99,24 +100,24 @@ export const DateRangePicker = ({
   onChange = () => { },
 }) => (
   <React.Fragment>
-      <Label for={name} className="mb-0">{label}</Label>
-      <Item>
-        {
-          getFieldDecorator(name, {
-            initialValue: [value.startJoiningDate, value.endJoiningDate],
-            rules: [
-              {
-                type: 'array',
-                required: true,
-                message: `Please fill "${label}".`,
-              },
-            ],
-          })(
-            <RangePicker className="w-100" onChange={onChange} />,
-          )
-        }
-      </Item>
-    </React.Fragment>
+    <Label for={name} className="mb-0">{label}</Label>
+    <Item>
+      {
+        getFieldDecorator(name, {
+          initialValue: [moment(value.startJoiningDate), moment(value.endJoiningDate)],
+          rules: [
+            {
+              type: 'array',
+              required: true,
+              message: `Please fill "${label}".`,
+            },
+          ],
+        })(
+          <RangePicker className="w-100" onChange={onChange} />,
+        )
+      }
+    </Item>
+  </React.Fragment>
 );
 
 export const DatePicker = ({
@@ -145,7 +146,7 @@ export const DatePicker = ({
       <Item>
         {
           getFieldDecorator(name, {
-            initialValue: value,
+            initialValue: moment(value),
             rules,
           })(
             <DefaultDatePicker
