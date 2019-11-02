@@ -1,11 +1,19 @@
 import React from 'react';
+import moment from 'moment';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Organization from '../layouts/organization';
 
-import { setMatchValueByAttribute as setMatchValueByAttributeAction } from '../../store/match';
+import { clientInstance } from '../../tools/request';
+
+import matchAdapter from '../../store/match/match-adapter';
+
+import {
+  setMatchValueByAttribute as setMatchValueByAttributeAction,
+  setMatch as setMatchAction,
+} from '../../store/match';
 
 import { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
@@ -24,6 +32,7 @@ function isCreateOrUpdate(haveCurrentMatch) {
 const MatchManagementPage = ({
   isCurrentMatch = false,
   match: {
+    id,
     name,
     description,
     startJoiningDate,
@@ -32,125 +41,176 @@ const MatchManagementPage = ({
     recruiterRankingEndDate,
     announceDate,
   },
-  form: { getFieldDecorator, setFieldsValue, validateFields },
+  form: {
+    getFieldDecorator,
+    setFieldsValue,
+    getFieldValue,
+    validateFieldsAndScroll,
+  },
   setMatchValue = () => { },
-}) => (
-  <Organization title={isCreateOrUpdate(isCurrentMatch)}>
-    <FormContainer
-      onSubmit={(e) => {
-        e.preventDefault();
-        validateFields((err, values) => {
-          console.log(values);
-          if (!err) {
-            // createMatch();
-            // updateMatch();
-          }
-        });
-      }}
-    >
-      <Col className="text-center">
-        <hr />
-        <CoverImage />
-        <TitleMedium className="my-2 text-center">
-          <b>Cover Photo</b>
-        </TitleMedium>
-      </Col>
+  setMatch = () => { },
+}) => {
+  const matchRequest = matchAdapter(clientInstance());
+  function createMatch(match) {
+    return matchRequest.createMatch(match).then(data => setMatch(data));
+  }
+  function updateMatch(match) {
+    return matchRequest.updateMatch(match).then(data => setMatch(data));
+  }
+  return (
+    <Organization title={isCreateOrUpdate(isCurrentMatch)}>
+      <FormContainer
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateFieldsAndScroll((err, values) => {
+            if (!err) {
+              const [startDate, endDate] = values.joinPeriod;
+              const match = {
+                name: values.name,
+                description: values.description,
+                startJoiningDate: startDate,
+                endJoiningDate: endDate,
+                applicantRankingEndDate: values.applicantRankingEndDate,
+                recruiterRankingEndDate: values.recruiterRankingEndDate,
+                announceDate: values.announceDate,
+              };
+              if (isCurrentMatch) {
+                updateMatch({ ...match, id });
+              } else {
+                createMatch(match);
+              }
+            }
+          });
+        }}
+      >
+        <Col className="text-center">
+          <hr />
+          <CoverImage />
+          <TitleMedium className="my-2 text-center">
+            <b>Cover Photo</b>
+          </TitleMedium>
+        </Col>
 
-      <TitleForm title="Match detail" />
-      <Col>
-        <LabelInput
-          label="Match name"
-          name="name"
-          text={name}
-          onChange={e => setMatchValue('name', e.target.value)}
-          getFieldDecorator={getFieldDecorator}
-        />
-      </Col>
-      <Col>
-        <Label for="description" className="mb-0">Description</Label>
-        {
-          getFieldDecorator('description', {
-            initialValue: description,
-            rules: [
-              {
-                required: true,
-                message: 'Please fill "Description".',
-              },
-            ],
-          })(
-            <TextArea onChange={e => setMatchValue('description', e.target.value)} />,
-          )
-        }
-      </Col>
-      <TitleForm title="Date detail" />
-      <Col lg={6} className="my-2">
-        <DateRangePicker
-          label="Join Period"
-          name="joinPeriod"
-          getFieldDecorator={getFieldDecorator}
-          value={{ startJoiningDate, endJoiningDate }}
-          onChange={(joinPeriod) => {
-            const [startDate, endDate] = joinPeriod;
-            setMatchValue('startJoiningDate', startDate);
-            setMatchValue('endJoiningDate', endDate);
-            setFieldsValue({ joinPeriod });
-          }}
-        />
-      </Col>
-      <Col lg={6} className="my-2">
-        <DatePicker
-          label="Applicant Ranking End Date"
+        <TitleForm title="Match detail" />
+        <Col>
+          <LabelInput
+            label="Match name"
+            name="name"
+            text={name}
+            onChange={e => setMatchValue('name', e.target.value)}
+            getFieldDecorator={getFieldDecorator}
+          />
+        </Col>
+        <Col>
+          <Label for="description" className="mb-0">Description</Label>
+          {
+            getFieldDecorator('description', {
+              initialValue: description,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please fill "Description".',
+                },
+              ],
+            })(
+              <TextArea onChange={e => setMatchValue('description', e.target.value)} />,
+            )
+          }
+        </Col>
+        <TitleForm title="Date detail" />
+        <Col lg={6} className="my-2">
+          <DateRangePicker
+            label="Join Period"
+            name="joinPeriod"
+            getFieldDecorator={getFieldDecorator}
+            value={{ startJoiningDate, endJoiningDate }}
+            onChange={(joinPeriod) => {
+              const [startDate, endDate] = joinPeriod;
+              setMatchValue('startJoiningDate', startDate);
+              setMatchValue('endJoiningDate', endDate);
+              setFieldsValue({ joinPeriod });
+            }}
+          />
+        </Col>
+        <Col lg={6} className="my-2">
+          <DatePicker
+            label="Applicant Ranking End Date"
             name="applicantRankingEndDate"
             value={applicantRankingEndDate}
-          onChange={(date) => {
+            onChange={(date) => {
               setMatchValue('applicantRankingEndDate', date.format());
               setFieldsValue({ applicantRankingEndDate: date });
-          }}
-          getFieldDecorator={getFieldDecorator}
-        />
-      </Col>
-      <Col lg={6} className="my-2">
-        <DatePicker
-          label="Recruiter Ranking End Date"
+            }}
+            getFieldDecorator={getFieldDecorator}
+            validator={(rule, value, callback) => {
+              const [_, endJoinDate] = getFieldValue('joinPeriod');
+              const endDate = moment(endJoinDate).add(1, 'days');
+              if (value && endDate && (value.isBefore(endDate) || value.isSame(endDate))) {
+                callback('"Applicant Ranking End Date" must after "Join Period" at least 1 day.');
+              }
+              callback();
+            }}
+          />
+        </Col>
+        <Col lg={6} className="my-2">
+          <DatePicker
+            label="Recruiter Ranking End Date"
             name="recruiterRankingEndDate"
             value={recruiterRankingEndDate}
-          onChange={(date) => {
+            onChange={(date) => {
               setMatchValue('recruiterRankingEndDate', date.format());
               setFieldsValue({ recruiterRankingEndDate: date });
-          }}
-          getFieldDecorator={getFieldDecorator}
-        />
-      </Col>
-      <Col lg={6} className="my-2">
-        <DatePicker
-          label="Announce Date"
-          name="announceDate"
-          value={announceDate}
-          onChange={(date) => {
-            setMatchValue('announceDate', date.format());
-            setFieldsValue({ announceDate: date });
-          }}
-          getFieldDecorator={getFieldDecorator}
-        />
-      </Col>
+            }}
+            getFieldDecorator={getFieldDecorator}
+            validator={(rule, value, callback) => {
+              const endDate = getFieldValue('applicantRankingEndDate');
+              if (value && endDate && (value.isBefore(endDate) || value.isSame(endDate))) {
+                callback('"Recruiter Ranking End Date" must after "Applicant Ranking End Date".');
+              }
+              callback();
+            }}
+          />
+        </Col>
+        <Col lg={6} className="my-2">
+          <DatePicker
+            label="Announce Date"
+            name="announceDate"
+            value={announceDate}
+            onChange={(date) => {
+              setMatchValue('announceDate', date.format());
+              setFieldsValue({ announceDate: date });
+            }}
+            getFieldDecorator={getFieldDecorator}
+            validator={(rule, value, callback) => {
+              const endDate = getFieldValue('recruiterRankingEndDate');
+              if (value && endDate && (value.isBefore(endDate) || value.isSame(endDate))) {
+                callback('"Announce Date Date" must after "Recruiter Ranking End Date".');
+              }
+              callback();
+            }}
+          />
+        </Col>
 
-      <Col className="text-center">
-        <hr />
-        <SmallMainButton htmlType="submit" className="mt-3 mb-5">
-          <SubTitleWhite className="mb-0">
-            {isCreateOrUpdate(isCurrentMatch)}
-          </SubTitleWhite>
-        </SmallMainButton>
-      </Col>
-    </FormContainer>
-  </Organization>
-);
+        <Col className="text-center">
+          <hr />
+          <SmallMainButton htmlType="submit" className="mt-3 mb-5">
+            <SubTitleWhite className="mb-0">
+              {isCreateOrUpdate(isCurrentMatch)}
+            </SubTitleWhite>
+          </SmallMainButton>
+        </Col>
+      </FormContainer>
+    </Organization>
+  );
+};
 
 const mapStateToProps = state => ({
+  isCurrentMatch: state.match.isCurrentMatch,
   match: state.match.match,
 });
 
 const mapDispatchToProps = dispatch => ({
+  setMatch: bindActionCreators(setMatchAction, dispatch),
   setMatchValue: bindActionCreators(setMatchValueByAttributeAction, dispatch),
 });
 
