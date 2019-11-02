@@ -1,4 +1,5 @@
 export const initState = {
+  isCurrentMatch: false,
   match: {
     id: 0,
     name: '',
@@ -21,6 +22,8 @@ export const SET_MATCH_VALUE_WITH_ATTRIBUTE = 'MATCH/SET_MATCH_VALUE_WITH_ATTRIB
 
 export const SET_MATCHES = 'MATCH/SET_MATCHES';
 
+export const SET_IS_CURRENT_MATCH = 'MATCH/SET_IS_CURRENT_MATCH';
+
 // Reducer
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -37,6 +40,10 @@ export default function reducer(state = initState, action = {}) {
       const match = { ...state.match, [field]: value };
       return { ...state, match };
     }
+    case SET_IS_CURRENT_MATCH: {
+      const { isCurrentMatch } = action;
+      return { ...state, isCurrentMatch };
+    }
     default: return { ...state };
   }
 }
@@ -52,4 +59,8 @@ export function setMatches(matches) {
 
 export function setMatchValueByAttribute(field, value) {
   return { type: SET_MATCH_VALUE_WITH_ATTRIBUTE, payload: { field, value } };
+}
+
+export function setIsCurrentMatch(isCurrentMatch) {
+  return { type: SET_IS_CURRENT_MATCH, isCurrentMatch };
 }

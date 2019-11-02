@@ -1,6 +1,6 @@
 import MatchReducer,
 {
-  setMatch, setMatchValueByAttribute,
+  setMatch, setMatchValueByAttribute, setIsCurrentMatch,
 } from '../index';
 
 describe('Test Match Reducer', () => {
@@ -44,6 +44,17 @@ describe('Test Match Reducer', () => {
       match: {
         name: 'Junior Programmer',
       },
+    });
+    done();
+  });
+
+  it('Test setIsCurrentMatch should return is current match.', (done) => {
+    const action = setIsCurrentMatch(true);
+
+    const store = MatchReducer({}, action);
+
+    expect(store).toEqual({
+      isCurrentMatch: true,
     });
     done();
   });

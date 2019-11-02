@@ -9,7 +9,7 @@ import withUser from '../../tools/with-user';
 
 import matchAdapter from '../../store/match/match-adapter';
 
-import { setMatch } from '../../store/match';
+import { setMatch, setIsCurrentMatch } from '../../store/match';
 
 import MatchManagementPage from '../../components/organization/MatchManagementPage';
 
@@ -22,6 +22,7 @@ class MatchManagementController extends React.Component {
     const match = await matchRequest.getCurrentMatchByOrganization();
 
     if (!match.error) {
+      store.dispatch(setIsCurrentMatch(true));
       store.dispatch(setMatch(match));
     }
 
