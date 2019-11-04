@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table, Descriptions } from 'antd';
 
 import Organization from '../layouts/organization';
 
@@ -7,6 +6,7 @@ import Card from '../base/Card';
 import ContainerRow, { Col } from '../base/Grid';
 import { Search } from '../base/Input';
 import { ApplicantDescription } from '../base/Description';
+import Table from '../base/Table';
 
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
