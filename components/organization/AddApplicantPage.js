@@ -33,6 +33,8 @@ export const dataSource = [
         gpax: '3.46',
       },
     ],
+    telno: '0863476125',
+    email: 'jirapas.jill@gmail.com',
   },
   {
     key: '2',
@@ -46,6 +48,8 @@ export const dataSource = [
         gpax: '3.46',
       },
     ],
+    telno: '099-456-2545',
+    email: 'keerati.jear@gmail.com',
   },
 ];
 
@@ -53,10 +57,10 @@ const AddApplicantPage = ({
   applicants = dataSource,
 }) => (
   <AddMemberContainer
-    title="Add applicants"
-    dataSource={applicants}
-    columns={columns}
-  />
+      title="Add applicants"
+      dataSource={applicants}
+      columns={columns}
+    />
 );
 
 export default AddApplicantPage;
