@@ -12,11 +12,10 @@ import {
   setFinished as setFinishedAction,
 } from '../../store/matching/ranking';
 
-import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
-import MainButton, { DangerButton } from '../base/Button';
+import Modal from '../base/Modal';
+import MainButton from '../base/Button';
 
 import RankingCard from './RankingCard';
-import { FlexBetween } from '../base/Flex';
 import Finished from './Finished';
 import { getPositionInformations } from '../../tools/ranking-informations';
 
@@ -73,30 +72,21 @@ const DocumentStep = ({
           </div>
         )
       }
-      <Modal isOpen={isOpenConfirm}>
-        <ModalHeader className="justify-content-center">Confirmation Document</ModalHeader>
-        <ModalBody className="text-center">
-          Are you sure to confirm this document?
-          Please check the document before confirming.
-        </ModalBody>
-        <ModalFooter className="flex-column text-center">
-          <span>
-          You can't edit your document.
-          </span>
-          <FlexBetween className="w-100 mt-3">
-            <DangerButton onClick={() => toggleConfirm(false)}>
-            Cancel
-            </DangerButton>
-            <MainButton onClick={() => {
-              toggleConfirm(false);
-              return handleConfirmDocument(applicantRanks) && setFinished(true);
-            }}
-            >
-            Confirm
-            </MainButton>
-          </FlexBetween>
-        </ModalFooter>
-      </Modal>
+      <Modal
+        isOpenModal={isOpenConfirm}
+        onClose={() => toggleConfirm(false)}
+        onConfirm={() => {
+          toggleConfirm(false);
+          handleConfirmDocument(applicantRanks);
+          setFinished(true);
+        }}
+        options={{
+          header: 'Confirmation Document',
+          body: `Are you sure to confirm this document?
+          Please check the document before confirming.`,
+          footer: 'You can\'t edit your document.',
+        }}
+      />
     </React.Fragment>
   );
 };

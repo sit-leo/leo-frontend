@@ -11,9 +11,8 @@ import {
 
 import ContainerRow, { Col } from '../base/Grid';
 import { SubTitleSmallWhite } from '../base/Text';
-import Button, { DangerButton, SmallMainButton } from '../base/Button';
-import { FlexBetween } from '../base/Flex';
-import Modal, { ModalHeader, ModalBody, ModalFooter } from '../base/Modal';
+import { SmallMainButton } from '../base/Button';
+import Modal from '../base/Modal';
 import { BreadcrumbList } from '../base/Breadcrumb';
 
 const JoinMatch = ({
@@ -43,27 +42,18 @@ const JoinMatch = ({
         </SmallMainButton>
       </Col>
     </ContainerRow>
-    <Modal isOpen={isOpenJoinModal}>
-      <ModalHeader className="justify-content-center">Confirmation</ModalHeader>
-      <ModalBody className="text-center">
-        Are you sure to join this match?
-        You won't be able to quit the match.
-      </ModalBody>
-      <ModalFooter className="flex-column text-center">
-        <span>
-        Confirm to join this match?
-        Please check your information before confirm.
-        </span>
-        <FlexBetween className="w-100 mt-3">
-          <DangerButton onClick={() => toggleJoinModal(!isOpenJoinModal)}>
-            Cancel
-          </DangerButton>
-          <Button onClick={() => toggleJoinModal(false) && handleConfirm()}>
-            Confirm
-          </Button>
-        </FlexBetween>
-      </ModalFooter>
-    </Modal>
+    <Modal
+      isOpenModal={isOpenJoinModal}
+      onClose={() => toggleJoinModal(!isOpenJoinModal)}
+      onConfirm={() => toggleJoinModal(false) && handleConfirm()}
+      options={{
+        header: 'Join Match Confirmation',
+        body: `Are you sure to join this match?
+        You won't be able to quit the match.`,
+        footer: `Confirm to join this match?
+        Please check your information before confirm.`,
+      }}
+    />
   </WithNavbar>
 );
 

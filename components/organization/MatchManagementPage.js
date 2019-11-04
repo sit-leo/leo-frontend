@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { message } from 'antd';
 
 import Organization from '../layouts/organization';
 
@@ -22,6 +23,7 @@ import { SmallMainButton } from '../base/Button';
 import {
   LabelInput, TextArea, DateRangePicker, DatePicker,
 } from '../base/Input';
+import Modal from '../base/Modal';
 
 import CoverImage from './CoverImage';
 
@@ -43,6 +45,7 @@ const MatchManagementPage = ({
   },
   form: {
     getFieldDecorator,
+    getFieldsValue,
     setFieldsValue,
     getFieldValue,
     validateFieldsAndScroll,
@@ -50,35 +53,45 @@ const MatchManagementPage = ({
   setMatchValue = () => { },
   setMatch = () => { },
 }) => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const matchRequest = matchAdapter(clientInstance());
+
   function createMatch(match) {
-    return matchRequest.createMatch(match).then(data => setMatch(data));
+    return matchRequest.createMatch(match).then(data => setMatch(data) && message.success('Create match success.'));
   }
+
   function updateMatch(match) {
-    return matchRequest.updateMatch(match).then(data => setMatch(data));
+    return matchRequest.updateMatch(match).then(data => setMatch(data) && message.success('Update match success.'));
   }
+
+  function submitForm() {
+    const values = getFieldsValue();
+    const [startDate, endDate] = values.joinPeriod;
+    const match = {
+      name: values.name,
+      description: values.description,
+      startJoiningDate: startDate,
+      endJoiningDate: endDate,
+      applicantRankingEndDate: values.applicantRankingEndDate,
+      recruiterRankingEndDate: values.recruiterRankingEndDate,
+      announceDate: values.announceDate,
+    };
+    if (isCurrentMatch) {
+      updateMatch({ ...match, id });
+    } else {
+      createMatch(match);
+    }
+  }
+
   return (
     <Organization title={isCreateOrUpdate(isCurrentMatch)}>
       <FormContainer
         onSubmit={(e) => {
           e.preventDefault();
-          validateFieldsAndScroll((err, values) => {
+          validateFieldsAndScroll((err) => {
             if (!err) {
-              const [startDate, endDate] = values.joinPeriod;
-              const match = {
-                name: values.name,
-                description: values.description,
-                startJoiningDate: startDate,
-                endJoiningDate: endDate,
-                applicantRankingEndDate: values.applicantRankingEndDate,
-                recruiterRankingEndDate: values.recruiterRankingEndDate,
-                announceDate: values.announceDate,
-              };
-              if (isCurrentMatch) {
-                updateMatch({ ...match, id });
-              } else {
-                createMatch(match);
-              }
+              setIsOpenModal(true);
             }
           });
         }}
@@ -200,6 +213,20 @@ const MatchManagementPage = ({
           </SmallMainButton>
         </Col>
       </FormContainer>
+      <Modal
+        isOpenModal={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        onConfirm={() => {
+          setIsOpenModal(false);
+          submitForm();
+        }}
+        options={{
+          header: 'Match Management Confirmation',
+          body: `Are you sure to confirm this ${isCurrentMatch ? 'changed' : 'information'}?
+          Please check the information before confirming.`,
+          footer: 'You can\'t edit your if the match joined by participant.',
+        }}
+      />
     </Organization>
   );
 };
