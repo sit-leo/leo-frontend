@@ -34,9 +34,10 @@ import JoinReducer,
   SET_RECRUITER_TELNO,
   setRecruiterEmail,
   SET_RECRUITER_EMAIL,
+  setOrganizer,
 } from '../index';
 
-import { applicant, recruiter } from './data.json';
+import { applicant, recruiter, organizer } from './data.json';
 
 describe('Test Profile Actions', () => {
   it('Test setApplicantExperiences action should return type and property correctly.', () => {
@@ -334,6 +335,17 @@ describe('Test Profile Reducer', () => {
     const store = JoinReducer(undefined, action);
 
     expect(store.recruiter.telNo).toEqual('0999999999');
+    done();
+  });
+
+  it('Test setOrganizer should return organizer correctly', (done) => {
+    const action = setOrganizer(organizer);
+
+    const store = JoinReducer(undefined, action);
+
+    expect(store.organizer.organizerId).toEqual(organizer.id);
+    expect(store.organizer.name).toEqual(organizer.name);
+    expect(store.organizer.description).toEqual(organizer.description);
     done();
   });
 });

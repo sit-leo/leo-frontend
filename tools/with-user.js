@@ -11,6 +11,7 @@ import {
   setApplicantProfile,
   setEducation,
   setRecruiterProfile,
+  setOrganizer,
 } from '../store/profile';
 import redirectToLogin from './reditect-login';
 
@@ -43,6 +44,11 @@ const withUser = WrappedComponent => class extends Component {
     if (isRecruiter(user.role)) {
       await ctx.store.dispatch(setFullname(profile.name));
       await ctx.store.dispatch(setRecruiterProfile(profile));
+    }
+
+    if (isOrganizer(user.role)) {
+      await ctx.store.dispatch(setFullname(profile.name));
+      await ctx.store.dispatch(setOrganizer(profile));
     }
 
     return { ...props, user };

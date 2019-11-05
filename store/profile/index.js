@@ -31,6 +31,11 @@ export const initState = {
     telNo: '',
     location: '',
   },
+  organizer: {
+    organizerId: 0,
+    name: '',
+    description: '',
+  },
 };
 
 export const SET_APPLICANT_PROFILE = 'PROFILE/SET_APPLICANT_PROFILE';
@@ -54,6 +59,8 @@ export const REMOVE_APPLICANT_SKILL = 'PROFILE/REMOVE_APPLICANT_SKILL';
 export const SET_APPLICANT_EXPERIENCES = 'PROFILE/SET_APPLICANT_EXPERIENCES';
 export const ADD_APPLICANT_FILE = 'PROFILE/ADD_APPLICANT_FILE';
 export const ADD_APPLICANT_FILES = 'PROFILE/ADD_APPLICANT_FILES';
+
+export const SET_ORGANIZER_PROFILE = 'PROFILE/SET_ORGANIZER_PROFILE';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -130,6 +137,14 @@ export default function reducer(state = initState, action = {}) {
     case ADD_APPLICANT_FILES: {
       const files = [...state.files, ...action.files];
       return { ...state, files };
+    }
+    case SET_ORGANIZER_PROFILE: {
+      const organizer = {
+        ...state.organizer,
+        ...action.organizer,
+        organizerId: action.organizer.id,
+      };
+      return { ...state, organizer };
     }
     default: return { ...state };
   }
@@ -209,4 +224,8 @@ export function addApplicantFile(file) {
 
 export function addApplicantFiles(files) {
   return { type: ADD_APPLICANT_FILES, files };
+}
+
+export function setOrganizer(organizer) {
+  return { type: SET_ORGANIZER_PROFILE, organizer };
 }
