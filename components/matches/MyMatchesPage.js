@@ -32,7 +32,7 @@ const NoMatch = ({ role }) => (
     {
       isOrganizer(role) && (
         <React.Fragment>
-          <span>Click below button to create match.</span>
+          <span> Click below button to create match.</span>
           <br />
           <a href="/organizations/matches/management">
             <MainButton className="my-3">
