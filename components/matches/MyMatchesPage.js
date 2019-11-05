@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import day from 'dayjs';
 
 import { clientInstance } from '../../tools/request';
+import { isOrganizer } from '../../tools/with-roles';
 
 import matchAdapter from '../../store/match/match-adapter';
 
@@ -19,10 +20,32 @@ import Card from '../base/Card';
 import { TitleSmall, TitleLargePrimary } from '../base/Text';
 
 import MatchCard from './MatchCard';
+import MainButton from '../base/Button';
 
 const matchRequest = matchAdapter(clientInstance());
 
-const MatchList = ({ matches = [] }) => (
+const NoMatch = ({ role }) => (
+  <Col className="text-center">
+    <span>
+      There is no current match.
+    </span>
+    {
+      isOrganizer(role) && (
+        <React.Fragment>
+          <span>Click below button to create match.</span>
+          <br />
+          <a href="/organizations/matches/management">
+            <MainButton className="my-3">
+              Create Match
+            </MainButton>
+          </a>
+        </React.Fragment>
+      )
+    }
+  </Col>
+);
+
+const MatchList = ({ matches = [], role }) => (
   matches.length > 0
     ? matches.map(match => (
       <MatchCard
@@ -34,12 +57,14 @@ const MatchList = ({ matches = [] }) => (
         startDate={day(match.announceDate).format('DD MMM YYYY')}
       />
     ))
-    : <TitleSmall className="text-center">No Matches Found.</TitleSmall>
+    : <NoMatch role={role} />
 );
 
 const TABS = ['Current', 'History'];
 
-const MyMatchPage = ({ matches, setMatches, setLoading }) => {
+const MyMatchPage = ({
+  role, matches, setMatches, setLoading,
+}) => {
   const [tab, setTab] = useState('1');
   useEffect(() => {
     setLoading(true);
@@ -73,7 +98,7 @@ const MyMatchPage = ({ matches, setMatches, setLoading }) => {
                   {
                     TABS.map((tap, key) => (
                       <TabPane tab={tap} key={`${key + 1}`}>
-                        <MatchList matches={matches} />
+                        <MatchList matches={matches} role={role} />
                       </TabPane>
                     ))
                   }
@@ -88,6 +113,7 @@ const MyMatchPage = ({ matches, setMatches, setLoading }) => {
 };
 
 const mapStateToProps = state => ({
+  role: state.user.role,
   matches: state.match.matches,
 });
 
