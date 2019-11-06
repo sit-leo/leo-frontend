@@ -27,7 +27,7 @@ import Modal from '../base/Modal';
 
 import CoverImage from './CoverImage';
 
-function isCreateOrUpdate(haveCurrentMatch) {
+export function isCreateOrUpdate(haveCurrentMatch) {
   return !haveCurrentMatch ? 'Create Match' : 'Update Match';
 }
 
