@@ -34,6 +34,7 @@ const AddApplicantPage = ({
     title="Add applicants"
     dataSource={applicants}
     columns={columns}
+    url="/organizations/applicants/add"
   />
 );
 

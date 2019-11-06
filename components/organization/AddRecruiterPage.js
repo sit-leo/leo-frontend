@@ -29,6 +29,7 @@ const AddRecruiterPage = ({
     title="Add recruiters"
     dataSource={recruiters}
     columns={columns}
+    url="/organizations/recruiters/add"
   />
 );
 

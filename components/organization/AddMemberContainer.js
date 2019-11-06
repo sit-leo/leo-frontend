@@ -25,26 +25,27 @@ const AddMemberContainer = ({
   title,
   columns,
   dataSource,
+  url,
 }) => (
-  <Organization title={title}>
-      <Col>
-        <Card>
-          <ContainerRow>
-            <Col md={{ size: 6, offset: 3 }}>
-              <Search />
-            </Col>
-            <Col className="mt-4" md={{ size: 10, offset: 1 }}>
-              <Table
-                expandedRowRender={ApplicantDescription}
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={dataSource}
-              />
-            </Col>
-          </ContainerRow>
-        </Card>
-      </Col>
-    </Organization>
+  <Organization title={title} page={title} url={url}>
+    <Col>
+      <Card>
+        <ContainerRow>
+          <Col md={{ size: 6, offset: 3 }}>
+            <Search />
+          </Col>
+          <Col className="mt-4" md={{ size: 10, offset: 1 }}>
+            <Table
+              expandedRowRender={ApplicantDescription}
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={dataSource}
+            />
+          </Col>
+        </ContainerRow>
+      </Card>
+    </Col>
+  </Organization>
 );
 
 export default AddMemberContainer;
