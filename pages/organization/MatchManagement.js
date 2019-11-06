@@ -7,7 +7,7 @@ import cookie from '../../tools/cookie';
 import { withAuth } from '../../tools/with-auth';
 import withUser from '../../tools/with-user';
 
-import matchAdapter from '../../store/match/match-adapter';
+import organizationAdapter from '../../store/organization/organization-adapter';
 
 import { setMatch, setIsCurrentMatch } from '../../store/match';
 
@@ -17,7 +17,7 @@ class MatchManagementController extends React.Component {
   static async getInitialProps({
     store, query, req, res,
   }) {
-    const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
+    const matchRequest = organizationAdapter(serverInstance(cookie.getToken(req)));
 
     const match = await matchRequest.getCurrentMatchByOrganization();
 

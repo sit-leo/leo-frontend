@@ -37,8 +37,4 @@ export default adapter => ({
     return adapter.put(`${MATCH_API}/match`, match)
       .then(({ data }) => data);
   },
-  getCurrentMatchByOrganization() {
-    return adapter.get(`${MATCH_API}/organizations/match`)
-      .then(({ data: match }) => match);
-  },
 });
