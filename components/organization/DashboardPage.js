@@ -55,8 +55,15 @@ const Statistic = ({
   cardColor,
   onClick = () => { },
 }) => (
-  <StatisticCard href={url} onClick={onClick} className="d-block w-100" color={cardColor}>
-    <Row className={text ? 'mt-2' : 'mt-1'}>
+  <StatisticCard
+    href={url}
+    onClick={onClick}
+    className={
+    `w-100 ${text ? 'd-block' : 'd-flex justify-content-center align-items-center'}`
+    }
+    color={cardColor}
+  >
+    <Row className={text ? 'mt-1' : 'mt-0 w-100'}>
       <Col xs={9}>
         <TitleLargeWhite className="mb-0">
           {number}
