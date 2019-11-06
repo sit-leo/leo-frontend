@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table } from 'antd';
 
-import { clientInstance } from '../../tools/request';
-
-import organizationAdapter from '../../store/organization/organization-adapter';
 
 import Organization from '../layouts/organization';
 
@@ -76,12 +73,17 @@ const Statistic = ({
 );
 
 const DashboardPage = ({
+  isCurrentMatch = false,
+  applicants,
+  recruiters,
   setLoading,
+  statistics: {
+    numberOfMatches = 0,
+    numberOfApplicants = 0,
+    numberOfRecruiters = 0,
+  },
 }) => {
   const [tab, setTab] = useState('1');
-
-  const [applicants, setApplicants] = useState([]);
-  const [recruiters, setRecruiters] = useState([]);
 
   const TABS = [
     {
@@ -106,31 +108,12 @@ const DashboardPage = ({
     },
   ];
 
-  const organizationRequest = organizationAdapter(clientInstance());
-
-  async function getParticipants() {
-    setLoading(true);
-
-    const responseApplicants = await organizationRequest.getApplicantsByOrganization();
-    const resonseRecruiters = await organizationRequest.getRecruitersByOrganization();
-
-    setApplicants(responseApplicants);
-    setRecruiters(resonseRecruiters);
-
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    getParticipants();
-  }, []);
-
   return (
     <Organization title="About Organization">
       <Col className="d-lg-flex justify-content-between">
-        <Statistic url="/my-matches" number={5} text="Matches" cardColor="#58b0ad" />
-        <Statistic url="#members" onClick={() => setTab('1')} number={439} text="Applicants" cardColor="#58b09e" />
-        <Statistic url="#members" onClick={() => setTab('2')} number={19} text="Recruiters" cardColor="#58b090" />
-        <Statistic url="/organizations/matches/management" number="Create Match" cardColor="#58b081" />
+        <Statistic url="/my-matches" number={numberOfMatches} text="Matches" cardColor="#58b0ad" />
+        <Statistic url="#members" onClick={() => setTab('1')} number={numberOfApplicants} text="Applicants" cardColor="#58b09e" />
+        <Statistic url="#members" onClick={() => setTab('2')} number={numberOfRecruiters} text="Recruiters" cardColor="#58b090" />
         <Statistic url="/organizations/matches/management" number={isCreateOrUpdate(isCurrentMatch)} cardColor="#58b081" />
       </Col>
       <Col>
@@ -172,8 +155,15 @@ const DashboardPage = ({
   );
 };
 
+const mapStateToProps = state => ({
+  isCurrentMatch: state.match.isCurrentMatch,
+  applicants: state.organization.applicants,
+  recruiters: state.organization.recruiters,
+  statistics: state.organization.statistics,
+});
+
 const mapDispatchToProps = dispatch => ({
   setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(DashboardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
