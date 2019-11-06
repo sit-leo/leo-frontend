@@ -15,4 +15,8 @@ export default adapter => ({
     return adapter.get(`${MATCH_API}/organization/recruiters`)
       .then(({ data: recruiters }) => recruiters);
   },
+  countMatchesByOrganizer() {
+    return adapter.get(`${MATCH_API}/organization/matches/count`)
+      .then(({ data: count }) => count);
+  },
 });
