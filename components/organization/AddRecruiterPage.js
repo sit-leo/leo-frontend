@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import AddMemberContainer from './AddMemberContainer';
 
@@ -30,4 +32,13 @@ const AddRecruiterPage = ({
   />
 );
 
-export default AddRecruiterPage;
+
+const mapStateToProps = state => ({
+  recruiters: state.organization.recruiters,
+});
+
+const mapDispatchToProps = dispatch => ({
+  // setLoading: bindActionCreators(setLoadingAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddRecruiterPage);
