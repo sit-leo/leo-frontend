@@ -35,7 +35,8 @@ class DashboardController extends React.Component {
     store.dispatch(setRecruiters(recruiters));
 
     store.dispatch(setStatistics({
-      numberOfMatches: (numberOfMatches && numberOfMatches.error) ? 0 : numberOfMatches,
+      numberOfMatches:
+        (typeof numberOfMatches === 'number') ? numberOfMatches : 0,
       numberOfApplicants: applicants.length,
       numberOfRecruiters: recruiters.length,
     }));
