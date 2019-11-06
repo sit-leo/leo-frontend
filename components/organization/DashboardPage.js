@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Table } from 'antd';
+
+import { clientInstance } from '../../tools/request';
+
+import organizationAdapter from '../../store/organization/organization-adapter';
 
 import Organization from '../layouts/organization';
 
@@ -19,8 +25,9 @@ import { LinkButton } from '../base/Button';
 
 import Chart from './Chart';
 
-import { columns as applicantColumns, dataSource as stubApplicants } from './AddApplicantPage';
-import { columns as recruiterColumns, dataSource as stubRecruiters } from './AddRecruiterPage';
+import { columns as applicantColumns } from './AddApplicantPage';
+import { columns as recruiterColumns } from './AddRecruiterPage';
+import { setLoading as setLoadingAction } from '../../store/global';
 
 const StatisticCard = styled.a`
   padding: 8px 16px;
@@ -68,17 +75,22 @@ const Statistic = ({
 );
 
 const DashboardPage = ({
-  applicants,
-  recruiters,
+  setLoading,
 }) => {
+  const [tab, setTab] = useState('1');
+
+  const [applicants, setApplicants] = useState([]);
+  const [recruiters, setRecruiters] = useState([]);
+
   const TABS = [
     {
       index: 1,
       name: 'Applicants',
       key: 'applicants',
       props: {
-        dataSource: applicants || stubApplicants,
+        dataSource: applicants,
         columns: applicantColumns,
+        rowKey: record => record.email,
       },
     },
     {
@@ -86,13 +98,30 @@ const DashboardPage = ({
       name: 'Recruiters',
       key: 'recruiters',
       props: {
-        dataSource: recruiters || stubRecruiters,
+        dataSource: recruiters,
         columns: recruiterColumns,
+        rowKey: record => record.email,
       },
     },
   ];
 
-  const [tab, setTab] = useState('1');
+  const organizationRequest = organizationAdapter(clientInstance());
+
+  async function getParticipants() {
+    setLoading(true);
+
+    const responseApplicants = await organizationRequest.getApplicantsByOrganization();
+    const resonseRecruiters = await organizationRequest.getRecruitersByOrganization();
+
+    setApplicants(responseApplicants);
+    setRecruiters(resonseRecruiters);
+
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getParticipants();
+  }, []);
 
   return (
     <Organization title="About Organization">
@@ -141,4 +170,8 @@ const DashboardPage = ({
   );
 };
 
-export default DashboardPage;
+const mapDispatchToProps = dispatch => ({
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(DashboardPage);

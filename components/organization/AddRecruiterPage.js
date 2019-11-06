@@ -20,23 +20,8 @@ export const columns = [
   },
 ];
 
-export const dataSource = [
-  {
-    key: '1',
-    name: 'Facebook Thailand, Inc',
-    location: 'Sukhumvit, BKK',
-    telNo: '0912345678',
-  },
-  {
-    key: '2',
-    name: '0912345678',
-    location: 'Sukhumvit, BKK',
-    telNo: '0912345678',
-  },
-];
-
 const AddRecruiterPage = ({
-  recruiters = dataSource,
+  recruiters = [],
 }) => (
   <AddMemberContainer
     title="Add recruiters"
