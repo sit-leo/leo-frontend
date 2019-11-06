@@ -8,11 +8,11 @@ export default adapter => ({
       .then(({ data: match }) => match);
   },
   getApplicantsByOrganization() {
-    return adapter.get(`${MATCH_API}/organizations/applicants`)
+    return adapter.get(`${MATCH_API}/organization/applicants`)
       .then(({ data: applicants }) => applicants);
   },
   getRecruitersByOrganization() {
-    return adapter.get(`${MATCH_API}/organizations/recruiters`)
+    return adapter.get(`${MATCH_API}/organization/recruiters`)
       .then(({ data: recruiters }) => recruiters);
   },
 });
