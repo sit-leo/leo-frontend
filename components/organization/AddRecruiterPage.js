@@ -51,9 +51,9 @@ const AddRecruiterPage = ({
     })
       .then((response) => {
         if (!response.status) {
-          message.success('Add applicants success.');
+          message.success('Add recruiters success.');
         } else {
-          message.error('Add applicants failed.');
+          message.error('Add recruiters failed.');
         }
         setRecruitersOrganization(
           recruiters.filter(({ applicantId }) => selectedRecruiters.find(id => id !== applicantId)),
