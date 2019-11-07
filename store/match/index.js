@@ -1,14 +1,16 @@
+import moment from 'moment';
+
 export const initState = {
   isCurrentMatch: false,
   match: {
     id: 0,
     name: '',
     description: '',
-    startJoiningDate: null,
-    endJoiningDate: null,
-    applicantRankingEndDate: null,
-    recruiterRankingEndDate: null,
-    announceDate: null,
+    startJoiningDate: moment(),
+    endJoiningDate: moment(),
+    applicantRankingEndDate: moment(),
+    recruiterRankingEndDate: moment(),
+    announceDate: moment(),
   },
   matches: [{
     id: 0,
