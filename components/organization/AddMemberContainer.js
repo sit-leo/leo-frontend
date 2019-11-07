@@ -5,27 +5,18 @@ import Organization from '../layouts/organization';
 import Card from '../base/Card';
 import ContainerRow, { Col } from '../base/Grid';
 import { Search } from '../base/Input';
-import { ApplicantDescription } from '../base/Description';
 import Table from '../base/Table';
-
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
-
-const expandedRowRender = record => <p>description</p>;
-
+import MainButton from '../base/Button';
 
 const AddMemberContainer = ({
   title,
   columns,
   dataSource,
   url,
+  rowRender,
+  rowKey = () => {},
+  onChange = () => {},
+  submit = () => {},
 }) => (
   <Organization title={title} page={title} url={url}>
     <Col>
@@ -36,12 +27,22 @@ const AddMemberContainer = ({
           </Col>
           <Col className="mt-4" md={{ size: 10, offset: 1 }}>
             <Table
-              expandedRowRender={ApplicantDescription}
-              rowSelection={rowSelection}
+              expandedRowRender={rowRender}
+              rowSelection={{ onChange }}
               columns={columns}
               dataSource={dataSource}
+              rowKey={rowKey}
             />
           </Col>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submit();
+            }}
+            className="text-center w-100"
+          >
+            <MainButton htmlType="submit">{title}</MainButton>
+          </form>
         </ContainerRow>
       </Card>
     </Col>

@@ -28,4 +28,12 @@ export default adapter => ({
     return adapter.get(`${PROFILE_API}/profile/recruiters`)
       .then(({ data: recruiters }) => recruiters);
   },
+  addOrganizationApplicants(applicants) {
+    return adapter.post(`${MATCH_API}/organization/applicants`, applicants)
+      .then(({ data }) => data);
+  },
+  addOrganizationRecruiters(recruiters) {
+    return adapter.post(`${MATCH_API}/organization/recruiters`, recruiters)
+      .then(({ data }) => data);
+  },
 });
