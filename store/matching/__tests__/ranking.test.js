@@ -101,7 +101,7 @@ describe('Test Ranking Reducer', () => {
 
     const expected = {
       recruiterRanks: [
-        { applicantMatch, participantId: applicantMatch.participantId, sequence: 1 },
+        { applicantMatch, participantId: applicantMatch.participantId, sequence: '-' },
       ],
     };
     expect(store).toEqual(expected);

@@ -190,7 +190,7 @@ export default function reducer(state = initState, action = {}) {
         recruiterRanks.push({
           applicantMatch,
           participantId: applicantMatch.participantId,
-          sequence: recruiterRanks.length + 1,
+          sequence: '-',
         });
       }
       message.success('Your is rank added.');
