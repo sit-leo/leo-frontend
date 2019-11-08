@@ -27,30 +27,30 @@ const RankingButton = ({
   const error = form.getFieldError(id);
   return (
     <Form.Item className="w-75 mb-0">
-      {
-        form.getFieldDecorator(id, {
-          initialValue: rank.sequence || '-',
-          rules: [{ validator: checkSequence }],
-        })(
-          <TooltipError visible={error !== undefined} placement="bottom" title="Please rank">
+      <TooltipError visible={error !== undefined} placement="bottom" title="Please rank">
+        {
+          form.getFieldDecorator(id, {
+            initialValue: rank.sequence || '-',
+            rules: [{ validator: checkSequence }],
+          })(
             <Select
               className="text-center"
               onChange={ranking(rank)}
             >
               <Select.Option value="-">
-                  -
+                -
               </Select.Option>
               {
-                  ranks.map((_, key) => (
-                    <Select.Option disabled={ranks.findIndex(({ sequence }) => sequence === key + 1) !== -1} key={key + 1} value={key + 1}>
-                      {key + 1}
-                    </Select.Option>
-                  ))
-                }
-            </Select>
-          </TooltipError>,
-        )
-      }
+                ranks.map((_, key) => (
+                  <Select.Option disabled={ranks.findIndex(({ sequence }) => sequence === key + 1) !== -1} key={key + 1} value={key + 1}>
+                    {key + 1}
+                  </Select.Option>
+                ))
+              }
+            </Select>,
+          )
+        }
+      </TooltipError>
     </Form.Item>
   );
 };
