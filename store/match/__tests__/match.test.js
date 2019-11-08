@@ -20,18 +20,9 @@ describe('Test Match Reducer', () => {
 
     const store = MatchReducer({}, action);
 
-    expect(store).toEqual({
-      match: {
-        id: 0,
-        name: '',
-        description: '',
-        startJoiningDate: null,
-        endJoiningDate: null,
-        applicantRankingEndDate: null,
-        recruiterRankingEndDate: null,
-        announceDate: null,
-      },
-    });
+    expect(store.match.id).toEqual(0);
+    expect(store.match.name).toEqual('');
+    expect(store.match.description).toEqual('');
     done();
   });
 
