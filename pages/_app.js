@@ -28,6 +28,11 @@ const GlobalStyle = createGlobalStyle`
   .anticon {
     vertical-align: 0 !important;
   }
+  .tooltip-error {
+    .ant-tooltip-arrow:before, .ant-tooltip-inner {
+      background-color: ${colors.error};
+    }
+  }
 `;
 
 export default withReduxStore(
