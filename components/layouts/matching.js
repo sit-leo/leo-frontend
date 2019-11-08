@@ -30,7 +30,7 @@ const Time = ({
 }) => (
   <Hero>
     <ContainerRow>
-      <Col lg={6}>
+      <Col lg={6} className="mt-3">
         <Title className="mb-3">
           {match.name || 'Default Match Name'}
         </Title>
@@ -39,7 +39,7 @@ const Time = ({
           {`Matching date: ${dayjs(match.announceDate).format('DD MMM YYYY')}`}
         </Title>
       </Col>
-      <Col lg={4} className="d-flex justify-content-between">
+      <Col lg={4} className="d-flex justify-content-between my-3">
         <CounterBox counter={match.numOfRecruiter} text="Recruiters" />
         <VerticalLine />
         <CounterBox counter={match.numOfApplicant} text="Applicants" />
