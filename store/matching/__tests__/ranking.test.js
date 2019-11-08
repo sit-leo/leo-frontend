@@ -2,12 +2,14 @@ import RankingReducer,
 {
   ADD_APPLICANT_RANKS,
   REMOVE_APPLICANT_RANKS,
+  updateApplicantRank,
   UPDATE_APPLICANT_RANKS,
   ADD_RECRUITER_RANKS,
   REMOVE_RECRUITER_RANKS,
   UPDATE_RECRUITER_RANKS,
   removePositionFile,
   setFinished,
+  updateRecruiterRank,
 } from '../ranking';
 
 describe('Test Ranking Reducer', () => {
@@ -18,7 +20,7 @@ describe('Test Ranking Reducer', () => {
     const initState = { applicantRanks: [] };
     const store = RankingReducer(initState, action);
 
-    const expected = { applicantRanks: [{ position, positionId: 1, sequence: 1 }] };
+    const expected = { applicantRanks: [{ position, positionId: 1, sequence: '-' }] };
     expect(store).toEqual(expected);
     done();
   });
@@ -66,45 +68,27 @@ describe('Test Ranking Reducer', () => {
     done();
   });
 
-  it('Test updateApplicantRank with `2 Positions Added` should return applicantRanks that changed Rank Sequence from Position 2 -> 1 and Position 1 -> 2.', (done) => {
+  it('Test updateApplicantRank with `Position 2` should return applicantRanks that changed Rank Sequence from Position 2 -> 1 and Position 1 -> 2.', (done) => {
     const positionAdded1 = {
       position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
     };
     const positionAdded2 = {
       position: { id: 2, name: 'Web Developer' }, positionId: 2, sequence: 2,
     };
-    const action = { type: UPDATE_APPLICANT_RANKS, index: 0, position: positionAdded2 };
+    const action1 = updateApplicantRank(1, positionAdded2);
+    const action2 = updateApplicantRank(2, positionAdded1);
 
     const initState = { applicantRanks: [positionAdded1, positionAdded2] };
-    const store = RankingReducer(initState, action);
+    const store1 = RankingReducer(initState, action1);
+    const store2 = RankingReducer(store1, action2);
 
     const expected = {
       applicantRanks: [
+        { ...positionAdded1, sequence: 2 },
         { ...positionAdded2, sequence: 1 },
-        { ...positionAdded1, sequence: 2 }],
+      ],
     };
-    expect(store).toEqual(expected);
-    done();
-  });
-
-  it('Test updateApplicantRank with `2 Positions Added` should return applicantRanks that changed Rank Sequence from Position 1 -> 2 and Position 2 -> 1.', (done) => {
-    const positionAdded1 = {
-      position: { id: 1, name: 'Software Developer' }, positionId: 1, sequence: 1,
-    };
-    const positionAdded2 = {
-      position: { id: 2, name: 'Web Developer' }, positionId: 2, sequence: 2,
-    };
-    const action = { type: UPDATE_APPLICANT_RANKS, index: 1, position: positionAdded1 };
-
-    const initState = { applicantRanks: [positionAdded1, positionAdded2] };
-    const store = RankingReducer(initState, action);
-
-    const expected = {
-      applicantRanks: [
-        { ...positionAdded2, sequence: 1 },
-        { ...positionAdded1, sequence: 2 }],
-    };
-    expect(store).toEqual(expected);
+    expect(store2).toEqual(expected);
     done();
   });
 
@@ -182,39 +166,20 @@ describe('Test Ranking Reducer', () => {
       sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 }, applicantMatch: { applicant: { name: 'Volk Natchanon' } },
     };
 
-    const action = { type: UPDATE_RECRUITER_RANKS, index: 0, applicantMatch: applicantMatchAdded2 };
+    const action1 = updateRecruiterRank(2, applicantMatchAdded1);
+    const action2 = updateRecruiterRank(1, applicantMatchAdded2);
 
     const initState = { recruiterRanks: [applicantMatchAdded1, applicantMatchAdded2] };
-    const store = RankingReducer(initState, action);
+    const store1 = RankingReducer(initState, action1);
+    const store2 = RankingReducer(store1, action2);
 
     const expected = {
       recruiterRanks: [
+        { ...applicantMatchAdded1, sequence: 2 },
         { ...applicantMatchAdded2, sequence: 1 },
-        { ...applicantMatchAdded1, sequence: 2 }],
+      ],
     };
-    expect(store).toEqual(expected);
-    done();
-  });
-
-  it('Test updateApplicantRank with `2 Applicant Match Added` should return recruiterRanks that changed Rank Sequence from Applicant Match 1 -> 2 and Applicant Match 2 -> 1.', (done) => {
-    const applicantMatchAdded1 = {
-      sequence: 1, id: 1, participantId: 1, applicant: { id: 1, applicantId: 1 }, applicantMatch: { applicant: { name: 'Tae Keerati' } },
-    };
-    const applicantMatchAdded2 = {
-      sequence: 2, id: 2, participantId: 2, applicant: { id: 2, applicantId: 2 }, applicantMatch: { applicant: { name: 'Volk Natchanon' } },
-    };
-
-    const action = { type: UPDATE_RECRUITER_RANKS, index: 1, applicantMatch: applicantMatchAdded1 };
-
-    const initState = { recruiterRanks: [applicantMatchAdded1, applicantMatchAdded2] };
-    const store = RankingReducer(initState, action);
-
-    const expected = {
-      recruiterRanks: [
-        { ...applicantMatchAdded2, sequence: 1 },
-        { ...applicantMatchAdded1, sequence: 2 }],
-    };
-    expect(store).toEqual(expected);
+    expect(store2).toEqual(expected);
     done();
   });
 

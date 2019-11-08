@@ -120,7 +120,7 @@ export default function reducer(state = initState, action = {}) {
 
     case SET_IS_UPDATE_RANK: return { ...state, isUpdateRank: action.isUpdateRank, isConfirm: false };
 
-    case SET_IS_CONFIRM: return { ...state, isUpdateRank: false, isConfirm: action.isConfirm };
+    case SET_IS_CONFIRM: return { ...state, isConfirm: action.isConfirm };
 
     case SET_POSITION: return { ...state, position: action.position };
 
@@ -151,7 +151,7 @@ export default function reducer(state = initState, action = {}) {
         applicantRanks.push({
           position,
           positionId: position.id,
-          sequence: applicantRanks.length + 1,
+          sequence: '-',
         });
       }
       message.success('Your is rank added.');
@@ -168,21 +168,14 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case UPDATE_APPLICANT_RANKS: {
-      const { index, position } = action;
-      const removalIndex = state.applicantRanks.findIndex(
+      const { sequence, position } = action;
+      const updatedIndex = state.applicantRanks.findIndex(
         rank => isRankEqualPosition(rank, position),
       );
       const ranks = [...state.applicantRanks];
-      message.success(`
-        Your is rank updated from
-        "${ranks[index].position.name}" to "${ranks[removalIndex].position.name}".
-      `);
-
-      ranks.splice(removalIndex, 1);
-      ranks.splice(index, 0, { ...position, sequence: index + 1 });
-      const applicantRanks = ranks.map(setSequenceByRankIndex);
-
-      return { ...state, applicantRanks };
+      ranks.splice(updatedIndex, 1, { ...position, sequence });
+      message.info('Your is rank updated.');
+      return { ...state, applicantRanks: ranks };
     }
 
     case SET_RECRUITER_RANKS: {
@@ -205,21 +198,14 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case UPDATE_RECRUITER_RANKS: {
-      const { index, applicantMatch } = action;
-      const removalIndex = state.recruiterRanks.findIndex(
+      const { sequence, applicantMatch } = action;
+      const updatedIndex = state.recruiterRanks.findIndex(
         rank => isRankEqualApplicant(rank, applicantMatch),
       );
       const ranks = [...state.recruiterRanks];
-      message.success(`
-        Your is rank updated from
-        "${ranks[index].applicantMatch.applicant.name}" to "${ranks[removalIndex].applicantMatch.applicant.name}"".
-      `);
-
-      ranks.splice(removalIndex, 1);
-      ranks.splice(index, 0, { ...applicantMatch, sequence: index + 1 });
-      const recruiterRanks = ranks.map(setSequenceByRankIndex);
-
-      return { ...state, recruiterRanks };
+      ranks.splice(updatedIndex, 1, { ...applicantMatch, sequence });
+      message.info('Your is rank updated.');
+      return { ...state, recruiterRanks: ranks };
     }
 
     case REMOVE_RECRUITER_RANKS: {
@@ -282,16 +268,16 @@ export function removeApplicantRank(position) {
   return { type: REMOVE_APPLICANT_RANKS, position };
 }
 
-export function updateApplicantRank(index, position) {
-  return { type: UPDATE_APPLICANT_RANKS, index, position };
+export function updateApplicantRank(sequence, position) {
+  return { type: UPDATE_APPLICANT_RANKS, sequence, position };
 }
 
 export function addRecruiterRank(applicantMatch) {
   return { type: ADD_RECRUITER_RANKS, applicantMatch };
 }
 
-export function updateRecruiterRank(index, applicantMatch) {
-  return { type: UPDATE_RECRUITER_RANKS, index, applicantMatch };
+export function updateRecruiterRank(sequence, applicantMatch) {
+  return { type: UPDATE_RECRUITER_RANKS, sequence, applicantMatch };
 }
 
 export function removeRecruiterRank(applicantMatch) {
