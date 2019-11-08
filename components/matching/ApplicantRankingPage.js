@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { message } from 'antd';
 import { clientInstance } from '../../tools/request';
 import { mapFilesToPositions } from '../../tools/ranking-utils';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
 
+import { setLoading as setLoadingAction } from '../../store/global';
 import {
   updateApplicantRank,
   removeApplicantRank,
   setApplicantRanks as setApplicantRanksAction,
+  setIsConfirm as setIsConfirmAction,
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
@@ -35,23 +38,29 @@ export const ApplicantRanking = ({
   updateRank = () => {},
   removeRank = () => {},
   setApplicantRanks = () => {},
+  setIsConfirm = () => {},
+  setLoading = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
 
-  function handleConfirm() {
+  async function handleConfirm() {
+    setLoading(true);
     const matchId = match.id;
     if (!haveRank) {
-      matchingRequest.postApplicantRankingByMatchId(
+      await matchingRequest.postApplicantRankingByMatchId(
         matchId, applicantRanks,
       );
     } else {
-      matchingRequest.updateApplicantRankingByMatchId(
+      await matchingRequest.updateApplicantRankingByMatchId(
         matchId, applicantRanks,
       );
     }
-    toggleConfirm(false);
     setApplicantRanks(mapFilesToPositions(applicantRanks, files));
+    setIsConfirm(true);
+    setLoading(false);
+    toggleConfirm(false);
+    message.success('Confirm ranking success.');
   }
   return (
     <RankingPageContainer
@@ -97,6 +106,8 @@ const mapDispatchToRankProps = dispatch => ({
   updateRank: bindActionCreators(updateApplicantRank, dispatch),
   removeRank: bindActionCreators(removeApplicantRank, dispatch),
   setApplicantRanks: bindActionCreators(setApplicantRanksAction, dispatch),
+  setIsConfirm: bindActionCreators(setIsConfirmAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(ApplicantRanking);
