@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Alert } from 'antd';
+import { Alert, message } from 'antd';
 
 import { clientInstance } from '../../tools/request';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
 
+import {
+  setLoading as setLoadingAction,
+} from '../../store/global';
 import {
   removePositionFile as removePositionFileAction,
   setFinished as setFinishedAction,
@@ -29,6 +32,7 @@ const DocumentStep = ({
   removePositionFile = () => {},
   isFinished,
   setFinished = () => {},
+  setLoading = () => {},
 }) => {
   const [isOpenConfirm, toggleConfirm] = useState(false);
   return (
@@ -77,8 +81,17 @@ const DocumentStep = ({
         onClose={() => toggleConfirm(false)}
         onConfirm={() => {
           toggleConfirm(false);
-          handleConfirmDocument(applicantRanks);
-          setFinished(true);
+          setLoading(true);
+          handleConfirmDocument(applicantRanks)
+            .then((response) => {
+              if (!response.status) {
+                message.success('Upload document success.');
+                setFinished(true);
+              } else {
+                message.error('Upload document failed.');
+              }
+              setLoading(false);
+            });
         }}
         options={{
           header: 'Confirmation Document',
@@ -100,6 +113,7 @@ const mapStateToProps = state => ({
 const mapDispatchToRankProps = dispatch => ({
   removePositionFile: bindActionCreators(removePositionFileAction, dispatch),
   setFinished: bindActionCreators(setFinishedAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(DocumentStep);
