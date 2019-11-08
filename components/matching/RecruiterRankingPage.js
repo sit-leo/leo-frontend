@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { message } from 'antd';
 
 import { clientInstance } from '../../tools/request';
 
 import matchAdapter from '../../store/matching/matching-adapter';
+import {
+  setLoading as setLoadingAction,
+} from '../../store/global';
 import {
   updateRecruiterRank,
   removeRecruiterRank,
@@ -33,24 +37,29 @@ export const RecruiterRanking = ({
   updateRank = () => {},
   removeRank = () => {},
   setFinished = () => {},
+  setLoading = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
 
-  function handleConfirm() {
+  async function handleConfirm() {
     const matchId = match.id;
     const positionId = position.id;
+    setLoading(true);
     if (!haveRank) {
-      matchRequest.postRecruiterRankingByMatchIdAndPositionId(
+      await matchRequest.postRecruiterRankingByMatchIdAndPositionId(
         matchId, positionId, recruiterRanks,
       );
     } else {
-      matchRequest.updateRecruiterRankingByMatchIdAndPositionId(
+      await matchRequest.updateRecruiterRankingByMatchIdAndPositionId(
         matchId, positionId, recruiterRanks,
       );
     }
     toggleConfirm(false);
-    return setFinished(true) && handleStep(2);
+    setLoading(false);
+    setFinished(true);
+    handleStep(2);
+    message.success('Confirm ranking success.');
   }
   return (
     <RankingPageContainer
@@ -96,6 +105,7 @@ const mapDispatchToRankProps = dispatch => ({
   updateRank: bindActionCreators(updateRecruiterRank, dispatch),
   removeRank: bindActionCreators(removeRecruiterRank, dispatch),
   setFinished: bindActionCreators(setFinishedAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(RecruiterRanking);
