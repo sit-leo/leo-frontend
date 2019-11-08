@@ -19,32 +19,38 @@ import RankingCard from './RankingCard';
 
 const RankingButton = ({
   ranks, rank, ranking, form, checkSequence,
-}) => (
-  <Form.Item className="w-75 mb-0">
-    {
-      form.getFieldDecorator(`ranking-${rank.position.id}`, {
-        initialValue: rank.sequence || '-',
-        rules: [{ validator: checkSequence }],
-      })(
-        <Select
-          className="text-center"
-          onChange={ranking(rank)}
-        >
-          <Select.Option value="-">
-              -
-          </Select.Option>
-          {
-              ranks.map((_, key) => (
-                <Select.Option disabled={ranks.findIndex(({ sequence }) => sequence === key + 1) !== -1} key={key + 1} value={key + 1}>
-                  {key + 1}
-                </Select.Option>
-              ))
-            }
-        </Select>,
-      )
-    }
-  </Form.Item>
-);
+}) => {
+  const id = `ranking-${
+    rank.position ? rank.position.id : rank.applicantMatch.applicantId
+  }`;
+  return (
+    <Form.Item className="w-75 mb-0">
+      {console.log(rank)}
+      {
+        form.getFieldDecorator(id, {
+          initialValue: rank.sequence || '-',
+          rules: [{ validator: checkSequence }],
+        })(
+          <Select
+            className="text-center"
+            onChange={ranking(rank)}
+          >
+            <Select.Option value="-">
+                -
+            </Select.Option>
+            {
+                ranks.map((_, key) => (
+                  <Select.Option disabled={ranks.findIndex(({ sequence }) => sequence === key + 1) !== -1} key={key + 1} value={key + 1}>
+                    {key + 1}
+                  </Select.Option>
+                ))
+              }
+          </Select>,
+        )
+      }
+    </Form.Item>
+  );
+};
 
 const ConfirmedButton = () => (
   <Button className="w-100">
@@ -114,7 +120,11 @@ const RankingStep = ({
           ? ranks.map((rank) => {
             const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
             const nestedValue = getRankedNestedValue(ranked);
-            const subtitle = nestedValue.educationName || `${nestedValue.name}, ${nestedValue.location}`;
+            const subtitle = (
+              nestedValue.major
+              && nestedValue.university
+              && `${nestedValue.major}, ${nestedValue.university}`
+            ) || `${nestedValue.name}, ${nestedValue.location}`;
             const value = (nestedValue.gpax && `GPAX ${nestedValue.gpax}`) || ranked.money;
             const capacity = getApplicantDocuments(ranked) || ranked.capacity;
             const informations = isApplicant(role) ? getPositionInformations(rank.position) : getApplicantInformations(rank.applicantMatch);
