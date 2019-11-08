@@ -18,8 +18,8 @@ import { CardButton } from '../base/Button';
 import { InformationCollapse } from '../base/Collapse';
 import { PreviewFile } from '../base/Upload';
 
-const CardLeft = ({ imagePath }) => (
-  <RankingAvatar className="w-75 rounded-circle" src={imagePath || '/static/images/leo.png'} alt="leo-logo" />
+const CardLeft = ({ imagePath, ...props }) => (
+  <RankingAvatar src={imagePath || '/static/images/leo.png'} alt="leo-logo" {...props} />
 );
 
 const CardMiddle = ({
@@ -106,7 +106,7 @@ const RankingCard = ({
     <SmallCard>
       <ContainerRow className="pt-4">
         { rankingButton && (
-          <Col lg={1} className="d-flex align-items-center justify-content-center">
+          <Col lg={2} className="d-flex align-items-center justify-content-center">
             { rankingButton }
           </Col>
         )}
@@ -117,15 +117,15 @@ const RankingCard = ({
             </SubTitleSmall>
           </Col>
         )}
-        <Col lg={2} className="text-center">
-          <CardLeft imagePath={imagePath} rankingButton={rankingButton} />
+        <Col lg={2} className="d-flex align-items-center justify-content-center">
+          <CardLeft className="rounded-circle w-75" imagePath={imagePath} rankingButton={rankingButton} />
         </Col>
-        <Col lg={rankingButton ? 6 : 7}>
+        <Col lg={rankingButton ? 6 : 7} className="my-3">
           <CardMiddle title={title} value={value} subtitle={subtitle} />
         </Col>
         { isEmpty(capacity)
           && (
-            <Col lg={3} className="text-center">
+            <Col lg={rankingButton ? 2 : 3} className="text-center">
               <CardRight actionButton={actionButton} />
             </Col>
           )

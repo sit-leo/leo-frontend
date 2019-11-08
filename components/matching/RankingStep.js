@@ -1,55 +1,49 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Select } from 'antd';
 
 import { getApplicantInformations, getPositionInformations } from '../../tools/ranking-informations';
 import { isApplicant } from '../../tools/with-roles';
 
 import { setIsUpdateRank } from '../../store/matching/ranking';
 
+import Form from '../base/Form';
 import Button from '../base/Button';
-import { Title, TitleLarge, TextError } from '../base/Text';
+import { TextError } from '../base/Text';
 import { Col } from '../base/Grid';
 import { FlexCenter } from '../base/Flex';
 import Icon, { DeletedIcon } from '../base/Icon';
 
 import RankingCard from './RankingCard';
 
-function isFirstRank(rankIndex) {
-  return rankIndex === 1;
-}
-
-function isLastRank(rankIndex, rankCounter) {
-  return rankIndex === rankCounter;
-}
-
 const RankingButton = ({
-  rankIndex,
-  rankCounter,
-  increaseRank,
-  decreaseRank,
+  ranks, rank, ranking, form, checkSequence,
 }) => (
-  <Title className="mb-0">
-    <FlexCenter className="flex-column">
-      <Icon
-        disabled={isFirstRank(rankIndex)}
-        type="caret-up"
-        theme="filled"
-        onClick={
-          () => !isFirstRank(rankIndex) && increaseRank()
-        }
-      />
-      <TitleLarge className="mb-0">{rankIndex}</TitleLarge>
-      <Icon
-        disabled={isLastRank(rankIndex, rankCounter)}
-        type="caret-down"
-        theme="filled"
-        onClick={
-         () => !isLastRank(rankIndex, rankCounter) && decreaseRank()
-        }
-      />
-    </FlexCenter>
-  </Title>
+  <Form.Item className="w-75 mb-0">
+    {
+      form.getFieldDecorator(`ranking-${rank.position.id}`, {
+        initialValue: rank.sequence || '-',
+        rules: [{ validator: checkSequence }],
+      })(
+        <Select
+          className="text-center"
+          onChange={ranking(rank)}
+        >
+          <Select.Option value="-">
+              -
+          </Select.Option>
+          {
+              ranks.map((_, key) => (
+                <Select.Option disabled={ranks.findIndex(({ sequence }) => sequence === key + 1) !== -1} key={key + 1} value={key + 1}>
+                  {key + 1}
+                </Select.Option>
+              ))
+            }
+        </Select>,
+      )
+    }
+  </Form.Item>
 );
 
 const ConfirmedButton = () => (
@@ -72,25 +66,21 @@ const RankingStep = ({
   isConfirm,
   haveRank,
   isUpdateRank,
-  setIsUpdate = () => {},
+  setIsUpdate = () => { },
 
   isOpenConfirm,
-  toggleConfirm = () => {},
+  toggleConfirm = () => { },
 
   ranks,
-  updateRank = () => {},
-  removeRank = () => {},
+  updateRank = () => { },
+  removeRank = () => { },
+
+  form,
 }) => {
   const rankCounter = ranks.length;
 
-  function increaseRank(index, rank) {
-    setIsUpdate(true);
-    return updateRank(index - 1, rank);
-  }
-
-  function decreaseRank(index, rank) {
-    setIsUpdate(true);
-    return updateRank(index + 1, rank);
+  function ranking(rank) {
+    return sequence => setIsUpdate(true) && updateRank(sequence, rank);
   }
 
   function remove(rank) {
@@ -109,15 +99,22 @@ const RankingStep = ({
     return (ranked.documents && Array.isArray(ranked.documents) && ranked.documents.length);
   }
 
+  function checkSequence(rule, value, callback) {
+    if (value === '-') {
+      callback('');
+      return;
+    }
+    callback();
+  }
+
   return (
-    <React.Fragment>
+    <Form>
       {
         (rankCounter > 0)
-          ? ranks.map((rank, index) => {
-            const rankIndex = index + 1;
+          ? ranks.map((rank) => {
             const ranked = (rank.applicantMatch && rank.applicantMatch.applicant) || rank.position;
             const nestedValue = getRankedNestedValue(ranked);
-            const subtitle = nestedValue.educationName || `${nestedValue.major}, ${nestedValue.university}`;
+            const subtitle = nestedValue.educationName || `${nestedValue.name}, ${nestedValue.location}`;
             const value = (nestedValue.gpax && `GPAX ${nestedValue.gpax}`) || ranked.money;
             const capacity = getApplicantDocuments(ranked) || ranked.capacity;
             const informations = isApplicant(role) ? getPositionInformations(rank.position) : getApplicantInformations(rank.applicantMatch);
@@ -129,19 +126,18 @@ const RankingStep = ({
                 subtitle={subtitle}
                 capacity={capacity}
                 informations={informations}
-                rankingButton={
+                rankingButton={(
+                  <RankingButton
+                    rank={rank}
+                    ranks={ranks}
+                    ranking={ranking}
+                    checkSequence={checkSequence}
+                    form={form}
+                  />
+                )}
+                actionButton={(
                   <DeletedIcon type="delete" theme="filled" onClick={() => remove(rank)} />
-                  }
-                actionButton={
-                    (
-                      <RankingButton
-                        rankIndex={rankIndex}
-                        rankCounter={rankCounter}
-                        increaseRank={() => increaseRank(index, rank)}
-                        decreaseRank={() => decreaseRank(index, rank)}
-                      />
-                    )
-                  }
+                )}
               />
             );
           })
@@ -154,7 +150,13 @@ const RankingStep = ({
               <Button
                 className="w-100"
                 disabled={rankCounter === 0 || !isUpdateRank}
-                onClick={() => toggleConfirm(!isOpenConfirm)}
+                onClick={() => {
+                  form.validateFieldsAndScroll((err) => {
+                    if (!err) {
+                      toggleConfirm(!isOpenConfirm);
+                    }
+                  });
+                }}
               >
                 {
                   !(haveRank && isUpdateRank)
@@ -165,9 +167,11 @@ const RankingStep = ({
             )
         }
       </Col>
-    </React.Fragment>
+    </Form>
   );
 };
+
+const WrappedRankingStep = Form.create({ name: 'ranking' })(RankingStep);
 
 const mapStateToProps = state => ({
   role: state.user.role,
@@ -180,4 +184,4 @@ const mapDispatchToProps = dispatch => ({
   setIsUpdate: bindActionCreators(setIsUpdateRank, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RankingStep);
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedRankingStep);
