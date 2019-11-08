@@ -63,7 +63,7 @@ const SmallRankingList = ({ ranks = [{ name: 'No rank.' }], removeRank }) => (
       return (
         <Text key={ranked.id} className="d-flex align-items-center">
           <DeletedIcon onClick={() => removeRank(rank)} className="mr-3" type="minus-circle" theme="filled" />
-          {`${index + 1}. ${ranked.name || '-'}`}
+          {`${ranked.name || '-'}`}
         </Text>
       );
     })
