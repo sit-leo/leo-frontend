@@ -17,6 +17,7 @@ module.exports = routes()
   .add('matching/RecruiterPositionMatchResult', '/matches/:matchId/result/positions')
   .add('matching/ApplicantMatchResult', '/matches/:matchId/result')
   .add('matching/PositionMatchResult', '/matches/:matchId/positions/:positionId/result')
-  .add('user/SignUp', '/signup')
+  .add('user/Signup', '/signup')
   .add('user/Login', '/login')
-  .add('profile/Profile', '/profile');
+  .add('profile/Profile', '/profile')
+  .add('admin/index', '/leo/admin');
