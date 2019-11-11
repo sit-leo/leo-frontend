@@ -43,31 +43,31 @@ export const EventCard = ({
   id, children, title, description, numOfApplicant, numOfRecruiter, src, loading,
 }) => (
   <PlainCard
-      loading={loading}
-      className="my-2"
-      cover={(
-        <img
-          alt="example"
-          src={src}
-        />
-      )}
-      actions={
+    loading={loading}
+    className="my-2"
+    cover={(
+      <img
+        alt="example"
+        src={src}
+      />
+    )}
+    actions={
         loading
           ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: colors.primary }} spin />} />]
           : [
             <ShowAmount count={numOfRecruiter} badgeText="Recruiters" />,
             <ShowAmount count={numOfApplicant} badgeText="Applicants" />,
-            <a href={`/matches/${id}`}>
+            <a href={`/matches/${id}`} className="px-3">
               <MainButton className="w-100">Detail</MainButton>
             </a>,
           ]}
-    >
-      <Meta
-        title={title}
-        description={description}
-      />
-      {children}
-    </PlainCard>
+  >
+    <Meta
+      title={title}
+      description={description}
+    />
+    {children}
+  </PlainCard>
 );
 
 const PlainCard = styled(DefaultCard)`
