@@ -43,39 +43,36 @@ export const EventCard = ({
   id, children, title, description, numOfApplicant, numOfRecruiter, src, loading,
 }) => (
   <PlainCard
-    loading={loading}
-    className="my-2"
-    cover={(
-      <img
-        alt="example"
-        src={src}
+      loading={loading}
+      className="my-2"
+      cover={(
+        <img
+          alt="example"
+          src={src}
+        />
+      )}
+      actions={
+        loading
+          ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: colors.primary }} spin />} />]
+          : [
+            <ShowAmount count={numOfRecruiter} badgeText="Recruiters" />,
+            <ShowAmount count={numOfApplicant} badgeText="Applicants" />,
+            <a href={`/matches/${id}`}>
+              <MainButton className="w-100">Detail</MainButton>
+            </a>,
+          ]}
+    >
+      <Meta
+        title={title}
+        description={description}
       />
-    )}
-    actions={
-      loading
-        ? [<Spin indicator={<Icon type="loading" style={{ fontSize: 24, color: colors.primary }} spin />} />]
-        : [
-          <ShowAmount count={numOfRecruiter} badgeText="Recruiters" />,
-          <ShowAmount count={numOfApplicant} badgeText="Applicants" />,
-          <a href={`/matches/${id}`}>
-            <MainButton className="w-100">Detail</MainButton>
-          </a>,
-        ]}
-  >
-    <Meta
-      title={title}
-      description={description}
-    />
-    {children}
-  </PlainCard>
+      {children}
+    </PlainCard>
 );
 
 const PlainCard = styled(DefaultCard)`
   width: 100%;
   margin-top: 16px;
-  li > span {
-    width:75%;
-  }
 `;
 
 export const SmallCard = styled.div`
