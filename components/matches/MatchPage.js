@@ -8,7 +8,7 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
-import { isApplicant, isRecruiter } from '../../tools/with-roles';
+import { isApplicant, isRecruiter, isOrganizer } from '../../tools/with-roles';
 import isCanJoinMatch, {
   convertDatePeriod,
   isAnnouceDate,
@@ -59,13 +59,19 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 const MatchPage = ({ match, isJoinMatch, role }) => {
-  let buttonText = 'Match Result';
-  if (!isAnnouceDate(match.announceDate)) {
-    if (!isJoinMatch) {
-      buttonText = 'Join Match';
-    } else {
-      buttonText = 'Ranking';
+  function getButtonText() {
+    if (isOrganizer(role)) {
+      return 'Update Match';
     }
+
+    if (!isAnnouceDate(match.announceDate)) {
+      if (!isJoinMatch) {
+        return 'Join Match';
+      }
+      return 'Ranking';
+    }
+
+    return 'Match Result';
   }
 
   function handleMatchResult() {
@@ -87,6 +93,10 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
       return Router.push(`/matches/${match.id}/applicants/join`);
     }
     return Router.push(`/matches/${match.id}/recruiters/join`);
+  }
+
+  function handleUpdateMatch() {
+    return Router.push(`/organizations/matches/${match.id}`);
   }
 
   function isDisabled() {
@@ -112,6 +122,28 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
     }
 
     return true;
+  }
+
+  function handleClick() {
+    if (isOrganizer(role)) {
+      return handleUpdateMatch();
+    }
+
+    if (isAnnouceDate(match.announceDate)) {
+      return handleMatchResult();
+    }
+
+    if (!isJoinMatch
+      && isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
+      return handleJoinMatch();
+    }
+
+    if (isJoinMatch
+      && isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
+      return handleRankingMatch();
+    }
+
+    return console.error('Failed to handle button match detail.');
   }
 
   return (
@@ -175,25 +207,11 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
               <Col className="text-center">
                 <Button
                   className="w-100"
-                  onClick={() => {
-                    if (isAnnouceDate(match.announceDate)) {
-                      return handleMatchResult();
-                    }
-
-                    if (!isJoinMatch
-                    && isCanJoinMatch(match.startJoiningDate, match.endJoiningDate)) {
-                      return handleJoinMatch();
-                    }
-
-                    if (isJoinMatch
-                    && isRankingPeriod(match.endJoiningDate, match.recruiterRankingEndDate)) {
-                      return handleRankingMatch();
-                    }
-                  }}
+                  onClick={handleClick}
                   disabled={isDisabled()}
                 >
                   <TitleWhite className="mb-0">
-                    {buttonText}
+                    {getButtonText()}
                   </TitleWhite>
                 </Button>
               </Col>
