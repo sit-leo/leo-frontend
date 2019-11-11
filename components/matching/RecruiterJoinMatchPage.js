@@ -8,6 +8,7 @@ import Router from 'next/router';
 import { clientInstance } from '../../tools/request';
 import matchingAdapter from '../../store/matching/matching-adapter';
 
+import { setLoading as setLoadingAction } from '../../store/global';
 import {
   addRecruiterPosition as addRecruiterPositionAction,
   updateRecruiterPosition as updateRecruiterPositionAction,
@@ -31,7 +32,7 @@ import RecruiterProfileForm from '../profile/RecruiterProfileForm';
 
 const handleConfirmRecruiter = async (id, positions) => {
   const matchRequest = matchingAdapter(clientInstance());
-  matchRequest.joinMatchRecruiter(id, positions).then(({
+  return matchRequest.joinMatchRecruiter(id, positions).then(({
     status, error, message: errorMessage,
   }) => {
     if (!status) {
@@ -164,12 +165,15 @@ const RecruiterJoinMatchPage = ({
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
   form: { getFieldDecorator, validateFields },
+  setLoading = () => { },
 }) => (
   <WithJoinMatch
-    handleConfirm={() => validateFields((err, values) => {
+    handleConfirm={() => validateFields(async (err, values) => {
+      setLoading(true);
       if (!err) {
-        handleConfirmRecruiter(match.id, { positions });
+        await handleConfirmRecruiter(match.id, { positions });
       }
+      setLoading(false);
     })}
   >
     <Col>
@@ -222,6 +226,7 @@ const mapDispatchToProps = dispatch => ({
   setDocument: bindActionCreators(setDocumentAction, dispatch),
   addRecruiterDocument: bindActionCreators(addRecruiterDocumentAction, dispatch),
   removeRecruiterDocument: bindActionCreators(removeRecruiterDocumentAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 const WrappedRecruiterJoinMatchPage = Form.create({ name: 'recruiter_join_match_page' })(RecruiterJoinMatchPage);
