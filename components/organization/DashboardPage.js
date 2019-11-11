@@ -25,7 +25,6 @@ import Chart from './Chart';
 import { columns as applicantColumns } from './AddApplicantPage';
 import { columns as recruiterColumns } from './AddRecruiterPage';
 import { setLoading as setLoadingAction } from '../../store/global';
-import { isCreateOrUpdate } from './MatchManagementPage';
 
 const StatisticCard = styled.a`
   padding: 8px 16px;
@@ -121,7 +120,7 @@ const DashboardPage = ({
         <Statistic url="/my-matches" number={numberOfMatches} text="Matches" cardColor="#58b0ad" />
         <Statistic url="#members" onClick={() => setTab('1')} number={numberOfApplicants} text="Applicants" cardColor="#58b09e" />
         <Statistic url="#members" onClick={() => setTab('2')} number={numberOfRecruiters} text="Recruiters" cardColor="#58b090" />
-        <Statistic url="/organizations/matches/management" number={isCreateOrUpdate(isCurrentMatch)} cardColor="#58b081" />
+        <Statistic url="/organizations/matches/create" number="Create Match" cardColor="#58b081" />
       </Col>
       <Col>
         <Card className="my-3">

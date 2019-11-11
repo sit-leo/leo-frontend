@@ -85,7 +85,7 @@ const MatchManagementPage = ({
   }
 
   return (
-    <Organization title={isCreateOrUpdate(isCurrentMatch)} url="/organizations/matches/management">
+    <Organization title={isCreateOrUpdate(isCurrentMatch)} url="/organizations/matches/create">
       <FormContainer
         onSubmit={(e) => {
           e.preventDefault();

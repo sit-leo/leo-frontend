@@ -34,7 +34,7 @@ const NoMatch = ({ role }) => (
         <React.Fragment>
           <span> Click below button to create match.</span>
           <br />
-          <a href="/organizations/matches/management">
+          <a href="/organizations/matches/create">
             <MainButton className="my-3">
               Create Match
             </MainButton>
