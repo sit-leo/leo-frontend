@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
                         setLoading(true);
                         userRequest.login({ username, password }).then(({ status }) => {
                           if (status && status !== 200) {
-                            this.setError('You have entered wrong password. Please try again.');
+                            this.setError('You have entered wrong email or password. Please try again.');
                             setLoading(false);
                           } else {
                             this.setError(null);
