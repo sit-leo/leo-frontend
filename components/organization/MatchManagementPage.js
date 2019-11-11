@@ -11,6 +11,7 @@ import { clientInstance } from '../../tools/request';
 
 import matchAdapter from '../../store/match/match-adapter';
 
+import { setLoading as setLoadingAction } from '../../store/global';
 import {
   setMatchValueByAttribute as setMatchValueByAttributeAction,
   setMatch as setMatchAction,
@@ -52,6 +53,7 @@ const MatchManagementPage = ({
   },
   setMatchValue = () => { },
   setMatch = () => { },
+  setLoading = () => { },
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -65,7 +67,8 @@ const MatchManagementPage = ({
     return matchRequest.updateMatch(match).then(data => setMatch(data) && message.success('Update match success.'));
   }
 
-  function submitForm() {
+  async function submitForm() {
+    setLoading(true);
     const values = getFieldsValue();
     const [startDate, endDate] = values.joinPeriod;
     const match = {
@@ -78,10 +81,11 @@ const MatchManagementPage = ({
       announceDate: values.announceDate,
     };
     if (isCurrentMatch) {
-      updateMatch({ ...match, id });
+      await updateMatch({ ...match, id });
     } else {
-      createMatch(match);
+      await createMatch(match);
     }
+    setLoading(false);
   }
 
   return (
@@ -239,6 +243,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setMatch: bindActionCreators(setMatchAction, dispatch),
   setMatchValue: bindActionCreators(setMatchValueByAttributeAction, dispatch),
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
 });
 
 const WrappedMatchManagementPage = Form.create({ name: 'match_management_page' })(MatchManagementPage);

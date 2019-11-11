@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import { serverInstance } from '../../tools/request';
 import cookie from '../../tools/cookie';
+import redirectToErrorWithMessage from '../../tools/redirect-error';
 
 import { withAuth } from '../../tools/with-auth';
 import withUser from '../../tools/with-user';
 
-import organizationAdapter from '../../store/organization/organization-adapter';
+import matchAdapter from '../../store/match/match-adapter';
 
 import { setMatch, setIsCurrentMatch } from '../../store/match';
 
@@ -17,13 +18,15 @@ class MatchManagementController extends React.Component {
   static async getInitialProps({
     store, query, req, res,
   }) {
-    const matchRequest = organizationAdapter(serverInstance(cookie.getToken(req)));
+    const matchRequest = matchAdapter(serverInstance(cookie.getToken(req)));
 
-    const match = await matchRequest.getCurrentMatchByOrganization();
+    const match = await matchRequest.getMatchByMatchId(query.matchId);
 
     if (!match.error) {
       store.dispatch(setIsCurrentMatch(true));
       store.dispatch(setMatch(match));
+    } else {
+      return redirectToErrorWithMessage({ req, res }, 'No Match Found.');
     }
 
     return {};
