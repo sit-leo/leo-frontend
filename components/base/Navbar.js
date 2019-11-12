@@ -111,7 +111,7 @@ const NavbarContainer = ({ fullName, role, logout = () => { } }) => (
           )
           : (
             <Col xs={9} md={{ size: 4, offset: 6 }} className="d-flex flex-row justify-content-end align-items-center">
-              <a href="/register">
+              <a href="/signup">
                 <TitleSmallPrimary className="mr-3">
                   Register
                 </TitleSmallPrimary>
