@@ -30,6 +30,12 @@ const InputDefaultStyled = styled(InputDefault)`
   ${INPUT_THEME}
 `;
 
+const Password = styled(InputDefaultStyled.Password)`
+  input {
+    ${INPUT_THEME}
+  }
+`;
+
 export const Select = styled(SelectDefault)`
   ${INPUT_THEME}
   div.ant-select-selection {
@@ -42,9 +48,9 @@ export const Option = styled(SelectDefault.Option)`
   ${INPUT_THEME}
 `;
 
-const Input = React.forwardRef(({ text, ...props }, ref) => (
-  <InputDefaultStyled ref={ref} placeholder={text} {...props} />
-));
+const Input = React.forwardRef(({ text, ...props }, ref) => (props.type !== 'password'
+  ? (<InputDefaultStyled ref={ref} placeholder={text} {...props} />)
+  : <Password ref={ref} placeholder={text} {...props} />));
 
 export default Input;
 
@@ -57,7 +63,7 @@ export const InputNumber = styled(InputNumberDefault)`
 `;
 
 export const LabelInput = ({
-  name, label, text, getFieldDecorator, ...props
+  name, label, text, getFieldDecorator, validator, ...props
 }) => (
   <React.Fragment>
     <Label for={name} className="mb-0">{label}</Label>
@@ -72,9 +78,13 @@ export const LabelInput = ({
                   required: true,
                   message: `Please fill "${label}".`,
                 },
+                {
+                  validator,
+                },
               ],
             })(
-              <Input id={name} name={name} {...props} />,
+              <Input id={name} name={name} {...props} />
+              ,
             )
             : <Input id={name} name={name} value={text} {...props} />
         }
@@ -103,19 +113,19 @@ export const DateRangePicker = ({
     <Label for={name} className="mb-0">{label}</Label>
     <Item>
       {
-        getFieldDecorator(name, {
-          initialValue: [moment(value.startJoiningDate), moment(value.endJoiningDate)],
-          rules: [
-            {
-              type: 'array',
-              required: true,
-              message: `Please fill "${label}".`,
-            },
-          ],
-        })(
-          <RangePicker className="w-100" onChange={onChange} />,
-        )
-      }
+          getFieldDecorator(name, {
+            initialValue: [moment(value.startJoiningDate), moment(value.endJoiningDate)],
+            rules: [
+              {
+                type: 'array',
+                required: true,
+                message: `Please fill "${label}".`,
+              },
+            ],
+          })(
+            <RangePicker className="w-100" onChange={onChange} />,
+          )
+        }
     </Item>
   </React.Fragment>
 );
