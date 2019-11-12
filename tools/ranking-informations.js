@@ -39,11 +39,11 @@ export function getPositionInformations(position) {
   return [
     {
       header: 'Job Description',
-      detail: position.description,
+      detail: position.description || '-',
     },
     {
       header: 'Required Document',
-      detail: position.documents.join(', '),
+      detail: Array.isArray(position.documents) ? position.documents.join(', ') : '-',
     },
     {
       header: 'Contact',
