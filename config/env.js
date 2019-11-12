@@ -8,6 +8,7 @@ const publicEnvironment = (config && config.publicRuntimeConfig) || {
   matchingApi: '',
   matchApi: '',
   userApi: '',
+  reCAPTCHA: '',
 };
 
 export default {

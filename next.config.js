@@ -17,6 +17,7 @@ module.exports = withCSS({
     matchApi: process.env.MATCH_API,
     userApi: process.env.USER_API,
     profileApi: process.env.PROFILE_API,
+    reCAPTCHA: process.env.RECAPTCHA,
     staticFolder: '/static',
   },
   webpack: (config) => {
