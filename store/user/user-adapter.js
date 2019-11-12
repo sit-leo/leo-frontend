@@ -38,4 +38,12 @@ export default adapter => ({
     )
       .then(({ data: user }) => user);
   },
+  applicantSignup(newUser) {
+    return adapter.post(`${USER_API}/user/applicant`, newUser)
+      .then(data => data);
+  },
+  recruiterSignup(newUser) {
+    return adapter.post(`${USER_API}/user/recruiter`, newUser)
+      .then(data => data);
+  },
 });
