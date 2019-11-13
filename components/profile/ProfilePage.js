@@ -14,7 +14,6 @@ import WithNavbar from '../layouts/with-navbar';
 
 import {
   addApplicantFile as addApplicantFileAction,
-  setPassword as setPasswordAction,
 } from '../../store/profile';
 
 import {
@@ -135,13 +134,11 @@ const mapStateToProps = state => ({
   applicant: state.profile.applicant,
   recruiter: state.profile.recruiter,
   files: state.profile.files,
-  password: state.profile.password,
 });
 
 const mapDispatchToProps = dispatch => ({
   addApplicantFile: bindActionCreators(addApplicantFileAction, dispatch),
   setLoading: bindActionCreators(setLoadingAction, dispatch),
-  setPassword: bindActionCreators(setPasswordAction, dispatch),
 });
 
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
