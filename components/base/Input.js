@@ -64,33 +64,33 @@ export const InputNumber = styled(InputNumberDefault)`
 
 export const LabelInput = ({
   name, label, text, getFieldDecorator, validator, ...props
-}) => (
-  <React.Fragment>
-    <Label for={name} className="mb-0">{label}</Label>
-    <Item>
-      {
+}) => {
+  let rules = [{
+    required: true,
+    message: `Please fill "${label}".`,
+  }];
+  if (validator) {
+    rules = [...rules, { validator }];
+  }
+  return (
+    <React.Fragment>
+      <Label for={name} className="mb-0">{label}</Label>
+      <Item>
+        {
           getFieldDecorator
             ? getFieldDecorator(name, {
               initialValue: text,
               setFieldsValue: text,
-              rules: [
-                {
-                  required: true,
-                  message: `Please fill "${label}".`,
-                },
-                {
-                  validator,
-                },
-              ],
+              rules,
             })(
-              <Input id={name} name={name} {...props} />
-              ,
+              <Input id={name} name={name} {...props} />,
             )
             : <Input id={name} name={name} value={text} {...props} />
         }
-    </Item>
-  </React.Fragment>
-);
+      </Item>
+    </React.Fragment>
+  );
+};
 
 export const Search = ({ ...props }) => (
   <InputDefault
