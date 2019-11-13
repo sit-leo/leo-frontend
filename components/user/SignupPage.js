@@ -18,10 +18,11 @@ import { Col } from '../base/Grid';
 import { TitleLargePrimary } from '../base/Text';
 import Form, { FormContainer } from '../base/Form';
 import MainButton from '../base/Button';
+import { LabelInput } from '../base/Input';
+import Modal from '../base/Modal';
 
 import ApplicantForm from './ApplicantForm';
 import RecruiterForm from './RecruiterForm';
-import { LabelInput } from '../base/Input';
 
 const userRequest = userAdapter(clientInstance());
 
@@ -30,6 +31,8 @@ const SignupPage = ({
   setLoading = () => { },
 }) => {
   const [formType, setFormType] = useState('applicant');
+  const [isOpenConfirm, toggleConfirm] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if (window.grecaptcha) {
@@ -54,6 +57,15 @@ const SignupPage = ({
     }
   }
 
+  function handleResponse(res) {
+    if (!res.error) {
+      message.success('Register success.');
+      window.location.assign('/login');
+    } else {
+      message.error('Register failed.');
+    }
+  }
+
   return (
     <WithNavbar>
       <FormContainer
@@ -68,9 +80,10 @@ const SignupPage = ({
             }
 
             if (!err && recaptcha !== '') {
-              setLoading(true);
+              toggleConfirm(true);
+
               if (isApplicant(formType)) {
-                return userRequest.applicantSignup({
+                setUser({
                   user: {
                     username: values.email,
                     password: values.password,
@@ -81,19 +94,11 @@ const SignupPage = ({
                     lastName: values.lastName,
                   },
                   recaptcha,
-                })
-                  .then((res) => {
-                    if (!res.error) {
-                      message.success('Register success.');
-                    } else {
-                      message.error('Register failed.');
-                    }
-                    setLoading(false);
-                  });
+                });
               }
 
               if (isRecruiter(formType)) {
-                return userRequest.recruiterSignup({
+                setUser({
                   user: {
                     username: values.email,
                     password: values.password,
@@ -103,15 +108,7 @@ const SignupPage = ({
                     name: values.name,
                   },
                   recaptcha,
-                })
-                  .then((res) => {
-                    if (!res.error) {
-                      message.success('Register success.');
-                    } else {
-                      message.error('Register failed.');
-                    }
-                    setLoading(false);
-                  });
+                });
               }
             }
           });
@@ -173,6 +170,33 @@ const SignupPage = ({
           </MainButton>
         </Col>
       </FormContainer>
+      <Modal
+        isOpenModal={isOpenConfirm}
+        onClose={() => toggleConfirm(false)}
+        onConfirm={async () => {
+          toggleConfirm(false);
+          setLoading(true);
+
+          if (isApplicant(formType)) {
+            await userRequest.applicantSignup(user)
+              .then(handleResponse);
+          }
+
+          if (isRecruiter(formType)) {
+            await userRequest.recruiterSignup(user)
+              .then(handleResponse);
+          }
+
+          setLoading(false);
+        }}
+        options={{
+          header: 'Register Confirmation',
+          body: `Are you sure to confirm this information?
+      Please check the information before confirming.`,
+          footer: `You can edit your profile information
+          by Clicking 'Profile' button on top left menu.`,
+        }}
+      />
     </WithNavbar>
   );
 };
