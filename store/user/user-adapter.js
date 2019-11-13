@@ -46,4 +46,8 @@ export default adapter => ({
     return adapter.post(`${USER_API}/user/recruiter`, newUser)
       .then(data => data);
   },
+  changePassword(password) {
+    return adapter.put(`${USER_API}/change-password`, password)
+      .then(({ data }) => data);
+  },
 });

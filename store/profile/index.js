@@ -36,6 +36,10 @@ export const initState = {
     name: '',
     description: '',
   },
+  password: {
+    currentPassword: '',
+    newPassword: '',
+  },
 };
 
 export const SET_APPLICANT_PROFILE = 'PROFILE/SET_APPLICANT_PROFILE';
@@ -61,6 +65,8 @@ export const ADD_APPLICANT_FILE = 'PROFILE/ADD_APPLICANT_FILE';
 export const ADD_APPLICANT_FILES = 'PROFILE/ADD_APPLICANT_FILES';
 
 export const SET_ORGANIZER_PROFILE = 'PROFILE/SET_ORGANIZER_PROFILE';
+
+export const SET_PASSWORD = 'PROFILE/SET_PASSWORD';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -146,6 +152,10 @@ export default function reducer(state = initState, action = {}) {
       };
       return { ...state, organizer };
     }
+    case SET_PASSWORD: {
+      const { payload: { name, value } } = action;
+      return { ...state, password: { ...state.password, [name]: value } };
+    }
     default: return { ...state };
   }
 }
@@ -228,4 +238,8 @@ export function addApplicantFiles(files) {
 
 export function setOrganizer(organizer) {
   return { type: SET_ORGANIZER_PROFILE, organizer };
+}
+
+export function setPassword(name, value) {
+  return { type: SET_PASSWORD, payload: { name, value } };
 }

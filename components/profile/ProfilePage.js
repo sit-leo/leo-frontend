@@ -14,6 +14,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import {
   addApplicantFile as addApplicantFileAction,
+  setPassword as setPasswordAction,
 } from '../../store/profile';
 
 import {
@@ -23,14 +24,14 @@ import {
 import ContainerRow, { Col } from '../base/Grid';
 import Form, { FormContainer } from '../base/Form';
 import {
-  TitleLargePrimary, TitleForm, SubTitleWhite, NoteText,
+  TitleLargePrimary, TitleForm, SubTitleWhite,
 } from '../base/Text';
-import { SmallMainButton, ExtraSmallMainButton } from '../base/Button';
-import { LabelInput } from '../base/Input';
+import { SmallMainButton } from '../base/Button';
+import { UploadButton, PreviewFile } from '../base/Upload';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
-import { UploadButton, PreviewFile } from '../base/Upload';
+import ChangePassword from './ChangePassword';
 
 export const Profile = ({
   role,
@@ -62,7 +63,7 @@ export const Profile = ({
         className="w-100 py-4 px-4"
         onSubmit={(e) => {
           e.preventDefault();
-          validateFields((err, values) => {
+          validateFields((err) => {
             if (!err) {
               updateProfile();
             }
@@ -124,35 +125,7 @@ export const Profile = ({
           </SmallMainButton>
         </Col>
       </FormContainer>
-
-      <FormContainer
-        className="w-100 pb-4 px-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          validateFields((err, values) => {
-            if (!err) {
-              // changePassword();
-            }
-          });
-        }}
-      >
-        <TitleForm title="Change password" />
-        <Col lg={6}>
-          <LabelInput label="Current password" />
-        </Col>
-        <Col lg={6}>
-          <LabelInput label="New password" />
-        </Col>
-        <Col className="d-flex justify-content-between my-2">
-          <NoteText>Leave it blank if you don’t want to change it.</NoteText>
-          <ExtraSmallMainButton htmlType="submit">
-            <SubTitleWhite className="mb-0">
-              Update
-            </SubTitleWhite>
-          </ExtraSmallMainButton>
-        </Col>
-        <Col><hr /></Col>
-      </FormContainer>
+      <ChangePassword />
     </WithNavbar>
   );
 };
@@ -162,11 +135,13 @@ const mapStateToProps = state => ({
   applicant: state.profile.applicant,
   recruiter: state.profile.recruiter,
   files: state.profile.files,
+  password: state.profile.password,
 });
 
 const mapDispatchToProps = dispatch => ({
   addApplicantFile: bindActionCreators(addApplicantFileAction, dispatch),
   setLoading: bindActionCreators(setLoadingAction, dispatch),
+  setPassword: bindActionCreators(setPasswordAction, dispatch),
 });
 
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
