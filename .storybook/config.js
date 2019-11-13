@@ -13,6 +13,7 @@ import { initState as match } from '../store/match'
 import { initState as ranking } from '../store/matching/ranking'
 import { initState as join } from '../store/matching/join'
 import { initState as profile } from '../store/profile'
+import { initState as organization } from '../store/organization'
 
 const stories = require.context('./stories', true, /.js$/);
 
@@ -29,6 +30,7 @@ const store = mockStore({
   ranking,
   join,
   profile,
+  organization,
 });
 addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
 
