@@ -67,15 +67,15 @@ const OrganizationCard = ({
   organization: {
     name,
     description,
-    numOfApplicant,
-    numOfRecruiter,
+    numOfApplicant = 0,
+    numOfRecruiter = 0,
   },
 }) => (
   <OrganizationCardStyled
     className="w-100 px-2"
     actions={[
-      <NumberBox number="412" text="Applicants" />,
-      <NumberBox number="10" text="Recruiters" />,
+      <NumberBox number={numOfApplicant} text="Applicants" />,
+      <NumberBox number={numOfRecruiter} text="Recruiters" />,
     ]}
   >
     <Meta
