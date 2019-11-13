@@ -10,8 +10,8 @@ const Organization = ({
   children, title, url,
 }) => {
   let items = [
-    { name: 'Organization' },
-    { url: '/organizations', name: 'Dashboard' },
+    { url: '/organizations', name: 'Organization' },
+    { url: '/organizations/dashboard', name: 'Dashboard' },
   ];
 
   if (url) {
