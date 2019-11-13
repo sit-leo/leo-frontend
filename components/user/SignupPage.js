@@ -39,16 +39,19 @@ const SignupPage = ({
     }
   }, []);
 
+  function compareToConfirmPassword(rule, value, callback) {
+    if (value) {
+      form.validateFields(['confirmPassword'], { force: true });
+    }
+    callback();
+  }
 
-  function compareToPassword(comparedKey) {
-    return (rule, value, callback) => {
-      if (value && value !== form.getFieldValue(comparedKey)) {
-        callback('Password do not matched.');
-      } else {
-        form.validateFields([comparedKey], { force: true });
-        callback();
-      }
-    };
+  function compareToPassword(rule, value, callback) {
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Password does not match.');
+    } else {
+      callback();
+    }
   }
 
   return (
@@ -58,14 +61,16 @@ const SignupPage = ({
         onSubmit={(e) => {
           e.preventDefault();
           form.validateFields(async (err, values) => {
-            const recaptcha = window.grecaptcha.getResponse(window.notRobot);
+            const recaptcha = await window.grecaptcha.getResponse(window.notRobot);
+
             if (recaptcha === '') {
               return message.warn('Please confirm recaptcha before submit.');
             }
+
             if (!err && recaptcha !== '') {
               setLoading(true);
               if (isApplicant(formType)) {
-                const user = {
+                return userRequest.applicantSignup({
                   user: {
                     username: values.email,
                     password: values.password,
@@ -76,10 +81,19 @@ const SignupPage = ({
                     lastName: values.lastName,
                   },
                   recaptcha,
-                };
-                await userRequest.applicantSignup(user);
-              } else if (isRecruiter(formType)) {
-                const user = {
+                })
+                  .then((res) => {
+                    if (!res.error) {
+                      message.success('Register success.');
+                    } else {
+                      message.error('Register failed.');
+                    }
+                    setLoading(false);
+                  });
+              }
+
+              if (isRecruiter(formType)) {
+                return userRequest.recruiterSignup({
                   user: {
                     username: values.email,
                     password: values.password,
@@ -89,10 +103,16 @@ const SignupPage = ({
                     name: values.name,
                   },
                   recaptcha,
-                };
-                await userRequest.recruiterSignup(user);
+                })
+                  .then((res) => {
+                    if (!res.error) {
+                      message.success('Register success.');
+                    } else {
+                      message.error('Register failed.');
+                    }
+                    setLoading(false);
+                  });
               }
-              setLoading(false);
             }
           });
         }}
@@ -132,7 +152,7 @@ const SignupPage = ({
             name="password"
             type="password"
             getFieldDecorator={form.getFieldDecorator}
-            validator={compareToPassword('confirmPassword')}
+            validator={compareToConfirmPassword}
           />
         </Col>
         <Col lg={{ offset: 2, size: 8 }}>
@@ -141,7 +161,7 @@ const SignupPage = ({
             name="confirmPassword"
             type="password"
             getFieldDecorator={form.getFieldDecorator}
-            validator={compareToPassword('password')}
+            validator={compareToPassword}
           />
         </Col>
         <Col lg={{ offset: 2, size: 8 }} className="mt-2">
