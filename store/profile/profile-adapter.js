@@ -30,4 +30,8 @@ export default adapter => ({
     return adapter.get(`${PROFILE_API}/documents/${fileId}`)
       .then(data => data);
   },
+  getOrganizations() {
+    return adapter.get(`${PROFILE_API}/profile/organizations`)
+      .then(({ data }) => data);
+  },
 });
