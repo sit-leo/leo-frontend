@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { message } from 'antd';
 
 import { clientInstance } from '../../tools/request';
+import { sortRanks } from '../../tools/ranking-utils';
 
 import matchAdapter from '../../store/matching/matching-adapter';
 import {
@@ -13,6 +14,7 @@ import {
   updateRecruiterRank,
   removeRecruiterRank,
   setFinished as setFinishedAction,
+  setRecruiterRanks as setRecruiterRanksAction,
 } from '../../store/matching/ranking';
 
 import RankingPageContainer from './RankingPageContainer';
@@ -38,6 +40,7 @@ export const RecruiterRanking = ({
   removeRank = () => {},
   setFinished = () => {},
   setLoading = () => {},
+  setRecruiterRanks = () => {},
 }) => {
   const [step, handleStep] = useState(0);
   const [isOpenConfirm, toggleConfirm] = useState(false);
@@ -55,6 +58,8 @@ export const RecruiterRanking = ({
         matchId, positionId, recruiterRanks,
       );
     }
+    const sortedRecruiterRanks = recruiterRanks.sort(sortRanks);
+    setRecruiterRanks(sortedRecruiterRanks);
     toggleConfirm(false);
     setLoading(false);
     setFinished(true);
@@ -106,6 +111,7 @@ const mapDispatchToRankProps = dispatch => ({
   removeRank: bindActionCreators(removeRecruiterRank, dispatch),
   setFinished: bindActionCreators(setFinishedAction, dispatch),
   setLoading: bindActionCreators(setLoadingAction, dispatch),
+  setRecruiterRanks: bindActionCreators(setRecruiterRanksAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToRankProps)(RecruiterRanking);

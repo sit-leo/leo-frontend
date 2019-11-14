@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { message } from 'antd';
 import { clientInstance } from '../../tools/request';
-import { mapFilesToPositions } from '../../tools/ranking-utils';
+import { mapFilesToPositions, sortRanks } from '../../tools/ranking-utils';
 
 import matchingAdapter from '../../store/matching/matching-adapter';
 
@@ -56,7 +56,8 @@ export const ApplicantRanking = ({
         matchId, applicantRanks,
       );
     }
-    setApplicantRanks(mapFilesToPositions(applicantRanks, files));
+    const sortedApplicantRanks = applicantRanks.sort(sortRanks);
+    setApplicantRanks(mapFilesToPositions(sortedApplicantRanks, files));
     setIsConfirm(true);
     setLoading(false);
     toggleConfirm(false);
