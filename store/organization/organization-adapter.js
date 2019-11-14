@@ -36,4 +36,8 @@ export default adapter => ({
     return adapter.post(`${MATCH_API}/organization/recruiters`, recruiters)
       .then(({ data }) => data);
   },
+  deleteMatchById(matchId) {
+    return adapter.delete(`${MATCH_API}/match/${matchId}`)
+      .then(({ data }) => data);
+  },
 });
