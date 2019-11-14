@@ -12,6 +12,7 @@ import {
   setEducation,
   setRecruiterProfile,
   setOrganizer,
+  setImageUrl,
 } from '../store/profile';
 import redirectToLogin from './reditect-login';
 
@@ -34,6 +35,7 @@ const withUser = WrappedComponent => class extends Component {
 
     await ctx.store.dispatch(setId(user.id));
     await ctx.store.dispatch(setRole(user.role));
+    await ctx.store.dispatch(setImageUrl(profile.imageURL));
 
     if (isApplicant(user.role)) {
       await ctx.store.dispatch(setFullname(profile.firstName));

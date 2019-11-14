@@ -19,10 +19,11 @@ function logout() {
 }
 
 const WithNavbar = ({
-  loading, setLoading, fullName, role, setRole, children,
+  loading, setLoading, fullName, role, setRole, imageUrl, children,
 }) => (
   <WithLoading loading={loading}>
     <Navbar
+      imageUrl={imageUrl}
       fullName={fullName}
       role={role}
       logout={() => setLoading(true) && setRole('guest') && logout()}
@@ -34,6 +35,7 @@ const WithNavbar = ({
 const mapStateToProps = state => ({
   fullName: state.user.fullName,
   role: state.user.role,
+  imageUrl: state.profile.imageUrl,
 });
 
 const mapDispatchToProps = dispatch => ({
