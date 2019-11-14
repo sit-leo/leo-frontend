@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Upload } from 'antd';
+import { Upload, message } from 'antd';
+import { connect } from 'react-redux';
 
 import color from '../../config/color';
 
@@ -51,7 +52,7 @@ export const PreviewFile = ({
   positionId,
   fileId,
   fileName,
-  removePositionFile = () => {},
+  removePositionFile = () => { },
 }) => (
   <FileContainer className="position-relative">
     {
@@ -72,3 +73,35 @@ export const PreviewFile = ({
 );
 
 export default Upload;
+
+function beforeUpload(file) {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  return isJpgOrPng && isLt2M;
+}
+
+export const UploadImage = ({
+  imageUrl,
+  handleChange = () => {},
+  customRequest = () => {},
+}) => (
+  <Upload
+    name="avatar"
+    listType="picture-card"
+    className="avatar-uploader"
+    showUploadList={false}
+    onChange={handleChange}
+    beforeUpload={beforeUpload}
+    customRequest={customRequest}
+  >
+    {imageUrl
+      ? <img src={imageUrl} alt="avatar" className="w-100" />
+      : <UploadButton />}
+  </Upload>
+);
