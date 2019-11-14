@@ -48,23 +48,29 @@ const AddApplicantPage = ({
     setApplicants(selectedRowKeys);
   }
 
-  function submit() {
+  function filterUnSelectedApplicant({ applicantId }) {
+    const isSelected = selectedApplicants.find(id => id === applicantId);
+    if (!isSelected) {
+      return true;
+    }
+    return false;
+  }
+
+  async function submit() {
     setLoading(true);
     const organizationRequest = organizationAdapter(clientInstance());
-    organizationRequest.addOrganizationApplicants({
+    const response = await organizationRequest.addOrganizationApplicants({
       idList: selectedApplicants,
-    })
-      .then((response) => {
-        if (!response.status) {
-          message.success('Add applicants success.');
-        } else {
-          message.error('Add applicants failed.');
-        }
-        setApplicantsOrganization(
-          applicants.filter(({ applicantId }) => selectedApplicants.find(id => id !== applicantId)),
-        );
-        setLoading(false);
-      });
+    });
+    if (!response.status && selectedApplicants.length > 0) {
+      const unSelectedApplicants = await applicants.filter(filterUnSelectedApplicant);
+      await setApplicantsOrganization(unSelectedApplicants);
+      await setApplicants([]);
+      message.success('Add applicants success.');
+    } else {
+      message.error('Add applicants failed.');
+    }
+    setLoading(false);
   }
 
   return (

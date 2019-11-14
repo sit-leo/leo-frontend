@@ -37,29 +37,35 @@ const AddRecruiterPage = ({
   setLoading = () => {},
   setRecruitersOrganization = () => {},
 }) => {
-  const [selectedRecruiters, setRecruiters] = useState([]);
+  const [selectedRecruiters, setSelectedRecruiters] = useState([]);
 
   function onChange(selectedRowKeys) {
-    setRecruiters(selectedRowKeys);
+    setSelectedRecruiters(selectedRowKeys);
   }
 
-  function submit() {
+  function filterUnSelectedRecruiter({ recruiterId }) {
+    const isSelected = selectedRecruiters.find(id => id === recruiterId);
+    if (!isSelected) {
+      return true;
+    }
+    return false;
+  }
+
+  async function submit() {
     setLoading(true);
     const organizationRequest = organizationAdapter(clientInstance());
-    organizationRequest.addOrganizationRecruiters({
+    const response = await organizationRequest.addOrganizationRecruiters({
       idList: selectedRecruiters,
-    })
-      .then((response) => {
-        if (!response.status) {
-          message.success('Add recruiters success.');
-        } else {
-          message.error('Add recruiters failed.');
-        }
-        setRecruitersOrganization(
-          recruiters.filter(({ applicantId }) => selectedRecruiters.find(id => id !== applicantId)),
-        );
-        setLoading(false);
-      });
+    });
+    if (!response.error && selectedRecruiters.length > 0) {
+      const unSelectedRecruiters = await recruiters.filter(filterUnSelectedRecruiter);
+      await setRecruitersOrganization(unSelectedRecruiters);
+      await setSelectedRecruiters([]);
+      message.success('Add recruiters success.');
+    } else {
+      message.error('Add recruiters failed.');
+    }
+    setLoading(false);
   }
 
   return (
