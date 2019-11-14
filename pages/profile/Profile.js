@@ -8,10 +8,10 @@ import { isApplicant } from '../../tools/with-roles';
 import withUser from '../../tools/with-user';
 
 import userAdapter from '../../store/user/user-adapter';
+import profileAdapter from '../../store/profile/profile-adapter';
 import { addApplicantFiles } from '../../store/profile';
 
 import ProfilePage from '../../components/profile/ProfilePage';
-import profileAdapter from '../../store/profile/profile-adapter';
 
 class ProfileController extends React.Component {
   static async getInitialProps({
