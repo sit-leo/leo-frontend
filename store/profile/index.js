@@ -40,6 +40,7 @@ export const initState = {
     currentPassword: '',
     newPassword: '',
   },
+  imageUrl: null,
 };
 
 export const SET_APPLICANT_PROFILE = 'PROFILE/SET_APPLICANT_PROFILE';
@@ -67,6 +68,8 @@ export const ADD_APPLICANT_FILES = 'PROFILE/ADD_APPLICANT_FILES';
 export const SET_ORGANIZER_PROFILE = 'PROFILE/SET_ORGANIZER_PROFILE';
 
 export const SET_PASSWORD = 'PROFILE/SET_PASSWORD';
+
+export const SET_IMAGE_URL = 'PROFILE/SET_IMAGE_URL';
 
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
@@ -156,6 +159,10 @@ export default function reducer(state = initState, action = {}) {
       const { payload: { name, value } } = action;
       return { ...state, password: { ...state.password, [name]: value } };
     }
+    case SET_IMAGE_URL: {
+      const { imageUrl } = action;
+      return { ...state, imageUrl };
+    }
     default: return { ...state };
   }
 }
@@ -242,4 +249,8 @@ export function setOrganizer(organizer) {
 
 export function setPassword(name, value) {
   return { type: SET_PASSWORD, payload: { name, value } };
+}
+
+export function setImageUrl(imageUrl) {
+  return { type: SET_IMAGE_URL, imageUrl };
 }
