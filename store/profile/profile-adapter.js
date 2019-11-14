@@ -22,6 +22,12 @@ export default adapter => ({
     return adapter.post(`${PROFILE_API}/profile/documents`, body)
       .then(({ data }) => data);
   },
+  uploadImageProfile(file) {
+    const body = new FormData();
+    body.append('file', file);
+    return adapter.post(`${PROFILE_API}/profile/upload`, body)
+      .then(({ data }) => data);
+  },
   getFiles() {
     return adapter.get(`${PROFILE_API}/profile/documents`)
       .then(({ data }) => data);
