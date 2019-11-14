@@ -82,6 +82,17 @@ export const DangerButton = styled(DefaultButtonStyled)`
   }
 `;
 
+export const GhostDangerButton = styled(DefaultButtonStyled)`
+  background: ${color.white};
+  color: ${color.error};
+  min-width: 45%;
+
+  &:hover, &.ant-btn:focus, &.ant-btn:hover, &.ant-btn:active {
+    text-decoration: underline;
+    text-decoration-color: ${color.error};
+  }
+`;
+
 export const CardButton = styled.button`
   width: 100%;
   border-color: ${color.disabled};

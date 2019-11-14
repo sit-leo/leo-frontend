@@ -46,6 +46,10 @@ export const TitleWhite = styled(Title)`
   color: ${colors.white};
 `;
 
+export const TitleDanger = styled(Title)`
+  color: ${colors.error};
+`;
+
 export const SubTitleStatistic = styled(TitleWhite)`
   font-weight: 100;
 `;
