@@ -13,7 +13,7 @@ import profileAdapter from '../../store/profile/profile-adapter';
 import WithNavbar from '../layouts/with-navbar';
 
 import {
-  addApplicantFile as addApplicantFileAction,
+  addApplicantFile as addApplicantFileAction, setImageUrl as setImageUrlAction,
 } from '../../store/profile';
 
 import {
@@ -26,7 +26,7 @@ import {
   TitleLargePrimary, TitleForm, SubTitleWhite,
 } from '../base/Text';
 import { SmallMainButton } from '../base/Button';
-import { UploadButton, PreviewFile } from '../base/Upload';
+import { UploadButton, PreviewFile, UploadImage } from '../base/Upload';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
@@ -37,8 +37,10 @@ export const Profile = ({
   applicant,
   recruiter,
   files = [],
+  imageUrl,
   form: { getFieldDecorator, validateFields },
   addApplicantFile,
+  setImageUrl,
   setLoading,
 }) => {
   function updateProfile() {
@@ -57,9 +59,29 @@ export const Profile = ({
             Profile
           </TitleLargePrimary>
         </Col>
+        <Col className="text-center">
+          <UploadImage
+            imageUrl={imageUrl}
+            customRequest={({ file }) => {
+              setLoading(true);
+              const profileRequest = profileAdapter(
+                clientInstance(true, { 'Content-Type': 'multipart/form-data' }),
+              );
+              profileRequest.uploadImageProfile(file).then((response) => {
+                if (!response.error) {
+                  setImageUrl(response.imageURL);
+                  message.success('Upload success.');
+                } else {
+                  message.error('Upload failed.');
+                }
+                setLoading(false);
+              });
+            }}
+          />
+        </Col>
       </ContainerRow>
       <FormContainer
-        className="w-100 py-4 px-4"
+        className="w-100 pb-4 px-4"
         onSubmit={(e) => {
           e.preventDefault();
           validateFields((err) => {
@@ -70,7 +92,6 @@ export const Profile = ({
         }}
       >
         <TitleForm title="Profile" />
-
         {
           isRecruiter(role)
           && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
@@ -134,11 +155,13 @@ const mapStateToProps = state => ({
   applicant: state.profile.applicant,
   recruiter: state.profile.recruiter,
   files: state.profile.files,
+  imageUrl: state.profile.imageUrl,
 });
 
 const mapDispatchToProps = dispatch => ({
   addApplicantFile: bindActionCreators(addApplicantFileAction, dispatch),
   setLoading: bindActionCreators(setLoadingAction, dispatch),
+  setImageUrl: bindActionCreators(setImageUrlAction, dispatch),
 });
 
 const WrappedProfilePage = Form.create({ name: 'profile_page' })(Profile);
