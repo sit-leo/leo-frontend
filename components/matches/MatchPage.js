@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -8,7 +8,10 @@ import day from 'dayjs';
 
 import colors from '../../config/color';
 
+import { clientInstance } from '../../tools/request';
 import { isApplicant, isRecruiter, isOrganizer } from '../../tools/with-roles';
+import { redirectToOrganizations } from '../../tools/redirect-orgnaizations';
+
 import isCanJoinMatch, {
   convertDatePeriod,
   isAnnouceDate,
@@ -19,14 +22,17 @@ import isCanJoinMatch, {
 } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
+import organizationAdapter from '../../store/organization/organization-adapter';
 
 import {
-  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary, TitleSmallPrimary,
+  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary, TitleSmallPrimary, TitleDanger,
 } from '../base/Text';
-import Button from '../base/Button';
+import Button, { GhostDangerButton } from '../base/Button';
 import Card from '../base/Card';
 import ContainerRow, { Row, Col } from '../base/Grid';
 import { BreadcrumbList } from '../base/Breadcrumb';
+import Modal from '../base/Modal';
+import { setLoading } from '../../store/global';
 
 
 const Meta = styled(AntdCard.Meta)`
@@ -59,6 +65,8 @@ const NumberLabel = ({ description, number }) => (
   </LabelCard>
 );
 const MatchPage = ({ match, isJoinMatch, role }) => {
+  const [isOpenDelete, toggleDelete] = useState(false);
+
   function getButtonText() {
     if (isOrganizer(role)) {
       return 'Update Match';
@@ -214,11 +222,45 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                     {getButtonText()}
                   </TitleWhite>
                 </Button>
+                {
+                  isOrganizer(role) && (
+                    <GhostDangerButton
+                      className="w-100"
+                      onClick={() => toggleDelete(true)}
+                    >
+                      <TitleDanger className="mb-0">
+                        Delete Match
+                      </TitleDanger>
+                    </GhostDangerButton>
+                  )
+                }
               </Col>
             </Row>
           </Card>
         </Col>
       </ContainerRow>
+      {
+        isOrganizer(role) && (
+          <Modal
+            isOpenModal={isOpenDelete}
+            onClose={() => toggleDelete(false)}
+            options={{
+              header: 'Delete Confirmation',
+              body: `Are you sure to delete this match?
+              Please check the information before confirming.`,
+              footer: 'You can\'t undo deleting the match after confirm.',
+            }}
+            onConfirm={async () => {
+              toggleDelete(false);
+              setLoading(true);
+              const organizationRequest = organizationAdapter(clientInstance());
+              await organizationRequest.deleteMatchById(match.id);
+              setLoading(false);
+              redirectToOrganizations();
+            }}
+          />
+        )
+      }
     </WithNavbar>
   );
 };
