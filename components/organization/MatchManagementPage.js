@@ -3,11 +3,12 @@ import moment from 'moment';
 import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { message } from 'antd';
+import { message, Alert } from 'antd';
 
 import Organization from '../layouts/organization';
 
 import { clientInstance } from '../../tools/request';
+import { redirectToOrganizations } from '../../tools/redirect-orgnaizations';
 
 import matchAdapter from '../../store/match/match-adapter';
 
@@ -64,7 +65,10 @@ const MatchManagementPage = ({
   }
 
   function updateMatch(match) {
-    return matchRequest.updateMatch(match).then(data => setMatch(data) && message.success('Update match success.'));
+    return matchRequest.updateMatch(match).then((data) => {
+      setMatch(data);
+      return data;
+    });
   }
 
   async function submitForm() {
@@ -81,9 +85,15 @@ const MatchManagementPage = ({
       announceDate: values.announceDate,
     };
     if (isCurrentMatch) {
-      await updateMatch({ ...match, id });
+      const response = await updateMatch({ ...match, id });
+      if (response.error) {
+        message.error("Can't edit your match detail because the match already publish.");
+      } else {
+        message.success('Update match success.');
+      }
     } else {
       await createMatch(match);
+      redirectToOrganizations();
     }
     setLoading(false);
   }
@@ -107,8 +117,18 @@ const MatchManagementPage = ({
             <b>Cover Photo</b>
           </TitleMedium>
         </Col>
-
         <TitleForm title="Match detail" />
+        {
+          isCurrentMatch && (
+            <Col className="mt-1 mb-2">
+              <Alert
+                type="info"
+                message="Update Match Information"
+                description="If this match have incorrect detail with publish status, you must delete it and create a new one. we will send notification to participants about this problem."
+              />
+            </Col>
+          )
+        }
         <Col>
           <LabelInput
             label="Match name"
@@ -207,7 +227,6 @@ const MatchManagementPage = ({
             }}
           />
         </Col>
-
         <Col className="text-center">
           <hr />
           <SmallMainButton htmlType="submit" className="mt-3 mb-5">
