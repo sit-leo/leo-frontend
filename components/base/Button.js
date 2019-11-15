@@ -111,6 +111,14 @@ export const TextButton = styled.button`
   border: none;
 `;
 
+export const TextDangerButton = styled.button`
+  color: ${color.error};
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-decoration-color: ${color.error};
+`;
+
 export const LinkButton = styled.a`
   color: ${color.primary};
   font-size: ${font.size.small};
