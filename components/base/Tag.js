@@ -5,7 +5,7 @@ import {
 } from 'antd';
 
 const Tag = styled(TagDefault)`
-  
+  margin: 4px;
 `;
 
 export default Tag;
