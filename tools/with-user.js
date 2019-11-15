@@ -28,7 +28,7 @@ const withUser = WrappedComponent => class extends Component {
     const profileRequest = profileAdapter(serverInstance(props.token));
     const profile = await profileRequest.getProfile();
 
-    if (user.error || profile.error) {
+    if ((user && user.error) || (profile && profile.error)) {
       redirectToLogin(ctx);
       return {};
     }
