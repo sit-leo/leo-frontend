@@ -50,4 +50,8 @@ export default adapter => ({
     return adapter.put(`${USER_API}/change-password`, password)
       .then(({ data }) => data);
   },
+  createOrganization(organizer) {
+    return adapter.post(`${USER_API}/user/organizer`, organizer)
+      .then(({ data }) => data);
+  },
 });
