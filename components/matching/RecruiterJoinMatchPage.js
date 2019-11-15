@@ -16,6 +16,7 @@ import {
   setDocument as setDocumentAction,
   addRecruiterDocument as addRecruiterDocumentAction,
   removeRecruiterDocument as removeRecruiterDocumentAction,
+  removeRecruiterPosition as removeRecruiterPositionAction,
 } from '../../store/matching/join';
 
 import WithJoinMatch from '../layouts/join-match';
@@ -24,7 +25,7 @@ import { Col } from '../base/Grid';
 import { TitleLarge, TitleForm } from '../base/Text';
 import Input, { LabelInput, TextArea } from '../base/Input';
 import Tag from '../base/Tag';
-import { TextButton } from '../base/Button';
+import { TextButton, TextDangerButton } from '../base/Button';
 import Icon from '../base/Icon';
 import Form, { FormContainer } from '../base/Form';
 
@@ -54,6 +55,7 @@ const Position = ({
   addRecruiterDocument = () => { },
   removeRecruiterDocument = () => { },
   getFieldDecorator,
+  removeRecruiterPosition = () => { },
 }) => (
   <React.Fragment>
     <Col lg={6}>
@@ -148,6 +150,13 @@ const Position = ({
           )
         }
       </div>
+    </Col>
+    <Col className="text-right">
+      <TextDangerButton onClick={() => removeRecruiterPosition(dataKey)}>
+        Delete
+      </TextDangerButton>
+    </Col>
+    <Col>
       <hr />
     </Col>
   </React.Fragment>
@@ -158,6 +167,7 @@ const RecruiterJoinMatchPage = ({
   positions,
   addRecruiterPosition = () => { },
   updateRecruiterPosition = () => { },
+  removeRecruiterPosition = () => { },
   inputDocumentVisible,
   setInputDocumentVisible,
   document,
@@ -193,6 +203,7 @@ const RecruiterJoinMatchPage = ({
               dataKey={dataKey}
               position={position}
               updateRecruiterPosition={updateRecruiterPosition}
+              removeRecruiterPosition={removeRecruiterPosition}
               inputDocumentVisible={inputDocumentVisible}
               setInputDocumentVisible={setInputDocumentVisible}
               document={document}
@@ -221,6 +232,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addRecruiterPosition: bindActionCreators(addRecruiterPositionAction, dispatch),
+  removeRecruiterPosition: bindActionCreators(removeRecruiterPositionAction, dispatch),
   updateRecruiterPosition: bindActionCreators(updateRecruiterPositionAction, dispatch),
   setInputDocumentVisible: bindActionCreators(setInputDocumentVisibleAction, dispatch),
   setDocument: bindActionCreators(setDocumentAction, dispatch),

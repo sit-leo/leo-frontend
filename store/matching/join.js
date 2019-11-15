@@ -23,6 +23,7 @@ export const SET_DOCUMENT = 'MATCH/SET_DOCUMENT';
 export const ADD_RECRUITER_POSITION = 'MATCH/ADD_RECRUITER_POSITION';
 export const UPDATE_RECRUITER_POSITION = 'MATCH/UPDATE_RECRUITER_POSITION';
 export const ADD_RECRUITER_DOCUMENT = 'MATCH/ADD_RECRUITER_DOCUMENT';
+export const REMOVE_RECRUITER_POSITION = 'MATCH/REMOVE_RECRUITER_POSITION';
 export const REMOVE_RECRUITER_DOCUMENT = 'MATCH/REMOVE_RECRUITER_DOCUMENT';
 
 export default function reducer(state = initState, action = {}) {
@@ -72,6 +73,12 @@ export default function reducer(state = initState, action = {}) {
       positions.splice(dataKey, 1, position);
       return { ...state, recruiter: { ...state.recruiter, positions } };
     }
+    case REMOVE_RECRUITER_POSITION: {
+      const { dataKey } = action;
+      const key = +dataKey;
+      const positions = state.recruiter.positions.filter((position, index) => index !== key);
+      return { ...state, recruiter: { ...state.recruiter, positions } };
+    }
     default: return { ...state };
   }
 }
@@ -106,4 +113,8 @@ export function removeRecruiterDocument(dataKey, document) {
 
 export function setJoined(joined) {
   return { type: SET_JOINED, joined };
+}
+
+export function removeRecruiterPosition(dataKey) {
+  return { type: REMOVE_RECRUITER_POSITION, dataKey };
 }
