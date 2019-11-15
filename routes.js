@@ -21,4 +21,4 @@ module.exports = routes()
   .add('user/Signup', '/signup')
   .add('user/Login', '/login')
   .add('profile/Profile', '/profile')
-  .add('admin/index', '/leo/admin');
+  .add('admin/index', '/admin');
