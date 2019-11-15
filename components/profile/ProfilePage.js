@@ -6,7 +6,7 @@ import {
 } from 'antd';
 
 import { clientInstance } from '../../tools/request';
-import { isApplicant, isRecruiter } from '../../tools/with-roles';
+import { isApplicant, isRecruiter, isOrganizer } from '../../tools/with-roles';
 
 import profileAdapter from '../../store/profile/profile-adapter';
 
@@ -30,12 +30,14 @@ import { UploadButton, PreviewFile, UploadImage } from '../base/Upload';
 
 import ApplicantProfileForm from './ApplicantProfileForm';
 import RecruiterProfileForm from './RecruiterProfileForm';
+import OrganizerProfileForm from './OrganizerProfileForm';
 import ChangePassword from './ChangePassword';
 
 export const Profile = ({
   role,
   applicant,
   recruiter,
+  organizer,
   files = [],
   imageUrl,
   form: { getFieldDecorator, validateFields },
@@ -43,14 +45,20 @@ export const Profile = ({
   setImageUrl,
   setLoading,
 }) => {
-  function updateProfile() {
+  async function updateProfile() {
     const profileRequest = profileAdapter(clientInstance());
-    message.success('Update profile success.');
     if (isApplicant(role)) {
-      return profileRequest.updateApplicantProfile(applicant);
+      await profileRequest.updateApplicantProfile(applicant);
     }
-    return profileRequest.updateRecruiterProfile(recruiter);
+    if (isRecruiter(role)) {
+      await profileRequest.updateRecruiterProfile(recruiter);
+    }
+    if (isOrganizer(role)) {
+      await profileRequest.updateOrganizerProfile(organizer);
+    }
+    return message.success('Update profile success.');
   }
+
   return (
     <WithNavbar>
       <ContainerRow>
@@ -84,14 +92,20 @@ export const Profile = ({
         className="w-100 pb-4 px-4"
         onSubmit={(e) => {
           e.preventDefault();
-          validateFields((err) => {
+          validateFields(async (err) => {
             if (!err) {
-              updateProfile();
+              setLoading(true);
+              await updateProfile();
+              setLoading(false);
             }
           });
         }}
       >
         <TitleForm title="Profile" />
+        {
+          isOrganizer(role)
+          && <OrganizerProfileForm getFieldDecorator={getFieldDecorator} />
+        }
         {
           isRecruiter(role)
           && <RecruiterProfileForm editable getFieldDecorator={getFieldDecorator} />
@@ -154,6 +168,7 @@ const mapStateToProps = state => ({
   role: state.user.role,
   applicant: state.profile.applicant,
   recruiter: state.profile.recruiter,
+  organizer: state.profile.organizer,
   files: state.profile.files,
   imageUrl: state.profile.imageUrl,
 });

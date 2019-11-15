@@ -16,6 +16,10 @@ export default adapter => ({
     return adapter.put(`${PROFILE_API}/profile/recruiter`, recruiter)
       .then(({ data: profile }) => profile);
   },
+  updateOrganizerProfile(organizer) {
+    return adapter.put(`${PROFILE_API}/profile/organizer`, organizer)
+      .then(({ data: profile }) => profile);
+  },
   uploadFile(file) {
     const body = new FormData();
     body.append('files', file);
