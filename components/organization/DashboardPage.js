@@ -37,6 +37,7 @@ const StatisticCard = styled(FlexCenter)`
   box-shadow: 0 2px 10px 0 ${color.shadow};
   background-color: ${props => props.color || color.white};
   transition: .15s;
+  cursor: default;
 
   &:hover {
     box-shadow: 0 5px 10px 0 rgba(23, 23, 23, 0.25);
