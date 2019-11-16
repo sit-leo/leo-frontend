@@ -178,30 +178,35 @@ const DashboardPage = ({
               <Statistic
                 label="Matches"
                 color="#ff9592"
+                number={2}
               />
             </Col>
             <Col md={6} lg={2}>
               <Statistic
                 label={'Applicants\nParticipating'}
                 color="#fe9e91"
+                number={98}
               />
             </Col>
             <Col md={6} lg={2}>
               <Statistic
                 label={'Recruters\nParticipating'}
                 color="#fea791"
+                number={12}
               />
             </Col>
             <Col md={6} lg={2}>
               <Statistic
                 label={'Unmatched\nApplicant'}
                 color="#feb091"
+                number={8}
               />
             </Col>
             <Col md={6} lg={2}>
               <Statistic
                 label={'Unmatched\nRecruiters'}
                 color="#feb991"
+                number={0}
               />
             </Col>
             <Col className="mt-5" lg={{ size: 10, offset: 1 }}>
