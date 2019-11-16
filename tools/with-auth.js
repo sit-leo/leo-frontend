@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 
 import cookie from './cookie';
-import redirectToLogin from './reditect-login';
+import redirectToLogin from './redirect-login';
 
 
 export const auth = (ctx) => {

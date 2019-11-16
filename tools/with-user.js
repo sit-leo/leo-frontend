@@ -14,7 +14,7 @@ import {
   setOrganizer,
   setImageUrl,
 } from '../store/profile';
-import redirectToLogin from './reditect-login';
+import redirectToLogin from './redirect-login';
 
 
 const withUser = WrappedComponent => class extends Component {

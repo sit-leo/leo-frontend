@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { serverInstance } from './request';
 
 import matchingAdapter from '../store/matching/matching-adapter';
-import redirectToLogin from './reditect-login';
+import redirectToLogin from './redirect-login';
 import redirectToError from './redirect-error';
 
 const withJoinMatch = WrappedComponent => class extends Component {
