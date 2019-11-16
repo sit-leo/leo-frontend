@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, Radio, DatePicker } from 'antd';
+import { Table, DatePicker } from 'antd';
 
 import Organization from '../layouts/organization';
 
@@ -23,6 +23,7 @@ import { IconLargeWhite } from '../base/Icon';
 import Tabs, { TabPane } from '../base/Tabs';
 import { LinkButton } from '../base/Button';
 import { FlexCenter } from '../base/Flex';
+import Radio from '../base/Radio';
 
 import Chart from './Chart';
 
@@ -48,7 +49,7 @@ const Statistic = ({
   color,
 }) => (
   <StatisticCard
-    className="flex-column"
+    className="flex-column my-1"
     color={color}
   >
     <TitleStatistic>
@@ -123,6 +124,7 @@ const DashboardPage = ({
   },
 }) => {
   const [tab, setTab] = useState('1');
+  const [statisticType, setStatisticType] = useState('Months');
 
   const TABS = [
     {
@@ -163,13 +165,13 @@ const DashboardPage = ({
           </TitleLargePrimary>
           <ContainerRow className="my-4">
             <Col lg={{ size: 3, offset: 1 }} className="mt-1 mb-4 d-flex justify-content-between">
-              <Radio.Group className="w-100" value="Months" onChange={value => console.log(value)}>
+              <Radio.Group className="w-100" value={statisticType} onChange={e => setStatisticType(e.target.value)}>
                 <Radio.Button className="w-50 text-center" value="Months">Months</Radio.Button>
                 <Radio.Button className="w-50 text-center" value="Years">Years</Radio.Button>
               </Radio.Group>
             </Col>
             <Col lg={{ size: 3, offset: 4 }} className="mt-1 mb-4 d-flex justify-content-between">
-              <DatePicker.MonthPicker className="w-100" onChange={e => console.log(e)} />
+              <DatePicker.MonthPicker placeholder="Select Month" className="w-100" onChange={e => console.log(e)} />
             </Col>
             <Col lg={{ size: 2, offset: 1 }}>
               <Statistic
@@ -177,25 +179,25 @@ const DashboardPage = ({
                 color="#ff9592"
               />
             </Col>
-            <Col lg={2}>
+            <Col md={6} lg={2}>
               <Statistic
                 label={'Applicants\nParticipating'}
                 color="#fe9e91"
               />
             </Col>
-            <Col lg={2}>
+            <Col md={6} lg={2}>
               <Statistic
                 label={'Recruters\nParticipating'}
                 color="#fea791"
               />
             </Col>
-            <Col lg={2}>
+            <Col md={6} lg={2}>
               <Statistic
                 label={'Unmatched\nApplicant'}
                 color="#feb091"
               />
             </Col>
-            <Col lg={2}>
+            <Col md={6} lg={2}>
               <Statistic
                 label={'Unmatched\nRecruiters'}
                 color="#feb991"

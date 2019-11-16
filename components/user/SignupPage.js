@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Radio, message } from 'antd';
+import { message } from 'antd';
 
 import env from '../../config/env';
 
@@ -20,6 +20,7 @@ import Form, { FormContainer } from '../base/Form';
 import MainButton from '../base/Button';
 import { LabelInput } from '../base/Input';
 import Modal from '../base/Modal';
+import Radio from '../base/Radio';
 
 import ApplicantForm from './ApplicantForm';
 import RecruiterForm from './RecruiterForm';
