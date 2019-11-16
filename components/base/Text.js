@@ -50,7 +50,17 @@ export const TitleDanger = styled(Title)`
   color: ${colors.error};
 `;
 
+export const SubTitleSummarize = styled(TitleWhite)`
+  font-weight: 100;
+`;
+
+export const TitleStatistic = styled(TitleWhite)`
+  margin: 0;
+`;
+
 export const SubTitleStatistic = styled(TitleWhite)`
+  font-size: ${font.size.xsmall};
+  margin: 0;
   font-weight: 100;
 `;
 
