@@ -187,7 +187,9 @@ const RecruiterJoinMatchPage = ({
     })}
   >
     <Col>
-      <TitleLarge className="my-2">Junior Programmer Match</TitleLarge>
+      <TitleLarge className="my-2">
+        {match.name}
+      </TitleLarge>
     </Col>
 
     <TitleForm title="Profile" />
