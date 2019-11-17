@@ -95,6 +95,7 @@ export const LabelInput = ({
 export const Search = ({ ...props }) => (
   <InputDefault
     size="large"
+    style={{ visibility: 'hidden' }}
     prefix={<Icon type="search" />}
     onChange={value => console.log(value)}
     onPressEnter={value => console.log(value)}
@@ -110,9 +111,9 @@ export const DateRangePicker = ({
   onChange = () => { },
 }) => (
   <React.Fragment>
-    <Label for={name} className="mb-0">{label}</Label>
-    <Item>
-      {
+      <Label for={name} className="mb-0">{label}</Label>
+      <Item>
+        {
           getFieldDecorator(name, {
             initialValue: [moment(value.startJoiningDate), moment(value.endJoiningDate)],
             rules: [
@@ -126,8 +127,8 @@ export const DateRangePicker = ({
             <RangePicker className="w-100" onChange={onChange} />,
           )
         }
-    </Item>
-  </React.Fragment>
+      </Item>
+    </React.Fragment>
 );
 
 export const DatePicker = ({
