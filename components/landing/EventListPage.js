@@ -7,7 +7,7 @@ import matchAdapter from '../../store/match/match-adapter';
 import WithNavbar from '../layouts/with-navbar';
 
 import ContainerRow, { Col } from '../base/Grid';
-import { Title, NoteText } from '../base/Text';
+import { Title, NoteText, EmptyInformationText } from '../base/Text';
 import { EventCard } from '../base/Card';
 import { MainButtonLight } from '../base/Button';
 
@@ -120,6 +120,15 @@ const EventListPage = () => {
               <MatchCard key={`${index}-lastchance`} match={lastchanceMatch} />
             ))
         }
+        {
+          !loading.loadingLastchance && match.lastchanceMatches.length === 0 && (
+            <Col className="text-center my-4">
+              <EmptyInformationText>
+                {'"There is no last chance matches at this time."'}
+              </EmptyInformationText>
+            </Col>
+          )
+        }
       </ContainerRow>
       <ContainerRow>
         <Col lg={12} className="mt-5">
@@ -132,6 +141,15 @@ const EventListPage = () => {
               <MatchCard key={`${index}-popular`} match={popularMatch} />
             ))
         }
+        {
+          !loading.loadingPopular && match.popularMatches.length === 0 && (
+            <Col className="text-center my-4">
+              <EmptyInformationText>
+                {'"There is no popular matches at this time."'}
+              </EmptyInformationText>
+            </Col>
+          )
+        }
       </ContainerRow>
       <ContainerRow>
         <Col lg={12} className="mt-5">
@@ -141,6 +159,15 @@ const EventListPage = () => {
           loading.loadingLastestMatch
             ? <LoadingEventCard type="lastest" />
             : match.lastestMatches.map((lastestMatch, index) => <MatchCard key={`${index}-lastest`} match={lastestMatch} />)
+        }
+        {
+          !loading.loadingLastestMatch && match.lastestMatches.length === 0 && (
+            <Col className="text-center my-4">
+              <EmptyInformationText>
+                {'"There is no lastest matches at this time."'}
+              </EmptyInformationText>
+            </Col>
+          )
         }
       </ContainerRow>
       <ContainerRow>

@@ -10,7 +10,7 @@ import WithNavbar from '../layouts/with-navbar';
 
 import ContainerRow, { Col } from '../base/Grid';
 import {
-  TitleLargePrimary, TitleSmall, ExtraSmallText,
+  TitleLargePrimary, TitleSmall, ExtraSmallText, EmptyInformationText,
 } from '../base/Text';
 import { FlexCenter } from '../base/Flex';
 
@@ -107,6 +107,13 @@ const MyOrganizationsPage = ({ organizations = [] }) => (
           </Col>
         ))
       }
+      { organizations.length === 0 && (
+        <Col className="text-center my-3">
+          <EmptyInformationText>
+            {'"You are not in any organization yet."'}
+          </EmptyInformationText>
+        </Col>
+      )}
     </ContainerRow>
   </WithNavbar>
 );
