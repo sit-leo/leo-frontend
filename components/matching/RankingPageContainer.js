@@ -158,6 +158,7 @@ const RankingPageContainer = ({
                             prefix={<Icon type="search" />}
                             type="text"
                             className="w-100"
+                            style={{ visibility: 'hidden' }}
                           />
                         )
                         : (<Title className="mb-0">Your Rank</Title>)
@@ -173,7 +174,7 @@ const RankingPageContainer = ({
                       }
                       onClick={increaseStep}
                     >
-                    Next
+                      Next
                     </Button>
                   </Col>
                 </React.Fragment>
@@ -183,7 +184,7 @@ const RankingPageContainer = ({
           </Row>
           <Row>
             <Col lg={{ size: 10, offset: 1 }}>
-              { children }
+              {children}
             </Col>
           </Row>
         </Card>
