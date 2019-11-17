@@ -25,7 +25,7 @@ import WithNavbar from '../layouts/with-navbar';
 import organizationAdapter from '../../store/organization/organization-adapter';
 
 import {
-  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary, TitleSmallPrimary, TitleDanger,
+  TitleLarge, Title, TitleWhite, TitleSmall, TitlePrimary, TitleSmallPrimary, TitleDanger, TitleLargePrimary,
 } from '../base/Text';
 import Button, { GhostDangerButton } from '../base/Button';
 import Card from '../base/Card';
@@ -33,7 +33,22 @@ import ContainerRow, { Row, Col } from '../base/Grid';
 import { BreadcrumbList } from '../base/Breadcrumb';
 import Modal from '../base/Modal';
 import { setLoading } from '../../store/global';
+import { FlexCenter } from '../base/Flex';
+import Tabs, { TabPane } from '../base/Tabs';
+import Table from '../base/Table';
 
+import { columns as applicantColumns } from '../organization/AddApplicantPage';
+import { columns as recruiterColumns } from '../organization/AddRecruiterPage';
+import { ApplicantDescription, RecruiterDescription } from '../base/Description';
+
+const TABS = ['Applicants', 'Positions'];
+
+const Statistic = ({ number, label }) => (
+  <FlexCenter className="flex-column my-3 px-4">
+    <TitlePrimary className="m-0">{number}</TitlePrimary>
+    <TitleSmall className="text-center">{label}</TitleSmall>
+  </FlexCenter>
+);
 
 const Meta = styled(AntdCard.Meta)`
   .ant-card-meta-title {
@@ -109,6 +124,9 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
 
   function isDisabled() {
     if (isAnnouceDate(match.announceDate)) {
+      if (isOrganizer(role)) {
+        return true;
+      }
       return false;
     }
 
@@ -152,6 +170,30 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
     }
 
     return console.error('Failed to handle button match detail.');
+  }
+
+  function tableProps(tableType) {
+    const [APPLICANTS, RECRUITERS] = TABS;
+
+    if (tableType === APPLICANTS) {
+      return ({
+        expandedRowRender: ApplicantDescription,
+        columns: applicantColumns,
+        dataSource: [],
+        rowKey: record => record.applicantId,
+      });
+    }
+
+    if (tableType === RECRUITERS) {
+      return ({
+        expandedRowRender: RecruiterDescription,
+        columns: recruiterColumns,
+        dataSource: [],
+        rowKey: record => record.recruiterId,
+      });
+    }
+
+    return null;
   }
 
   return (
@@ -205,6 +247,27 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                   date={day(match.announceDate).format('DD MMMM YYYY')}
                 />
               </Col>
+              {
+                isOrganizer(role) && isAnnouceDate(match.announceDate) && (
+                  <React.Fragment>
+                    <Col>
+                      <Title>Statistics</Title>
+                    </Col>
+                    <Col lg={6}>
+                      <Statistic number={28} label={'Success\nApplicants'} />
+                    </Col>
+                    <Col lg={6}>
+                      <Statistic number={11} label={'Success\nPositions'} />
+                    </Col>
+                    <Col lg={6}>
+                      <Statistic number={8} label={'Unmatched\nApplicants'} />
+                    </Col>
+                    <Col lg={6}>
+                      <Statistic number={1} label={'Unmatched\nPositions'} />
+                    </Col>
+                  </React.Fragment>
+                )
+              }
               <hr className="w-100" />
               <Col lg={6}>
                 <NumberLabel description="Recruiters" number={match.numOfRecruiter || '0'} />
@@ -223,9 +286,9 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                   </TitleWhite>
                 </Button>
                 {
-                  isOrganizer(role) && (
+                  isOrganizer(role) && !isAnnouceDate(match.announceDate) && (
                     <GhostDangerButton
-                      className="w-100"
+                      className="w-100 mt-2"
                       onClick={() => toggleDelete(true)}
                     >
                       <TitleDanger className="mb-0">
@@ -236,6 +299,24 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
                 }
               </Col>
             </Row>
+          </Card>
+        </Col>
+        <Col className="my-5">
+          <Card>
+            <TitleLargePrimary>
+              Participants
+            </TitleLargePrimary>
+            <Tabs defaultActiveKey="Applicants" onChange={() => {}} animated={false}>
+              {
+                  TABS.map((tab, key) => (
+                    <TabPane tab={tab} key={`${key + 1}`}>
+                      <Table
+                        {...tableProps(tab)}
+                      />
+                    </TabPane>
+                  ))
+                }
+            </Tabs>
           </Card>
         </Col>
       </ContainerRow>
