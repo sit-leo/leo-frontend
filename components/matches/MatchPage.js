@@ -301,24 +301,28 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
             </Row>
           </Card>
         </Col>
-        <Col className="my-5">
-          <Card>
-            <TitleLargePrimary>
-              Participants
-            </TitleLargePrimary>
-            <Tabs defaultActiveKey="Applicants" onChange={() => {}} animated={false}>
-              {
-                  TABS.map((tab, key) => (
-                    <TabPane tab={tab} key={`${key + 1}`}>
-                      <Table
-                        {...tableProps(tab)}
-                      />
-                    </TabPane>
-                  ))
-                }
-            </Tabs>
-          </Card>
-        </Col>
+        {
+          isOrganizer(role) && (
+            <Col className="my-5">
+              <Card>
+                <TitleLargePrimary>
+                  Participants
+                </TitleLargePrimary>
+                <Tabs defaultActiveKey="Applicants" onChange={() => {}} animated={false}>
+                  {
+                      TABS.map((tab, key) => (
+                        <TabPane tab={tab} key={`${key + 1}`}>
+                          <Table
+                            {...tableProps(tab)}
+                          />
+                        </TabPane>
+                      ))
+                    }
+                </Tabs>
+              </Card>
+            </Col>
+          )
+        }
       </ContainerRow>
       {
         isOrganizer(role) && (
