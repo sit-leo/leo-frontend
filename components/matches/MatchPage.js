@@ -79,7 +79,9 @@ const NumberLabel = ({ description, number }) => (
     <TitleSmall>{description}</TitleSmall>
   </LabelCard>
 );
-const MatchPage = ({ match, isJoinMatch, role }) => {
+const MatchPage = ({
+  match, isJoinMatch, role, applicants, positions,
+}) => {
   const [isOpenDelete, toggleDelete] = useState(false);
 
   function getButtonText() {
@@ -179,7 +181,7 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
       return ({
         expandedRowRender: ApplicantDescription,
         columns: applicantColumns,
-        dataSource: [],
+        dataSource: [...applicants],
         rowKey: record => record.applicantId,
       });
     }
@@ -188,7 +190,7 @@ const MatchPage = ({ match, isJoinMatch, role }) => {
       return ({
         expandedRowRender: RecruiterDescription,
         columns: recruiterColumns,
-        dataSource: [],
+        dataSource: [...positions],
         rowKey: record => record.recruiterId,
       });
     }
@@ -360,6 +362,8 @@ const mapStateToProps = state => ({
   match: state.match.match,
   isJoinMatch: state.join.joined,
   role: state.user.role,
+  positions: state.ranking.positions,
+  applicants: state.ranking.applicants,
 });
 
 export default connect(mapStateToProps)(MatchPage);

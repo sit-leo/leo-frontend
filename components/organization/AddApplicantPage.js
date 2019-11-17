@@ -19,11 +19,20 @@ export const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (_, record) => (
-      <React.Fragment>
-        {`${record.firstName} ${record.lastName}`}
-      </React.Fragment>
-    ),
+    render: (_, record) => {
+      if (record.firstName) {
+        return (
+          <React.Fragment>
+            {`${record.firstName} ${record.lastName}`}
+          </React.Fragment>
+        );
+      }
+      return (
+        <React.Fragment>
+          {`${record.name}`}
+        </React.Fragment>
+      );
+    },
   },
   {
     title: 'GPAX',

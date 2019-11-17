@@ -21,6 +21,10 @@ export default adapter => ({
     return adapter.get(`${MATCHING_API}/matches/${matchId}/positions`)
       .then(({ data: positions }) => positions);
   },
+  getMatchApplicantsByMatchId(matchId) {
+    return adapter.get(`${MATCHING_API}/matches/${matchId}/applicants`)
+      .then(({ data: applicants }) => applicants);
+  },
   postApplicantRankingByMatchId(matchId, applicantRanking) {
     return adapter.post(`${MATCHING_API}/matches/${matchId}/applicants/ranking`, applicantRanking)
       .then(({ status }) => status === 200 && redirectToApplicantRanking(matchId));

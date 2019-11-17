@@ -29,6 +29,11 @@ export const columns = [
     title: 'Telno',
     dataIndex: 'telNo',
     key: 'telNo',
+    render: (_, record) => (
+      <React.Fragment>
+        {`${record.telNo || record.telno}`}
+      </React.Fragment>
+    ),
   },
 ];
 
