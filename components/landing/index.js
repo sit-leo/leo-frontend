@@ -18,7 +18,9 @@ const LandingIndex = ({ role }) => (
         <TitleLarge>We are LEO</TitleLarge>
         <SubTitleSmall>A land that easy to find the opportunities.</SubTitleSmall>
         <ThinParagraph className="my-3 mb-5">You will get the best match here. Ranking them by yourself and let we match them for you. We guarantee the best result by using Deferred Acceptance Algorithm, awarded the Nobel prize of Economic Sciences in Memory of Alfred Nobel 2012.</ThinParagraph>
-        <MainButton className="w-75">Register</MainButton>
+        <a href="/signup" className="w-100">
+          <MainButton className="w-75">Register</MainButton>
+        </a>
       </Col>
       <Col lg={7} className="d-flex align-items-end">
         <img alt="girl-boy-landing" className="w-100" src="/static/images/girl-boy-landing.png" />
