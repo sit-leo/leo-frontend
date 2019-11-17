@@ -49,18 +49,18 @@ const Statistic = ({
   label = '-',
   color,
 }) => (
-  <StatisticCard
-    className="flex-column my-1"
-    color={color}
-  >
-    <TitleStatistic>
-      {number}
-    </TitleStatistic>
-    <SubTitleStatistic className="text-center">
-      {label}
-    </SubTitleStatistic>
-  </StatisticCard>
-);
+    <StatisticCard
+      className="flex-column my-1"
+      color={color}
+    >
+      <TitleStatistic>
+        {number}
+      </TitleStatistic>
+      <SubTitleStatistic className="text-center">
+        {label}
+      </SubTitleStatistic>
+    </StatisticCard>
+  );
 
 const SummarizeCard = styled.a`
   padding: 8px 16px;
@@ -90,29 +90,29 @@ const Summarize = ({
   cardColor,
   onClick = () => { },
 }) => (
-  <SummarizeCard
-    href={url}
-    onClick={onClick}
-    className={
-    `w-100 ${text ? 'd-block' : 'd-flex justify-content-center align-items-center'}`
-    }
-    color={cardColor}
-  >
-    <Row className={text ? 'mt-1' : 'mt-0 w-100'}>
-      <Col xs={9}>
-        <TitleLargeWhite className="mb-0">
-          {number}
-        </TitleLargeWhite>
-        <SubTitleSummarize className="mb-0">
-          {text}
-        </SubTitleSummarize>
-      </Col>
-      <Col xs={3} className="d-flex align-items-center justify-content-center">
-        <IconLargeWhite type="right-circle" />
-      </Col>
-    </Row>
-  </SummarizeCard>
-);
+    <SummarizeCard
+      href={url}
+      onClick={onClick}
+      className={
+        `w-100 ${text ? 'd-block' : 'd-flex justify-content-center align-items-center'}`
+      }
+      color={cardColor}
+    >
+      <Row className={text ? 'mt-1' : 'mt-0 w-100'}>
+        <Col xs={9}>
+          <TitleLargeWhite className="mb-0">
+            {number}
+          </TitleLargeWhite>
+          <SubTitleSummarize className="mb-0">
+            {text}
+          </SubTitleSummarize>
+        </Col>
+        <Col xs={3} className="d-flex align-items-center justify-content-center">
+          <IconLargeWhite type="right-circle" />
+        </Col>
+      </Row>
+    </SummarizeCard>
+  );
 
 const DashboardPage = ({
   applicants,
@@ -165,15 +165,6 @@ const DashboardPage = ({
             <hr />
           </TitleLargePrimary>
           <ContainerRow className="my-4">
-            <Col lg={{ size: 3, offset: 1 }} className="mt-1 mb-4 d-flex justify-content-between">
-              <Radio.Group className="w-100" value={statisticType} onChange={e => setStatisticType(e.target.value)}>
-                <Radio.Button className="w-50 text-center" value="Months">Months</Radio.Button>
-                <Radio.Button className="w-50 text-center" value="Years">Years</Radio.Button>
-              </Radio.Group>
-            </Col>
-            <Col lg={{ size: 3, offset: 4 }} className="mt-1 mb-4 d-flex justify-content-between">
-              <DatePicker.MonthPicker placeholder="Select Month" className="w-100" onChange={e => console.log(e)} />
-            </Col>
             <Col lg={{ size: 2, offset: 1 }}>
               <Statistic
                 label="Matches"
@@ -235,13 +226,13 @@ const DashboardPage = ({
               TABS.map(({
                 name, props, key, index,
               }) => (
-                <TabPane tab={name} key={index}>
-                  <div className="text-right mb-3">
-                    <LinkButton href={`/organizations/${key}/add`}>{`+ Add more ${key}`}</LinkButton>
-                  </div>
-                  <Table {...props} />
-                </TabPane>
-              ))
+                  <TabPane tab={name} key={index}>
+                    <div className="text-right mb-3">
+                      <LinkButton href={`/organizations/${key}/add`}>{`+ Add more ${key}`}</LinkButton>
+                    </div>
+                    <Table {...props} />
+                  </TabPane>
+                ))
             }
           </Tabs>
         </Card>
