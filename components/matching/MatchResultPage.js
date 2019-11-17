@@ -55,6 +55,7 @@ function getCardInformationByRole(result, role) {
       value: applicant.educations[0].gpax,
       subtitle: applicant.educations[0].university,
       informations: getApplicantInformations({ applicant }),
+      imagePath: applicant.pictureUrl,
     };
   }
   return null;
@@ -63,7 +64,7 @@ function getCardInformationByRole(result, role) {
 const ResultList = ({ role, matchResults = [] }) => (
   matchResults.map((result) => {
     const {
-      title, value, subtitle, informations,
+      title, value, subtitle, informations, imagePath,
     } = getCardInformationByRole(result, role);
     return (
       <RankingCard
@@ -72,6 +73,7 @@ const ResultList = ({ role, matchResults = [] }) => (
         value={value}
         subtitle={subtitle}
         informations={informations}
+        imagePath={imagePath}
       />
     );
   })
