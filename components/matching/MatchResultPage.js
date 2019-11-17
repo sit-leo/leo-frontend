@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 import color from '../../config/color';
 
-import { ROLE_APPLICANT, ROLE_RECRUITER, isApplicant } from '../../tools/with-roles';
+import {
+  isApplicant, isRecruiter,
+} from '../../tools/with-roles';
 
 import MatchingLayout from '../layouts/matching';
 
@@ -37,22 +39,22 @@ function getPosition(result) {
 }
 
 function getCardInformationByRole(result, role) {
-  if (role === ROLE_APPLICANT) {
+  if (isApplicant(role)) {
     const position = getPosition(result);
     return {
       title: position.name,
       value: position.money,
-      subtitle: position.recruiter.location,
+      subtitle: `${position.recruiter.name}, ${position.recruiter.location}`,
       informations: getPositionInformations(result.position),
     };
   }
-  if (role === ROLE_RECRUITER) {
+  if (isRecruiter(role)) {
     const applicant = getApplicant(result);
     return {
       title: applicant.name,
       value: applicant.educations[0].gpax,
-      subtitle: applicant.educations[0].educationName,
-      informations: getApplicantInformations(result),
+      subtitle: applicant.educations[0].university,
+      informations: getApplicantInformations({ applicant }),
     };
   }
   return null;
@@ -95,7 +97,7 @@ const MatchResultPage = ({
                       <Title>
                         {'You have matched with '}
                         {
-                          (role === ROLE_APPLICANT)
+                          isApplicant(role)
                             ? 'this position'
                             : `${resultCount} Applicants`
                         }
