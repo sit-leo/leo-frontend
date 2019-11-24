@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import { Card as AntdCard, Avatar } from 'antd';
+import { Card as AntdCard, Avatar, message } from 'antd';
 import day from 'dayjs';
 
+import { bindActionCreators } from 'redux';
 import colors from '../../config/color';
 
 import { clientInstance } from '../../tools/request';
@@ -19,6 +20,7 @@ import isCanJoinMatch, {
   isApplicantCanRanking,
   isRecruiterCanRanking,
   isRankingPeriod,
+  isMatchingDate,
 } from '../../tools/match-time';
 import WithNavbar from '../layouts/with-navbar';
 
@@ -32,7 +34,7 @@ import Card from '../base/Card';
 import ContainerRow, { Row, Col } from '../base/Grid';
 import { BreadcrumbList } from '../base/Breadcrumb';
 import Modal from '../base/Modal';
-import { setLoading } from '../../store/global';
+import { setLoading as setLoadingAction } from '../../store/global';
 import { FlexCenter } from '../base/Flex';
 import Tabs, { TabPane } from '../base/Tabs';
 import Table from '../base/Table';
@@ -81,11 +83,15 @@ const NumberLabel = ({ description, number }) => (
 );
 const MatchPage = ({
   match, isJoinMatch, role, applicants, positions,
+  setLoading,
 }) => {
   const [isOpenDelete, toggleDelete] = useState(false);
 
   function getButtonText() {
     if (isOrganizer(role)) {
+      if (isMatchingDate(match.recruiterRankingEndDate, match.announceDate)) {
+        return 'Matching';
+      }
       return 'Update Match';
     }
 
@@ -97,6 +103,17 @@ const MatchPage = ({
     }
 
     return 'Match Result';
+  }
+
+  async function handleMatching() {
+    setLoading(true);
+    const organizationRequest = organizationAdapter(clientInstance());
+    const response = await organizationRequest.matching(match.id);
+    setLoading(false);
+    if (!response.error) {
+      return message.success('Matching success.');
+    }
+    return message.error('Matching failed.');
   }
 
   function handleMatchResult() {
@@ -125,6 +142,10 @@ const MatchPage = ({
   }
 
   function isDisabled() {
+    if (isOrganizer(role) && isMatchingDate(match.recruiterRankingEndDate, match.announceDate)) {
+      return false;
+    }
+
     if (isAnnouceDate(match.announceDate)) {
       if (isOrganizer(role)) {
         return true;
@@ -154,6 +175,9 @@ const MatchPage = ({
 
   function handleClick() {
     if (isOrganizer(role)) {
+      if (isMatchingDate(match.recruiterRankingEndDate, match.announceDate)) {
+        return handleMatching();
+      }
       return handleUpdateMatch();
     }
 
@@ -366,4 +390,8 @@ const mapStateToProps = state => ({
   applicants: state.ranking.applicants,
 });
 
-export default connect(mapStateToProps)(MatchPage);
+const mapDispatchToProps = dispatch => ({
+  setLoading: bindActionCreators(setLoadingAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MatchPage);

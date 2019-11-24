@@ -29,6 +29,10 @@ export function isAnnouceDate(annouceDate) {
   return TODAY.isSame(annouceDate) || TODAY.isAfter(annouceDate);
 }
 
+export function isMatchingDate(recruiterRankingTime, annouceDate) {
+  return TODAY.isAfter(recruiterRankingTime) && TODAY.isBefore(annouceDate);
+}
+
 export function convertDatePeriod(startDate, endDate) {
   const startDateFormat = dayjs(startDate);
   const endDateFormat = dayjs(endDate);

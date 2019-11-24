@@ -1,5 +1,6 @@
 import env from '../../config/env';
 
+const MATCHING_API = env.public.matchingApi;
 const MATCH_API = env.public.matchApi;
 const PROFILE_API = env.public.profileApi;
 
@@ -38,6 +39,10 @@ export default adapter => ({
   },
   deleteMatchById(matchId) {
     return adapter.delete(`${MATCH_API}/match/${matchId}`)
+      .then(({ data }) => data);
+  },
+  matching(matchId) {
+    return adapter.post(`${MATCHING_API}/matches/${matchId}/matching`)
       .then(({ data }) => data);
   },
 });
